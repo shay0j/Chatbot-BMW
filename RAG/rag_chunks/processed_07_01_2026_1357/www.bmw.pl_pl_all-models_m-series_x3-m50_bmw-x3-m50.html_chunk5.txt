@@ -1,0 +1,50 @@
+zne warianty finansowania.
+WARIANTY I DANE TECHNICZNE.
+Modele
+Hybryda plug-in
+Benzyna • Diesel
+Modele M
+Benzyna
+X3
+BMW X3 M50 xDrive
+Moc
+[1]
+293 kW (398 KM)
+0–100 km/h
+4,6 s
+Prędkość maksymalna
+250 km/h
+Dane techniczne
+Porównanie modeli
+Kontynuuj do „Porównaj”
+BMW X3 M50 xDrive: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km: 8,3–7,7; emisja CO₂, cykl mieszany WLTP w g/km: 189–175
+[1]
+Składa się z napędu spalinowego 280 kW oraz napędu elektrycznego 13 kW.
+Back to Navigation
+TWOJE BMW X3 M50 xDrive.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW X3 M50 xDrive
+Biel Alpejska Niemetalizowany
+Czarny szafirowy metalizowany
+Szary Sophisto Z Brylantowym Połyskiem Metalizowany
+Niebieski Arctic Race Metalizowany
+Ognista Czerwień Metalizowany
+Szary

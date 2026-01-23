@@ -1,0 +1,8 @@
+lnikiem benzynowym. Dla samochodów z silnikiem wysokoprężnym w normie Euro 6b i Euro 6c obowiązują te same wartości graniczne. Normy emisji spalin Euro 6d-TEMP (od września 2019 r.*) i Euro 6d (od stycznia 2021 r.*) ze względu na dostosowanie do RDE zakładają nieco niższe niż dotychczas wartości graniczne cząstek stałych i tlenków azotu.
+* Dotyczy tylko nowych pojazdów. Nowe typy pojazdów podlegają nowej normie emisji spalin o rok wcześniej.
+Co oznacza Selective Catalytic Reduction (SCR)?
+W celu dalszej redukcji emisji spalin do silników wysokoprężnych doprowadzany jest płynny amoniak, tzw. AdBlue. Układ Selective Catalytic Reduction (SCR) z AdBlue
+®
+eliminuje nawet 90% tlenków azotu. Produktami reakcji są para wodna, azot i dwutlenek węgla.
+Czym jest BluePerformance?
+W celu dalszej redukcji emisji tlenków azotu BMW stosuje w swoich samochodach technologię BluePerformance. Ta technologia umożliwia dodatkową redukcję emisji spalin w silnikach wysokoprężnych. Oprócz filtra DPF i kataliza

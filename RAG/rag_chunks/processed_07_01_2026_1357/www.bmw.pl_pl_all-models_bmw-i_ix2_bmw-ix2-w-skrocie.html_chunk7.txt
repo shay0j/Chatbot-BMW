@@ -1,0 +1,46 @@
+
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+Basis
+M Sport
+Mroźny szary Pure metalizowany
+Mroźny niebieski Portimao
+Storm Bay metalizowany
+Pomarańczowy Utah metalizowany
+Biel mineralna metalizowany
+Zielony Cape York metalizowany
+Ognista czerwień metalizowany
+Czarny szafirowy metalizowany
+Szary Skyscraper metalizowany
+Czarny niemetalizowany
+Biel alpejska niemetalizowany
+Niebieski Portimao metalizowany
+Szary Brooklyn metalizowany
+Mroźny szary Pure metalizowany
+Mroźny niebieski Portimao
+Storm Bay metalizowany
+Niebieski Portimao metalizowany
+Szary Brooklyn metalizowany
+Zielony Cape York metalizowany
+Ognista czerwień metalizowany
+Czarny szafirowy metalizowany
+Szary Skyscraper metalizowany
+Biel alpejska niemetalizowany
+Czarny niemetalizowany
+Biel mineralna metalizowany
+Po

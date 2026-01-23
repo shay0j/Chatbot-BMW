@@ -1,0 +1,120 @@
+L
+STD
+Yokohama
+-
+19"
+Rear
+285/40 ZR 19 107 Y XL
+STD
+Pirelli
+-
+19"
+Rear
+285/40 ZR 19 107 Y XL
+STD
+Yokohama
+-
+19"
+Front
+265/40 R 19 102 V XL M+S
+STD
+Continental
+SZ
+19"
+Front
+265/40 R 19 102 V XL M+S
+STD
+Michelin
+SZ
+19"
+Rear
+285/40 R 19 107 V XL M+S
+STD
+Continental
+SZ
+19"
+Rear
+285/40 R 19 107 V XL M+S
+STD
+Michelin
+SZ
+20"
+Front
+275/35 ZR 20 102 Y XL
+STD
+Michelin
+-
+20"
+Front
+275/35 ZR 20 102 Y XL
+STD
+Pirelli
+-
+20"
+Rear
+285/35 ZR 20 104 Y XL
+STD
+Michelin
+-
+20"
+Rear
+285/35 ZR 20 104 Y XL
+STD
+Pirelli
+-
+-
+M8 Gran Coupé
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+19"
+All-round
+265/40 R 19 102 V XL M+S
+STD
+Continental
+-
+19"
+All-round
+265/40 R 19 102 V XL M+S
+STD
+Michelin
+-
+19"
+Front
+265/40 R 19 102 V XL M+S
+STD
+Continental
+SZ
+19"
+Front
+265/40 R 19 102 V XL M+S
+STD
+Michelin
+SZ
+19"
+Rear
+285/40 R 19 107 V XL M+S
+STD
+Continental
+SZ
+19"
+Rear
+285/40 R 19 107 V XL M+S
+STD
+Michelin
+SZ
+20"
+Front
+275/35 ZR 20 102 Y XL
+STD
+Michelin
+-
+20"
+Front
+275/35 ZR 20 102 Y XL
+STD
+Pirelli

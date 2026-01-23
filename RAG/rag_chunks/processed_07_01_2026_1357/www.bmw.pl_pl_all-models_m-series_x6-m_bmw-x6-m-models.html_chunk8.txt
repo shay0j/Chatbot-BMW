@@ -1,0 +1,32 @@
+xDrive: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 12,4–11,7; emisja CO₂, cykl mieszany WLTP w g/km: 283–267
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+Wybierz swoje modele BMW X6 M.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Skonfiguruj
+BMW X6 M Competition
+BMW X6 M60i xDrive
+Biel alpejska niemetalizowany
+Szafirowoczarny metalizowany
+Biel mineralna metalizowany
+Czarny karbon M metalizowany
+Niebieski Marina Bay M metalizowany
+Czerwony Toronto M metalizowany
+Zielony Isle of Man M metalizowany
+Szary Brooklyn M metalizowany
+Szary drawit BM

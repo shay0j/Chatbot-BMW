@@ -1,0 +1,36 @@
+
+[3][4][5]
+215 kW (292 KM)
+0–100 km/h
+5,9 s
+Prędkość maksymalna
+230 km/h
+Zasięg elektr. (do)
+[1]
+96–101 km
+Dane techniczne
+Porównanie modeli
+Kontynuuj do „Porównaj”
+BMW 330e Limuzyna
+[1][2]
+: Zużycie paliwa, cykl mieszany WLTP w l/100 km 2,7–2,4; emisja CO₂, cykl mieszany WLTP w g/km: 60–54; zużycie w trybie elektrycznym, cykl mieszany WLTP w kWh/100 km: 15,7–15,3; zasięg elektryczny, WLTP w km: 96–101
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+TWOJE BMW SERII 3 LIMUZYNA PLUG-IN HYBRID.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Ta

@@ -1,0 +1,119 @@
+SC
+RSC
+Bridgestone
+-
+19"
+Rear
+275/35 R 19 100 Y XL RSC
+RSC
+Goodyear
+-
+19"
+Rear
+275/35 R 19 100 Y XL RSC
+RSC
+Michelin
+-
+19"
+Rear
+275/35 R 19 100 Y XL RSC
+RSC
+Pirelli
+-
+19"
+Front
+245/40 R 19 98 V XL M+S RSC
+RSC
+Pirelli
+-
+19"
+Rear
+275/35 R 19 100 V XL M+S RSC
+RSC
+Pirelli
+-
+20"
+Front
+245/35 R 20 95 Y XL HP
+STD
+Bridgestone
+SZ
+20"
+Front
+245/35 R 20 95 Y XL HP
+STD
+Michelin
+-
+20"
+Rear
+275/30 R 20 97 Y XL HP
+STD
+Bridgestone
+SZ
+20"
+Rear
+275/30 R 20 97 Y XL HP
+STD
+Bridgestone
+-
+20"
+Front
+245/35 R 20 95 Y XL RSC
+RSC
+Goodyear
+-
+20"
+Front
+245/35 R 20 95 Y XL RSC
+RSC
+Pirelli
+-
+20"
+Rear
+275/30 R 20 97 Y XL RSC
+RSC
+Goodyear
+-
+20"
+Rear
+275/30 R 20 97 Y XL RSC
+RSC
+Pirelli
+-
+-
+Modele BMW X
+X1
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+17"
+All-round
+205/65 R 17 100 Y XL
+STD
+Apollo Vredestein
+-
+17"
+All-round
+205/65 R 17 100 Y XL
+STD
+Hankook
+-
+17"
+All-round
+205/65 R 17 100 Y XL
+STD
+Nexen
+-
+17"
+All-round
+205/65 R 17 100 H XL M+S
+STD
+Apollo Vredestein
+SZ
+17"
+All-round
+205/65 R 17

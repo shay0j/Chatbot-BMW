@@ -1,0 +1,26 @@
+w l/100 km: 9,9–8,5; emisja CO₂, cykl mieszany WLTP w g/km: 224–193
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+Back to Navigation
+Pionier pod względem stylistyki i wydajności.
+BMW X5 łączy charakterystyczną stylistykę z wyjątkowymi osiągami, najwyższej klasy komfortem i imponującą wszechstronnością. Jako pionier w segmencie pojazdów typu SAV wyznacza standardy na drogach i poza utartymi szlakami.
+Wybierz swoje BMW X5.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW X5 M Sport
+BMW X5, Hybryda plug-in
+Biel alpejska niemetalizowany
+Szary Skyscraper metalizowan

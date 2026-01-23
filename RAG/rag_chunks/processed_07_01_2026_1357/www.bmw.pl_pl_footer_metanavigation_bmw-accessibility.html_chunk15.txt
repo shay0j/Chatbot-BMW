@@ -1,0 +1,9 @@
+ukcesu Web Content Accessibility Guidelines (WCAG) 2.1, o których mowa w tej normie, na poziomach zgodności A i AA.
+Odpowiednie podstrony strony internetowej również zawierają informacje wymagane zgodnie z ustawą z dnia 26 kwietnia 2024 r. o zapewnianiu spełniania wymagań dostępności niektórych produktów i usług przez podmioty gospodarcze w przystępnej formie.
+Odpowiedzialny organ nadzoru rynku.
+Zgodnie z ustawą o zapewnianiu spełniania wymagań dostępności niektórych produktów i usług przez podmioty gospodarcze, głównym organem nadzoru nad stronami internetowymi, w tym sklepami internetowymi, jest minister właściwy do spraw informatyzacji. Ponadto, każdy może złożyć Prezesowi Zarządu PFRON (Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych) zawiadomienie o niespełnianiu przez produkt albo usługę wymagań dostępności.
+Informacja zwrotna i kontakt.
+Wszystkie problemy z dostępnością tej strony internetowej można zgłosić na adres mailowy:
+info.bmw.pl@bmw.com
+lub telefonicznie:
++48 885 

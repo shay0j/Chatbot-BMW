@@ -1,0 +1,9 @@
+ kondycji akumulatora.
+[2]
+W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted – metoda obliczeniowa uwzględniająca różne scenariusze ładowania pojazdów elektrycznych do oceny emisji CO₂ i zużycia energii).
+[3]
+Składa się z napędu spalinowego 430 kW / 750 Nm oraz napędu elektrycznego do 145 kW / 280 Nm. Napęd elektryczny zależny od poziomu naładowania akumulatora.
+[4]
+W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+[5]
+Z uwagi na właściwości materiału podczas hamowania mogą pojawiać się głośniejsze odgłosy pracy, na przykład przy dłuższym, niskim obciążeniu lub na mokrej nawierzchni krótko przed całkowitym zatrzymaniem pojazdu. Na skutek działania soli drogowej lub wilgoci, np. po wizycie w myjni, przy kondensacji wilgoci nocą, podczas jazdy w deszczu itd., skuteczność hamowania może być porównywalna ze skutecznością konwencjonalnego układu hamulcowego. Takie obniżenie skuteczności hamowania można skompensować przez mocniejsze naciśnię

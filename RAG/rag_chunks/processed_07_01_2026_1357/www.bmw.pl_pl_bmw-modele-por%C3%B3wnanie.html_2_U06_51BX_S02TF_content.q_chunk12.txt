@@ -1,0 +1,56 @@
+10 (150) / 4 700 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+230 / 1 500 - 4 400
+-
+-
+Silnik elektryczny
+9
+,
+10
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 230e xDrive Active Tourer
+(Nominal) power/30 minutes power in kW (hp)
+130 (177)
+-
+-
+(Nominal) torque in Nm
+247
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 230e xDrive Active Tourer
+Przyspieszenie 0-100 km/h w s
+5,5
+7
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+205
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+140
+-
+-
+Zużycie i emisja
+8
+,
+11
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW 230e xDrive Active Tourer
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+12
+2,9

@@ -1,0 +1,7 @@
+ieszany WLTP w g/km: 93–77; zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 17,2–16,3; zasięg elektryczny, WLTP w km¹: 72–80
+¹ Zasięg zależy od różnych czynników, przede wszystkim: indywidualnego stylu jazdy, uwarunkowań trasy, temperatury zewnętrznej, układu grzewczego/klimatyzacji i przygotowania temperatury.
+² Składa się z silnika spalinowego o mocy 280 kW oraz napędu elektrycznego o mocy 145 kW. Napęd elektryczny zależny od poziomu naładowania akumulatora.
+³ Wydajność ładowania zależy od poziomu naładowania akumulatora, temperatury otoczenia, indywidualnego stylu jazdy i wykorzystania odbiorników energii. Podane zasięgi są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania.
+⁴ W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+5
+W przypadku hybrydy plug-in: W pełni elektryczny napęd w temperaturach poniżej -10°C jest dostępny dop

@@ -1,0 +1,7 @@
+ędnione
+Uwzględniony jest wpływ całego wyposażenia dodatkowego na aerodynamikę, masę i opory toczenia
+Real driving emissions (RDE).
+Praktyczny pomiar emisji zanieczyszczeń podczas jazdy na drodze.
+Od połowy maja 2016 r. wszystkich producentów samochodów w UE, a także w Szwajcarii, Turcji, Norwegii, Liechtensteinie i Izraelu obowiązują pomiary RDE (Real Driving Emissions). W teście RDE emisja substancji szkodliwych, na przykład cząstek stałych i tlenków azotu (NOx), mierzona będzie bezpośrednio podczas jazdy na drodze. Dzięki temu określone zostaną średnie wartości emisji, jakich należy spodziewać się również w codziennej eksploatacji.
+W celu dalszej redukcji emisji substancji szkodliwych w codziennej eksploatacji BMW Group stosuje w swoich modelach różne technologie.
+BMW BluePerformance zmniejsza na przykład emisję tlenków azotu w silnikach wysokoprężnych. Wraz z wprowadzeniem nowej generacji 6-cylindrowych silników wysokoprężnych od 2020 roku katalizator akumulacyjny w pobliżu silnika

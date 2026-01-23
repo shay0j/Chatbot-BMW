@@ -1,0 +1,59 @@
+Dopuszczalna masa brutto w kg
+3 200
+Ładowność w kg
+780
+Uchwyt na relingi dachowe bez relingów w kg
+100
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+11
+2 700 / 140
+Pojemność bagażnika w l
+500–1 720
+Pojemność zbiornika w l
+69
+Całkowity układ napędowy
+1
+Typ napędu
+Benzynowy – mild hybrid 48 V
+Moc w kW (KM)
+280 (381)
+Moment obrotowy w Nm
+540
+13
+Skrzynia biegów
+8-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+6
+Pojemność w cm³
+2 998
+Moc znamionowa w kW (KM) / obr/min
+280 (381) / 5 200 - 6 250
+Znamionowy moment obrotowy w Nm / obr/min
+520 / 1 850 - 5 000
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+9 (12) / -
+(Znamionowy) moment obrotowy w Nm
+200
+Wydajność
+Przyspieszenie 0-100 km/h w s
+5,4
+5
+Prędkość maksymalna w km/h
+250
+Zużycie i emisja
+1
+,
+6
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+9,9–8,5
+Emisja CO₂, cykl mieszany WLTP w g/km
+224–193
+Hałas przejściowy w dB (A)
+68
+12
+Stacjonarny pozio

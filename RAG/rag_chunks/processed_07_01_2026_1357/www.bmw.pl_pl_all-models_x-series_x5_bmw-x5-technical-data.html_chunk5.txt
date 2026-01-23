@@ -1,0 +1,62 @@
+X5 xDrive40i
+Benzynowy
+BMW X5 xDrive40i
+BMW X5 M60i xDrive
+BMW X5 M Competition
+Diesel
+BMW X5 xDrive30d
+BMW X5 xDrive40d
+Benzynowy – Hybryda plug-in
+BMW X5 xDrive50e
+Wybierz skrzynię biegów
+Sportowa skrzynia Steptronic
+Sportowa skrzynia Steptronic
+Sportowa skrzynia Steptronic
+Sportowa skrzynia Steptronic
+Całkowity układ napędowy
+1
+,
+2
+Typ napędu
+Benzynowy – Hybryda plug-in
+Moc w kW (KM)
+360 (489)
+3
+Moment obrotowy w Nm
+700
+3
+Skrzynia biegów
+8-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+6
+Pojemność w cm³
+2 998
+Moc znamionowa w kW (KM) / obr/min
+230 (313) / 5 000 - 6 500
+Znamionowy moment obrotowy w Nm / obr/min
+450 / 1 750 - 4 700
+Silnik elektryczny
+2
+,
+4
+Moc (nominalna) /moc 30 minut w kW (KM)
+145 (197)
+(Znamionowy) moment obrotowy w Nm
+280
+Wydajność
+Przyspieszenie 0-100 km/h w s
+4,8
+5
+Prędkość maksymalna w km/h
+250
+Prędkość maksymalna na napędzie elektrycznym w km/h
+140
+Zużycie i emisja
+1
+,
+6
+Zużycie paliwa, cykl mieszany WLTP w 

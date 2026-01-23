@@ -1,0 +1,40 @@
+avigation
+Wybierz swój styl.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW M3 CS Touring z M xDrive
+BMW M3 Competition z M xDrive
+Czarny szafirowy metalizowany
+Zielony niemetalizowany BMW Individual British Racing
+Niebieski niemetalizowany BMW Individual Laguna Seca
+BMW Individual Frozen Solid White metallic
+Biel alpejska niemetalizowany
+Żółty M Sao Paulo niemetalizowany
+Czarny szafirowy metalizowany
+Czerwony awenturynowy metalizowany
+Niebieski Portimao metalizowany M
+Czerwony M Toronto metalizowany
+Zielony M Isle of Man metalizowany
+Szary M Brooklyn metalizowany
+Szary Skyscraper metalizowany
+Niebieski tanzanit metalizowany BMW Individual
+Szary Drawit metalizowany BMW Individual
+Mroźny biały Brilliant metalizowany BMW Individual
+Mroźny ni

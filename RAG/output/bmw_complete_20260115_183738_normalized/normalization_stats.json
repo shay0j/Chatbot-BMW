@@ -1,0 +1,24 @@
+{
+  "total_pages": 50,
+  "model_pages": 40,
+  "other_pages": 10,
+  "total_characters": 427842,
+  "avg_characters_per_page": 8556.84,
+  "models_found": {
+    "X3": 32,
+    "i4": 24,
+    "X1": 18,
+    "X5": 12,
+    "iX": 10,
+    "M5": 8,
+    "M3": 6
+  },
+  "normalized_at": "2026-01-16T14:29:16.089058",
+  "price_stats": {
+    "total_found": 29,
+    "min": 122295.0,
+    "max": 535000.0,
+    "avg": 268397.4137931034,
+    "avg_formatted": "268 397 zł"
+  }
+}

@@ -1,0 +1,19 @@
+61
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+STYLOWY WYGLĄD.
+Zaokrąglona linia dachu podkreśla elegancki wygląd BMW serii 4 Gran Coupé. Imponujący wygląd zewnętrzny podkreśla podwójna atrapa chłodnicy w matowym chromie, lampy tylne o precyzyjnej optyce i okrągłe końcówki rur wydechowych. Wewnątrz pojazdu wrażenie robi przeprojektowany kokpit z dwuramienną kierownicą i sześciokątnymi otworami wentylacyjnymi. Dynamiczny napęd BMW 430i xDrive Gran Coupé zapewnia niezapomniane chwile podczas każdej przejażdżki.
+Skonfiguruj
+TWOJE BMW SERII 4 GRAN COUPÉ.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualiz

@@ -1,0 +1,60 @@
+jemność akumulatora w kWh
+101,7
+Doładowany zasięg po 10 minutach ładowania z wysoką mocą w km
+168 - 189
+Maksymalna moc ładowania AC w kW
+11 / 22
+Minmalny czas ładowania AC 0-100% w h
+10:45 / 5:30
+Maksymalna moc ładowania DC w kW
+195
+Minimalny czas ładowania DC 10-80% w h
+0:34
+Wymiary i ciężar
+5 391 mm
+1 950 mm
+1 544 mm
+Długość w mm
+5 391
+Szerokość w mm
+1 950
+Wysokość w mm
+1 544
+Szerokość w mm / z lusterkami
+2 192
+Rozstaw osi w mm
+3 215
+Masa własna pojazdu w kg
+5
+2 595
+Dopuszczalna masa brutto w kg
+3 130
+Ładowność w kg
+610
+Uchwyt na relingi dachowe bez relingów w kg
+0
+Pojemność bagażnika w l
+500
+Całkowity układ napędowy
+Typ napędu
+Elektryczny
+Moc w kW (KM)
+400 (544)
+Moment obrotowy w Nm
+745
+Skrzynia biegów
+1-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+400 (544) / 135 (184)
+(Znamionowy) moment obrotowy w Nm
+745
+Wydajność
+Przyspieszenie 0-100 km/h w s
+4,7
+1
+Prędkość maksymalna na napędzie elektrycznym w km/h
+240
+Zużyci

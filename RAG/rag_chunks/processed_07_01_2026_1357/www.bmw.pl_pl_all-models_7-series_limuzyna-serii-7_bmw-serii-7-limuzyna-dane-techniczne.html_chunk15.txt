@@ -1,0 +1,28 @@
+ 544
+Szerokość w mm / z lusterkami
+2 192
+Rozstaw osi w mm
+3 215
+Masa własna pojazdu w kg
+5
+2 255
+Dopuszczalna masa brutto w kg
+2 895
+Ładowność w kg
+715
+Uchwyt na relingi dachowe bez relingów w kg
+0
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+7
+2 100 / 85
+Pojemność bagażnika w l
+540
+Pojemność zbiornika w l
+74
+Koła i opony BMW.
+Opony w naszych pojazdach poddajemy rygorystycznym testom obejmującym do 50 różnych kryteriów jakościowych – to znacznie więcej niż przewiduje obowiązujący w całej UE wymóg jednolitego oznakowania opon. Tu znaleźć można wszystkie informacje na temat właściwości opon stosowanych w BMW.
+Dowiedz się więcej
+Zużycie i emisja CO₂.
+BMW 740d xDrive Limuzyna: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 6,8–6,1; emisja CO₂, cykl mieszany WLTP w g/km: 178–160
+1
+Dodatkowy zasięg w kilometrach po 10-minutowym ładowaniu o dużej mocy (HPC) jest określany zgodnie z normą DIN70080 w cyklu WLTP. Zależy on od wyposażenia pojazdu, indywidualn

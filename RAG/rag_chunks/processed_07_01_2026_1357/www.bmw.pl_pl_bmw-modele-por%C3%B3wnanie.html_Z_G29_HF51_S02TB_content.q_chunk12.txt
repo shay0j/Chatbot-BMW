@@ -1,0 +1,71 @@
+0i
+Przyspieszenie 0-100 km/h w s
+4,5
+3
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+250
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+-
+-
+-
+Zużycie i emisja
+4
+,
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW Z4 M40i
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+8–7,9
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+null
+-
+-
+Fuel consumption with a discharged battery, highway in km/l
+null
+-
+-
+Zużycie paliwa z rozładowanym akumulatorem, WLTP łącznie w l/100 km
+null
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+181–179
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+null
+-
+-
+CO₂-Emissions (comb. for NI)
+null
+-
+-
+Zużycie energii, łączny WLTP w kWh/

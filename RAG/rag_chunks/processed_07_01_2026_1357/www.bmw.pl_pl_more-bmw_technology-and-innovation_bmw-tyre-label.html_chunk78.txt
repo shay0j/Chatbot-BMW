@@ -1,0 +1,123 @@
+ XL
+STD
+Yokohama
+-
+21"
+Rear
+275/40 R 21 107 Y XL
+STD
+Yokohama
+-
+21"
+Rear
+275/40 R 21 107 Y XL P
+STD
+Michelin
+-
+22"
+Front
+255/35 R 22 99 Y XL
+STD
+Pirelli
+-
+22"
+Rear
+275/35 R 22 104 Y XL
+STD
+Pirelli
+-
+-
+Modele BMW Z
+Z4
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+17"
+Front
+225/50 R 17 98 H XL M+S
+STD
+Bridgestone
+SZ
+17"
+Front
+225/50 R 17 98 H XL M+S
+STD
+Hankook
+SZ
+17"
+Rear
+225/50 R 17 98 H XL M+S
+STD
+Bridgestone
+SZ
+17"
+Rear
+225/50 R 17 98 H XL M+S
+STD
+Hankook
+SZ
+17"
+Front
+225/50 R 17 98 H XL M+S RSC
+RSC
+Bridgestone
+-
+17"
+Front
+225/50 R 17 98 H XL M+S RSC
+RSC
+Hankook
+-
+17"
+Rear
+225/50 R 17 98 H XL M+S RSC
+RSC
+Bridgestone
+-
+17"
+Rear
+225/50 R 17 98 H XL M+S RSC
+RSC
+Hankook
+-
+18"
+Front
+225/45 ZR 18 95 Y XL HP
+STD
+Michelin
+-
+18"
+Rear
+255/40 ZR 18 99 Y XL HP
+STD
+Michelin
+-
+18"
+Front
+255/40 R 18 99 V XL M+S
+STD
+Continental
+-
+18"
+Rear
+255/40 R 18 99 V XL M+S
+STD
+Continental
+-
+18"
+Front
+255/40 ZR 18 95 Y HP
+STD
+Michelin
+-
+18"
+Rear
+275/40 ZR 18 99 Y HP
+STD
+Michelin
+-
+19

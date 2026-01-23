@@ -1,0 +1,15 @@
+jest stosowanie paliwa bezołowiowego o liczbie oktanowej 91 lub wyższej i zawartości etanolu do  25% (E25). BMW zaleca stosowanie paliwa o LO 95. W przypadku samochodów o wysokich osiągach BMW zaleca stosowanie paliwa o LO 98.
+9
+W przypadku Hybrydy plug-in: moc zależy od stanu naładowania akumulatora.
+10
+Generowana przez silnik spalinowy (podana wartość znamionowa) oraz silnik elektryczny (maksymalnie podana wartość znamionowa). Napęd elektryczny zależny od stanu naładowania akumulatora.
+11
+W przypadku Hybrydy plug-in: przy temperaturach poniżej 0°C w pełni elektryczny napęd jest dostępny dopiero po przejechaniu kilku kilometrów, gdy akumulator rozgrzeje się do temperatury roboczej.
+12
+W przypadku Hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted).
+13
+Generowana przez silnik spalinowy (podana wartość znamionowa) oraz silnik elektryczny (maksymalnie podana wartość znamionowa).
+My BMW App. Łącz się bezpośrednio ze swoim BMW.
+Dowiedz się więcej
+Kontakt i informacje
+Obsługa kli

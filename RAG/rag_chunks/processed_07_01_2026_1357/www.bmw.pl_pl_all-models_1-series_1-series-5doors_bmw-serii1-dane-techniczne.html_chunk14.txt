@@ -1,0 +1,13 @@
+iążenie haka w kg
+5
+1 300 / 75
+Pojemność bagażnika w l
+300–1 135
+Pojemność zbiornika w l
+49
+1
+Dane dotyczące mocy silników benzynowych odnoszą się do paliwa o liczbie oktanowej 98. Dane dotyczące zużycia odnoszą się do paliwa referencyjnego zgodnie z rozporządzeniem (WE) 1151/2017. Dopuszczalne jest stosowanie paliwa bezołowiowego o liczbie oktanowej 91 lub wyższej i zawartości etanolu do  25% (E25). BMW zaleca stosowanie paliwa o LO 95. W przypadku samochodów o wysokich osiągach BMW zaleca stosowanie paliwa o LO 98.
+2
+Dodatkowy zasięg w kilometrach po 10-minutowym ładowaniu o dużej mocy (HPC) jest określany zgodnie z normą DIN70080 w cyklu WLTP. Zależy on od wyposażenia pojazdu, indywidualnego profilu jazdy, temperatury otoczenia, poziomu naładowania i korzystania z zewnętrznych odbiorników.
+3
+Wskazane dane dotyczące zużycia paliwa, emisji CO₂, zużycia energii i zasięgu na napędzie elektrycznym zostały ustalone na podstawie nowej procedury WLTP określonej w Rozporządzeniu (UE) 2017/11

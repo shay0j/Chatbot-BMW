@@ -1,0 +1,9 @@
+ach FAQ:
+Dostępność modelu
+Dostępność w kraju
+Kompatybilne smartfony i smartwatche
+Informacje o dostępności w Twoim BMW można również znaleźć w aplikacji My BMW. W niektórych krajach i/lub regionach technologia bezprzewodowa BMW Digital Key Plus (ultraszerokopasmowa, UWB) jest niedozwolona. Ze względu na wymogi prawne funkcja może być tam ograniczona. W takich przypadkach dostęp do pojazdu gwarantuje Near-Field Communication (NFC). W tym celu należy przytrzymać urządzenie mobilne przy zewnętrznej klamce.
+Jak bezpieczny jest BMW Digital Key?
+Twój kluczyk cyfrowy jest bezpiecznie przechowywany w module Secure Element Twojego smartfona lub smartwatcha. Ponadto w celu ustalenia bezpośredniej bliskości nadajnika i odbiornika w sposób odporny na manipulacje wykorzystywana jest zarówno technologia NFC, jak i technologia ultraszerokopasmowa (UWB).
+Co zrobić, jeśli mój smartfon wymaga naładowania?
+Możesz odblokować i uruchomić swój pojazd, nawet jeśli smartfon lub smartwatch wymaga naładowania.

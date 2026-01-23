@@ -1,0 +1,6 @@
+styl jazdy, korzystanie z odbiorników energii, temperatura otoczenia oraz dostępna moc ładowania na stacji ładowania.
+Automatyzuje nawyki i rutynowe czynności podczas jazdy.
+Asystent uczy się Twoich nawyków. Jeśli na przykład regularnie wjeżdżasz do firmowego garażu, boczna szyba otworzy się automatycznie. W nowym systemie BMW Operating System X możesz stworzyć własną sekwencję różnych funkcji, z których korzystasz najczęściej. Tryb Sport, klimatyzacja albo masaż mogą na Twoje życzenie zostać połączone w jedną sekwencję i uruchamiać się automatycznie.
+Najczęściej zadawane pytania dotyczące BMW Intelligent Personal Assistant.
+Jak mogę aktywować BMW Intelligent Personal Assistant i funkcję „Hej BMW”?
+Aby aktywować BMW Intelligent Personal Assistant w swoim BMW po raz pierwszy, zaloguj się do pojazdu za pomocą identyfikatora BMW ID. Następnie uruchom asystenta konfiguracji dla osobistego asystenta za pomocą przycisku mikrofonu na kierownicy wielofunkcyjnej, zaakceptuj postanowienia o ochr

@@ -1,0 +1,5 @@
+ej ruchomych części w silniku, co daje mniejsze zużycie. Nie ma potrzeby wymiany oleju, a hamulce wytrzymują dłużej, ponieważ hamowanie odzyskowe zmniejsza ich zużycie.
+Korzyści podatkowe: W niektórych krajach istnieją ulgi podatkowe i dotacje zachęcające do zakupu pojazdów elektrycznych. Może to zmniejszyć roczne obciążenie podatkiem samochodowym. W niektórych krajach pojazdy elektryczne są nawet zwolnione z podatku.
+Ile kosztuje ładowanie pojazdu elektrycznego?
+Koszt ładowania pojazdu elektrycznego może być różny i zależy od różnych czynników. Na przykład od taryfy za energię elektryczną na publicznych stacjach ładowania albo od tego, czy ładując pojazd w domu, korzystasz z własnego systemu fotowoltaicznego. Znaczenie ma też pojemność akumulatora. Określa ona ilość energii wymaganej do naładowania, a tym samym koszt ładowania.
+Aby obliczyć koszt pełnego naładowania, należy pomnożyć pojemność akumulatora w kWh przez cenę za kWh. Na przykład jeśli masz pojazd elektryczny z akumulatorem

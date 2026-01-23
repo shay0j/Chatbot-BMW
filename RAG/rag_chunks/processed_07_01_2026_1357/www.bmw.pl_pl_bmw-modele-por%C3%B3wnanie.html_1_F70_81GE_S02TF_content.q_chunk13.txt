@@ -1,0 +1,91 @@
+ycie paliwa z rozładowanym akumulatorem, WLTP łącznie w l/100 km
+null
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+124–121
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+null
+-
+-
+CO₂-Emissions (comb. for NI)
+null
+-
+-
+Zużycie energii, łączny WLTP w kWh/100 km
+-
+-
+-
+Zużycie energii, cykl mieszany WLTP w kWh/100 km
+null
+-
+-
+Energy consumption (comb. for NI)
+null
+-
+-
+Energy consumption, city in km/kWh
+null
+-
+-
+Energy consumption, highway in km/kWh
+null
+-
+-
+Zasięg elektryczny, WLTP w km
+-
+-
+-
+Zasięg elektryczny, WLTP w km
+null
+-
+-
+Zasięg elektryczny, WLTP (Miasto) w km
+null
+-
+-
+Electric range (comb. for NI)
+null
+-
+-
+Klasa emisji CO₂ (min.)
+null
+-
+-
+Klasa emisji CO₂ (maks.)
+null
+-
+-
+Klasa emisji CO₂ przy rozładowanym akumulatorze (min.)
+null
+-
+-
+Klasa emisji CO₂ przy rozładowanym akumulatorze (maks.)
+null
+-
+-
+Hałas przejściowy w dB (A)
+67
+4
+-
+-
+Stacjonarny poziom hałasu w dB (A) /1/min
+78 / 3 750
+4
+-
+-
+CO₂ Equivalent Overall
+null
+-
+-
+CO₂
+null
+-
+-
+Petrol Equivalent Overall
+null
+-
+-
+Petrol Equivalent 

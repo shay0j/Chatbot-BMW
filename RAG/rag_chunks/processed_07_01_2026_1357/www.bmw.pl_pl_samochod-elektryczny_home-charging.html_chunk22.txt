@@ -1,0 +1,6 @@
+ naładowania od 10 do 80%.
+Pojazdy elektryczne ładują się prądem przemiennym (AC) dłużej – w zależności od infrastruktury ładowania, pojemności akumulatora i stosowanej mocy ładowania. Z kolei ładowanie prądem stałym (DC) jest znacznie szybsze. W codziennym użytkowaniu należy preferować ładowanie z domowych stacji Wallbox oraz publicznych ładowarek AC i DC o mocy do 100 kW. W ten sposób optymalizuje się efektywność ładowania, jak również żywotność akumulatora posiadanego pojazdu elektrycznego BMW.
+Szczególnie wygodne i wydajne ładowanie w domu zapewnia stacja Wallbox, która znacznie skraca czas ładowania w porównaniu z ładowaniem ze zwykłego gniazdka elektrycznego. Stacja BMW Wallbox dysponuje mocą ładowania do 22 kW.
+⁸
+Jak często powinno się ładować pojazd elektryczny w domu?
+Częstsze krótkie procesy ładowania bardziej sprzyjają żywotności akumulatora wysokonapięciowego niż pełne ładowanie lub rozładowywanie. W celu optymalizacji żywotności akumulatora pojazdu elektrycznego BMW w codz

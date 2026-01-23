@@ -1,0 +1,37 @@
+leżą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Wybierz swój model BMW serii 4 Coupé M.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW M4 Competition
+BMW M4 Coupé
+BMW M440i xDrive
+Biały alpejski, niemetalizowany
+Żółty M Sao Paulo niemetalizowany
+Szafirowoczarny metalizowany
+Czerwień Aventurine metalizowany
+Niebieski M Portimao metalizowany
+Czerwony M Toronto metalizowany
+Zielony M Isle of Man metalizowany
+Szary M Brooklyn metalizowany
+Szary Skyscraper metalizowany
+Niebieski Tanzanite Blue metalizowany BMW Individual
+Szary Dravit metalizowany BMW Individual
+Niebieski Marina Bay metalizowany BMW Individual
+Mroźny b

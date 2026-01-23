@@ -1,0 +1,57 @@
+cenie może udzielić partner BMW.
+Dane techniczne
+Pokaż tylko różnice
+Wyświetlone zostaną tylko różnice.
+Całkowity układ napędowy
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Całkowity układ napędowy
+BMW 318i Limuzyna
+Typ napędu
+Benzyna
+-
+-
+Moc w kW (KM)
+115 (156)
+-
+-
+Moment obrotowy w Nm
+250
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 318i Limuzyna
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 998
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+115 (156) / 4 500 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+250 / 1 300 - 4 300
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 318i Limu

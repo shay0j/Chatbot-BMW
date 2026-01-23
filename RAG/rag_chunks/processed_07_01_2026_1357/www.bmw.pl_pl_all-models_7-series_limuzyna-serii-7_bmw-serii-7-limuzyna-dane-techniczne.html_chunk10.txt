@@ -1,0 +1,64 @@
+ Hybryda plug-in
+Moc w kW (KM)
+360 (489)
+10
+Moment obrotowy w Nm
+700
+10
+Skrzynia biegów
+8-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+8
+Cylindry
+6
+Pojemność w cm³
+2 998
+Moc znamionowa w kW (KM) / obr/min
+230 (313) / 5 000 - 6 500
+Znamionowy moment obrotowy w Nm / obr/min
+450 / 1 750 - 4 700
+Silnik elektryczny
+9
+,
+11
+Moc (nominalna) /moc 30 minut w kW (KM)
+145 (197)
+(Znamionowy) moment obrotowy w Nm
+280
+Wydajność
+Przyspieszenie 0-100 km/h w s
+4,8
+1
+Prędkość maksymalna w km/h
+250
+Prędkość maksymalna na napędzie elektrycznym w km/h
+140
+Zużycie i emisja
+8
+,
+2
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+12
+3,7–3,3
+Emisja CO₂, cykl mieszany WLTP w g/km
+12
+83–74
+Zużycie energii, łączny WLTP w kWh/100 km
+12
+17,5–16,7
+Zasięg elektryczny, WLTP w km
+3
+77–80
+Hałas przejściowy w dB (A)
+65
+6
+Stacjonarny poziom hałasu w dB (A) /1/min
+74 / 3 750
+6
+Akumulator wysokiego napięcia/48 V, ładowanie
+4
+Pojemność akumulatora w kWh
+17,6
+Maksymalna moc ładowania AC 

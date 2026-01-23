@@ -1,0 +1,51 @@
+ą mocą w km
+-
+-
+-
+Ładowanie dwukierunkowe
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ładowanie dwukierunkowe
+BMW X1 xDrive25e
+Maksymalna moc rozładowania Vehicle-to-Load (V2L) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Load (V2V) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Home Power Flex (V2H Flex) w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 3-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 1-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Czas ładowania za pomocą 3-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Czas ładowania za pomocą 1-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Wymiary i ciężar
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wymiary i ciężar
+BMW X1 xDrive25e
+Długość w mm
+4 500
+-
+-
+Szerokość w mm
+1 845
+-
+-
+Wys

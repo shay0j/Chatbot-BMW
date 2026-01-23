@@ -1,0 +1,36 @@
+mieszanym WLTP w g/km: 171–166
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+TWOJE BMW SERII 4 CABRIO.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+M Sport
+M Sport Pro
+Basis
+Biel alpejska niemetalizowany
+Biel mineralna metalizowany
+Zielony Cape York metalizowany
+Czarny szafirowy metalizowany
+Ognista czerwień metalizowany
+Niebieski Arctic Race metalizowany
+Niebieski Portimao M metalizowany
+Szary Brooklyn M metalizowany
+Niebieski tanzanit metalizowany BMW Individual
+Szary Drawit metalizowany BMW Indivi

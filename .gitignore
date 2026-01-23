@@ -1,0 +1,31 @@
+# ===== PYTHON =====
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# ===== NODE/FRONTEND =====  
+node_modules/
+npm-debug.log*
+dist/
+build/
+
+# ===== SECRETS =====
+.env
+.env.local
+config.ini
+*.key
+*.pem
+
+# ===== DATA & LOGS =====
+data/js_crawl/
+data/raw_pages_zkmotors.pl/
+logs/
+tmp/
+*.log
+
+# ===== SYSTEM =====
+.DS_Store
+Thumbs.db

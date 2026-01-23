@@ -1,0 +1,34 @@
+. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Twoje BMW M5 Touring.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW M5 sedan z M xDrive
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Szary Sophisto z brylantowym połyskiem metalizowany
+Czerwień Dragon Fire metalizowany
+Czarny karbon M metalizowany
+Niebieski M Marina Bay metalizowany
+Zielony M Isle of Man metalizowany
+Szary M Brooklyn metalizowany
+Storm Bay metalizowany BMW Individual
+Mroźny głęboki szary BMW Individual metalizowany
+20/21-calowe obręcze kół M ze felgą podwójną 951 M Bicolor, Midnight Grey
+20/21-calowe obręcze 

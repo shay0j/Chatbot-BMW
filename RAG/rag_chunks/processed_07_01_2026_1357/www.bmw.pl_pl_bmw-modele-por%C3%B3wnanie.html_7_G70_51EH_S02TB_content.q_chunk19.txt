@@ -1,0 +1,6 @@
+ików dodatkowych. Podane zakresy są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania.
+Masa własna (UE) odnosi się do pojazdu z wyposażeniem standardowym bez wyposażenia dodatkowego. Masa własna uwzględnia 90-procentowe napełnienie zbiornika paliwa i 75 kg wagi kierowcy. Wyposażenie dodatkowe może wpływać na masę samochodu, ładowność oraz, w przypadku wpływu na aerodynamikę, na prędkość maksymalną.
+Generowana przez silnik spalinowy (podana wartość znamionowa) oraz silnik elektryczny (maksymalnie podana wartość znamionowa). Napęd elektryczny zależny od stanu naładowania akumulatora.
+Wartości zmierzone zgodnie z regulaminem EKG ONZ nr 51/UE 540/2014 są zaokrąglone.
+Masa przyczepy zależna od wyposażenia pojazdu
+Dodatkowy zasięg w kilometrach po 10-minutowym ładowaniu o dużej mocy (HPC) jest określany zgodnie z normą DIN70080 w cyklu WLTP. Zależy on od wyposażenia p

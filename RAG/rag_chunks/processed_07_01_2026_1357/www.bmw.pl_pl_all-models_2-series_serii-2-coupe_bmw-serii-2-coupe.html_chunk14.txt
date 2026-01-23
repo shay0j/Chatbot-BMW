@@ -1,0 +1,10 @@
+c dodatkową przestrzeń do przechowywania.
+Gdzie jest produkowane BMW serii 2 Coupé?
+BMW serii 2 Coupé jest produkowane w fabryce BMW w San Luis Potosí w Meksyku.
+W jaki silnik jest wyposażone BMW M240i xDrive?
+BMW M240i xDrive Coupe jest napędzane 3,0-litrowym 6-cylindrowym rzędowym silnikiem benzynowym i przyspiesza od 0 do 100 km/h w zaledwie {techdata.acceleration} sekundy. Silnik zachwyca szybkim rozwijaniem mocy, łatwym wchodzeniem na wysokie obroty i dynamiczną reakcją.
+Ile KM ma BMW M240i xDrive?
+BMW M240i xDrive Coupe jest napędzane mocnym, 6-cylindrowym rzędowym silnikiem benzynowym o pojemności 3,0 litra, który generuje moc szczytową 275 kW (374 KM). Prędkość maksymalna wynosi 250 km/h.
+Obowiązkowe informacje prawne.
+BMW M240i xDrive Coupe: Zużycie energii w cyklu mieszanym WLTP w l/100 km: {techdata.consumptionWltpCombined}; emisja CO₂, cykl mieszany WLTP w g/km: {techdata.emissionsWltpCombined}
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste

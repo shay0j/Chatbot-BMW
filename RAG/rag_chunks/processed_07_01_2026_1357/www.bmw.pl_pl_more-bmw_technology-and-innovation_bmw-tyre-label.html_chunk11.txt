@@ -1,0 +1,116 @@
+
+-
+19"
+All-round
+225/40 R 19 93 Y XL
+STD
+Goodyear
+-
+19"
+All-round
+225/40 R 19 93 H XL M+S
+STD
+Giti
+SZ
+19"
+All-round
+235/40 R 19 96 Y XL
+STD
+Bridgestone
+-
+19"
+All-round
+235/40 R 19 96 Y XL
+STD
+Bridgestone
+-
+19"
+All-round
+235/40 R 19 96 Y XL
+STD
+Goodyear
+-
+19"
+All-round
+235/40 R 19 96 Y XL P
+STD
+Goodyear
+-
+19"
+All-round
+235/40 ZR 19 96 Y XL HP
+STD
+Michelin
+-
+-
+Seria 2 Active Tourer
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+16"
+All-round
+205/65 R 16 95 W
+STD
+Apollo Vredestein
+-
+16"
+All-round
+205/65 R 16 95 W
+STD
+Bridgestone
+-
+16"
+All-round
+205/65 R 16 95 W
+STD
+Hankook
+-
+16"
+All-round
+205/65 R 16 95 W
+STD
+Nexen
+-
+16"
+All-round
+205/65 R 16 95 H M+S
+STD
+Continental
+-
+16"
+All-round
+205/65 R 16 95 H M+S
+STD
+Goodyear
+-
+17"
+All-round
+205/60 R 17 97 W XL
+STD
+Apollo Vredestein
+-
+17"
+All-round
+205/60 R 17 97 W XL
+STD
+Bridgestone
+-
+17"
+All-round
+205/60 R 17 97 W XL
+STD
+Hankook
+-
+17"
+All-round
+205/60 R 17 97 H XL M+S
+STD
+Continental
+-
+17"
+All-round
+205/60 R 17 97 H XL 

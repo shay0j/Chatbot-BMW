@@ -1,0 +1,7 @@
+ch oraz w sprawie dostępu do informacji dotyczących naprawy i utrzymania pojazdów w brzmieniu obowiązującym w chwili udzielenia homologacji. Zakresy danych WLTP uwzględniają wszelkie wyposażenie dodatkowe (w tym przypadku z rynku niemieckiego). W przypadku pojazdów, których homologację typu przeprowadzono na nowo od 01.01.2021 r., oficjalne dane są dostępne tylko według WLTP. Więcej informacji o procedurze pomiarowej WLTP można znaleźć na stronie www.bmw.com/wltp
+7
+W przypadku Hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted).
+8
+Zasięg zależny od wielu różnych czynników, przede wszystkim: indywidualnego stylu jazdy, uwarunkowań trasy, temperatury zewnętrznej, ogrzewania lub klimatyzacji oraz zastanej temperatury.
+9
+Wydajność ładowania zależy od stanu naładowania, temperatury otoczenia, indywidualnego profilu jazdy i wykorzystania odbiorników dodatkowych. Podane zakresy są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wc

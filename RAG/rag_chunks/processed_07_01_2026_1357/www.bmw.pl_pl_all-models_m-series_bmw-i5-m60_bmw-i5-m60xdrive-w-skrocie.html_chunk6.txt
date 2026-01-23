@@ -1,0 +1,36 @@
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW i5 M60 xDrive
+Biel alpejska niemetalizowany
+Ognista czerwień metalizowany
+Niebieski Phytonic metalizowany
+Oksydowany szary metalizowany
+Szafirowoczarny metalizowany
+Zielony Cape York metalizowany
+Szary Sophisto z brylantowym połyskiem metalizowany
+Biel mineralna metalizowany
+Czarny karbon M metalizowany
+Szary Brooklyn M metalizowany
+Niebieski tanzanit BMW Individual metalizowany
+Mroźny czysty szary BMW Individual metalizowany
+Mroźny głęboki szary BMW Individual metalizowany
+Mroźny niebieski Portimao metalizowany BMW Individual
+19-calowe M Double Spoke 935 M Bicolor czarno-szare
+19-calowe aerodynamiczne obręcze kół M 936 M Bicolor czarno-szare
+20-calowe aerodynamiczne obręcze kół M 939 M Bicolor czarno

@@ -1,0 +1,31 @@
+ energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+BMW M440d xDrive Cabrio: zużycie paliwa w cyklu mieszanym WLTP w l/100 km: 6,8–6,4; emisja CO
+2
+w cyklu mieszanym WLTP w g/km: 178–167
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+WYBIERZ WYGLĄD, KTÓRY CI ODPOWIADA.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW M4 Competition Cabrio z M xDrive
+Biel alpejska niemetalizowany
+Żółty M Sao Paulo niemetalizowany
+Czarny szafirowy metalizowany
+Czerwony awenturynowy metalizowany
+Szary Skyscraper metaliz

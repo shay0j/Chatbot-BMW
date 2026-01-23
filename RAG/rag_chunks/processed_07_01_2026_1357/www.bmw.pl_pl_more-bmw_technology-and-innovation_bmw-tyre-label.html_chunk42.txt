@@ -1,0 +1,118 @@
+prel Link
+19"
+All-round
+245/40 R 19 98 H XL M+S RSC
+RSC
+Pirelli
+SZ
+19"
+All-round
+245/40 R 19 98 V XL M+S RSC
+RSC
+Pirelli
+SZ
+19"
+Front
+245/40 R 19 98 Y XL RSC
+RSC
+Bridgestone
+-
+19"
+Front
+245/40 R 19 98 Y XL RSC
+RSC
+Goodyear
+-
+19"
+Front
+245/40 R 19 98 Y XL RSC
+RSC
+Michelin
+-
+19"
+Front
+245/40 R 19 98 Y XL RSC
+RSC
+Pirelli
+-
+19"
+Rear
+275/35 R 19 100 Y XL RSC
+RSC
+Bridgestone
+-
+19"
+Rear
+275/35 R 19 100 Y XL RSC
+RSC
+Goodyear
+-
+19"
+Rear
+275/35 R 19 100 Y XL RSC
+RSC
+Michelin
+-
+19"
+Rear
+275/35 R 19 100 Y XL RSC
+RSC
+Pirelli
+-
+19"
+Front
+245/40 R 19 98 V XL M+S RSC
+RSC
+Pirelli
+-
+19"
+Rear
+275/35 R 19 100 V XL M+S RSC
+RSC
+Pirelli
+-
+20"
+Front
+245/35 R 20 95 Y XL HP
+STD
+Bridgestone
+SZ
+20"
+Front
+245/35 R 20 95 Y XL HP
+STD
+Michelin
+-
+20"
+Rear
+275/30 R 20 97 Y XL HP
+STD
+Bridgestone
+SZ
+20"
+Rear
+275/30 R 20 97 Y XL HP
+STD
+Bridgestone
+-
+20"
+Front
+245/35 R 20 95 Y XL RSC
+RSC
+Goodyear
+-
+20"
+Front
+245/35 R 20 95 Y XL RSC
+RSC
+Pirelli
+-
+20"
+Rear
+275/30 R 20 97 Y XL RSC
+RSC
+Goodyear
+-
+20"
+Rear
+275/30 R 20 97 Y XL R

@@ -1,0 +1,127 @@
+ M+S
+STD
+Goodyear
+-
+18"
+All-round
+245/45 R 18 100 H XL M+S
+STD
+Pirelli
+-
+18"
+All-round
+245/45 R 18 100 Y XL RSC
+RSC
+Bridgestone
+-
+18"
+All-round
+245/45 R 18 100 Y XL RSC
+RSC
+Pirelli
+-
+18"
+Front
+245/45 R 18 100 Y XL
+STD
+Hankook
+-
+18"
+Front
+245/45 R 18 100 Y XL
+STD
+Pirelli
+-
+18"
+Rear
+255/45 R 18 103 Y XL
+STD
+Hankook
+-
+18"
+Rear
+255/45 R 18 103 Y XL
+STD
+Pirelli
+-
+19"
+Front
+245/40 R 19 98 Y XL
+STD
+Bridgestone
+-
+19"
+Front
+245/40 R 19 98 Y XL
+STD
+Hankook
+-
+19"
+Rear
+255/40 R 19 100 Y XL
+STD
+Bridgestone
+-
+19"
+Rear
+255/40 R 19 100 Y XL
+STD
+Hankook
+-
+19"
+Front
+245/40 R 19 98 Y XL HP
+STD
+Hankook
+-
+19"
+Rear
+255/40 R 19 100 Y XL HP
+STD
+Hankook
+-
+19"
+Front
+245/40 R 19 98 V XL M+S
+STD
+Goodyear
+SZ
+19"
+Front
+245/40 R 19 98 V XL M+S
+STD
+Pirelli
+SZ
+19"
+Rear
+255/40 R 19 100 V XL M+S
+STD
+Goodyear
+SZ
+19"
+Rear
+255/40 R 19 100 V XL M+S
+STD
+Pirelli
+SZ
+19"
+Front
+245/40 R 19 98 W XL M+S
+STD
+Goodyear
+SZ
+19"
+Rear
+255/40 R 19 100 W XL M+S
+STD
+Goodyear
+SZ
+19"
+Front
+245/40 R 19 98 Y XL RSC
+RSC
+Hankook
+-
+19"
+Front
+245/4

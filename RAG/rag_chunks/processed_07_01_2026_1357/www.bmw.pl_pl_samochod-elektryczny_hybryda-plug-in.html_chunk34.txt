@@ -1,0 +1,5 @@
+tyczących oficjalnego zużycia paliwa oraz emisji CO₂ nowych samochodów osobowych można uzyskać we wszystkich salonach sprzedaży.
+² Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+³ Dane dotyczące osiągów silników benzynowych dotyczą ich eksploatacji z paliwem o jakości LO 98. Dane dotyczące zużycia dotyczą eksploatacji z paliwem referencyjnym zgodnie z rozporządzeniem (UE) 715/2007. Dopuszczalne są jakości paliwa bezołowiowego LO 91 i wyższe o maksymalnym udziale etanolu wynoszącym 10% (E10). BMW zaleca stosowanie paliwa o LO 95. W przypadku samochodów o wysokich osiągach BMW zaleca stosowanie paliwa o LO 98.
+⁴ W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+⁵ Wydajność ładowania zależy od poziomu naładowania, temperatury otoczenia, indywidua

@@ -1,0 +1,62 @@
+rzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd przedni
+-
+-
+Silnik spalinowy TwinPower Turbo
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 120
+Cylindry
+3
+-
+-
+Pojemność w cm³
+1 499
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+115 (156) / 4 700 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+240 / 1 500 - 4 400
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 120
+(Nominal) power/30 minutes power in kW (hp)
+15 (20) / -
+-
+-
+(Nominal) torque in Nm
+55
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 120
+Przyspieszenie 0-100 km/h w s
+7,8
+6
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+226
+-
+-
+Prędko

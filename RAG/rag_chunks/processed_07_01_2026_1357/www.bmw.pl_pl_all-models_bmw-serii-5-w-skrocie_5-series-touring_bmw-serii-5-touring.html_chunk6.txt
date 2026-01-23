@@ -1,0 +1,45 @@
+g-in
+5
+BMW 520d Touring
+Moc
+145 kW (197 KM)
+Moment obrotowy
+400 Nm
+0-100 km/h
+7,5 s
+Prędkość maksymalna
+220 km/h
+Dane techniczne
+Porównanie modeli
+Kontynuuj do „Porównaj”
+BMW 520d Touring: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km: 5,9–5,3; emisja CO
+2
+, cykl mieszany WLTP w g/km: 154–140
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+BMW SERII 5 TOURING.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+M Sport Pro
+M Sport
+Basis
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Szary Soph

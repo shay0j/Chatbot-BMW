@@ -1,0 +1,117 @@
+L
+STD
+Goodyear
+-
+17"
+All-round
+205/55 R 17 95 Y XL
+STD
+MAXXIS
+-
+17"
+All-round
+205/55 R 17 95 Y XL
+STD
+Nexen
+-
+17"
+All-round
+205/55 R 17 95 H XL M+S
+STD
+Goodyear
+SZ
+18"
+All-round
+HL 195/50 R 18 93 H XL M+S
+STD
+Apollo Vredestein
+-
+18"
+All-round
+HL 195/50 R 18 93 H XL M+S
+STD
+Goodyear
+-
+18"
+All-round
+225/45 R 18 95 Y XL
+STD
+Bridgestone
+-
+18"
+All-round
+225/45 R 18 95 Y XL
+STD
+Goodyear
+-
+18"
+All-round
+225/45 R 18 95 Y XL
+STD
+MAXXIS
+-
+18"
+All-round
+225/45 R 18 95 Y XL
+STD
+Nexen
+-
+18"
+All-round
+225/45 R 18 95 Y XL P
+STD
+Continental
+-
+18"
+All-round
+225/45 R 18 95 V XL M+S
+STD
+Bridgestone
+SZ
+18"
+All-round
+225/45 R 18 95 V XL M+S
+STD
+Goodyear
+SZ
+18"
+All-round
+225/45 R 18 95 Y XL RSC
+RSC
+Hankook
+-
+19"
+All-round
+HL 195/45 R 19 91 H XL M+S
+STD
+Hankook
+-
+19"
+All-round
+225/40 R 19 93 Y XL
+STD
+Bridgestone
+-
+19"
+All-round
+225/40 R 19 93 Y XL
+STD
+Goodyear
+-
+19"
+All-round
+225/40 R 19 93 H XL M+S
+STD
+Giti
+SZ
+19"
+All-round
+235/40 R 19 96 Y XL
+STD
+Bridgestone
+-
+19"
+All-round
+235/40 R 19 96 Y XL
+STD
+Bridgest

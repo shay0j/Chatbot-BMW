@@ -1,0 +1,11 @@
+yposażeniem standardowym bez wyposażenia dodatkowego. Masa własna uwzględnia 90-procentowe napełnienie zbiornika paliwa i 75 kg wagi kierowcy. Wyposażenie dodatkowe może wpływać na masę samochodu, ładowność oraz, w przypadku wpływu na aerodynamikę, na prędkość maksymalną.
+5
+Masa przyczepy zależna od wyposażenia pojazdu
+6
+Wartości zmierzone zgodnie z regulaminem EKG ONZ nr 51/UE 540/2014 są zaokrąglone.
+7
+Generowana przez silnik spalinowy (podana wartość znamionowa) oraz silnik elektryczny (maksymalnie podana wartość znamionowa).
+8
+Wydajność ładowania zależy od stanu naładowania, temperatury otoczenia, indywidualnego profilu jazdy i wykorzystania odbiorników dodatkowych. Podane zakresy są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania.
+9
+Wg opracowania dot. oceny cyklu życia w momencie rozpoczęcia produkcji – odnośnie szczegółów, patrz: Raport na temat śladu w

@@ -1,0 +1,6 @@
+nych środków oraz środków bezpieczeństwa przetwarzania, jakie wynikają z obecnego stanu techniki. Między innymi, używamy następujących środków:
+silnych wymogów autoryzacji dostępu do Państwa danych, zgodnie z zasadą „need-to-know” (ograniczenie dostępu dla tak niewielu osób, jak to tylko możliwe) oraz udostępnianie wyłącznie w określonych celach;
+transfer zebranych danych wyłącznie w zaszyfrowanej formie;
+system ochrony IT Firewall, aby zapewnić ochronę przeciwko nieautoryzowanemu dostępowi, na przykład przez hakerów;
+stałego monitorowania dostępu do systemów IT, w celu wykrycia i zapobiegania niewłaściwemu użyciu danych osobowych.
+Jeśli otrzymali Państwo od nas hasło i uzyskali Państwo dostęp do określonych obszarów naszej strony internetowej lub innych portali, aplikacji, usług, którymi dysponujemy, jesteście Państwo odpowiedzialni za zachowanie tajemnicy swojego hasła oraz jego zgodności z wszystkimi procedurami bezpieczeństwa, z którymi zostaliście Państwo przez nas zapoznani. W sz

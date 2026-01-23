@@ -1,0 +1,116 @@
+
+Pirelli
+-
+19"
+Rear
+255/35 R 19 96 Y XL RSC
+RSC
+Bridgestone
+-
+19"
+Rear
+255/35 R 19 96 Y XL RSC
+RSC
+Goodyear
+-
+19"
+Rear
+255/35 R 19 96 Y XL RSC
+RSC
+Pirelli
+-
+19"
+Front
+225/40 R 19 93 H XL M+S RSC
+RSC
+Continental
+SZ
+19"
+Rear
+255/35 R 19 96 H XL M+S RSC
+RSC
+Continental
+SZ
+20"
+Front
+225/35 R 20 90 Y XL RSC
+RSC
+Bridgestone
+SZ
+20"
+Front
+225/35 R 20 90 Y XL RSC
+RSC
+Pirelli
+SZ
+20"
+Rear
+255/30 R 20 92 Y XL RSC
+RSC
+Bridgestone
+SZ
+20"
+Rear
+255/30 R 20 92 Y XL RSC
+RSC
+Pirelli
+SZ
+-
+Seria 4 Gran Coupé
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+17"
+All-round
+225/55 R 17 101 Y XL
+STD
+Continental
+-
+17"
+All-round
+225/55 R 17 101 H XL M+S
+STD
+Continental
+-
+17"
+All-round
+225/55 R 17 101 H XL M+S
+STD
+Goodyear
+-
+18"
+All-round
+245/45 R 18 100 Y XL
+STD
+Goodyear
+-
+18"
+All-round
+245/45 R 18 100 Y XL
+STD
+Hankook
+-
+18"
+All-round
+245/45 R 18 100 H XL M+S
+STD
+Goodyear
+-
+18"
+All-round
+245/45 R 18 100 H XL M+S
+STD
+Pirelli
+-
+18"
+All-round
+245/45 R 18 100 Y XL RSC
+RSC
+Bridgestone
+-
+18"
+Al

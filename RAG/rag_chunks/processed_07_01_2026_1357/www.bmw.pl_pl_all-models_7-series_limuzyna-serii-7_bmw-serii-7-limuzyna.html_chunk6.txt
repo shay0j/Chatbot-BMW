@@ -1,0 +1,25 @@
+ation
+Wyjątkowe pod względem technologii i elegancji.
+Zanurz się w świecie BMW serii 7. Niezależnie od tego, czy wybierzesz model z silnikiem spalinowym, czy hybrydę plug-in – najnowocześniejsze systemy wspomagające kierowcę oraz innowacyjne technologie, zapewniające większe bezpieczeństwo, lepszą rozrywkę i wyższy komfort, sprawiają, że podróże są przyjemniejsze i zwiększają radość z jazdy. Odchyl się do tyłu i doznaj wyjątkowości każdej podróży dzięki ekskluzywnym elementom wyposażenia, takim jak ekran kinowy BMW Theatre Screen lub szklany dach panoramiczny Sky Lounge.
+Twoje BMW serii 7 Limuzyna.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW serii 7 Limuzyna M Sport Pro
+BMW serii 7 Limuzyna Hybryda plug-in
+Biel alpejska niemetalizowany
+Czarny karbon metalizowany
+Szafirowocza

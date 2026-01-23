@@ -1,0 +1,51 @@
+₂e – do momentu przekazania pojazdu (zakres 1, 2, 3 i wyższy); wartość szacunkowa, podana w tonach.
+-
+-
+-
+Udział surowców wtórnych w całym pojeździe; wartość szacunkowa, podana w %
+-
+-
+-
+Akumulator wysokiego napięcia/48 V, ładowanie
+2
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Akumulator wysokiego napięcia/48 V, ładowanie
+BMW i5 eDrive40 Limuzyna
+Pojemność akumulatora w kWh
+81,2
+-
+-
+Maksymalna moc ładowania AC w kW
+11
+-
+-
+Maksymalna moc ładowania AC/DC w kW
+null
+-
+-
+Minmalny czas ładowania AC 0-100% w h
+8:30
+-
+-
+bmw.web.technicaldata.charging.chargingMaxAC
+null
+-
+-
+Maksymalna moc ładowania DC w kW
+205
+-
+-
+Minimalny czas ładowania DC 10-80% w h
+0:30
+-
+-
+Doładowany zasięg po 10 minutach ładowania z wysoką mocą w km
+157 - 211
+-
+-
+Ładowanie dwukierunkowe
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ładowanie dwukierunkowe
+BMW i5 eDrive40 

@@ -1,0 +1,10 @@
+edz się więcej
+Zużycie i emisja CO₂.
+BMW X5 xDrive40i: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 9,9–8,5; emisja CO₂, cykl mieszany WLTP w g/km: 224–193
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+1
+Dane dotyczące mocy silników benzynowych odnoszą się do paliwa o liczbie oktanowej 98. Dane dotyczące zużycia odnoszą się do paliwa referencyjnego zgodnie z rozporządzeniem (WE) 1151/2017. Dopuszczalne jest stosowanie paliwa bezołowiowego o liczbie oktanowej 91 lub wyższej i zawartości etanolu do  25% (E25). BMW zaleca stosowanie paliwa o LO 95. W przypadku samochodów o wysokich osiągach BMW zaleca stosowanie paliwa o LO 98.
+2
+W przypadku Hybrydy plug-in: moc zależy od stanu naładowania akumulatora.
+3
+Generowana przez silnik spalinowy (podana wartość znamionowa

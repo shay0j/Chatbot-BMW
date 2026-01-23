@@ -1,0 +1,61 @@
+j sekcji nie występuje dla wybranych modeli.
+Całkowity układ napędowy
+BMW X1 sDrive18i
+Typ napędu
+Benzyna
+-
+-
+Moc w kW (KM)
+100 (136)
+-
+-
+Moment obrotowy w Nm
+230
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd przedni
+-
+-
+Silnik spalinowy TwinPower Turbo
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW X1 sDrive18i
+Cylindry
+3
+-
+-
+Pojemność w cm³
+1 499
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+100 (136) / 4 400 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+230 / 1 500 - 4 000
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW X1 sDrive18i
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych m

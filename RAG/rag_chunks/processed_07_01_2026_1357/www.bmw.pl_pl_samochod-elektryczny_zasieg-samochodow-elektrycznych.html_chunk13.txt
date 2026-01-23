@@ -1,0 +1,5 @@
+stała funkcja Trener wydajności, która pokazuje, jak najlepiej przyspieszać lub wytracać prędkość, aby jeździć oszczędnie. Dopóki zachowanie jest optymalne, odczyt mocy świeci na niebiesko zamiast na szaro. Przyrost zasięgu wynikający z efektywnego stylu jazdy wskazywany jest na wyświetlaczu informacyjnym.
+Back to Navigation
+Postaw na maksymalny zasięg podczas jazdy.
+W trybie My Mode Efficient funkcja Max Range zapewnia większe bezpieczeństwo w aspekcie zasięgu. Jeśli na przykład sterowany terminal ładujący nie jest wykorzystywany zgodnie z planem, zasięg elektrycznego BMW może zostać zwiększony nawet o 25%. Za pomocą przycisku i w czasie jazdy.
+Moc napędowa jest zmniejszana i prędkość maksymalna ograniczana jest do 90 km/h. Działanie funkcji komfortowych, takich jak klimatyzacja lub ogrzewanie siedzeń, redukowane jest w inteligentny sposób. Jak najwięcej energii zamieniane jest na ruch. Funkcja Max Range dostępna jest w wielu modelach elektrycznych BMW. Dokładniejszych informacji może

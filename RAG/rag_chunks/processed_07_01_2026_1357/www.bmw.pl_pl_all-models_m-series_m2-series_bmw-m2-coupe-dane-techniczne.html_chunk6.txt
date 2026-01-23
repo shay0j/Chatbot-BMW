@@ -1,0 +1,27 @@
+1 404
+Szerokość w mm / z lusterkami
+2 068
+Rozstaw osi w mm
+2 741
+Masa własna pojazdu w kg
+6
+1 830
+Dopuszczalna masa brutto w kg
+2 230
+Ładowność w kg
+475
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+7
+1 600 / 75
+Pojemność bagażnika w l
+390
+Pojemność zbiornika w l
+52
+1
+Dane dotyczące mocy silników benzynowych odnoszą się do paliwa o liczbie oktanowej 98. Dane dotyczące zużycia odnoszą się do paliwa referencyjnego zgodnie z rozporządzeniem (WE) 1151/2017. Dopuszczalne jest stosowanie paliwa bezołowiowego o liczbie oktanowej 91 lub wyższej i zawartości etanolu do  25% (E25). BMW zaleca stosowanie paliwa o LO 95. W przypadku samochodów o wysokich osiągach BMW zaleca stosowanie paliwa o LO 98.
+2
+Generowana przez silnik spalinowy (podana wartość znamionowa) oraz silnik elektryczny (maksymalnie podana wartość znamionowa).
+3
+Dodatkowy zasięg w kilometrach po 10-minutowym ładowaniu o dużej mocy (HPC) jest określany 

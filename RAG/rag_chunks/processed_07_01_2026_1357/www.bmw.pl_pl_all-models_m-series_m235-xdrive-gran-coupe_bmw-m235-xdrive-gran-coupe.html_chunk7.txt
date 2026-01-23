@@ -1,0 +1,37 @@
+nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW M235 xDrive Gran Coupé
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Thundernight metalizowany
+Szary Skyscraper metalizowany
+Czerwień Dragon Fire metalizowany
+Niebieski Portimao metalizowany M
+Szary M Brooklyn metalizowany
+Storm Bay metalizowany BMW Individual
+Niebieski tanzanit metalizowany BMW Individual
+Mroźny czysty szary metalizowany BMW Individual
+Mroźny niebieski Portimao metalizowany BMW Individual
+Obręcze 18” M szprycha Y 975 M Bicolor
+Obręcze 19” M wieloramienne 977 M Bicolor
+Obręcze 19” M szprycha Y 976 M Bicolor
+Obręcze kute 19'' M felga Y 1085 M
+Połączenie Alcantary i Veganzy M | czarny z kontrastującym niebieskim pikowaniem
+Veganza perforowana | Oyster
+Veganza perforowana | Koralowo-czarna
+Veganza perforowana | Mocha
+Vega

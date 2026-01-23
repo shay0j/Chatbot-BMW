@@ -1,0 +1,7 @@
+emissionsWltpCombined}
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+Back to Navigation
+Muskularna sylwetka. Precyzja prowadzenia.
+BMW serii 2 Coupé podkreśla sportową precyzję na drodze. Niski środek ciężkości, szeroka sylwetka i napęd na tylne koła zapewniają bezpośrednią reakcję oraz intensywne wrażenia z jazdy, szczególnie podczas pokonywania zakrętów. Coupé, które nie tylko sportowo wygląda, ale także jeździ jak przystało na swój gatunek.
+BMW M240i xDrive Coupe: Zużycie energii w cyklu mieszanym WLTP w l/100 km: {techdata.consumptionWltpCombined}; emisja CO₂, cykl mieszany WLTP w g/km: {techdata.emissionsWltpCombined}
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy

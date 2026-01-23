@@ -1,0 +1,71 @@
+nie występuje dla wybranych modeli.
+Całkowity układ napędowy
+Typ napędu
+-
+-
+-
+Moc w kW (KM)
+-
+-
+-
+Moment obrotowy w Nm
+-
+-
+-
+Skrzynia biegów
+-
+-
+-
+Rodzaj napędu
+-
+-
+-
+Silnik spalinowy TwinPower Turbo
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+Cylindry
+-
+-
+-
+Pojemność w cm³
+-
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+-
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+-
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+Przyspieszenie 0-100 km/h w s
+-
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+-
+-
+-
+Pr

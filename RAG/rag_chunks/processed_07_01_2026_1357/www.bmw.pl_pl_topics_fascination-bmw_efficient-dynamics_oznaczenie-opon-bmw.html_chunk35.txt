@@ -1,0 +1,127 @@
+Front
+245/40 R 20 99 Y XL
+STD
+Michelin
+-
+20"
+Front
+245/40 R 20 99 Y XL
+STD
+Pirelli
+-
+20"
+Front
+245/40 R 20 99 Y XL HP
+STD
+Pirelli
+-
+20"
+Rear
+275/35 R 20 102 Y XL
+STD
+Bridgestone
+-
+20"
+Rear
+275/35 R 20 102 Y XL
+STD
+Continental
+-
+20"
+Rear
+275/35 R 20 102 Y XL
+STD
+Michelin
+-
+20"
+Rear
+275/35 R 20 102 Y XL
+STD
+Michelin
+SZ
+20"
+Rear
+275/35 R 20 102 Y XL
+STD
+Pirelli
+-
+20"
+Rear
+275/35 R 20 102 Y XL HP
+STD
+Pirelli
+-
+20"
+Front
+245/40 R 20 99 V XL M+S
+STD
+Pirelli
+SZ
+20"
+Rear
+275/35 R 20 102 V XL M+S
+STD
+Pirelli
+SZ
+21"
+Front
+245/35 R 21 96 Y XL
+STD
+Bridgestone
+-
+21"
+Front
+245/35 R 21 96 Y XL
+STD
+Continental
+-
+21"
+Front
+245/35 R 21 96 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Bridgestone
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Continental
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Pirelli
+-
+21"
+Front
+HL 255/35 R 21 101 Y XL
+STD
+Continental
+-
+21"
+Front
+HL 255/35 R 21 101 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+HL 285/30 R 21 103 Y XL
+STD
+Continental
+-
+21"
+Rear
+HL 285/30 R 21 103 Y XL
+STD
+Pirelli
+-
+-
+Seria 5 Touring

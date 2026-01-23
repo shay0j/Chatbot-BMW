@@ -1,0 +1,71 @@
+ (V2L) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Load (V2V) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Home Power Flex (V2H Flex) w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 3-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 1-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Czas ładowania za pomocą 3-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Czas ładowania za pomocą 1-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Wymiary i ciężar
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wymiary i ciężar
+BMW iX M70 xDrive
+Długość w mm
+4 965
+-
+-
+Szerokość w mm
+1 970
+-
+-
+Wysokość w mm
+1 695
+-
+-
+Szerokość w mm / z lusterkami
+2 230
+-
+-
+Rozstaw osi w mm
+3 000
+-
+-
+Masa własna pojazdu w kg
+3
+2 655
+-
+-
+Dopuszczalna masa brutto w kg
+3 160
+-
+-
+Ładowność w kg
+580
+-
+-
+Pojemność bagażnika w l
+500–1 750
+-
+-
+Pojemność zbiornika 

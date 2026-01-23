@@ -1,0 +1,33 @@
+i Izraelu (EU28+).
+Od stycznia 2021 r. we wszystkich krajach stosujących prawodawstwo UE w zakresie homologacji pojazdów obowiązkowe będzie publikowanie wartości WLTP dla każdego pojazdu.
+Zestawienie WLTP z NEDC.
+Dowiedz się więcej na temat różnic między starą i nową procedurą testową.
+Procedura testowa
+NEDC
+WLTP
+Czas trwania testu
+20 min
+30 min
+Dystans testowy
+11 km
+23,2 km
+Czas postoju
+25%
+13%
+Fazy testu
+cykl miejski, pozamiejski, (mieszany)
+wolna, średnia, szybka, bardzo szybka (mieszana); dodatkowo „City” dla samochodów elektrycznych i hybrydowych plug-in
+Prędkość
+Średnia: 34 km/h
+Maksymalna: 120 km/h
+Średnia: 46,6 km/h
+Maksymalna: 131 km/h
+Temperatura startowa
+20–30°C; rozruch na zimno
+14°C (przetestowano przy 23°C, skorygowano dla 14°C) rozruch na zimno
+Wyposażenie dodatkowe
+Nieuwzględnione
+Uwzględniony jest wpływ całego wyposażenia dodatkowego na aerodynamikę, masę i opory toczenia
+Real driving emissions (RDE).
+Praktyczny pomiar emisji zanieczyszczeń podczas jazdy na drodze.
+Od 

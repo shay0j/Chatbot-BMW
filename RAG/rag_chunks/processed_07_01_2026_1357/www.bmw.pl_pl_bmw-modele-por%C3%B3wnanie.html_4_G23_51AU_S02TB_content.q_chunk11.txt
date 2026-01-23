@@ -1,0 +1,62 @@
+ranych modeli.
+Całkowity układ napędowy
+BMW 420d Cabrio
+Typ napędu
+Diesel – 48 Volt Mild-Hybrid
+-
+-
+Moc w kW (KM)
+140 (190)
+-
+-
+Moment obrotowy w Nm
+400
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+6
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 420d Cabrio
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 995
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+140 (190) / 4 000
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+400 / 1 750 - 2 500
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 420d Cabrio
+(Nominal) power/30 minutes power in kW (hp)
+8 (11) / -
+-
+-
+(Nominal) torque in Nm
+25
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydaj

@@ -1,0 +1,62 @@
+li.
+Całkowity układ napędowy
+BMW i7 eDrive50 Limuzyna
+Typ napędu
+Całkowicie elektryczny
+-
+-
+Moc w kW (KM)
+335 (455)
+-
+-
+Moment obrotowy w Nm
+650
+-
+-
+Skrzynia biegów
+1-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW i7 eDrive50 Limuzyna
+Cylindry
+-
+-
+-
+Pojemność w cm³
+-
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+-
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+-
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW i7 eDrive50 Limuzyna
+(Nominal) power/30 minutes power in kW (hp)
+335 (455) / 125 (170)
+-
+-
+(Nominal) torque in Nm
+650
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW i7 eDrive

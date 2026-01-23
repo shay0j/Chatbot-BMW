@@ -1,0 +1,24 @@
+0:34 h
+Wydłużenie zasięgu po 10 minutach ładowania o dużej mocy (HPC)
+[4]
+151 - 186 km
+Sprawdź dostępność
+BMW iX2 xDrive30
+Zasięg elektryczny (WLTP)
+[2]
+418–449 km
+Czas trwania ładowania DC (poziom naładowania 10–80%)
+[3]
+0:29 h
+Wydłużenie zasięgu po 10 minutach ładowania o dużej mocy (HPC) w km
+[4]
+125 - 140 km
+Sprawdź dostępność
+BMW iX xDrive40: Zużycie energii w cyklu mieszanym WLTP w kWh/100 km
+[1]:
+21,4 - 19,4; zasięg elektryczny, WLTP w km: 403 - 435
+Podane wartości wyznaczono zgodnie z wymaganą procedurą pomiarową WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+BMW iX1 eDrive20: Zużycie energii w cyklu mieszanym WLTP w kWh/100 km
+[1]
+: 17,1–15,5; zasięg elektryczny, WLTP w km: 431–473
+Podane wartości wyznaczono zgodnie z wymaganą procedurą pomiarową WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, sty

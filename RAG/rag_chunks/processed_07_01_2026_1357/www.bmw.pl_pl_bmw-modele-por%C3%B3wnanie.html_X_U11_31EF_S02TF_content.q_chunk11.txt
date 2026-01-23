@@ -1,0 +1,66 @@
+w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Całkowity układ napędowy
+BMW X1 xDrive30e
+Typ napędu
+Benzynowy – hybryda plug-in
+-
+-
+Moc w kW (KM)
+240 (326)
+4
+-
+-
+Moment obrotowy w Nm
+477
+4
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+8
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW X1 xDrive30e
+Cylindry
+3
+-
+-
+Pojemność w cm³
+1 499
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+110 (150) / 4 700 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+230 / 1 500 - 4 400
+-
+-
+Silnik elektryczny
+9
+,
+10
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW X1 xDrive30e
+(Nominal) power/30 minutes power in kW (hp)
+130 (177)
+-
+-
+(Nominal) torque in Nm
+247
+-
+-
+Wydajność
+Wy

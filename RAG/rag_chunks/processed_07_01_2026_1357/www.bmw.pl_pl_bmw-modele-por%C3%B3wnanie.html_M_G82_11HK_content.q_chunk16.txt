@@ -1,0 +1,74 @@
+adowania i rozładowywania z 3-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 1-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Czas ładowania za pomocą 3-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Czas ładowania za pomocą 1-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Wymiary i ciężar
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wymiary i ciężar
+BMW M4 Coupé
+Długość w mm
+-
+-
+-
+Szerokość w mm
+-
+-
+-
+Wysokość w mm
+-
+-
+-
+Szerokość w mm / z lusterkami
+-
+-
+-
+Rozstaw osi w mm
+-
+-
+-
+Masa własna pojazdu w kg
+-
+-
+-
+Dopuszczalna masa brutto w kg
+-
+-
+-
+Ładowność w kg
+-
+-
+-
+Pojemność bagażnika w l
+-
+-
+-
+Pojemność zbiornika w l
+-
+-
+-
+Uchwyt na relingi dachowe bez relingów w kg
+-
+-
+-
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+-
+-
+-
+Pojemność przedniego schowka w l
+-
+-
+-
+Pojemność bagażnika ze złożonymi 

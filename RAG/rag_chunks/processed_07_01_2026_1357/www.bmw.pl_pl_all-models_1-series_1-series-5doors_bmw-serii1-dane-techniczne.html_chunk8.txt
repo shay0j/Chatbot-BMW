@@ -1,0 +1,66 @@
+ w kg
+5
+1 300 / 75
+Pojemność bagażnika w l
+300–1 135
+Pojemność zbiornika w l
+49
+Całkowity układ napędowy
+1
+Typ napędu
+Benzynowy – mild hybrid 48 V
+Moc w kW (KM)
+160 (218)
+7
+Moment obrotowy w Nm
+360
+7
+Skrzynia biegów
+7-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+4
+Pojemność w cm³
+1 998
+Moc znamionowa w kW (KM) / obr/min
+150 (204) / 5 000 - 6 500
+Znamionowy moment obrotowy w Nm / obr/min
+320 / 1 500 - 4 000
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+15 (20) / -
+(Znamionowy) moment obrotowy w Nm
+55
+Wydajność
+Przyspieszenie 0-100 km/h w s
+6,3
+2
+Prędkość maksymalna w km/h
+246
+Zużycie i emisja
+1
+,
+3
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+6,1–5,9
+Emisja CO₂, cykl mieszany WLTP w g/km
+138–134
+Hałas przejściowy w dB (A)
+65
+6
+Stacjonarny poziom hałasu w dB (A) /1/min
+74 / 3 750
+6
+Akumulator wysokiego napięcia/48 V, ładowanie
+8
+Pojemność akumulatora w kWh
+0,9
+Wymiary i ciężar
+4 361 mm
+1 800 mm
+1 459 mm
+Długość w mm
+4 3

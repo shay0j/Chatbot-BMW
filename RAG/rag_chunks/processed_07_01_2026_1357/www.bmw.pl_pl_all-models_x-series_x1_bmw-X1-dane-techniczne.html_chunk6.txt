@@ -1,0 +1,67 @@
+ć akumulatora w kWh
+14,2
+Maksymalna moc ładowania AC w kW
+11
+Minmalny czas ładowania AC 0-100% w h
+1:45
+Wymiary i ciężar
+4 500 mm
+1 845 mm
+1 630 mm
+Długość w mm
+4 500
+Szerokość w mm
+1 845
+Wysokość w mm
+1 630
+Szerokość w mm / z lusterkami
+2 104
+Rozstaw osi w mm
+2 692
+Masa własna pojazdu w kg
+10
+1 930
+Dopuszczalna masa brutto w kg
+2 430
+Ładowność w kg
+575
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+11
+1 700 / 80
+Pojemność bagażnika w l
+490–1 495
+Pojemność zbiornika w l
+47
+Całkowity układ napędowy
+1
+,
+2
+Typ napędu
+Benzynowy – Hybryda plug-in
+Moc w kW (KM)
+240 (326)
+3
+Moment obrotowy w Nm
+477
+3
+Skrzynia biegów
+7-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+3
+Pojemność w cm³
+1 499
+Moc znamionowa w kW (KM) / obr/min
+110 (150) / 4 700 - 6 500
+Znamionowy moment obrotowy w Nm / obr/min
+230 / 1 500 - 4 400
+Silnik elektryczny
+2
+,
+4
+Moc (nominalna) /moc 30 minut 

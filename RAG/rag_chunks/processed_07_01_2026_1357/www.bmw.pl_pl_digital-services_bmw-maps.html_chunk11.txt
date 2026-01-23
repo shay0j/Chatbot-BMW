@@ -1,0 +1,5 @@
+wych ulic czy lokalizacji, które pojawiają się dopiero po kolejnych cyklicznych aktualizacjach. Różnice te wynikają z ewolucji technologicznej produktu, co sprawia, że niestety nie ma możliwości, aby mapy w systemach RSU 8 były aktualizowane z taką samą częstotliwością jak w systemie RSU 9.
+Jak korzystać z BMW Maps?
+Aby rozpocząć aktywne prowadzenie do celu, wystarczy wprowadzić miejsce docelowe lub adres w polu wyszukiwania i wybrać jedną z propozycji. Dostęp do wszystkich pozostałych funkcji BMW Maps uzyskasz intuicyjnie na ekranie z mapą. Możliwe jest również sterowanie przy użyciu poleceń głosowych.
+W jaki sposób usługa BMW Maps pomoże mi znaleźć miejsce parkingowe?
+Usługa BMW Maps On-Street Parking Information wskazuje bezpłatne miejsca parkingowe wzdłuż ulicy. Obszary te oznaczone są niebieskimi liniami, podczas gdy niebieskie okręgi oznaczają miejsca, które właśnie zostały zwolnione. Usługa Park Search Route zaprowadzi Cię na najlepsze dostępne miejsce parkingowe w pobliżu miejs

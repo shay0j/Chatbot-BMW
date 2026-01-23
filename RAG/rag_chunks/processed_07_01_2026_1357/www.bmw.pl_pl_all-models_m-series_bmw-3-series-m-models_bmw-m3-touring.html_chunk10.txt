@@ -1,0 +1,18 @@
+gii w cyklu mieszanym WLTP w l/100 km: 7,9–7,3; emisja CO₂, cykl mieszany WLTP w g/km: 181–165
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+BMW M340d xDrive Touring¹: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 6,6–6,1; emisja CO₂, cykl mieszany WLTP w g/km: 173–161
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+Wybierz swój styl.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.

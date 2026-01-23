@@ -1,0 +1,7 @@
+dowym bez wyposażenia dodatkowego. Masa własna uwzględnia 90-procentowe napełnienie zbiornika paliwa i 75 kg wagi kierowcy. Wyposażenie dodatkowe może wpływać na masę samochodu, ładowność oraz, w przypadku wpływu na aerodynamikę, na prędkość maksymalną.
+Chwilowe zwiększenie mocy <10 s w stosunku do podanej wartości znamionowej.
+Wartości zmierzone zgodnie z regulaminem EKG ONZ nr 51/UE 540/2014 są zaokrąglone.
+Masa przyczepy zależna od wyposażenia pojazdu
+Dodatkowy zasięg w kilometrach po 10-minutowym ładowaniu o dużej mocy (HPC) jest określany zgodnie z normą DIN70080 w cyklu WLTP. Zależy on od wyposażenia pojazdu, indywidualnego profilu jazdy, temperatury otoczenia, poziomu naładowania i korzystania z zewnętrznych odbiorników.
+Wg opracowania dot. oceny cyklu życia w momencie rozpoczęcia produkcji – odnośnie szczegółów, patrz: Raport na temat śladu węglowego pojazdów BMW
+Wskazane dane dotyczące zużycia paliwa, emisji CO₂, zużycia energii i zasięgu na napędzie elektrycznym zostały ustal

@@ -1,0 +1,53 @@
+MW 220d Gran Coupé
+BMW 218d Gran Coupé
+BMW 220 Gran Coupé
+Benzynowy
+BMW 220 Gran Coupé
+BMW M235 xDrive Gran Coupé
+BMW 216 Gran Coupé
+BMW 223 xDrive Gran Coupé
+Diesel
+BMW 220d Gran Coupé
+BMW 218d Gran Coupé
+Wybierz skrzynię biegów
+Sportowa skrzynia Steptronic z podwójnym sprzęgłem
+Sportowa skrzynia Steptronic z podwójnym sprzęgłem
+Sportowa skrzynia Steptronic z podwójnym sprzęgłem
+Sportowa skrzynia Steptronic z podwójnym sprzęgłem
+Całkowity układ napędowy
+1
+Typ napędu
+Benzynowy
+Moc w kW (KM)
+90 (122)
+Moment obrotowy w Nm
+230
+Skrzynia biegów
+7-stopniowa, automatyczna
+Rodzaj napędu
+Napęd przedni
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+3
+Pojemność w cm³
+1 499
+Moc znamionowa w kW (KM) / obr/min
+90 (122) / 3 900 - 6 500
+Znamionowy moment obrotowy w Nm / obr/min
+230 / 1 500 - 3 600
+Wydajność
+Przyspieszenie 0-100 km/h w s
+9,9
+2
+Prędkość maksymalna w km/h
+214
+Zużycie i emisja
+1
+,
+3
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+6–5,9
+Emisja CO₂, cykl mieszany WLTP w g/km
+137–133
+Hałas przejś

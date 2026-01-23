@@ -1,0 +1,52 @@
+zy na pewno chcesz usunąć ten pojazd?
+Tak
+Nie
+PORÓWNANIE MODELI BMW
+Dodaj pojazd BMW
+Wybierz pojazd.
+BMW 220d Coupé
+Konfiguracja i ceny
+Gotowe do odbioru
+Od
+227 500 zł
+Informacja o cenie
+Na ilustracjach pokazane są dodatkowo płatne opcje wyposażenia. Podane są niewiążące, niebędące wynikiem zmowy kartelowej sugestie cenowe producenta zawierające podatek VAT i podatek od emisji (NoVA) przy założeniu modelu podstawowego bez opcji wyposażenia, bez kosztów transportu. Zastrzega się możliwość zmian i pomyłek. Wiążących informacji o cenie może udzielić partner BMW.
+Wybierz pojazd.
+Seria
+2
+1
+2
+3
+4
+5
+7
+M
+Z
+X
+i
+2
+Model
+BMW serii 2 Coupé
+BMW serii 2 Coupé
+BMW serii 2 Gran Coupé
+BMW serii 2 Active Tourer
+BMW M2 Coupé
+BMW serii 2 Coupé
+Model
+Silnik
+BMW 220d Coupé
+BMW 218i Coupé
+BMW 220i Coupé
+BMW 230i Coupé
+BMW M240i xDrive Coupé
+BMW M2 Coupé
+BMW 220d Coupé
+BMW 220d Coupé
+Silnik
+Skrzynia biegów
+Sportowa skrzynia Steptronic
+Dodaj pojazd BMW
+Wybierz pojazd.
+Dodaj pojazd BMW
+Konfiguracja i ceny
+Gotow

@@ -1,0 +1,5 @@
+ napędu elektrycznego o mocy 145 kW. Napęd elektryczny zależny od poziomu naładowania akumulatora.
+³ W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+⁴ W przypadku hybrydy plug-in: W pełni elektryczny napęd w temperaturach poniżej -10°C jest dostępny dopiero po przejechaniu kilku kilometrów, gdy akumulator rozgrzeje się do temperatury roboczej.
+⁵ W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+⁶ Zasięg zależy od różnych czynników, w szczególności: indywidualnego stylu jazdy, warunków na drodze, temperatury zewnętrznej, ogrzewania/klimatyzacji, przygotowania temperatury. Więcej informacji dotyczących oficjalnego zużycia paliwa oraz oficjalnych specyficznych emisji CO₂ nowych samochodów osobowych podano w „Przewodniku po zużyciu paliwa, emisjach CO₂ i zużyciu energii elektrycznej nowych samochodów osobowych”, dostępnym bezpłatnie we wszystkich salonach sprzedaży, w spółce Deutsche Automobil Treuhand GmbH (DAT), Hellmuth Hirth Str. 1,

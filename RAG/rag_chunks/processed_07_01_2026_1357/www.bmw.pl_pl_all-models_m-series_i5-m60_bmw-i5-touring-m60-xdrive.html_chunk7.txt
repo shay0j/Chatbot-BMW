@@ -1,0 +1,33 @@
+ tylko podczas weekendowych wypadów, ale i w codziennym użytkowaniu.
+Skonfiguruj
+BMW i5 M60 xDrive Touring
+[1]
+: Zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 20,1–17,7; zasięg elektryczny, WLTP w km: 455–522
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+BMW i5 M60 xDRIVE TOURING.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW i5 M60 xDrive Touring
+Biel alpejska niemetalizowany
+Ognista czerwień metalizowany
+Niebieski Phytonic metalizowany
+Oksydowany szary metalizowany
+Czarny szafirowy metalizowany
+Zielony Cape

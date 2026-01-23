@@ -1,0 +1,32 @@
+ xDrive60 Limuzyna: zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 19,6–18,5; zasięg elektryczny, WLTP w km¹: 589–624
+¹ Zasięg zależy od różnych czynników, przede wszystkim: indywidualnego stylu jazdy, uwarunkowań trasy, temperatury zewnętrznej, układu grzewczego/klimatyzacji i przygotowania temperatury.
+Twoje BMW i7 Limuzyna.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW i7 Limuzyna
+Biel alpejska niemetalizowany
+Czarny karbon M metalizowany
+Szafirowoczarny metalizowany
+Szary Sophisto z brylantowym połyskiem metalizowany
+Biel mineralna metalizowany
+Oksydowany szary metalizowany
+Połyskujący miedziany szary, metalizowany
+Kosmiczny srebrny metalizowany
+Szary drawit BMW Individual metalizowany
+Niebieski tanzanit BMW Individual metalizowany
+Czerwony awenturyn metalizowany
+Mro

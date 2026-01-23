@@ -1,0 +1,71 @@
+owania Vehicle-to-Load (V2V) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Home Power Flex (V2H Flex) w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 3-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 1-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Czas ładowania za pomocą 3-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Czas ładowania za pomocą 1-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Wymiary i ciężar
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wymiary i ciężar
+BMW M2 Coupé
+Długość w mm
+4 580
+-
+-
+Szerokość w mm
+1 887
+-
+-
+Wysokość w mm
+1 403
+-
+-
+Szerokość w mm / z lusterkami
+2 068
+-
+-
+Rozstaw osi w mm
+2 747
+-
+-
+Masa własna pojazdu w kg
+1
+1 805
+-
+-
+Dopuszczalna masa brutto w kg
+2 155
+-
+-
+Ładowność w kg
+425
+-
+-
+Pojemność bagażnika w l
+390
+-
+-
+Pojemność zbiornika w l
+52
+-
+-
+Uchwyt na relingi dachowe bez relingów 

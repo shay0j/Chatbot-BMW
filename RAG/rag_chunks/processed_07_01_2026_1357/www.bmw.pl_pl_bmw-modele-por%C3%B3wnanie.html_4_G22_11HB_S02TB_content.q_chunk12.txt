@@ -1,0 +1,67 @@
+ in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 420i Coupé
+Przyspieszenie 0-100 km/h w s
+7,5
+4
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+240
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+-
+-
+-
+Zużycie i emisja
+5
+,
+6
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW 420i Coupé
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+6,6–6,3
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+null
+-
+-
+Fuel consumption with a discharged battery, highway in km/l
+null
+-
+-
+Zużycie paliwa z rozładowanym akumulatorem

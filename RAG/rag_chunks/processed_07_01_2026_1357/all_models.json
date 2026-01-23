@@ -1,0 +1,1871 @@
+[
+  {
+    "model_name": "Oficjalna strona internetowa BMW Polska: Pojazdy i innowacje klasy premium",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "typ_nadwozia": "Sedan",
+    "zasieg": "5000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_content_bmw_marketPL_bmw_pl_all-in-simply-smart.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X1 SUV (U11): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "218KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_content_bmw_marketPL_bmw_pl_pl_all-models_x-series_x1_bmw-x1.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Pojazdy elektryczne BMW: przegląd i zalety e-mobilności",
+    "typ_nadwozia": "kombi",
+    "zasieg": "613 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_content_bmw_marketPL_bmw_pl_pl_samochod-elektryczny.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_content_bmw_marketPL_bmw_pl_pl_serwis-bmw.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Zapytaj o ofertę | BMW.pl",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_faas_form_pl-pl_bmw_rfo_zapytanie-o-oferte.html_modelRange_F70&modelCode_81GE.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_bmwM_yes.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_series_1.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_series_2.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_series_3.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_series_4.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_series_5.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_series_7.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_series_8.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models.html_series_x.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 1 (F70): Dane techniczne, wymiary i wersje silnikowe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_1-series_1-series-5doors_bmw-serii1-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 1 (F70): Zestawienie modeli, konfigurator i ceny",
+    "moc_silnika": "170 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_1-series_1-series-5doors_bmw-serii1.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW AG : Error 404 (Page Not Found)",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_1-series_1-series-5doors_bmw.pl.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 2 Active Tourer (U06): przegląd, konfigurator, ceny",
+    "moc_silnika": "170 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_2-series_2-series-active-tourer_bmw-serii-2-active-tourer.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 2 Gran Coupé (F74): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "170 KM",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_2-series_gran-coupe_bmw-2er-gran-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 2 Gran Coupé (F74): Dane techniczne, wymiary i wersje silnikowe",
+    "typ_nadwozia": "kombi",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_2-series_gran-coupe_bmw-serii-2-gran-coupe-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW AG : Error 404 (Page Not Found)",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_2-series_gran-coupe_bmw.pl.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 2 Coupé (G42): przegląd, konfigurator i ceny",
+    "moc_silnika": "374 KM",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_2-series_serii-2-coupe_bmw-serii-2-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 3 Limuzyna hybryda plug-in (G20): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "292 KM",
+    "typ_nadwozia": "Kombi",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_3-series_bmw-serii-3-limuzyna_bmw-serii-3-limuzyna-hybryda-plug-in.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 3 Limuzyna (G20): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "245 KM",
+    "typ_nadwozia": "Sedan",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_3-series_bmw-serii-3-limuzyna_bmw-serii-3-limuzyna.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 3 Touring hybryda plug-in (G21 LCI): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "292 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_3-series_bmw-serii-3-touring_bmw-serii-3-touring-hybryda-plug-in.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 3 Touring (G21): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "245 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_3-series_bmw-serii-3-touring_bmw-serii-3-touring.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 4 Cabrio (G23): Przegląd modeli, konfigurator i ceny.",
+    "moc_silnika": "245 KM",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_4-series_convertible_bmw-serii-4-cabrio.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 4 Coupé (G22): Przegląd modeli, konfigurator i ceny.",
+    "moc_silnika": "392 KM",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_4-series_coupe_bmw-serii-4-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 4 Gran Coupé (G26): Zestawienie modeli, konfigurator i ceny",
+    "moc_silnika": "245 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_4-series_gran-coupe_bmw-serii-4-gran-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 7 Limuzyna (G70): dane techniczne i silniki",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_7-series_limuzyna-serii-7_bmw-serii-7-limuzyna-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 7 Limuzyna (G70): Modele, konfigurator i ceny",
+    "moc_silnika": "299KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_7-series_limuzyna-serii-7_bmw-serii-7-limuzyna.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Pojazdy elektryczne BMW: przegląd i zalety e-mobilności",
+    "typ_nadwozia": "kombi",
+    "zasieg": "613 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i4 Gran Coupé: Dane techniczne i wymiary we wszystkich wersjach silnikowych",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_i4_bmw-i4-gran-coupe-technical-data.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i4 Gran Coupé: Dane techniczne i wymiary we wszystkich wersjach silnikowych",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_i4_bmw-i4-gran-coupe-technical-data.html_bmw-i4-edrive40-gran-coup%C3%A9.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i4 Gran Coupé (G26): Zestawienie modeli, konfigurator i ceny",
+    "moc_silnika": "340 KM",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_i4_bmw-i4-gran-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i5 Touring (G61): Zestawienie modeli, konfigurator i ceny",
+    "moc_silnika": "340 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_i5_bmw-i5-touring.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i5 Limuzyna (G60): modele, dane techniczne i ceny | BMW.pl",
+    "moc_silnika": "340 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_i5_bmw-i5-w-skrocie.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i7 Limuzyna (G70): Przegląd, konfigurator i ceny",
+    "moc_silnika": "544KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_i7_bmw-i7-limuzyna.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX1 SUV (U11): Dane techniczne i wersje silnikowe",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_ix1_bmw-ix1-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX1 SUV (U11): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "313KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_ix1_bmw-ix1.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX2 (U10): Modele, dane techniczne i ceny",
+    "moc_silnika": "313  KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_ix2_bmw-ix2-w-skrocie.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX2 (U10): silniki i dane techniczne",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_ix2_dane-techniczne-bmw-ix2.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX (I20): dane techniczne, wymiary i silniki",
+    "zasieg": "701 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_ix_bmw-ix-technical-data.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX (I20): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "544KM",
+    "zasieg": "701 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-i_ix_bmw-ix.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 5 Touring hybryda plug-in (G61): Zestawienie modeli, konfigurator i ceny",
+    "moc_silnika": "299 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-serii-5-w-skrocie_5-series-touring_bmw-serii-5-touring-phev.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 5 Touring (G61): modele, dane techniczne i ceny",
+    "moc_silnika": "197 KM",
+    "typ_nadwozia": "kombi",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-serii-5-w-skrocie_5-series-touring_bmw-serii-5-touring.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 5 Limuzyna (G60): silniki i dane techniczne | BMW.pl",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-serii-5-w-skrocie_sedan_bmw-serii-5-limuzyna-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 5 Limuzyna Plug-in Hybrid (G60): modele, dane techniczne i ceny | BMW.pl",
+    "moc_silnika": "299 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-serii-5-w-skrocie_sedan_bmw-serii-5-limuzyna-phev-w-skrocie.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 5 Limuzyna (G60): modele, dane techniczne i ceny | BMW.pl",
+    "moc_silnika": "208 KM",
+    "typ_nadwozia": "kombi",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_bmw-serii-5-w-skrocie_sedan_bmw-serii-5-limuzyna-w-skrocie.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Modele BMW serii 3 Limuzyna M (G80 i G20): Przegląd, konfigurator i ceny",
+    "moc_silnika": "340 KM",
+    "typ_nadwozia": "Sedan",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_bmw-3-series-m-models_bmw-m3-limuzyna.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 3 Touring M (G81 i G21): Przegląd, konfigurator i ceny",
+    "moc_silnika": "530KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_bmw-3-series-m-models_bmw-m3-touring.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i4 M60 xDrive Gran Coupé (G26): przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "601KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_bmw-i4-m50_bmw-i4-m60-xdrive-gran-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i5 M60 xDrive (G60): modele, dane techniczne i ceny | BMW.pl",
+    "moc_silnika": "601 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_bmw-i5-m60_bmw-i5-m60xdrive-w-skrocie.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW M135 (F70): Zestawienie modeli, konfigurator i ceny",
+    "moc_silnika": "300 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_bmw-m-135_bmw-m135.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Modele BMW X5 M (G05, F95): Przegląd, konfigurator i ceny",
+    "moc_silnika": "625 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_bmw-x5-m_bmw-x5-m-models.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW i5 M60 xDrive Touring (G61): modele, dane techniczne i ceny",
+    "moc_silnika": "601 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_i5-m60_bmw-i5-touring-m60-xdrive.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Modele BMW serii 7 M (G70): Przegląd, konfigurator i ceny",
+    "moc_silnika": "659 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_i7-m70_bmw-serii-7-m.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX M70 (I20): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "659KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_ix-m70_bmw-ix-m70.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 2 Coupé M (G87): dane techniczne i silniki",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m2-series_bmw-m2-coupe-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 2 Coupé M (G87): przegląd, konfigurator i ceny",
+    "moc_silnika": "530 KM",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m2-series_bmw-m2-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW M235 xDrive Gran Coupé (F74): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "300 KM",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m235-xdrive-gran-coupe_bmw-m235-xdrive-gran-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW serii 3 Touring M (G81 i G21): Przegląd, konfigurator i ceny",
+    "moc_silnika": "530KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m3-series_bmw-m3-touring.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Modele BMW serii 4 Cabrio M (G83 i G23): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "530 KM",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m4-series_bmw-m4-cabrio.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Zestawienie modeli BMW serii 4 coupé (G82 i G22): Zestawienie modeli, konfigurator i ceny",
+    "moc_silnika": "340 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m4-series_bmw-m4-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW M440i xDrive Gran Coupé (G26): Zestawienie modeli, konfigurator i ceny",
+    "moc_silnika": "392 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m440i-xdrive-gran-coupe_bmw-m440i-xdrive-gran-coupe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW M5 Limuzyna (G90): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "727 KM",
+    "typ_nadwozia": "sedan",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m5-series_bmw-m5-limuzyna.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW M5 Touring (G99): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "727 KM",
+    "typ_nadwozia": "sedan",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m5-series_bmw-m5-touring.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW M5 Limuzyna (G90): Dane techniczne, wymiary",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_m5-series_dane-techniczne-bmw-m5-limuzyna.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X1 M35i xDrive (U11): Przegląd, konfigurator i ceny",
+    "moc_silnika": "300KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_x1-m35i_bmw-x1-m35i-xdrive.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X2 M35i xDrive (U10): modele, dane techniczne i ceny",
+    "moc_silnika": "300 KM",
+    "typ_nadwozia": "kombi",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_x2-m35i_bmw-x2-m35ixdrive-w-skrocie.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X3 M50 xDrive (G45): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "398 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_x3-m50_bmw-x3-m50.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Modele BMW X6 M (G06, F96): przegląd, konfigurator i cena",
+    "moc_silnika": "625 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_x6-m_bmw-x6-m-models.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X7 M60i xDrive (G07): przegląd, konfigurator i ceny",
+    "moc_silnika": "530 KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_x7-m60i_bmw-x7-m60i.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Modele BMW XM (G09): przegląd, konfigurator i ceny",
+    "moc_silnika": "748 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_xm_bmw-xm.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Z4 M40i Roadster (G29): przegląd, konfigurator i ceny",
+    "moc_silnika": "340KM",
+    "typ_nadwozia": "Roadster",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_m-series_z4-m40i_bmw-z4-m40i-roadster.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Z4 Roadster (G29): przegląd, konfigurator i ceny",
+    "moc_silnika": "258KM",
+    "typ_nadwozia": "Roadster",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_seria-bmw-z_z4-roadster_bmw-z4-roadster.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X1 SUV (U11): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "218KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX3 (NA5): dane techniczne, wymiary i silniki",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_ix3_bmw-ix3-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX3 (NA5): przegląd, konfigurator i ceny",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_ix3_bmw-ix3.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X1 SUV (U11): Dane techniczne i wersje silnikowe",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_x1_bmw-X1-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X1 SUV (U11): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "218KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_x1_bmw-x1.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X2 (U10): Modele, dane techniczne i ceny",
+    "moc_silnika": "170 KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_X2_bmw-x2-w-skrocie.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X3 hybryda plug-in (G45): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "299 KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_x3_bmw-x3-phev.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Modele BMW X5 (G05): dane techniczne i silniki",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_x5_bmw-x5-technical-data.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Modele BMW X5 (G05): Przegląd, konfigurator i ceny",
+    "moc_silnika": "381KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_x5_bmw-x5.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X6 (G06): przegląd, konfigurator i ceny",
+    "moc_silnika": "530 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_x6_bmw-x6.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X7 (G07): dane techniczne i wersje silnikowe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_x7_bmw-x7-dane-techniczne.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW X7 (G07): przegląd, konfigurator i ceny",
+    "moc_silnika": "381KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_all-models_x-series_x7_bmw-x7.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Art Club | BMW Drives Culture | BMW Polska",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_art-club.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Financial Services: oferty leasingowe i finansowe.",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-financial-services.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "typ_nadwozia": "Sedan",
+    "zasieg": "5000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-financial-services_all-in-simply-smart.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Finansowanie BMW: oferty i informacje",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-financial-services_bmw-comfort-lease.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Leasing BMW: oferty i informacje",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-financial-services_bmw-leasing.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW M | Odkryj niesamowity styl i osiągi typowe dla litery M",
+    "moc_silnika": "551 KM",
+    "typ_nadwozia": "SUV",
+    "zasieg": "551 KM",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-m.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_1_F70_11GF_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_1_F70_21GE_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_1_F70_31GE_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_1_F70_81GE_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_F74_11GH_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_F74_31GG_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_F74_31GH_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_F74_41GG_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_G42_11CN_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_G42_51FA_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_G42_61CM_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_G87_21DM_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_U06_21BY_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_U06_21EA_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_U06_51BX_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_2_U06_71BX_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G20_28FF_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G20_28FU_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G20_48GK_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G20_68FT_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G20_68FU_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G21_11FY_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G21_11FZ_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G21_21GL_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G21_41GL_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G21_51GL_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_3_G21_61FZ_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G22_11HB_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G22_41FN_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G22_81DA_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G23_51AU_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G23_71AU_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G23_71DB_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G23_81DB_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G26_11HC_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G26_41FR_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G26_51HD_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G26_61FB_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_4_G26_71HD_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G60_11FJ_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G60_11FL_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G60_41HG_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G60_61HG_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G60_71FJ_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G61_11GV_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G61_11GW_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G61_21GV_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G61_61HH_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_5_G61_71HH_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_7_G70_21EJ_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_7_G70_41EH_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_7_G70_41EJ_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_7_G70_51EH_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_7_G70_81EH_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_G26E_61HD_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_G26E_71HD_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_G60E_41HG_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_G60E_61HG_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_G61E_61HH_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_G61E_71HH_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_G70E_51EJ_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_G70E_81EH_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_I20_41CF_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_I20_51CF_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_I20_61CF_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_U10E_71GM_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_U11E_61EF_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_i_U11E_71EG_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_F95_11ET_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_F96_21ET_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G09_11CS_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G09_31CS_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G80_11HJ_Default_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G81_21GB_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G81_31GB_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G82_11HK_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G83_41BA_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G87_31DM_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Sedan",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G90_81FK_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "typ_nadwozia": "Cabrio",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_M_G99_81GV_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G05_11EV_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G05_21EU_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G05_31EU_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G05_41EU_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G06_11EY_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G06_31EX_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G06_41EX_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G07_21EM_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G07_21EN_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G07_31EM_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G45_11GR_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G45_31GP_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G45_65GP_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_G45_71GP_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_NA5_31HR_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U10_21GM_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U10_31GN_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U10_51GM_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U10_71GM_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U10_81GM_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U11_11EE_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U11_11EF_S02TE_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U11_11EG_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U11_21EF_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U11_31EF_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U11_61EE_S02TF_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_X_U11_71EG_A_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_Z_G29_HF11_Default_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Porównanie modeli BMW",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-modele-por%C3%B3wnanie.html_Z_G29_HF51_S02TB_content.q.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW XM by KITH | POP-UP",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_bmw-m_bmw-xm-kith.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW ConnectedDrive: Usługi cyfrowe i łączność",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_digital-services_bmw-connecteddrive.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Digital Key",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_digital-services_bmw-digital-key.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "System rozrywki BMW: Twoja rozrywka premium",
+    "typ_nadwozia": "Cabrio",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_digital-services_bmw-entertainment.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iDrive: przedstawiamy inteligentne funkcje",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_digital-services_bmw-idrive.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Intelligent Personal Assistant: „Hej BMW”",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_digital-services_bmw-intelligent-personal-assistant.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Maps: przydatne usługi ułatwiające nawigowanie, parkowanie i ładowanie",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_digital-services_bmw-maps.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Polska",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_bmw-explore_about-us.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "zasieg": "000km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_faq_general-q-and-a.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW - polityka plików cookies | Polityka cookies | BMW Polska",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_footer-section_cookie-policy.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Deklaracja dostępności BMW",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_bmw-accessibility.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_data-privacy.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW AG : Error 404 (Page Not Found)",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_data-privacy_privacy-subpage-weblink-legal-bases.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_eu-battery-regulation.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_legal-disclaimer-pool_Generalproductsafetyregulation.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Nota prawna BMW Connected Drive",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_legal-disclaimer-pool_legal-disclaimer-cd.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Nota prawna BMW Financial Services",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_legal-disclaimer-pool_legal-disclaimer-FS.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Polska: Nota prawna",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_legal-disclaimer-pool_legal-disclaimer.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_metanavigation_legal-disclaimer-pool_Nota-Prawna.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Akcje przywoławcze BMW.pl",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_footer_quick-link_bmw-vehicle-recalls.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oficjalna strona internetowa BMW Polska: Pojazdy i innowacje klasy premium",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_index.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Polska | Konfigurator",
+    "typ_nadwozia": "SUV",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_konfigurator.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Poznaj szczegóły oferty BMW Individual",
+    "typ_nadwozia": "kombi",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-individual.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Lifestyle: Oficjalne kolekcje",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-lifestyle.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Special Sales: przegląd ofert i usług",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-special-sales.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Special Sales Hub, BMW 7 Protection: przegląd oferty",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-special-sales_bmw-7-protection.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Pojazdy uprzywilejowane BMW: przegląd i broszura",
+    "typ_nadwozia": "sedan",
+    "zasieg": "70 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-special-sales_bmw-authority-vehicles.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Pojazdy dyplomatyczne BMW: doradztwo i usługi",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-special-sales_bmw-diplomatic-sales.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Pojazdy pancerne BMW: przegląd i korzyści",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-special-sales_bmw-protection-vehicles.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-special-sales_bmw-x5-protection-vr6.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW x Maja Ganszyniec Studio",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_bmw-x-majaganszyniec.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX5 Hydrogen (G05): Przegląd modeli, konfigurator i ceny",
+    "moc_silnika": "401 KM",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_concept-cars_bmw-ix5-hydrogen.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_digital-services-act.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Ekskluzywne pojazdy BMW | bmw.pl",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_ekskluzywne-pojazdy-bmw.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Vision Neue Klasse Family",
+    "typ_nadwozia": "SUV",
+    "zasieg": "805 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_neue-klasse.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Centrum obsługi klienta BMW",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_obsluga-klienta.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oryginalne akcesoria BMW.",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_parts-and-accessoires_akcesoria-jesienne-zimowe-bmw.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oryginalne akcesoria BMW.",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_parts-and-accessories_bmw-akcesoria.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_parts-and-accessories_oryginalne-czesci-bmw.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_podstawy-prawne-przetwarzania-danych-osobowych.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oficjalna strona internetowa BMW Polska: Pojazdy i innowacje klasy premium",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_sustainability_samochody-materialy-produkcja.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Heart of Joy: serce Neue Klasse",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_technology-and-innovation_bmw-heart-of-joy.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oznaczenia opon | BMW.pl",
+    "typ_nadwozia": "kombi",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_more-bmw_technology-and-innovation_bmw-tyre-label.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Odkup",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_odkup__icp_topnav-to-trade-in&origin_topnav.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW iX3 (NA5): przegląd, konfigurator i ceny",
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_more-bmw_concept-cars_concept-cars-vision-neue-klasse-x.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_services-and-workshop_bmw-proactive-care.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_services-and-workshop_bmw-service.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Lifestyle: Oficjalne kolekcje",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_fascination-bmw_bmw-lifestyle_bmw-lifestyle-lookbook.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW AG : Error 404 (Page Not Found)",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_offers-and-services_bmw-connected-drive_bmw-connected-drive-overview.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Digital Key",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_offers-and-services_bmw-connected-drive_bmw-digital-key-2022.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Leasing BMW: oferty i informacje",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_offers-and-services_bmw-financial-services_bmw-leasing.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Leasing BMW: oferty i informacje",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_offers-and-services_bmw-financial-services_leasing.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Financial Services: oferty leasingowe i finansowe.",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_offers-and-services_bmw-financial-services_uslugi-dodatkowe.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW ConnectedDrive: Usługi cyfrowe i łączność",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_offers-and-services_digital-services-and-connectivity_bmw-connected-drive-digital-premium-overview.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oryginalne akcesoria BMW.",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_offers-and-services_original-bmw-accessories_introduction.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_PL_topics_offers-and-services_service-workshop_service-proactive-care.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_publicPools_sitemap_sitemap.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Pojazdy elektryczne BMW: przegląd i zalety e-mobilności",
+    "typ_nadwozia": "kombi",
+    "zasieg": "613 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Produkty wspomagające ładowanie BMW Charging",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_bmw-charging-support.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Ładowanie pojazdu elektrycznego w domu: BMW Guide, stacje Wallbox i wiele więcej",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_home-charging.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Hybrydy plug-in BMW: modele, zalety i opcje zakupu",
+    "typ_nadwozia": "Sedan",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_hybryda-plug-in.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_koszty-samochodu-elektrycznego.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Ładowanie pojazdu elektrycznego w domu: BMW Guide, stacje Wallbox i wiele więcej",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_ladowanie-samochodow-elektrycznych_ladowanie-w-domu.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Zalety pojazdów elektrycznych BMW i ich pozytywne skutki.",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_pojazdy-elektryczne-zalety.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_public-charging.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Akumulator pojazdu elektrycznego i technologia napędu BMW.",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_technologia-akumulatora.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Używane pojazdy elektryczne BMW | Sprawdzona gwarancja producenta",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_used-electric-cars.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "typ_nadwozia": "SUV",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_samochod-elektryczny_zasieg-samochodow-elektrycznych.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_service-portal_bmw-proactive-care.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_serwis-bmw.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oferty i promocje BMW",
+    "typ_nadwozia": "Coupe",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_Shop-Online_bmw-oferty.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW PL  – FAQ ConnectedDrive",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_s__language_pl.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW PL  – FAQ ConnectedDrive",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_s__nocache_https%3A%2F%2Fwww.bmw.pl%2Fpl%2Fs%2F%3Flanguage%3Dpl.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Zaangażowanie w kulturę i sztukę | BMW Drives Culture | BMW Polska",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_fascination-bmw_bmw-drives-culture_Zaangazowanie-w%20kulture-i-sztuke.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Poznaj szczegóły oferty BMW Individual",
+    "typ_nadwozia": "kombi",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_fascination-bmw_bmw-individual.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW EfficientDynamics: zużycie i emisja | BMW.pl",
+    "typ_nadwozia": "kombi",
+    "zasieg": "11 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_fascination-bmw_efficient-dynamics_naped-elektryczny.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oznaczenia opon | BMW.pl",
+    "typ_nadwozia": "kombi",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_fascination-bmw_efficient-dynamics_oznaczenie-opon-bmw.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW EfficientDynamics: zużycie i emisja | BMW.pl",
+    "typ_nadwozia": "kombi",
+    "zasieg": "11 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_fascination-bmw_efficient-dynamics_zarzadzanie-energia.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW EfficientDynamics: zużycie i emisja | BMW.pl",
+    "typ_nadwozia": "kombi",
+    "zasieg": "11 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_fascination-bmw_efficient-dynamics_zuzycie-emisja.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oficjalna strona internetowa BMW Polska: Pojazdy i innowacje klasy premium",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_fascination-bmw_electromobility2020-new_electric-cars.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW ConnectedDrive: Usługi cyfrowe i łączność",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_bmw-connected-drive_bmw-connected-drive-przeglad.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW Digital Key",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_bmw-connected-drive_bmw-digital-key.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Leasing BMW: oferty i informacje",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_bmw-financial-services_bmw-leasing.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Ubezpieczenie samochodu | Oferta ubezpieczeń | BMW Polska",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_bmw-financial-services_bmw-ubezpieczenia.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Leasing BMW: oferty i informacje",
+    "zasieg": "000 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_bmw-financial-services_leasing-bmw.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "BMW AG : Error 404 (Page Not Found)",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_bmw-special-sales_%20.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Sprzedaż korporacyjna BMW | BMW.pl",
+    "typ_nadwozia": "SUV",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_bmw-special-sales_bmw-corporate-sales.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Oryginalne akcesoria BMW.",
+    "zasieg": "100 km",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_original-bmw-accessories_kola-i-opony-bmw.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_personal-service_wizyta-online.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_personal-service_zglos-szkode.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  },
+  {
+    "model_name": "Samochody używane BMW – BMW Premium Selection |  Samochody używane z gwarancją.",
+    "source_file": "bmw_07_01_2026\\www.bmw.pl_pl_topics_offers-and-services_used-automobiles_bmw-premium-selection.html.html",
+    "scrap_folder": "bmw_07_01_2026"
+  }
+]

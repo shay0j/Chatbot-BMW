@@ -1,0 +1,11 @@
+ji akumulatora.
+[2]
+W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted – metoda obliczeniowa uwzględniająca różne scenariusze ładowania pojazdów elektrycznych do oceny emisji CO₂ i zużycia energii).
+[3]
+W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+[4]
+Hybrydy plug-in: W temperaturach poniżej -10°C napęd w pełni elektryczny jest dostępny dopiero po przejechaniu kilku kilometrów – gdy tylko akumulator osiągnie temperaturę roboczą.
+[5]
+Generowana przez silnik spalinowy (podana wartość znamionowa) oraz silnik elektryczny (maksymalnie podana wartość znamionowa).
+[6]
+Wydajność ładowania zależy od poziomu naładowania, temperatury otoczenia, indywidualnego profilu jazdy i wykorzystania odbiorników energii. Podane zasięgi są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania. Dane dotyczące osiągów silników benzynowyc

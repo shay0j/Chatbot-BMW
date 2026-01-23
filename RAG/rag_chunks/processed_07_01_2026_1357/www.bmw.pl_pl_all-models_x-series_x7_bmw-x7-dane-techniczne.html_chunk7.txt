@@ -1,0 +1,64 @@
+wa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+8
+Pojemność w cm³
+4 395
+Moc znamionowa w kW (KM) / obr/min
+390 (530) / 5 300 - 6 000
+Znamionowy moment obrotowy w Nm / obr/min
+750 / 2 100 - 4 000
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+9 (12) / -
+(Znamionowy) moment obrotowy w Nm
+200
+Wydajność
+Przyspieszenie 0-100 km/h w s
+4,7
+3
+Prędkość maksymalna w km/h
+250
+Zużycie i emisja
+1
+,
+4
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+12,9–12,1
+Emisja CO₂, cykl mieszany WLTP w g/km
+293–276
+Hałas przejściowy w dB (A)
+69
+8
+Stacjonarny poziom hałasu w dB (A) /1/min
+84 / 3 750
+8
+Akumulator wysokiego napięcia/48 V, ładowanie
+5
+Pojemność akumulatora w kWh
+0,4
+Wymiary i ciężar
+5 181 mm
+2 000 mm
+1 835 mm
+Długość w mm
+5 181
+Szerokość w mm
+2 000
+Wysokość w mm
+1 835
+Szerokość w mm / z lusterkami
+2 218
+Rozstaw osi w mm
+3 105
+Masa własna pojazdu w kg
+6
+2 675
+Dopuszczalna masa brutto w kg
+3 355
+Ładowność w kg
+755
+Uchwyt na relingi dachowe bez re

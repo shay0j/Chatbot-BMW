@@ -1,0 +1,21 @@
+ej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+Dynamiczny i wyczynowy.
+Design, który emanuje mocą i podkreśla sportowy charakter oraz potęgę silnika o mocy 221 kW (300 KM). Cztery końcówki wydechu, atrapa chłodnicy z podświetleniem, lusterka M, tylny spojler, ekskluzywne obręcze ze stopu lekkiego 19” M i fotele sportowe przemawiają własnym, wyrazistym językiem. Sportowe hamulce i adaptacyjny układ jezdny M wzmacniają dynamiczny charakter BMW M235 xDrive Gran Coupé, który dodatkowo podkreśla pakiet M.
+Twoje BMW M235 xDrive Gran Coupé.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach

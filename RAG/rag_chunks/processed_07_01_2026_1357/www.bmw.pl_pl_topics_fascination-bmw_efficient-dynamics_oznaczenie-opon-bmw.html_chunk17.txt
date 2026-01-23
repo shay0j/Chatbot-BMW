@@ -1,0 +1,122 @@
+ichelin
+-
+19"
+Front
+225/40 R 19 93 Y XL
+STD
+Pirelli
+-
+19"
+Rear
+255/35 R 19 96 Y XL
+STD
+Goodyear
+-
+19"
+Rear
+255/35 R 19 96 Y XL
+STD
+Michelin
+-
+19"
+Rear
+255/35 R 19 96 Y XL
+STD
+Pirelli
+-
+19"
+Front
+225/40 R 19 93 Y XL HP
+STD
+Goodyear
+-
+19"
+Rear
+255/35 R 19 96 Y XL HP
+STD
+Goodyear
+-
+19"
+Front
+225/40 R 19 93 Y XL RSC
+RSC
+Bridgestone
+-
+19"
+Front
+225/40 R 19 93 Y XL RSC
+RSC
+Goodyear
+-
+19"
+Front
+225/40 R 19 93 Y XL RSC
+RSC
+Pirelli
+-
+19"
+Rear
+255/35 R 19 96 Y XL RSC
+RSC
+Bridgestone
+-
+19"
+Rear
+255/35 R 19 96 Y XL RSC
+RSC
+Goodyear
+-
+19"
+Rear
+255/35 R 19 96 Y XL RSC
+RSC
+Pirelli
+-
+19"
+Front
+225/40 R 19 93 H XL M+S RSC
+RSC
+Continental
+SZ
+19"
+Rear
+255/35 R 19 96 H XL M+S RSC
+RSC
+Continental
+SZ
+20"
+Front
+225/35 R 20 90 Y XL RSC
+RSC
+Bridgestone
+SZ
+20"
+Front
+225/35 R 20 90 Y XL RSC
+RSC
+Pirelli
+SZ
+20"
+Rear
+255/30 R 20 92 Y XL RSC
+RSC
+Bridgestone
+SZ
+20"
+Rear
+255/30 R 20 92 Y XL RSC
+RSC
+Pirelli
+SZ
+-
+Seria 3 Touring
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+16"
+All-round
+205/

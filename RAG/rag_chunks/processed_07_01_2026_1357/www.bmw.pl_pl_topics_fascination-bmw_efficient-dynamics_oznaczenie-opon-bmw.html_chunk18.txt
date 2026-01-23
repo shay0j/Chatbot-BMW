@@ -1,0 +1,108 @@
+55/30 R 20 92 Y XL RSC
+RSC
+Bridgestone
+SZ
+20"
+Rear
+255/30 R 20 92 Y XL RSC
+RSC
+Pirelli
+SZ
+-
+Seria 3 Touring
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+16"
+All-round
+205/60 R 16 96 H XL M+S
+STD
+Bridgestone
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S
+STD
+Continental
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S
+STD
+Michelin
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S
+STD
+Pirelli
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S RSC
+RSC
+Bridgestone
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S RSC
+RSC
+Continental
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S RSC
+RSC
+Goodyear
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S RSC
+RSC
+Pirelli
+SZ
+17"
+All-round
+225/50 R 17 98 Y XL
+STD
+Bridgestone
+-
+17"
+All-round
+225/50 R 17 98 Y XL
+STD
+Hankook
+-
+17"
+All-round
+225/50 R 17 98 Y XL
+STD
+Michelin
+-
+17"
+All-round
+225/50 R 17 98 H XL M+S
+STD
+Bridgestone
+SZ
+17"
+All-round
+225/50 R 17 98 H XL M+S
+STD
+Hankook
+SZ
+17"
+All-round
+225/50 R 17 98 Y XL RSC
+RSC
+Bridgestone
+-
+17"
+All-round
+225/50 R 17 98 Y XL RSC
+RSC
+Goo

@@ -1,0 +1,128 @@
+ XL RSC
+RSC
+Pirelli
+-
+20"
+Front
+255/45 R 20 105 Y XL
+STD
+Continental
+-
+20"
+Front
+255/45 R 20 105 Y XL P
+STD
+Continental
+-
+20"
+Front
+255/45 R 20 105 Y XL
+STD
+Goodyear
+-
+20"
+Front
+255/45 R 20 105 Y XL
+STD
+Pirelli
+-
+20"
+Rear
+285/40 R 20 108 Y XL
+STD
+Continental
+-
+20"
+Rear
+285/40 R 20 108 Y XL P
+STD
+Continental
+-
+20"
+Rear
+285/40 R 20 108 Y XL
+STD
+Goodyear
+-
+20"
+Rear
+285/40 R 20 108 Y XL
+STD
+Pirelli
+-
+20"
+Front
+255/45 R 20 105 V XL M+S
+STD
+Goodyear
+SZ
+20"
+Front
+255/45 R 20 105 V XL M+S
+STD
+Michelin
+SZ
+20"
+Front
+255/45 R 20 105 V XL M+S
+STD
+Pirelli
+SZ
+20"
+Rear
+285/40 R 20 108 V XL M+S
+STD
+Goodyear
+SZ
+20"
+Rear
+285/40 R 20 108 V XL M+S
+STD
+Michelin
+SZ
+20"
+Rear
+285/40 R 20 108 V XL M+S
+STD
+Pirelli
+SZ
+21"
+Front
+255/40 R 21 102 Y XL
+STD
+Goodyear
+-
+21"
+Front
+255/40 R 21 102 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+285/35 R 21 105 Y XL
+STD
+Goodyear
+-
+21"
+Rear
+285/35 R 21 105 Y XL
+STD
+Pirelli
+-
+22"
+Front
+HL 255/35 R 22 102 Y XL
+STD
+Goodyear
+SZ
+22"
+Rear
+HL 285/30 R 22 104 Y XL
+STD
+Goodyear
+SZ
+-
+X4
+Wheel size
+Fitm

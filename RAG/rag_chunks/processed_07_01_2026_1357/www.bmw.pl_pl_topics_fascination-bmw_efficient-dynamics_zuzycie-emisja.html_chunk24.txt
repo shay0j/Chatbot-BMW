@@ -1,0 +1,6 @@
+puje obowiązującą dotychczas procedurę NEDC.
+Więcej informacji na ten temat znaleźć można tutaj
+Co to jest cykl jezdny WLTP?
+Zużycie paliwa i emisja spalin zależą m.in. od stylu jazdy. Dlatego na potrzeby procedury WLTP zgromadzono dane z jazdy z całego świata. Na podstawie tych danych określono cztery reprezentatywne fazy o różnych średnich prędkościach jazdy: wolna (low), średnia (medium), szybka (high) i bardzo szybka (extra high). W każdej z tych faz przyspiesza, hamuje i zatrzymuje się itp. z różną intensywnością i częstotliwością, tak aby odzwierciedlić sposób jazdy w codziennej eksploatacji. Połączenie tych faz daje cykl jezdny, którego wartość podawana jest przez producenta jako cykl mieszany. Ponieważ samochody elektryczne i hybrydowe stosowane są głównie w miastach, ich cykl jezdny obejmuje piątą fazę: fazę miejską. Tworzą ją średnia prędkości wolnej (low) i średniej (medium).
+Co WLTP oznacza dla mnie?
+Wprowadzenie procedury WLTP spowoduje zbliżenie się deklarowanych wartości

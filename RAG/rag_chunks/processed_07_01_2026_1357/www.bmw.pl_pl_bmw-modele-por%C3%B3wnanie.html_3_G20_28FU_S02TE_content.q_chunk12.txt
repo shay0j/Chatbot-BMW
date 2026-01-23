@@ -1,0 +1,58 @@
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 318d Limuzyna
+(Nominal) power/30 minutes power in kW (hp)
+8 (11) / -
+-
+-
+(Nominal) torque in Nm
+25
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 318d Limuzyna
+Przyspieszenie 0-100 km/h w s
+8,3
+5
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+218
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+-
+-
+-
+Zużycie i emisja
+6
+,
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW 318d Limuzyna
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+5,2–4,9
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null

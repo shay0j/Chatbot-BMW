@@ -1,0 +1,67 @@
+gość w mm
+5 060
+Szerokość w mm
+1 900
+Wysokość w mm
+1 515
+Szerokość w mm / z lusterkami
+2 156
+Rozstaw osi w mm
+2 995
+Masa własna pojazdu w kg
+5
+2 080
+Dopuszczalna masa brutto w kg
+2 655
+Ładowność w kg
+650
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+6
+1 800 / 100
+Pojemność bagażnika w l
+520
+Pojemność zbiornika w l
+60
+Całkowity układ napędowy
+8
+,
+9
+Typ napędu
+Benzynowy – Hybryda plug-in
+Moc w kW (KM)
+220 (299)
+10
+Moment obrotowy w Nm
+450
+10
+Skrzynia biegów
+8-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+8
+Cylindry
+4
+Pojemność w cm³
+1 998
+Moc znamionowa w kW (KM) / obr/min
+140 (190) / 4 400 - 6 500
+Znamionowy moment obrotowy w Nm / obr/min
+310 / 1 500 - 4 000
+Silnik elektryczny
+9
+,
+11
+Moc (nominalna) /moc 30 minut w kW (KM)
+135 (184)
+(Znamionowy) moment obrotowy w Nm
+250
+Wydajność
+Przyspieszenie 0-100 km/h w s
+6,3
+1
+Prędkość maksymalna w km/h
+225
+Prędkość maksymalna 

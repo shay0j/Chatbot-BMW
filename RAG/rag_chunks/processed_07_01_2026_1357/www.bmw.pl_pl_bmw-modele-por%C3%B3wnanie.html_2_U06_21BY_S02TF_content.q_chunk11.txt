@@ -1,0 +1,59 @@
+ostaną tylko różnice.
+Całkowity układ napędowy
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Całkowity układ napędowy
+BMW 218d Active Tourer
+Typ napędu
+Wysokoprężny
+-
+-
+Moc w kW (KM)
+110 (150)
+-
+-
+Moment obrotowy w Nm
+360
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd przedni
+-
+-
+Silnik spalinowy TwinPower Turbo
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 218d Active Tourer
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 995
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+110 (150) / 3 750 - 4 000
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+360 / 1 500 - 2 500
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 218d Active Tourer
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nomi

@@ -1,0 +1,33 @@
+zasięg elektryczny, WLTP w km¹: 490–559
+¹ Zasięg zależy od różnych czynników, przede wszystkim: indywidualnego stylu jazdy, uwarunkowań trasy, temperatury zewnętrznej, układu grzewczego/klimatyzacji i przygotowania temperatury.
+Modele M BMW serii 7.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW i7 M70 xDrive
+BMW M760e xDrive Hybryda plug-in
+Szafirowoczarny metalizowany
+Oksydowany szary metalizowany
+Czerwony awenturyn metalizowany
+Płynna miedź BMW Individual metalizowany
+Szary drawit BMW Individual metalizowany
+Niebieski tanzanit BMW Individual metalizowany
+Mroźny niebieski tanzanit BMW Individual metalizowany
+Mroźny czysty szary BMW Individual metalizowany
+Mroźny głęboki szary BMW Individual metalizowany
+Biel alpejska niemetalizowany
+Szafirowoczarny metalizowany
+Biel mineralna

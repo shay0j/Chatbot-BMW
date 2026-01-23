@@ -1,0 +1,12 @@
+ pod kątem energii słonecznej z instalacji fotowoltaicznej oraz korzystając z maksymalnej dostępnej mocy swojego domu poprzez ładowanie z optymalizacją obciążenia. Dodatkowo możliwe jest zdalne, zoptymalizowane kosztowo ładowanie pojazdu w najtańszych godzinach, we współpracy z odpowiednią taryfą energetyczną dostarczaną przez kompatybilnego dostawcę energii elektrycznej
+⁵
+.
+Back to Navigation
+Steruj funkcjami ładowania poprzez aplikację My BMW.
+Aplikacja My BMW
+⁴
+to centralny interfejs do ładowania pojazdu. Pokazuje aktualny status ładowania i pomaga wybrać odpowiedni tryb ładowania. Zapewnia również wgląd w statystyki ładowania i historię. Można także sterować swoją stacją Wallbox bezpośrednio poprzez aplikację, co oznacza, że wszystkie ważne funkcje są zebrane w jednej aplikacji.
+Pobierz My BMW App
+Najczęściej zadawane pytania.
+Jak ładować pojazd elektryczny w domu?
+Pojazd elektryczny możesz ładować z każdego domowego gniazdka elektrycznego. Z oferowanym oddzielnie odpowiednim kable

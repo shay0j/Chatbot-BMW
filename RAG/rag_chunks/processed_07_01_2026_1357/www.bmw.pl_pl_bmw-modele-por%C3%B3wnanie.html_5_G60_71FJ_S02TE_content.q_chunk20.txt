@@ -1,0 +1,6 @@
+ nr 51/UE 540/2014 są zaokrąglone.
+Masa przyczepy zależna od wyposażenia pojazdu
+Dodatkowy zasięg w kilometrach po 10-minutowym ładowaniu o dużej mocy (HPC) jest określany zgodnie z normą DIN70080 w cyklu WLTP. Zależy on od wyposażenia pojazdu, indywidualnego profilu jazdy, temperatury otoczenia, poziomu naładowania i korzystania z zewnętrznych odbiorników.
+Dane dotyczące mocy silników benzynowych odnoszą się do paliwa o liczbie oktanowej 98. Dane dotyczące zużycia odnoszą się do paliwa referencyjnego zgodnie z rozporządzeniem (WE) 1151/2017. Dopuszczalne jest stosowanie paliwa bezołowiowego o liczbie oktanowej 91 lub wyższej i zawartości etanolu do  25% (E25). BMW zaleca stosowanie paliwa o LO 95. W przypadku samochodów o wysokich osiągach BMW zaleca stosowanie paliwa o LO 98.
+Wg opracowania dot. oceny cyklu życia w momencie rozpoczęcia produkcji – odnośnie szczegółów, patrz: Raport na temat śladu węglowego pojazdów BMW
+W przypadku Hybrydy plug-in: moc zależy od stanu naładowania akum

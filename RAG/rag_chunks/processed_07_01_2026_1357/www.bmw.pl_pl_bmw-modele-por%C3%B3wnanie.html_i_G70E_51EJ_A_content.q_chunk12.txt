@@ -1,0 +1,60 @@
+ele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW i7 xDrive60 Limuzyna
+Przyspieszenie 0-100 km/h w s
+4,7
+6
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+-
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+240
+-
+-
+Zużycie i emisja
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW i7 xDrive60 Limuzyna
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+-
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+null
+-
+-
+Fuel consumption with a discharged battery, highway in km/l
+null
+-
+-
+Zużycie paliwa z rozładowanym akumulatorem, WLTP łącznie w l/100 km
+null
+-
+-
+Emisja CO₂, cykl miesza

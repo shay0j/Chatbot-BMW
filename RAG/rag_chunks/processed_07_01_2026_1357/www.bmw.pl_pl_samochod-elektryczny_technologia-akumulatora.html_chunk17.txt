@@ -1,0 +1,7 @@
+wzbudzane prądem, w skrócie SSM.
+Zalety silnika synchronicznego wzbudzanego prądem (SSM).
+Zalety silnika synchronicznego wzbudzanego prądem (SSM).
+Jedną z kluczowych kompetencji BMW jest powszechne stosowanie silników SSM. Wyróżnia je rezygnacja z określonych „metali ziem rzadkich” w wirniku. W porównaniu z innymi typami silników silniki SSM cechują się korzystną charakterystyką mocy i również przy dużej prędkości zapewniają dobre przyspieszenie. Jest to przydatne podczas wyprzedzania na autostradzie. Oprócz tego silniki SSM zużywają mało energii. Ponieważ wirnik w nich magnetyzowany jest prądem, w zależności od sytuacji pracują one z optymalną efektywnością lub mocą.
+Zalety silnika synchronicznego wzbudzanego magnesami trwałymi (PSM).
+Zalety silnika synchronicznego wzbudzanego magnesami trwałymi (PSM).
+Silnik elektryczny typu PSM wyróżnia się duża gęstością mocy. W danej przestrzeni montażowej może on wytwarzać stosunkowo dużą moc. Pod względem technicznym różni się od silnika SSM tym

@@ -1,0 +1,63 @@
+
+11
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 530e Limuzyna
+(Nominal) power/30 minutes power in kW (hp)
+135 (184)
+-
+-
+(Nominal) torque in Nm
+250
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 530e Limuzyna
+Przyspieszenie 0-100 km/h w s
+6,3
+7
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+230
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+140
+-
+-
+Zużycie i emisja
+8
+,
+12
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW 530e Limuzyna
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+13
+2,6–2,1
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+13
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fue

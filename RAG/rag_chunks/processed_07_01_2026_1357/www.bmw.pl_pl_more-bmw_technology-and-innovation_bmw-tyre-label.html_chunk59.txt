@@ -1,0 +1,119 @@
+ront
+275/40 R 21 107 V XL M+S RSC
+RSC
+Pirelli
+SZ
+21"
+Rear
+315/35 R 21 111 V XL M+S RSC
+RSC
+Pirelli
+SZ
+22"
+Front
+275/35 R 22 104 Y XL
+STD
+Continental
+-
+22"
+Front
+275/35 R 22 104 Y XL
+STD
+Continental
+-
+22"
+Front
+275/35 R 22 104 Y XL
+STD
+Pirelli
+-
+22"
+Front
+275/35 R 22 104 Y XL
+STD
+Pirelli
+-
+22"
+Front
+275/35 R 22 104 Y XL
+STD
+Pirelli
+-
+22"
+Rear
+315/30 R 22 107 Y XL
+STD
+Continental
+-
+22"
+Rear
+315/30 R 22 107 Y XL
+STD
+Continental
+-
+22"
+Rear
+315/30 R 22 107 Y XL
+STD
+Pirelli
+-
+22"
+Rear
+315/30 R 22 107 Y XL
+STD
+Pirelli
+-
+22"
+Rear
+315/30 R 22 107 Y XL
+STD
+Pirelli
+-
+-
+X6
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+20"
+All-round
+275/45 R 20 110 V XL M+S RSC
+RSC
+Bridgestone
+-
+20"
+All-round
+275/45 R 20 110 V XL M+S RSC
+RSC
+Michelin
+-
+20"
+All-round
+275/45 R 20 110 V XL M+S RSC
+RSC
+Pirelli
+-
+20"
+Front
+275/45 R 20 110 Y XL RSC
+RSC
+Bridgestone
+-
+20"
+Front
+275/45 R 20 110 Y XL RSC
+RSC
+Hankook
+-
+20"
+Front
+275/45 R 20 110 Y XL RSC
+RSC
+Pirelli
+-
+20"
+Rear
+305/40 R 20 112 Y XL R

@@ -1,0 +1,55 @@
+pieszenie 0-100 km/h w s
+7,5
+1
+Prędkość maksymalna w km/h
+230
+Zużycie i emisja
+8
+,
+2
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+6,4–5,8
+Emisja CO₂, cykl mieszany WLTP w g/km
+144–130
+Hałas przejściowy w dB (A)
+67
+7
+Stacjonarny poziom hałasu w dB (A) /1/min
+73 / 3 750
+7
+Ślad węglowy pojazdu
+13
+Emisje wyrażone jako równoważnik emisji dwutlenku węgla – CO₂e – do momentu przekazania pojazdu (zakres 1, 2, 3 i wyższy); wartość szacunkowa, podana w tonach.
+11,1
+Udział surowców wtórnych w całym pojeździe; wartość szacunkowa, podana w %
+23
+Akumulator wysokiego napięcia/48 V, ładowanie
+4
+Pojemność akumulatora w kWh
+0,9
+Wymiary i ciężar
+5 060 mm
+1 900 mm
+1 515 mm
+Długość w mm
+5 060
+Szerokość w mm
+1 900
+Wysokość w mm
+1 515
+Szerokość w mm / z lusterkami
+2 156
+Rozstaw osi w mm
+2 995
+Masa własna pojazdu w kg
+5
+1 800
+Dopuszczalna masa brutto w kg
+2 335
+Ładowność w kg
+610
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+6
+2 

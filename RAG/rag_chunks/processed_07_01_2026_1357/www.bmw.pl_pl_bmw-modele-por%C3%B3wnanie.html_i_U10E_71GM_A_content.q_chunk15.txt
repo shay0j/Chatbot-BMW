@@ -1,0 +1,54 @@
+ze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Akumulator wysokiego napięcia/48 V, ładowanie
+BMW iX2 xDrive30
+Pojemność akumulatora w kWh
+64,8
+-
+-
+Maksymalna moc ładowania AC w kW
+11
+-
+-
+Maksymalna moc ładowania AC/DC w kW
+null
+-
+-
+Minmalny czas ładowania AC 0-100% w h
+6:30
+-
+-
+bmw.web.technicaldata.charging.chargingMaxAC
+null
+-
+-
+Maksymalna moc ładowania DC w kW
+130
+-
+-
+Minimalny czas ładowania DC 10-80% w h
+0:29
+-
+-
+Doładowany zasięg po 10 minutach ładowania z wysoką mocą w km
+125 - 140
+-
+-
+Ładowanie dwukierunkowe
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ładowanie dwukierunkowe
+BMW iX2 xDrive30
+Maksymalna moc rozładowania Vehicle-to-Load (V2L) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Load (V2V) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Home Power Flex (V2H Flex) w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 3-fazowym BMW Wallbox Prof

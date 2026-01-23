@@ -1,0 +1,59 @@
+m
+1 544
+Szerokość w mm / z lusterkami
+2 192
+Rozstaw osi w mm
+3 215
+Masa własna pojazdu w kg
+5
+2 715
+Dopuszczalna masa brutto w kg
+3 250
+Ładowność w kg
+610
+Uchwyt na relingi dachowe bez relingów w kg
+0
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+7
+2 000 / 80
+Pojemność bagażnika w l
+500
+Całkowity układ napędowy
+Typ napędu
+Elektryczny
+Moc w kW (KM)
+485 (659)
+Moment obrotowy w Nm
+1 015
+Skrzynia biegów
+1-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+485 (659) / 135 (184)
+(Znamionowy) moment obrotowy w Nm
+1 015
+Wydajność
+Przyspieszenie 0-100 km/h w s
+3,7
+1
+Prędkość maksymalna na napędzie elektrycznym w km/h
+250
+Zużycie i emisja
+2
+Emisja CO₂, cykl mieszany WLTP w g/km
+0
+Zużycie energii, łączny WLTP w kWh/100 km
+23,7–20,8
+Zasięg elektryczny, WLTP w km
+3
+490–559
+Hałas przejściowy w dB (A)
+65
+6
+Akumulator wysokiego napięcia/48 V, ładowanie
+4
+Pojemność akumulatora w kWh
+101,7
+Doładowany zasięg 

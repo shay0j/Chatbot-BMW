@@ -1,0 +1,48 @@
+zy na pewno chcesz usunąć ten pojazd?
+Tak
+Nie
+PORÓWNANIE MODELI BMW
+Dodaj pojazd BMW
+Wybierz pojazd.
+BMW 740d xDrive Limuzyna
+Konfiguracja i ceny
+Gotowe do odbioru
+Od
+570 500 zł
+Informacja o cenie
+Na ilustracjach pokazane są dodatkowo płatne opcje wyposażenia. Podane są niewiążące, niebędące wynikiem zmowy kartelowej sugestie cenowe producenta zawierające podatek VAT i podatek od emisji (NoVA) przy założeniu modelu podstawowego bez opcji wyposażenia, bez kosztów transportu. Zastrzega się możliwość zmian i pomyłek. Wiążących informacji o cenie może udzielić partner BMW.
+Wybierz pojazd.
+Seria
+7
+1
+2
+3
+4
+5
+7
+M
+Z
+X
+i
+7
+Model
+BMW serii 7 Limuzyna
+BMW serii 7 Limuzyna
+BMW serii 7 Limuzyna
+Model
+BMW serii 7 Limuzyna
+Silnik
+BMW 740d xDrive Limuzyna
+Electric
+BMW i7 eDrive50 Limuzyna
+BMW i7 xDrive60 Limuzyna
+BMW i7 M70 xDrive Limuzyna
+Petrol – Plug-in Hybrid
+BMW 750e xDrive Limuzyna
+BMW M760e xDrive Limuzyna
+Diesel
+BMW 740d xDrive Limuzyna
+BMW 740d xDrive Limuzyna
+Silnik
+Skrzynia biegów
+Sportowa 

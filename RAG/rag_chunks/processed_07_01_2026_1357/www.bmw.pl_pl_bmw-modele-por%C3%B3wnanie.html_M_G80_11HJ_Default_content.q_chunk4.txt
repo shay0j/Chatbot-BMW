@@ -1,0 +1,54 @@
+zy na pewno chcesz usunąć ten pojazd?
+Tak
+Nie
+PORÓWNANIE MODELI BMW
+Dodaj pojazd BMW
+Wybierz pojazd.
+BMW M3 Limuzyna
+Konfiguracja i ceny
+Gotowe do odbioru
+Od
+462 500 zł
+Informacja o cenie
+Na ilustracjach pokazane są dodatkowo płatne opcje wyposażenia. Podane są niewiążące, niebędące wynikiem zmowy kartelowej sugestie cenowe producenta zawierające podatek VAT i podatek od emisji (NoVA) przy założeniu modelu podstawowego bez opcji wyposażenia, bez kosztów transportu. Zastrzega się możliwość zmian i pomyłek. Wiążących informacji o cenie może udzielić partner BMW.
+Wybierz pojazd.
+Seria
+M
+1
+2
+3
+4
+5
+7
+M
+Z
+X
+i
+M
+Model
+BMW M3 Limuzyna
+BMW M2 Coupé
+BMW M3 Limuzyna
+BMW M3 Touring
+BMW M4 Coupé
+BMW M4 Cabrio
+BMW M5 Sedan
+BMW M5 Touring
+BMW X5 M
+BMW X6 M
+BMW XM
+BMW M3 Limuzyna
+Model
+Silnik
+BMW M3 Limuzyna
+Benzyna
+BMW M340i xDrive Limuzyna
+BMW M3 Limuzyna
+BMW M3 Competition Limuzyna
+BMW M3 Competition xDrive Limuzyna
+Diesel
+BMW M340d xDrive Limuzyna
+BMW M3 Limuzyna
+Silnik
+Skrzynia biegów
+Manual Tran

@@ -1,0 +1,116 @@
+Bridgestone
+SZ
+22"
+Rear
+HL 285/30 R 22 104 Y XL
+STD
+Goodyear
+-
+22"
+Rear
+HL 285/30 R 22 104 Y XL
+STD
+Pirelli
+SZ
+-
+iX
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+20"
+All-round
+235/60 R 20 108 H XL
+STD
+Apollo Vredestein
+-
+20"
+All-round
+235/60 R 20 108 H XL
+STD
+Nexen
+-
+20"
+All-round
+235/60 R 20 108 H XL M+S
+STD
+Goodyear
+SZ
+20"
+All-round
+235/60 R 20 108 H XL M+S
+STD
+Pirelli
+SZ
+21"
+All-round
+255/50 R 21 109 Y XL
+STD
+Nexen
+-
+21"
+All-round
+255/50 R 21 109 Y XL
+STD
+Pirelli
+-
+21"
+All-round
+255/50 R 21 109 H XL M+S
+STD
+Goodyear
+-
+21"
+All-round
+255/50 R 21 109 H XL M+S
+STD
+Michelin
+-
+22"
+All-round
+275/40 R 22 107 Y XL
+STD
+Bridgestone
+SZ
+22"
+All-round
+275/40 R 22 107 Y XL
+STD
+Hankook
+-
+22"
+All-round
+275/40 R 22 107 Y XL
+STD
+Pirelli
+-
+22"
+All-round
+275/40 R 22 107 Y XL
+STD
+Pirelli
+SZ
+22"
+All-round
+275/40 R 22 107 Y XL HP
+STD
+Pirelli
+-
+23"
+All-round
+HL 275/35 R 23 108 Y XL
+STD
+Goodyear
+-
+23"
+All-round
+HL 275/35 R 23 108 Y XL
+STD
+Hankook
+-
+23"
+All-round
+HL 275/35 R 23 108

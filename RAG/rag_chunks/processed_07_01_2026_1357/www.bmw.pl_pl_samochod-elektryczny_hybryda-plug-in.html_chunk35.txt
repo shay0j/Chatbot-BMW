@@ -1,0 +1,6 @@
+BMW zaleca stosowanie paliwa o LO 98.
+⁴ W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+⁵ Wydajność ładowania zależy od poziomu naładowania, temperatury otoczenia, indywidualnego profilu jazdy i wykorzystania odbiorników energii. Podane zasięgi są oparte na najlepszym scenariuszu WLTP. Czasy trwania ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania.
+W pełni elektryczny napęd przy temperaturach poniżej -10°C jest dostępny dopiero po przejechaniu kilku kilometrów, gdy akumulator rozgrzeje się do temperatury roboczej.
+6
+Prezentowana kalkulacja dotyczy leasingu pojazdu BMW serii 2 Active Tourer w ramach usługi BMW Leasing 103% oferowanej przez BMW Financial Services Polska sp. z o.o. z siedzibą w Warszawie i jest kierowana do przedsiębiorców. Koszt leasingu odpowiada całkowitej sumie opłat 103% ceny pojazdu przy następujących parametrach: opłata wstępna 15%, okres leasingu 36 miesięc

@@ -1,0 +1,60 @@
+anych modeli.
+Całkowity układ napędowy
+BMW i7 M70 xDrive Limuzyna
+Typ napędu
+Całkowicie elektryczny
+-
+-
+Moc w kW (KM)
+485 (659)
+-
+-
+Moment obrotowy w Nm
+1 015
+-
+-
+Skrzynia biegów
+1-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW i7 M70 xDrive Limuzyna
+Cylindry
+-
+-
+-
+Pojemność w cm³
+-
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+-
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+-
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW i7 M70 xDrive Limuzyna
+(Nominal) power/30 minutes power in kW (hp)
+485 (659) / 135 (184)
+-
+-
+(Nominal) torque in Nm
+1 015
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych

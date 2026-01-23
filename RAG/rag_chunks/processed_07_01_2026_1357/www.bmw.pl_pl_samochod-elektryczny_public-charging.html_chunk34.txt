@@ -1,0 +1,5 @@
+inut obliczone zostało w cyklu WLTP zgodnie z normą ISO12906. Te wartości oraz wydajność ładowania zależą od takich czynników jak wyposażenie pojazdu, stan i wiek akumulatora, temperatura akumulatora, indywidualny styl jazdy, korzystanie z odbiorników energii, temperatura otoczenia oraz dostępna moc ładowania na stacji ładowania.
+⁵ Aplikacja My BMW jest kompatybilna z wszystkimi pojazdami BMW od roku modelowego 2014. Warunkiem korzystania jest posiadanie usług ConnectedDrive i odpowiedniego smartfona. Dostępność i zakres funkcji aplikacji My BMW zależy od rynku.
+⁶ Oferta indywidualna dla rynku, dotyczy nowych samochodów w oddziałach i u dealerów BMW w Europie w sieci BMW Charging.
+⁷ BMW Charging jest usługą firmy Digital Charging Solutions GmbH.
+⁸ Prezentowana kalkulacja dotyczy leasingu pojazdu BMW i4 eDrive35 o wartości 220 720 zł brutto w ramach usługi BMW Comfort Lease oferowanej przez BMW Financial Services Polska sp. z o.o. z siedzibą w Warszawie i jest kierowana do przedsiębiorc

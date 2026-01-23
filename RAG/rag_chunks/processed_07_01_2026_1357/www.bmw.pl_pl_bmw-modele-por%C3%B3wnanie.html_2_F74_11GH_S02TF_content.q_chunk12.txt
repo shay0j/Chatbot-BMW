@@ -1,0 +1,64 @@
+d Gran Coupé
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 218d Gran Coupé
+Przyspieszenie 0-100 km/h w s
+8,4
+4
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+226
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+-
+-
+-
+Zużycie i emisja
+5
+,
+6
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW 218d Gran Coupé
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+4,7–4,6
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+null
+-
+-
+Fuel consumption with a discharged battery, highway in k

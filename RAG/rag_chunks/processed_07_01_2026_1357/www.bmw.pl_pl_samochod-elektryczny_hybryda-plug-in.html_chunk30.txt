@@ -1,0 +1,5 @@
+P w g/km¹, ³, ⁴: 65–53; zużycie energii w cyklu mieszanym WLTP w kWh/100 km¹, ³, ⁴: 16,2–15,3; zasięg elektryczny, WLTP w km¹, ²: 87–98
+BMW M5 Limuzyna: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km¹, ³, ⁴: 5–4,4; emisja CO₂, cykl mieszany WLTP w g/km¹, ³, ⁴: 114–101; zużycie energii w cyklu mieszanym WLTP w kWh/100 km¹, ³, ⁴: 17,6–16,5; zasięg elektryczny, WLTP w km¹, ²: 63–69
+BMW M5 Touring: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km¹, ³, ⁴: 5,3–4,7; emisja CO₂, cykl mieszany WLTP w g/km¹, ³, ⁴: 119–106; zużycie energii w cyklu mieszanym WLTP w kWh/100 km¹, ³, ⁴: 18,1–16,9; zasięg elektryczny, WLTP w km¹, ²: 61–67
+BMW 750e xDrive Limuzyna: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km¹, ³, ⁴: 3,7–3,3; emisja CO₂, cykl mieszany WLTP w g/km¹, ³, ⁴: 83–74; zużycie energii w cyklu mieszanym WLTP w kWh/100 km¹, ³, ⁴: 17,5–16,7; zasięg elektryczny, WLTP w km¹, ²: 77–80
+BMW M760e xDrive Limuzyna: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km¹, ³, ⁴: 4,1–3,4; emisja CO₂, cykl 

@@ -1,0 +1,47 @@
+zy na pewno chcesz usunąć ten pojazd?
+Tak
+Nie
+PORÓWNANIE MODELI BMW
+Dodaj pojazd BMW
+Wybierz pojazd.
+BMW i5 eDrive40 Limuzyna
+Konfiguracja i ceny
+Gotowe do odbioru
+Od
+335 000 zł
+Informacja o cenie
+Na ilustracjach pokazane są dodatkowo płatne opcje wyposażenia. Podane są niewiążące, niebędące wynikiem zmowy kartelowej sugestie cenowe producenta zawierające podatek VAT i podatek od emisji (NoVA) przy założeniu modelu podstawowego bez opcji wyposażenia, bez kosztów transportu. Zastrzega się możliwość zmian i pomyłek. Wiążących informacji o cenie może udzielić partner BMW.
+Wybierz pojazd.
+Seria
+5
+1
+2
+3
+4
+5
+7
+M
+Z
+X
+i
+5
+Model
+BMW serii 5 Limuzyna
+BMW serii 5 Limuzyna
+BMW serii 5 Touring
+BMW serii 5 Limuzyna
+Model
+Silnik
+BMW i5 eDrive40 Limuzyna
+BMW i5 eDrive40 Limuzyna
+BMW i5 xDrive40 Limuzyna
+BMW i5 M60 xDrive Limuzyna
+BMW 530e Limuzyna
+BMW 530e xDrive Limuzyna
+BMW 550e xDrive Limuzyna
+BMW 520i Limuzyna
+BMW M5 Limuzyna
+BMW 520d Limuzyna
+BMW 520d xDrive Limuzyna
+BMW 540d xDrive Limuzyna
+BMW 

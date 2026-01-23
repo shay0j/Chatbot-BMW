@@ -1,0 +1,62 @@
+puje dla wybranych modeli.
+Silnik elektryczny
+BMW M440i xDrive Coupé
+(Nominal) power/30 minutes power in kW (hp)
+9 (12) / -
+-
+-
+(Nominal) torque in Nm
+200
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW M440i xDrive Coupé
+Przyspieszenie 0-100 km/h w s
+4,4
+6
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+250
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+-
+-
+-
+Zużycie i emisja
+7
+,
+8
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW M440i xDrive Coupé
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+7,7–7,1
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city 

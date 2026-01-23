@@ -1,0 +1,122 @@
+inental
+-
+21"
+Rear
+HL 285/30 R 21 103 Y XL
+STD
+Pirelli
+-
+-
+i7 Limuzyna
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+19"
+All-round
+245/50 R 19 105 Y XL
+STD
+Pirelli
+-
+19"
+All-round
+245/50 R 19 105 Y XL
+STD
+Yokohama
+-
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Bridgestone
+SZ
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Goodyear
+-
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Pirelli
+SZ
+19"
+All-round
+245/50 R 19 105 W XL RSC
+RSC
+Bridgestone
+SZ
+20"
+Front
+255/45 R 20 105 Y XL
+STD
+Bridgestone
+-
+20"
+Front
+255/45 R 20 105 Y XL
+STD
+Pirelli
+-
+20"
+Front
+255/45 R 20 105 Y XL HP
+STD
+Pirelli
+-
+20"
+Front
+255/45 R 20 105 Y XL
+STD
+Yokohama
+-
+20"
+Rear
+285/40 R 20 108 Y XL
+STD
+Bridgestone
+-
+20"
+Rear
+285/40 R 20 108 Y XL
+STD
+Pirelli
+-
+20"
+Rear
+285/40 R 20 108 Y XL HP
+STD
+Pirelli
+-
+20"
+Rear
+285/40 R 20 108 Y XL
+STD
+Yokohama
+-
+20"
+Front
+255/45 R 20 105 V XL M+S
+STD
+Goodyear
+-
+20"
+Front
+255/45 R 20 105 V XL M+S
+STD
+Pirelli
+-
+20"
+Rear
+285/40 R 20 108 V XL M+S
+STD
+Goodyear
+-
+20"
+Rear
+285

@@ -1,0 +1,22 @@
+y się radość z jazdy.
+BMW serii 2 Coupé, to sportowiec pełną parą. Muskularny przód, krótki tył i wyraźne linie sprawiają, że jego dynamika jest odczuwalna nawet podczas postoju. We wnętrzu znajdziesz zorientowany na kierowcę kokpit z wysokiej jakości detalami. Odkryj model BMW serii 2 Coupé, opcje wyposażenia oraz dane techniczne oraz liczne możliwości leasingu i finansowania.
+Warianty i dane techniczne.
+Modele
+Benzyna • Diesel
+Modele M
+Benzyna
+2
+BMW M240i xDrive Coupe
+Moc
+275 kW (374 KM)
+Moment obrotowy
+500 Nm
+0-100 km/h
+{techdata.acceleration} s
+Prędkość maksymalna
+250 km/h
+Dane techniczne
+Porównaj pojazd
+Kontynuuj do „Porównaj”
+BMW M240i xDrive Coupe: Zużycie energii w cyklu mieszanym WLTP w l/100 km: {techdata.consumptionWltpCombined}; emisja CO₂, cykl mieszany WLTP w g/km: {techdata.emissionsWltpCombined}
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, w

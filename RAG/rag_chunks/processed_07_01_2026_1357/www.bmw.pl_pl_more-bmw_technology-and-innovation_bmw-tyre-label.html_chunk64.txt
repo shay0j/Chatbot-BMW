@@ -1,0 +1,116 @@
+
+22"
+Rear
+315/35 R 22 111 Y XL HP
+STD
+Yokohama
+-
+22"
+Rear
+315/35 R 22 111 Y XL HP
+STD
+Yokohama
+-
+22"
+Front
+275/40 R 22 107 V XL M+S
+STD
+Pirelli
+SZ
+22"
+Rear
+315/35 R 22 111 V XL M+S
+STD
+Pirelli
+SZ
+23"
+Front
+HL 275/35 R 23 108 Y XL HP
+STD
+Pirelli
+-
+23"
+Front
+HL 275/35 R 23 108 Y XL HP
+STD
+Yokohama
+-
+23"
+Rear
+HL 315/30 R 23 111 Y XL HP
+STD
+Pirelli
+-
+23"
+Rear
+HL 315/30 R 23 111 Y XL HP
+STD
+Yokohama
+-
+-
+Modele BMW i
+i4 Gran Coupé
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+17"
+All-round
+225/55 R 17 101 Y XL
+STD
+Continental
+-
+17"
+All-round
+225/55 R 17 101 H XL M+S
+STD
+Continental
+-
+17"
+All-round
+225/55 R 17 101 H XL M+S
+STD
+Goodyear
+-
+18"
+All-round
+245/45 R 18 100 Y XL
+STD
+Goodyear
+-
+18"
+All-round
+245/45 R 18 100 Y XL
+STD
+Hankook
+-
+18"
+All-round
+245/45 R 18 100 H XL M+S
+STD
+Goodyear
+-
+18"
+All-round
+245/45 R 18 100 H XL M+S
+STD
+Pirelli
+-
+18"
+All-round
+245/45 R 18 100 Y XL RSC
+RSC
+Bridgestone
+-
+18"
+All-round
+245/45 R 18 100 Y XL RSC
+RSC
+Pirelli
+-
+18"
+Front
+245/45 

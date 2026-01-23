@@ -1,0 +1,5 @@
+rzedaży, historia serwisowania), historia kampanii / odpowiedzi na kampanie, opcjonalne dane o kliencie lub o posiadanych pojazdach innych producentów np. platforma używanych pojazdów BMW, uczestnictwo w wydarzeniach (lokalizacja, spółka), historia reklamacji, historia serwisowania.
+Korzystanie z urządzeń i usług : sposób korzystania przez Państwa z posiadanego urządzenia (mobilnego lub pojazdu) oraz usług oferowanych w urządzeniu.
+Szczegóły konfiguracji pojazdu : dane na temat cech oraz aktualnych ustawień Państwa pojazdu (identyfikowane numerem identyfikacyjnym pojazdu).
+Dane techniczne pojazdu : dane na temat aktualnej i dotychczasowej pracy silnika i systemów zainstalowanych w pojeździe, poziomu napełnienia zbiornika na paliwo, liczby kilometrów do przejechania na pozostałym paliwie, dane RTTI (dane wejściowe nawigacji), temperatura zewnętrzna, przebieg, średnia prędkość. zużycie paliwa lub energii elektrycznej, łączna ilość przejechanych kilometrów (dane OBFCM).
+Dane o lokalizacji

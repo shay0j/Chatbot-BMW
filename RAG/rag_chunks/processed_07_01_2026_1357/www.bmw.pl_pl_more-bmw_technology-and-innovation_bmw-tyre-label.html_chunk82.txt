@@ -1,0 +1,127 @@
+ M+S
+STD
+Michelin
+SZ
+20"
+Front
+285/30 ZR 20 99 Y XL
+STD
+Yokohama
+SZ
+21"
+Rear
+295/25 ZR 21 96 Y XL
+STD
+Yokohama
+SZ
+-
+M3 Touring
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+19"
+Front
+275/35 R 19 100 V XL M+S
+STD
+Michelin
+-
+19"
+Front
+275/35 R 19 100 V XL M+S
+STD
+Pirelli
+-
+19"
+Rear
+275/35 R 19 100 V XL M+S
+STD
+Michelin
+-
+19"
+Rear
+275/35 R 19 100 V XL M+S
+STD
+Pirelli
+-
+19"
+Front
+275/35 ZR 19 100 Y XL
+STD
+Michelin
+-
+19"
+Front
+275/35 ZR 19 100 Y XL
+STD
+Michelin
+-
+19"
+Front
+275/35 ZR 19 100 Y XL
+STD
+Pirelli
+SZ
+19"
+Front
+275/35 ZR 19 100 Y XL
+STD
+Pirelli
+-
+19"
+Front
+275/35 ZR 19 100 Y XL
+STD
+Yokohama
+SZ
+20"
+Rear
+285/30 ZR 20 99 Y XL
+STD
+Michelin
+-
+20"
+Rear
+285/30 ZR 20 99 Y XL
+STD
+Michelin
+-
+20"
+Rear
+285/30 ZR 20 99 Y XL
+STD
+Pirelli
+SZ
+20"
+Rear
+285/30 ZR 20 99 Y XL
+STD
+Pirelli
+-
+20"
+Rear
+285/30 ZR 20 99 Y XL
+STD
+Yokohama
+SZ
+19"
+Front
+275/35 R 19 100 V XL M+S
+STD
+Michelin
+SZ
+20"
+Front
+285/30 ZR 20 99 Y XL
+STD
+Yokohama
+SZ
+21"
+Rear
+295/25 ZR 21 96 Y XL
+STD
+Yokohama
+SZ

@@ -1,0 +1,122 @@
+RSC
+RSC
+Pirelli
+-
+22"
+Rear
+315/35 R 22 111 Y XL RSC
+RSC
+Continental
+SZ
+22"
+Rear
+315/35 R 22 111 Y XL RSC
+RSC
+Continental
+-
+22"
+Rear
+315/35 R 22 111 Y XL RSC
+RSC
+Pirelli
+-
+23"
+Front
+HL 275/35 R 23 108 Y XL HP
+STD
+Pirelli
+-
+23"
+Front
+HL 275/35 R 23 108 Y XL HP
+STD
+Yokohama
+-
+23"
+Rear
+HL 315/30 R 23 111 Y XL HP
+STD
+Pirelli
+-
+23"
+Rear
+HL 315/30 R 23 111 Y XL HP
+STD
+Yokohama
+-
+-
+XM
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+21"
+All-round
+285/45 R 21 113 V XL M+S RSC
+RSC
+Pirelli
+-
+21"
+Front
+275/45 R 21 110 Y XL HP
+STD
+Yokohama
+-
+21"
+Rear
+315/40 R 21 115 Y XL HP
+STD
+Yokohama
+-
+22"
+Front
+275/40 R 22 107 Y XL HP
+STD
+Pirelli
+-
+22"
+Front
+275/40 R 22 107 Y XL HP
+STD
+Yokohama
+-
+22"
+Front
+275/40 R 22 107 Y XL HP
+STD
+Yokohama
+-
+22"
+Rear
+315/35 R 22 111 Y XL HP
+STD
+Pirelli
+-
+22"
+Rear
+315/35 R 22 111 Y XL HP
+STD
+Yokohama
+-
+22"
+Rear
+315/35 R 22 111 Y XL HP
+STD
+Yokohama
+-
+22"
+Front
+275/40 R 22 107 V XL M+S
+STD
+Pirelli
+SZ
+22"
+Rear
+315/35 R 22 111 V XL M+S
+STD
+Pirelli
+SZ
+23"

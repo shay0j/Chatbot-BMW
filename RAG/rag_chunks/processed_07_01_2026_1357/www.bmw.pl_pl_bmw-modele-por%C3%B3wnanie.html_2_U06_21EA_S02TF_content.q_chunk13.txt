@@ -1,0 +1,77 @@
+cja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW 225e xDrive Active Tourer
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+12
+2,9–2,6
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+12
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+null
+-
+-
+Fuel consumption with a discharged battery, highway in km/l
+null
+-
+-
+Zużycie paliwa z rozładowanym akumulatorem, WLTP łącznie w l/100 km
+null
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+12
+66–60
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+12
+null
+-
+-
+CO₂-Emissions (comb. for NI)
+null
+-
+-
+Zużycie energii, łączny WLTP w kWh/100 km
+12
+11,8–11,5
+-
+-
+Zużycie energii, cykl mieszany WLTP w kWh/100 km
+12
+null
+-
+-
+Energy consumption (comb. for NI)
+null
+-
+-
+Energy consumption, city in km/kWh
+null
+-
+-
+Energy consumption, highway in km/kWh
+null
+-
+-
+Zasięg elektryczny, WLTP w km
+1
+81–87
+-

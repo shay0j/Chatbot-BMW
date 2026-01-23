@@ -1,0 +1,5 @@
+ństwem lub Państwa pojazdem wyłącznie dopóki jest to konieczne w celu osiągnięcia celu, na jaki wyrazili Państwo zgodę;
+są one uzyskiwane lub dostęp jest do nich uzyskiwany w takiej formie wyłącznie, gdy jest to niezbędne w celu wykonania żądanej usługi lub gdy jesteśmy zobowiązani do zatrzymania lub udzielenia danych na podstawie przepisów prawa (i gdy jesteśmy zobowiązani do przekazania danych organom ścigania lub innym podmiotom zewnętrznym - zawiadomimy o tym Państwa, o ile nie zaszkodzi to zapobieganiu lub wykrywaniu przestępstw lub o ile nie będzie nas obowiązywał zakaz w tym zakresie);
+Dane o lokalizacji pojazdu oraz Dane o lokalizacji urządzenia nie są powiązane, chyba że jest to niezbędne w celu świadczenia żądanej usługi;
+Dane o lokalizacji będą wykorzystywane w celach analitycznych na zbiorach danych nieodwracalnie zanonimizowanych.
+My oraz Dealer możemy mieć dostęp do Danych o lokalizacji pojazdu, zaś BMW AG może mieć dostęp do Danych o lokalizacji urządzenia w związku ze ś

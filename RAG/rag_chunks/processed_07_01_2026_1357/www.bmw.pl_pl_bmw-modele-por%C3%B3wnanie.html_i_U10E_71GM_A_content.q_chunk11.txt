@@ -1,0 +1,61 @@
+rzynia biegów
+1-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW iX2 xDrive30
+Cylindry
+-
+-
+-
+Pojemność w cm³
+-
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+-
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+-
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW iX2 xDrive30
+(Nominal) power/30 minutes power in kW (hp)
+225 (306) / 104 (141)
+-
+-
+(Nominal) torque in Nm
+494
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW iX2 xDrive30
+Przyspieszenie 0-100 km/h w s
+5,6
+7
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+-
+-
+-
+Prędkość

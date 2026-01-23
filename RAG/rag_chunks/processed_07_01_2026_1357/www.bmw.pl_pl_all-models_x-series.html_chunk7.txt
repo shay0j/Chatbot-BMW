@@ -1,0 +1,28 @@
+h serwisowych
+Gotowy na codzienne przygody.
+W towarzystwie BMW X1 każdy dzień staje się ekscytujący i niesamowicie przyjemny. Między innymi dzięki bezkompromisowemu, wyrazistemu designowi w stylu X. Dużo miejsca dla wszystkich pasażerów, a także dużo miejsca do przechowywania. Multimedialny kokpit z BMW Curved Display, na którym można z łatwością obsługiwać wszystkie funkcje za pomocą głosu lub dotyku. Doświadczenie z jazdy, które zawsze sprawia przyjemność.
+Odkryj wszystkie warianty modeli, opcje wyposażenia, dane techniczne lub skonfiguruj BMW X1 według indywidualnych potrzeb.
+Twoje BMW X1.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW X1
+BMW X1 Plug-in hybrid
+Biel alpejska niemetalizowany
+Biel mineralna metalizowany
+Czarny niemetalizowany
+Czarny szafirowy metalizowany
+Zielo

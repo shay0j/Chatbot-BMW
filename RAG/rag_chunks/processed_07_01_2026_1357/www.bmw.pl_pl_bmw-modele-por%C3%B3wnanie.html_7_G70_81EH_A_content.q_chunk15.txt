@@ -1,0 +1,52 @@
+ i wyższy); wartość szacunkowa, podana w tonach.
+-
+-
+-
+Udział surowców wtórnych w całym pojeździe; wartość szacunkowa, podana w %
+-
+-
+-
+Akumulator wysokiego napięcia/48 V, ładowanie
+2
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Akumulator wysokiego napięcia/48 V, ładowanie
+BMW i7 M70 xDrive Limuzyna
+Pojemność akumulatora w kWh
+101,7
+-
+-
+Maksymalna moc ładowania AC w kW
+22
+-
+-
+Maksymalna moc ładowania AC/DC w kW
+null
+-
+-
+Minmalny czas ładowania AC 0-100% w h
+10:45 / 5:30
+-
+-
+bmw.web.technicaldata.charging.chargingMaxAC
+null
+-
+-
+Maksymalna moc ładowania DC w kW
+195
+-
+-
+Minimalny czas ładowania DC 10-80% w h
+0:34
+-
+-
+Doładowany zasięg po 10 minutach ładowania z wysoką mocą w km
+144 - 170
+-
+-
+Ładowanie dwukierunkowe
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ładowanie dwukierunkowe
+BMW i7 M70 xDrive Limuzyna
+Maksymalna moc rozładowania V

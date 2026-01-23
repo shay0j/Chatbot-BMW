@@ -1,0 +1,10 @@
+klu mieszanym WLTP w kWh/100 km
+[1]
+: 19,6–18,5; zasięg elektryczny, WLTP w km: 589–624
+Podane wartości wyznaczono zgodnie z wymaganą procedurą pomiarową WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+BMW iX2 xDrive30: Zużycie energii w cyklu mieszanym WLTP w kWh/100 km
+[1]
+: 17,7–16,3; zasięg elektryczny, WLTP w km: 418–449
+Podane wartości wyznaczono zgodnie z wymaganą procedurą pomiarową WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+BMW i3 jako pojazd używany.
+Za sprawą nowoczesnego wyglądu i inteligentnej technologii jest on nie tylko prawdziwą atrakcją, lecz również pionierem w dziedzinie miejskiej mobilności. Droga do pracy, czy też przemierzanie ulic miasta – BMW i3 

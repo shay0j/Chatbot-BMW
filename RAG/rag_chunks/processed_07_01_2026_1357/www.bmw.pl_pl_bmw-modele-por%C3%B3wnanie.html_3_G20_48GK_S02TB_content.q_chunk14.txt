@@ -1,0 +1,86 @@
+or NI)
+null
+-
+-
+Energy consumption, city in km/kWh
+null
+-
+-
+Energy consumption, highway in km/kWh
+null
+-
+-
+Zasięg elektryczny, WLTP w km
+1
+96–101
+-
+-
+Zasięg elektryczny, WLTP w km
+1
+null
+-
+-
+Zasięg elektryczny, WLTP (Miasto) w km
+null
+-
+-
+Electric range (comb. for NI)
+null
+-
+-
+Klasa emisji CO₂ (min.)
+null
+-
+-
+Klasa emisji CO₂ (maks.)
+null
+-
+-
+Klasa emisji CO₂ przy rozładowanym akumulatorze (min.)
+null
+-
+-
+Klasa emisji CO₂ przy rozładowanym akumulatorze (maks.)
+null
+-
+-
+Hałas przejściowy w dB (A)
+68
+5
+-
+-
+Stacjonarny poziom hałasu w dB (A) /1/min
+76 / 3 750
+5
+-
+-
+CO₂ Equivalent Overall
+null
+-
+-
+CO₂
+null
+-
+-
+Petrol Equivalent Overall
+null
+-
+-
+Petrol Equivalent Best
+null
+-
+-
+Primary Energy Petrol Equivalent
+null
+-
+-
+Primary Energy Petrol Best
+null
+-
+-
+Ślad węglowy pojazdu
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ślad węglowy pojazdu
+BMW 330e Limuzyna
+Emisje wyrażone jako równoważnik emisji dwutlenku węgla – CO

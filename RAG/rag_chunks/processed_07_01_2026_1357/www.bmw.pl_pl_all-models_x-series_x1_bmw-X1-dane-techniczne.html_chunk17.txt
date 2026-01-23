@@ -1,0 +1,63 @@
+1/min
+75 / 3 000
+12
+Akumulator wysokiego napięcia/48 V, ładowanie
+9
+Pojemność akumulatora w kWh
+0,9
+Wymiary i ciężar
+4 500 mm
+1 845 mm
+1 642 mm
+Długość w mm
+4 500
+Szerokość w mm
+1 845
+Wysokość w mm
+1 642
+Szerokość w mm / z lusterkami
+2 104
+Rozstaw osi w mm
+2 692
+Masa własna pojazdu w kg
+10
+1 685
+Dopuszczalna masa brutto w kg
+2 180
+Ładowność w kg
+570
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+11
+1 800 / 80
+Pojemność bagażnika w l
+500–1 545
+Pojemność zbiornika w l
+54
+Całkowity układ napędowy
+1
+Typ napędu
+Wysokoprężny – mild hybrid 48 V
+Moc w kW (KM)
+120 (163)
+13
+Moment obrotowy w Nm
+400
+13
+Skrzynia biegów
+7-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+4
+Pojemność w cm³
+1 995
+Moc znamionowa w kW (KM) / obr/min
+110 (150) / 3 750 - 4 000
+Znamionowy moment obrotowy w Nm / obr/min
+360 / 1 500 - 2 500
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM

@@ -1,0 +1,7 @@
+o usługi telematyczne, takie jak usługi nawigacyjne i obsługa głosowa. Ponadto systemy wspomagania kierowcy, połączenia dla urządzeń mobilnych, a także oferta systemu rozrywki i usługi drogowe sprawiają, że każda podróż jest wygodniejsza.
+W jakich modelach BMW dostępna jest usługa BMW ConnectedDrive?
+W pojazdach BMW od 2013 r. karta SIM jest zainstalowana na stałe i zasadniczo aktywna. Karta SIM stanowi podstawowy warunek korzystania z BMW ConnectedDrive oraz spełnienia wymogów prawnych, takich jak np. wymagane prawnie połączenie alarmowe.
+W celu świadczenia usług BMW ConnectedDrive, takich jak inteligentne połączenie alarmowe BMW i TeleService itp., dane są wymieniane między pojazdem a BMW za pośrednictwem sieci komórkowej i przetwarzane w BMW w celu świadczenia usług.
+Więcej informacji na temat tych danych można znaleźć w informacjach prawnych dotyczących ochrony danych.
+Czy usługi cyfrowe dla BMW ConnectedDrive można rezerwować później?
+W zależności od kraju dostawy, modelu i wyposa

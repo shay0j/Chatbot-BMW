@@ -1,0 +1,6 @@
+rwałymi (PSM).
+Silnik elektryczny typu PSM wyróżnia się duża gęstością mocy. W danej przestrzeni montażowej może on wytwarzać stosunkowo dużą moc. Pod względem technicznym różni się od silnika SSM tym, że pole magnetyczne wytwarzane jest w wirniku w inny sposób. Wytwarzają je magnesy trwałe. Dlatego silnik PSM szczególnie dobrze nadaje się na przykład do integracji w skrzyniach biegów samochodów PHEV i M PHEV (BMW XM).
+Prosta technika. Łatwe prowadzenie.
+Prosta technika. Łatwe prowadzenie.
+Pojazd elektryczny BMW przyspiesza bezpośrednio. Bez wciskania sprzęgła i przełączania biegów. W odróżnieniu od silnika spalinowego silnik elektryczny udostępnia swoją moc jeszcze bardziej spontanicznie. Jego moment obrotowy w dolnym zakresie prędkości obrotowej jest wysoki i niemal stały. Przy wyższych prędkościach obrotowych silnik elektryczny może w dowolnej chwili mobilizować swoją pełną moc. Dlatego prędkości obrotowej nie trzeba dostosowywać jak w silniku spalinowym poprzez zmianę biegu.
+Back t

@@ -1,0 +1,34 @@
+ści określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+Back to Navigation
+Wybierz swoje modele M BMW serii 2.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW M2 Coupé
+Biel alpejska niemetalizowany
+Żółty M Sao Paulo niemetalizowany
+M Zandvoort niebieski niemetalizowany
+Czarny szafirowy metalizowany
+Ognista czerwień metalizowany
+Niebieski M Portimao metalizowany
+Szary M Brooklyn metalizowany
+Szary Skyscraper metalizowany
+Mroźny niebieski Portimao metalizowany BMW Individual
+Mroźny czysty szary metalizowany BMW Individual
+Lakier specjalny Grigio

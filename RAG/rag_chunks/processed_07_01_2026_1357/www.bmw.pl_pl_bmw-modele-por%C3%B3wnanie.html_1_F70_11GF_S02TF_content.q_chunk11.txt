@@ -1,0 +1,61 @@
+tyczna
+-
+-
+Rodzaj napędu
+Napęd przedni
+-
+-
+Silnik spalinowy TwinPower Turbo
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 118d
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 995
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+110 (150) / 3 750 - 4 000
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+360 / 1 500 - 2 500
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 118d
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 118d
+Przyspieszenie 0-100 km/h w s
+8,3
+4
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+222
+-
+-
+Prędkość maksymalna na napędzie elektrycznym 

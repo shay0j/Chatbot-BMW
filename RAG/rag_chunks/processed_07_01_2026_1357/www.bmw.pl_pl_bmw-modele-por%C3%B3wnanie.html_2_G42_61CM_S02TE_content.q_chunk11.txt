@@ -1,0 +1,67 @@
+ędowy
+BMW 218i Coupé
+Typ napędu
+Benzyna
+-
+-
+Moc w kW (KM)
+115 (156)
+-
+-
+Moment obrotowy w Nm
+250
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 218i Coupé
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 998
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+115 (156) / 4 500 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+250 / 1 300 - 4 300
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 218i Coupé
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 218i Coupé
+Przyspieszenie 0-100 km/h w s
+8,7
+4
+-
+-

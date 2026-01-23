@@ -1,0 +1,7 @@
+pracuje nad nowymi technologiami mającymi na celu dalszą poprawę zużycia paliwa i zasięgu.
+Wszystkie dostępne w krajach EU28+ pojazdy BMW Group są dopuszczone do ruchu zgodnie z procedurą WLTP.
+W Niemczech ustawodawca określa jednak, że wartości zmierzone w procedurze WLTP mają być jeszcze podawane w przeliczeniu na wartości NEDC. W tym celu komisja UE opracowała procedurę korelacji, która obowiązuje na równi wszystkich producentów samochodów.
+Ta faza ma ułatwić przejście na nową procedurę. Jej okres obowiązywania zależy od regulacji prawnych w danym kraju, dlatego też różni się w zależności od kraju.
+Od września 2018 r. wszyscy producenci samochodów są zobowiązani testować zgodnie z procedurą WLTP wszystkie pojazdy sprzedawane w UE, a także w Szwajcarii, Turcji, Norwegii, Liechtensteinie i Izraelu (EU28+).
+Od stycznia 2021 r. we wszystkich krajach stosujących prawodawstwo UE w zakresie homologacji pojazdów obowiązkowe będzie publikowanie wartości WLTP dla każdego pojazdu.
+Zestawienie 

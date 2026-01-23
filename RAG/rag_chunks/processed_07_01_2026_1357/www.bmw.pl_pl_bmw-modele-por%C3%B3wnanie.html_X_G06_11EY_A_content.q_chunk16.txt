@@ -1,0 +1,68 @@
+oc rozładowania Vehicle-to-Load (V2L) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Load (V2V) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Home Power Flex (V2H Flex) w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 3-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 1-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Czas ładowania za pomocą 3-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Czas ładowania za pomocą 1-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Wymiary i ciężar
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wymiary i ciężar
+BMW X6 xDrive30d
+Długość w mm
+4 960
+-
+-
+Szerokość w mm
+2 004
+-
+-
+Wysokość w mm
+1 700
+-
+-
+Szerokość w mm / z lusterkami
+2 212
+-
+-
+Rozstaw osi w mm
+2 975
+-
+-
+Masa własna pojazdu w kg
+2
+2 295
+-
+-
+Dopuszczalna masa brutto w kg
+2 950
+-
+-
+Ładowność w kg
+730
+-
+-
+Pojemność bagażnika w l
+580–

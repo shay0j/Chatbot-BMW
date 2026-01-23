@@ -1,0 +1,6 @@
+i w silniku i układzie recyrkulacji spalin obejmuje on w szczególności oczyszczanie spalin za pomocą kombinacji NSC (katalizator akumulacyjny NOx = Nitrogen Oxide Storage Catalytic Converter) i systemu SCR (Selective Catalytic Reduction). W interakcji z temperaturą spalin i wtryskiem AdBlue
+®
+katalizator SCR przekształca toksyczne tlenki azotu w nietoksyczne składniki – wodę i azot.
+W nowym 6-cylindrowym silniku wysokoprężnym BMW dotychczasowy bardzo wydajny układ oczyszczania spalin składający się z katalizatora akumulującego NOx, filtra DPF i systemu SCR w podwoziu został zastąpiony układem o jeszcze większym potencjale działania. System SCR w pobliżu silnika (na DPF) został przy tym uzupełniony o system SCR w podwoziu, aby móc objąć bardzo szeroki zakres pracy silnika przy optymalnej przemianie NOx. Jest to również podstawa dla przyszłych norm emisji spalin.
+Norma emisji spalin Euro
+Norma emisji spalin Euro określa wartości graniczne dla emisji w zależności od typu pojazdu i silnika

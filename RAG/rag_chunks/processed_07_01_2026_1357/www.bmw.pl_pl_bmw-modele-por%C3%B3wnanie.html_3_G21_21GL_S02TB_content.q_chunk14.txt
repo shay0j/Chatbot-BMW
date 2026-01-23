@@ -1,0 +1,60 @@
+-
+-
+-
+CO₂ Equivalent Overall
+-
+-
+-
+CO₂
+-
+-
+-
+Petrol Equivalent Overall
+-
+-
+-
+Petrol Equivalent Best
+-
+-
+-
+Primary Energy Petrol Equivalent
+-
+-
+-
+Primary Energy Petrol Best
+-
+-
+-
+Ślad węglowy pojazdu
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ślad węglowy pojazdu
+Emisje wyrażone jako równoważnik emisji dwutlenku węgla – CO₂e – do momentu przekazania pojazdu (zakres 1, 2, 3 i wyższy); wartość szacunkowa, podana w tonach.
+-
+-
+-
+Udział surowców wtórnych w całym pojeździe; wartość szacunkowa, podana w %
+-
+-
+-
+Akumulator wysokiego napięcia/48 V, ładowanie
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Akumulator wysokiego napięcia/48 V, ładowanie
+Pojemność akumulatora w kWh
+-
+-
+-
+Maksymalna moc ładowania AC w kW
+-
+-
+-
+Maksymalna moc ładowania AC/DC w kW
+-
+-
+-
+Minmalny czas ładowania AC 0-100% w h
+-
+-
+-
+bmw.web.technicaldata.charging.chargingM

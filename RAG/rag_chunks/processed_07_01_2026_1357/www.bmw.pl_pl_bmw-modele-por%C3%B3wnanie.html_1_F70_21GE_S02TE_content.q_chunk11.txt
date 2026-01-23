@@ -1,0 +1,58 @@
+ obrotowy w Nm
+400
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW M135 xDrive
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 998
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+221 (300) / 5 750 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+400 / 2 000 - 4 500
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW M135 xDrive
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW M135 xDrive
+Przyspieszenie 0-100 km/h w s
+4,9
+4
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach

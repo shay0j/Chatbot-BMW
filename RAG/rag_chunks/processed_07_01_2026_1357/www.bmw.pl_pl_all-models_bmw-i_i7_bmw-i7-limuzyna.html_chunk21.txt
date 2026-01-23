@@ -1,0 +1,6 @@
+ego stylu jazdy, uwarunkowań trasy, temperatury zewnętrznej, układu grzewczego/klimatyzacji i przygotowania temperatury.
+² Napęd elektryczny do - kW, z chwilowym zwiększeniem mocy przez <10 s do - kW.
+³ Wydajność ładowania zależy od poziomu naładowania akumulatora, temperatury otoczenia, indywidualnego stylu jazdy i wykorzystania odbiorników energii. Podane zasięgi są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania.
+Wskazane dane dotyczące zużycia paliwa, emisji CO
+2
+, zużycia energii i zasięgu w trybie elektrycznym zostały ustalone na podstawie nowej procedury WLTP określonej w Rozporządzeniu (UE) 2017/1151 z dnia 1 czerwca 2017 r. w uzupełnieniu Rozporządzenia (WE) nr 2007/715 Parlamentu Europejskiego i Rady w sprawie homologacji typu pojazdów silnikowych w odniesieniu do emisji zanieczyszczeń pochodzących z lekkich pojazdów pasażerskich i użytkowych oraz w 

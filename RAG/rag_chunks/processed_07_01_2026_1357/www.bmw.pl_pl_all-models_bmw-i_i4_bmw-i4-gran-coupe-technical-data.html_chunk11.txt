@@ -1,0 +1,45 @@
+a z wysoką mocą w km
+141 - 185
+Maksymalna moc ładowania AC w kW
+11
+Minmalny czas ładowania AC 0-100% w h
+8:30
+Maksymalna moc ładowania DC w kW
+205
+Minimalny czas ładowania DC 10-80% w h
+0:30
+Wymiary i ciężar
+4 783 mm
+1 852 mm
+1 448 mm
+Długość w mm
+4 783
+Szerokość w mm
+1 852
+Wysokość w mm
+1 448
+Szerokość w mm / z lusterkami
+2 073
+Rozstaw osi w mm
+2 856
+Masa własna pojazdu w kg
+5
+2 285
+Dopuszczalna masa brutto w kg
+2 730
+Ładowność w kg
+520
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+6
+1 600 / 75
+Pojemność bagażnika w l
+470–1 290
+KOŁA I OPONY BMW.
+Opony w naszych pojazdach poddajemy rygorystycznym testom obejmującym do 50 różnych kryteriów jakościowych – to znacznie więcej niż przewiduje obowiązujący w całej UE wymóg jednolitego oznakowania opon. Tu znajdziesz wszystkie informacje na temat właściwości opon stosowanych w BMW.
+Dowiedz się więcej
+Zużycie energii i emisja CO₂.
+BMW i4 eDrive40 Gran Coupé
+[1]
+: Zu

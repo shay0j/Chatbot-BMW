@@ -1,0 +1,6 @@
+obu użytkowania.
+⁴ W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+5
+W przypadku hybrydy plug-in: W pełni elektryczny napęd w temperaturach poniżej -10°C jest dostępny dopiero po przejechaniu kilku kilometrów, gdy akumulator rozgrzeje się do temperatury roboczej.
+⁶ W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+Oficjalne dane dotyczące zużycia paliwa, emisji CO2, zużycia energii i zasięgu elektrycznego zostały określone zgodnie z zalecaną procedurą pomiaru i są zgodne z rozporządzeniem (UE) 715/2007 z późniejszymi zmianami. w uzupełnieniu Rozporządzenia (WE) nr 2007/715 Parlamentu Europejskiego i Rady w sprawie homologacji typu pojazdów silnikowych w odniesieniu do emisji zanieczyszczeń pochodzących z lekkich pojazdów pasażerskich i użytkowych oraz w sprawie dostępu do informacji dotyczących naprawy i utrzymania pojazdów w brzmieniu obowiązującym w chwili udzielenia homologacji. W przypadku pojazdów, których homologację typu prze

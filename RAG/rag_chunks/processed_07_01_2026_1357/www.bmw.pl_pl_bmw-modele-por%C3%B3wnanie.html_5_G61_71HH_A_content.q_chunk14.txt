@@ -1,0 +1,72 @@
+y, WLTP w km
+1
+null
+-
+-
+Zasięg elektryczny, WLTP (Miasto) w km
+null
+-
+-
+Electric range (comb. for NI)
+null
+-
+-
+Klasa emisji CO₂ (min.)
+null
+-
+-
+Klasa emisji CO₂ (maks.)
+null
+-
+-
+Klasa emisji CO₂ przy rozładowanym akumulatorze (min.)
+null
+-
+-
+Klasa emisji CO₂ przy rozładowanym akumulatorze (maks.)
+null
+-
+-
+Hałas przejściowy w dB (A)
+66
+4
+-
+-
+Stacjonarny poziom hałasu w dB (A) /1/min
+-
+-
+-
+CO₂ Equivalent Overall
+null
+-
+-
+CO₂
+null
+-
+-
+Petrol Equivalent Overall
+null
+-
+-
+Petrol Equivalent Best
+null
+-
+-
+Primary Energy Petrol Equivalent
+null
+-
+-
+Primary Energy Petrol Best
+null
+-
+-
+Ślad węglowy pojazdu
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ślad węglowy pojazdu
+BMW i5 eDrive40 Touring
+Emisje wyrażone jako równoważnik emisji dwutlenku węgla – CO₂e – do momentu przekazania pojazdu (zakres 1, 2, 3 i wyższy); wartość szacunkowa, podana w tonach.
+-
+-
+-
+Udział surowców wtórnych w całym pojeździe; wartość szacunkowa, po

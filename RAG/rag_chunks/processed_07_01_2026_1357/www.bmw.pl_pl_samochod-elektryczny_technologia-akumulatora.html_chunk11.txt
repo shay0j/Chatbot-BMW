@@ -1,0 +1,11 @@
+trycznego.
+Powolne ładowanie chroni akumulator.
+Akumulatory pojazdów elektrycznych lepiej znoszą powolne ładowanie w stacjach Wallbox, stacjach ładowania AC lub DC z mocą maksymalnie 100 kW. Z ładowania z wysoką mocą (HPC) na stacjach szybkiego ładowania najlepiej korzystać na długich trasach.
+Podłączanie do sieci tylko w razie potrzeby.
+Akumulator ładuj tylko, jeśli jest to niezbędne, a nie po każdej podróży. Poziomy naładowania od niskich do średnich podczas parkowania są mają lepszy wpływ na żywotność akumulatora pojazdu elektrycznego.
+Pełne ładowanie przed długimi trasami.
+Zalecanym poziomem naładowania w codziennej eksploatacji akumulatora pojazdu elektrycznego jest poziom od 10% do 80%. Przed długimi wyjazdami ładuj akumulator do 100%. Najlepiej dopiero na krótko przed wyjazdem.
+Ustawianie celu ładowania na co dzień.
+Optymalnym podejściem jest unikanie pełnego ładowania na co dzień. BMW zaleca cel ładowania wynoszący maksymalnie 80%.
+Unikanie pełnego rozładowania akumulatora.
+Doł

@@ -1,0 +1,43 @@
+podgrzewane lusterka zewnętrzne.
+Przednie i tylne lampy LED.
+Gotowe do odbioru
+TWOJE BMW SERII 1.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+Podstawowy
+M Sport Design
+M Sport
+M Sport Package Pro
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Mroźny czysty szary metalizowany BMW Individual
+Mroźny niebieski Portimao metalizowany BMW Individual
+Storm Bay metalizowany BMW Individual
+Thundernight metalizowany
+Zielony Cape York metalizowany
+Szary Skyscraper metalizowany
+Czarny niemetalizowany
+Czerwony Fire Red
+Niebieski Tanzanite BMW Individual
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Mroźny czysty szary metalizowany BMW Individual
+Mroźny niebieski Portimao metalizowany BMW Individual
+Storm Bay metalizowany BMW In

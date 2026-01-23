@@ -1,0 +1,57 @@
+dowanym akumulatorze (maks.)
+null
+-
+-
+Hałas przejściowy w dB (A)
+69
+4
+-
+-
+Stacjonarny poziom hałasu w dB (A) /1/min
+-
+-
+-
+CO₂ Equivalent Overall
+null
+-
+-
+CO₂
+null
+-
+-
+Petrol Equivalent Overall
+null
+-
+-
+Petrol Equivalent Best
+null
+-
+-
+Primary Energy Petrol Equivalent
+null
+-
+-
+Primary Energy Petrol Best
+null
+-
+-
+Ślad węglowy pojazdu
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ślad węglowy pojazdu
+BMW iX M70 xDrive
+Emisje wyrażone jako równoważnik emisji dwutlenku węgla – CO₂e – do momentu przekazania pojazdu (zakres 1, 2, 3 i wyższy); wartość szacunkowa, podana w tonach.
+-
+-
+-
+Udział surowców wtórnych w całym pojeździe; wartość szacunkowa, podana w %
+-
+-
+-
+Akumulator wysokiego napięcia/48 V, ładowanie
+2
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Akumulator wysokiego napięcia/48 V, ładowanie
+BMW iX M70 xDrive
+Pojemność akumulatora w kWh

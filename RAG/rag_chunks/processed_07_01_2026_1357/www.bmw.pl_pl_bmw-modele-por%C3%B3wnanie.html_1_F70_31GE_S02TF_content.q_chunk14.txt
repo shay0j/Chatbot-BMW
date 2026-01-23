@@ -1,0 +1,58 @@
+-
+Stacjonarny poziom hałasu w dB (A) /1/min
+78 / 3 750
+2
+-
+-
+CO₂ Equivalent Overall
+null
+-
+-
+CO₂
+null
+-
+-
+Petrol Equivalent Overall
+null
+-
+-
+Petrol Equivalent Best
+null
+-
+-
+Primary Energy Petrol Equivalent
+null
+-
+-
+Primary Energy Petrol Best
+null
+-
+-
+Ślad węglowy pojazdu
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ślad węglowy pojazdu
+BMW 116
+Emisje wyrażone jako równoważnik emisji dwutlenku węgla – CO₂e – do momentu przekazania pojazdu (zakres 1, 2, 3 i wyższy); wartość szacunkowa, podana w tonach.
+-
+-
+-
+Udział surowców wtórnych w całym pojeździe; wartość szacunkowa, podana w %
+-
+-
+-
+Akumulator wysokiego napięcia/48 V, ładowanie
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Akumulator wysokiego napięcia/48 V, ładowanie
+BMW 116
+Pojemność akumulatora w kWh
+-
+-
+-
+Maksymalna moc ładowania AC w kW
+-
+-
+-
+Maksymalna moc ładowania AC/DC w kW
+n

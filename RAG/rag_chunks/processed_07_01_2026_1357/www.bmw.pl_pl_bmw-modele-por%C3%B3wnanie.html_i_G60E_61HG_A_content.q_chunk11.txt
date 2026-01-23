@@ -1,0 +1,64 @@
+ryczny
+-
+-
+Moc w kW (KM)
+250 (340)
+-
+-
+Moment obrotowy w Nm
+400
+-
+-
+Skrzynia biegów
+1-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW i5 eDrive40 Limuzyna
+Cylindry
+-
+-
+-
+Pojemność w cm³
+-
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+-
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+-
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW i5 eDrive40 Limuzyna
+(Nominal) power/30 minutes power in kW (hp)
+250 (340) / 105 (143)
+-
+-
+(Nominal) torque in Nm
+400
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW i5 eDrive40 Limuzyna
+Przyspieszenie 0-100 km/h w s
+6
+6
+-
+-
+Przyspieszenie 0 - 100 km/h met

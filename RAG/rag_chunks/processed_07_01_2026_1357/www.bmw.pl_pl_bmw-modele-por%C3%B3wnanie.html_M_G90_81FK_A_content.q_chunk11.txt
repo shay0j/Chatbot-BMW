@@ -1,0 +1,66 @@
+M5 Limuzyna
+Typ napędu
+Benzynowy – hybryda plug-in
+-
+-
+Moc w kW (KM)
+535 (727)
+4
+-
+-
+Moment obrotowy w Nm
+1 000
+4
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+8
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW M5 Limuzyna
+Cylindry
+8
+-
+-
+Pojemność w cm³
+4 395
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+430 (585) / 5 600 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+750 / 1 800 - 5 400
+-
+-
+Silnik elektryczny
+10
+,
+11
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW M5 Limuzyna
+(Nominal) power/30 minutes power in kW (hp)
+145 (197)
+-
+-
+(Nominal) torque in Nm
+280
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW M5

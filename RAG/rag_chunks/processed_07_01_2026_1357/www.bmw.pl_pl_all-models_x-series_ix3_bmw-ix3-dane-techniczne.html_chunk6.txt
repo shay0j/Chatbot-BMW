@@ -1,0 +1,46 @@
+ wysokiego napięcia/48 V, ładowanie
+4
+Pojemność akumulatora w kWh
+108,7
+Doładowany zasięg po 10 minutach ładowania z wysoką mocą w km
+309 - 372
+Maksymalna moc ładowania AC w kW
+11
+Minmalny czas ładowania AC 0-100% w h
+11:00
+Maksymalna moc ładowania DC w kW
+400
+Minimalny czas ładowania DC 10-80% w h
+0:21
+Wymiary i ciężar
+4 782 mm
+1 895 mm
+1 635 mm
+Długość w mm
+4 782
+Szerokość w mm
+1 895
+Wysokość w mm
+1 635
+Szerokość w mm / z lusterkami
+2 093
+Rozstaw osi w mm
+2 897
+Masa własna pojazdu w kg
+6
+2 360
+Dopuszczalna masa brutto w kg
+2 825
+Ładowność w kg
+540
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+7
+2 000 / 80
+Pojemność bagażnika w l
+520–1 750
+Pojemność przedniego schowka w l
+58
+1
+Dodatkowy zasięg w kilometrach po 10-minutowym ładowaniu o dużej mocy (HPC) jest określany zgodnie z normą DIN70080 w cyklu WLTP. Zależy on od wyposażenia pojazdu, indywidualnego profilu jazdy, temperatury otoczenia, poziomu naładowa

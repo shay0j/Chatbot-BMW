@@ -1,0 +1,44 @@
+Minimalny czas ładowania DC 10-80% w h
+-
+-
+-
+Doładowany zasięg po 10 minutach ładowania z wysoką mocą w km
+-
+-
+-
+Ładowanie dwukierunkowe
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ładowanie dwukierunkowe
+BMW 530e Touring
+Maksymalna moc rozładowania Vehicle-to-Load (V2L) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Load (V2V) w kW
+-
+-
+-
+Maksymalna moc rozładowania Vehicle-to-Home Power Flex (V2H Flex) w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 3-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Maksymalna moc ładowania i rozładowywania z 1-fazowym BMW Wallbox Professional w kW
+-
+-
+-
+Czas ładowania za pomocą 3-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Czas ładowania za pomocą 1-fazowego BMW Wallbox Professional w h (stan naładowania 0-100%)
+-
+-
+-
+Wymiary i ciężar
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranyc

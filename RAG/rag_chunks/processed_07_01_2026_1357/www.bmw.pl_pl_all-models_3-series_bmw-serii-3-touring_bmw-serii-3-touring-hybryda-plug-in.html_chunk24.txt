@@ -1,0 +1,10 @@
+eniowa uwzględniająca różne scenariusze ładowania pojazdów elektrycznych do oceny emisji CO₂ i zużycia energii).
+[3]
+W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+[4]
+Hybrydy plug-in: W temperaturach poniżej -10°C napęd w pełni elektryczny jest dostępny dopiero po przejechaniu kilku kilometrów – gdy tylko akumulator osiągnie temperaturę roboczą.
+[5]
+Składa się z napędu spalinowego 135 kW oraz napędu elektrycznego 80 kW. Napęd elektryczny zależny od stanu naładowania akumulatora.
+[6]
+Wydajność ładowania zależy od poziomu naładowania, temperatury otoczenia, indywidualnego profilu jazdy i wykorzystania odbiorników energii. Podane zasięgi są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania.
+Dane dotyczące osiągów silników benzynowych dotyczą ich eksploatacji z paliwem o jakości LO 98. Dane dotyczące zużycia dotyczą eksploatacji z pali

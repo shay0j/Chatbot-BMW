@@ -1,0 +1,60 @@
+trol – 48 Volt Mild-Hybrid
+-
+-
+Moc w kW (KM)
+460 (625)
+-
+-
+Moment obrotowy w Nm
+750
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+6
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW X5 M Competition
+Cylindry
+8
+-
+-
+Pojemność w cm³
+4 395
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+460 (625) / 6 000
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+750 / 1 800 - 5 800
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW X5 M Competition
+(Nominal) power/30 minutes power in kW (hp)
+9 (12) / -
+-
+-
+(Nominal) torque in Nm
+200
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW X5 M Competition
+Przyspieszenie 0-100

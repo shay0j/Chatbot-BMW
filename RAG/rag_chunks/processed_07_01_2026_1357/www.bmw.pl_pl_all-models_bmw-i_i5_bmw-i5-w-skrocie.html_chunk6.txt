@@ -1,0 +1,39 @@
+eżą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+BMW i5.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+Model podstawowy
+M Sport
+M Sport Pro
+Biel alpejska niemetalizowany
+Szafirowoczarny metalizowany
+Szary Sophisto z brylantowym połyskiem metalizowany
+Biel mineralna metalizowany
+Niebieski Phytonic metalizowany
+Zielony Cape York metalizowany
+Niebieski tanzanit BMW Individual metalizowany
+Biel alpejska niemetalizowany
+Szafirowoczarny metalizowany
+Szary Sophisto z brylantowym połyskiem metalizowany
+Biel mineralna metalizowany
+Niebieski Phytonic metalizowany
+Oksydowany szary metalizowany
+Zielony Cape Yor

@@ -1,0 +1,5 @@
+ych na zbiorach danych nieodwracalnie zanonimizowanych.
+My oraz Dealer możemy mieć dostęp do Danych o lokalizacji pojazdu, zaś BMW AG może mieć dostęp do Danych o lokalizacji urządzenia w związku ze świadczonymi przez siebie usługami (np. ConnectedDrive).
+W momencie zakupu pojazdu lub aktywacji bądź konfiguracji usługi lub aplikacji (np. ConnectedDrive lub Connected App) otrzymali Państwo szczegółowy opis Danych o lokalizacji uzyskiwanych w celu świadczenia usług uzależnionych od Danych o lokalizacji. Prosimy zwrócić uwagę, że nie będziemy w stanie dostarczać pewnych funkcjonalności naszych usług, jeżeli ograniczą Państwo gromadzenie danych o Państwa lokalizacji.
+Jak długo przechowujemy Państwa dane?
+Przechowujemy Państwa dane tylko tak długo, jak to jest niezbędne w celu, w jakim je uzyskaliśmy, oraz w innych dozwolonych celach związanych z nim (np. jeżeli będzie to niezbędne w celu obrony roszczeń). Jeżeli przetwarzamy dane w wielu celach, zostaną one automatycznie usunięte gdy tylko

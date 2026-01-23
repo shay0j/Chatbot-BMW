@@ -1,0 +1,68 @@
+ranych modeli.
+Silnik elektryczny
+BMW X1 xDrive25e
+(Nominal) power/30 minutes power in kW (hp)
+80 (109)
+-
+-
+(Nominal) torque in Nm
+247
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW X1 xDrive25e
+Przyspieszenie 0-100 km/h w s
+6,8
+7
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+190
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+140
+-
+-
+Zużycie i emisja
+8
+,
+11
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW X1 xDrive25e
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+12
+2,8–2,4
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+12
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+null
+-
+-
+Fuel c

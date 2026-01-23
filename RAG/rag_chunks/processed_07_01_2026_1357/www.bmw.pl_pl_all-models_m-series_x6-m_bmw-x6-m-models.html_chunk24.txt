@@ -1,0 +1,6 @@
+kowe informacje prawne.
+BMW X6 M Competition: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 12,8–12,6; emisja CO₂, cykl mieszany WLTP w g/km: 289–285
+BMW X6 M60i xDrive: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 12,4–11,7; emisja CO₂, cykl mieszany WLTP w g/km: 283–267
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+¹ Wartość w nawiasach z odjętym "rolloutem": w tej alternatywnej metodzie pomiaru czasomierz jest uruchamiany dopiero po opuszczeniu zapory świetlnej. Dystans, który nie jest uwzględniany w pomiarze („Rollout”), to jedna stopa = 30,48 cm.
+Dane dotyczące osiągów silników benzynowych dotyczą ich eksploatacji z paliwem o jakości LO 98. Dane dotyczące zużycia dotyczą eksploatacji z paliwem referencyjnym zgodnie z rozporządzeniem (UE) 715/2007. Dop

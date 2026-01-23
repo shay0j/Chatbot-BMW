@@ -1,0 +1,63 @@
+48 Volt Mild-Hybrid
+-
+-
+Moc w kW (KM)
+145 (197)
+-
+-
+Moment obrotowy w Nm
+400
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+6
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW X3 20d xDrive
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 995
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+145 (197) / 4 000
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+400 / 1 500 - 2 750
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW X3 20d xDrive
+(Nominal) power/30 minutes power in kW (hp)
+8 (11) / -
+-
+-
+(Nominal) torque in Nm
+25
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW X3 20d xDrive
+Przyspieszenie 0-100 km/h w s
+7,7
+5
+-

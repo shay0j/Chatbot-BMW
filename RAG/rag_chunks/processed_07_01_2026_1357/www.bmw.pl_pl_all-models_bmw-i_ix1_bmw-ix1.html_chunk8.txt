@@ -1,0 +1,35 @@
+unków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Twoje BMW iX1.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW xLine
+Biel alpejska niemetalizowany
+Biel mineralna metalizowany
+Czarny niemetalizowany
+Czarny szafirowy metalizowany
+Niebieski Phytonic metalizowany
+Zielony Cape York metalizowany
+Pomarańczowy Utah metalizowany
+Zielony Sanremo metalizowany
+Storm Bay metalizowany BMW Individual
+Mroźny czysty szary metalizowany BMW Individual
+Niebieski Bay Lagoon metalizowany BMW Individual
+Kosmiczny srebrny metalizowany
+20-calowe wieloramienne obręcze kół BMW Individual 869 I
+Veganza perforowana | Mokka
+Skóra „Vernasca” | ozdobne pikowanie Oyster
+Skóra „Vernasca” | ozdobne pikowanie Mokka
+Skóra „Vernasca” | czerń z ozdobnym pikowanie

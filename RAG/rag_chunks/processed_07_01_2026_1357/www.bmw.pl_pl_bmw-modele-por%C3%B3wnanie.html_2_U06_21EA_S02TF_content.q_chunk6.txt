@@ -1,0 +1,68 @@
+ o cenie może udzielić partner BMW.
+Wybierz pojazd.
+Seria
+Wybierz serię
+1
+2
+3
+4
+5
+7
+M
+Z
+X
+i
+Wybierz serię
+Model
+Wybierz model
+BMW serii 1
+Wybierz model
+Model
+Silnik
+Wybierz silnik
+Wybierz silnik
+Silnik
+Skrzynia biegów
+--
+Dodaj pojazd BMW
+Wybierz pojazd.
+Dodaj pojazd BMW
+Konfiguracja i ceny
+Gotowe do odbioru
+Od
+Informacja o cenie
+Na ilustracjach pokazane są dodatkowo płatne opcje wyposażenia. Podane są niewiążące, niebędące wynikiem zmowy kartelowej sugestie cenowe producenta zawierające podatek VAT i podatek od emisji (NoVA) przy założeniu modelu podstawowego bez opcji wyposażenia, bez kosztów transportu. Zastrzega się możliwość zmian i pomyłek. Wiążących informacji o cenie może udzielić partner BMW.
+Wybierz pojazd.
+Seria
+Wybierz serię
+1
+2
+3
+4
+5
+7
+M
+Z
+X
+i
+Wybierz serię
+Model
+Wybierz model
+BMW serii 1
+Wybierz model
+Model
+Silnik
+Wybierz silnik
+Wybierz silnik
+Silnik
+Skrzynia biegów
+--
+Najważniejsze cechy
+Dane techniczne
+8
+,
+9
+Dane techniczne
+BMW 225e xDrive Active Tourer
+Moc w kW (KM)
+180

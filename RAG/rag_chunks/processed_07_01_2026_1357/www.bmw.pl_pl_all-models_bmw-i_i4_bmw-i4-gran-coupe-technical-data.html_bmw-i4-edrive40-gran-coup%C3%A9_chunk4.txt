@@ -1,0 +1,38 @@
+kcje wymagające zgody użytkownika mogą nie być dostępne.
+THE
+i4
+BMW i4 GRAN COUPÉ.
+Skonfiguruj
+Dowiedz się więcej
+BMW i4 eDrive40 Gran Coupé
+[1]
+: Zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 18–14,9; zasięg elektryczny, WLTP w km: 506–613
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+DANE TECHNICZNE BMW i4.
+Całkowity układ napędowy
+Typ napędu
+Elektryczny
+Moc w kW (KM)
+210 (286)
+Moment obrotowy w Nm
+400
+Skrzynia biegów
+1-stopniowa, automatyczna
+Rodzaj napędu
+Napęd tylny
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+210 (286) / 85 (116)
+(Znamionowy) moment obrotowy w Nm
+400
+Wydajność
+Przyspieszenie 0-100 km/h w s
+6
+1
+Prędkość maksymalna na napędzie elektrycznym w km/h
+190
+Zużycie i emisja
+2
+Emisja CO₂, cykl mieszany WLTP w g/km
+0
+Zużycie energ

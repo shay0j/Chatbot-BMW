@@ -1,0 +1,8 @@
+ation
+Budowa silnika elektrycznego. Prostymi słowami.
+Tak działa napęd elektryczny.
+Tak działa napęd elektryczny.
+Silnik elektryczny przekształca prąd w ruch. Do jego najważniejszych elementów należą wirnik i stojan. Jak sama nazwa mówi, wirnik ma się obracać. Odbywa się to w efekcie wzajemnego oddziaływania pola magnetycznego wirnika i stojana. Pole magnetyczne wirnika – w zależności od typu silnika – wytwarzane jest przez magnesy lub prąd. Powstający ruch obrotowy silnik elektryczny przenosi na koła za pośrednictwem 1-biegowej skrzyni biegów. Jeśli pod uwagę weźmiemy cykl jazdy (WLTP), stwierdzimy, że sprawność silnika elektrycznego ponad trzykrotnie przekracza sprawność silnika spalinowego. W pojazdach elektrycznych BMW często stosowane są te niezmiernie efektywne silniki synchroniczne wzbudzane prądem, w skrócie SSM.
+Zalety silnika synchronicznego wzbudzanego prądem (SSM).
+Zalety silnika synchronicznego wzbudzanego prądem (SSM).
+Jedną z kluczowych kompetencji BMW jest powszechne st

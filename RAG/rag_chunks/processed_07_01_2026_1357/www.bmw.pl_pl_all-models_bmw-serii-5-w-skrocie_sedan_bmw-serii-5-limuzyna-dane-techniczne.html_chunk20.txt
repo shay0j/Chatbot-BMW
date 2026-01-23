@@ -1,0 +1,62 @@
+
+1 995
+Moc znamionowa w kW (KM) / obr/min
+145 (197) / 4 000
+Znamionowy moment obrotowy w Nm / obr/min
+400 / 1 500 - 2 750
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+8 (11) / -
+(Znamionowy) moment obrotowy w Nm
+25
+Wydajność
+Przyspieszenie 0-100 km/h w s
+7,3
+1
+Prędkość maksymalna w km/h
+233
+Zużycie i emisja
+8
+,
+2
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+5,6–5,1
+Emisja CO₂, cykl mieszany WLTP w g/km
+147–133
+Hałas przejściowy w dB (A)
+67
+7
+Stacjonarny poziom hałasu w dB (A) /1/min
+71 / 3 000
+7
+Akumulator wysokiego napięcia/48 V, ładowanie
+4
+Pojemność akumulatora w kWh
+0,9
+Wymiary i ciężar
+5 060 mm
+1 900 mm
+1 515 mm
+Długość w mm
+5 060
+Szerokość w mm
+1 900
+Wysokość w mm
+1 515
+Szerokość w mm / z lusterkami
+2 156
+Rozstaw osi w mm
+2 995
+Masa własna pojazdu w kg
+5
+1 850
+Dopuszczalna masa brutto w kg
+2 405
+Ładowność w kg
+630
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+6
+2 000 / 100
+Pojemność bag

@@ -1,0 +1,9 @@
+ive40 Gran Coupé
+[1]
+: Zużycie energii w cyklu mieszanym WLTP w kWh/100 km: {techdata.electricConsumption}; zasięg elektryczny, WLTP w km: {techdata.electricRangeWltpCombined}
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+ELEKTRYCZNE. WYJĄTKOWE. ELEGANCKIE.
+BMW i4 eDrive40 Gran Coupé pokazuje swój sportowy charakter w każdym detalu. Mocny napęd elektryczny przyspiesza od 0 do 100 km/h w 5,6 sekund i komfortowo dowiezie Cię do celu z zasięgiem 506–613 kilometrów
+[1]
+. Dwukolorowe obręcze kół i smukłe przednie lampy dodatkowo go wyróżniają oraz podkreślają jego dynamikę. Wewnątrz sportowe fotele M PerformTex w kolorze czarnym zapewniają stabilną pozycję, a przeprojektowane otwory wentylacyjne odświeżają atmosferę wnętrza. Dzięki usługom cyfrowym,

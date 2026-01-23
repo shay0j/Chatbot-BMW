@@ -1,0 +1,120 @@
+
+-
+20"
+Rear
+275/35 R 20 102 Y XL HP
+STD
+Pirelli
+-
+20"
+Front
+245/40 R 20 99 V XL M+S
+STD
+Pirelli
+SZ
+20"
+Rear
+275/35 R 20 102 V XL M+S
+STD
+Pirelli
+SZ
+21"
+Front
+245/35 R 21 96 Y XL
+STD
+Bridgestone
+-
+21"
+Front
+245/35 R 21 96 Y XL
+STD
+Continental
+-
+21"
+Front
+245/35 R 21 96 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Bridgestone
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Continental
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Pirelli
+-
+21"
+Front
+HL 255/35 R 21 101 Y XL
+STD
+Continental
+-
+21"
+Front
+HL 255/35 R 21 101 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+HL 285/30 R 21 103 Y XL
+STD
+Continental
+-
+21"
+Rear
+HL 285/30 R 21 103 Y XL
+STD
+Pirelli
+-
+-
+Modele BMW serii 7
+Seria 7 Limuzyna
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+19"
+All-round
+245/50 R 19 105 Y XL
+STD
+Pirelli
+-
+19"
+All-round
+245/50 R 19 105 Y XL
+STD
+Yokohama
+-
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Bridgestone
+SZ
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Goodyear
+-
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Pirelli
+SZ

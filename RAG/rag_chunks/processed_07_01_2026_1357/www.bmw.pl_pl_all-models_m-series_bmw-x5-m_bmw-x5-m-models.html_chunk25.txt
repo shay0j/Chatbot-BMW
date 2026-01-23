@@ -1,0 +1,8 @@
+
+bmw.pl
+Zużycie i emisja CO₂.
+BMW X5 M Competition: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 12,9–12,8; emisja CO₂, cykl mieszany WLTP w g/km: 292–289
+BMW X5 M60i xDrive: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 12,6–11,8; emisja CO₂, cykl mieszany WLTP w g/km: 286–270
+¹ Maksymalna masa przyczepy hamowanej, 12% nachylenia/obciążenie haka holowniczego w kg
+Dane dotyczące osiągów silników benzynowych dotyczą ich eksploatacji z paliwem o jakości LO 98. Dane dotyczące zużycia dotyczą eksploatacji z paliwem referencyjnym zgodnie z rozporządzeniem (UE) 715/2007. Dopuszczalne są jakości paliwa bezołowiowego LO 91 i wyższe o maksymalnym udziale etanolu wynoszącym 10% (E10). BMW zaleca stosowanie paliwa o LO 95. W przypadku samochodów o wysokich osiągach BMW zaleca stosowanie paliwa o LO 98.
+Wskazane dane dotyczące zużycia paliwa, emisji CO₂, zużycia energii i zasięgu w trybie elektrycznym zostały ustalone na podstawie nowej procedury WLTP określonej w Rozporządzeniu (UE) 20

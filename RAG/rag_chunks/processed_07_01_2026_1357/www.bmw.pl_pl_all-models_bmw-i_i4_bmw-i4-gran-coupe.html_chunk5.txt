@@ -1,0 +1,26 @@
+MW i4 Gran Coupé ma sportowy charakter i jest w 100% elektryczne. Zamiast lokalnej emisji spalin pozostawia po sobie niezapomniane wrażenia, a na nowo zaprojektowany przód podkreśla dynamikę auta. Z tyłu wyróżniają się eleganckie lampy tylne, które tworzą estetyczną całość. We wnętrzu nowa stylistyka kierownicy i oświetlenie kaskadowe tworzą nowoczesny klimat. Odkryj wszystkie warianty BMW serii 4 Gran Coupé, opcje wyposażenia oraz dane techniczne, a także liczne warianty finansowania.
+Dane techniczne
+WARIANTY.
+Modele
+Benzyna • Diesel
+BMW i4 eDrive40 Gran Coupé
+Modele M
+Benzyna
+i4
+BMW i4 eDrive40 Gran Coupé
+Moc
+250 kW (340 KM)
+0–100 km/h
+5,6 s
+Prędkość maksymalna
+190 km/h
+Zasięg
+[1]
+{techdata.electricRangeWltpCombined} km
+Dane techniczne
+Porównanie modeli
+Kontynuuj do „Porównaj”
+BMW i4 eDrive40 Gran Coupé
+[1]
+: Zużycie energii w cyklu mieszanym WLTP w kWh/100 km: {techdata.electricConsumption}; zasięg elektryczny, WLTP w km: {techdata.electricRangeWltpCombined}
+Prezentowane wartości ba

@@ -1,0 +1,6 @@
+m WLTP w l/100 km: 10,5; emisja CO₂, cykl mieszany WLTP w g/km: 238
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+BMW M3 Competition M xDrive Touring¹: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 10,4–10,3; emisja CO₂, cykl mieszany WLTP w g/km: 235–233
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+BMW M340i xDrive Touring¹: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 7,9–7,3; emisja CO₂, cykl mieszany WLTP w g/km: 181–165
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od r

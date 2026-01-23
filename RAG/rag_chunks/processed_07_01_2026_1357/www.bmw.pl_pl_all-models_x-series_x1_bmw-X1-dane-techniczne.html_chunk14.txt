@@ -1,0 +1,70 @@
+5
+Hałas przejściowy w dB (A)
+67
+12
+Stacjonarny poziom hałasu w dB (A) /1/min
+76 / 3 750
+12
+Wymiary i ciężar
+4 505 mm
+1 845 mm
+1 622 mm
+Długość w mm
+4 505
+Szerokość w mm
+1 845
+Wysokość w mm
+1 622
+Szerokość w mm / z lusterkami
+2 104
+Rozstaw osi w mm
+2 692
+Masa własna pojazdu w kg
+10
+1 740
+Dopuszczalna masa brutto w kg
+2 240
+Ładowność w kg
+575
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+11
+750 / 80
+Pojemność bagażnika w l
+540–1 600
+Pojemność zbiornika w l
+54
+Całkowity układ napędowy
+1
+Typ napędu
+Diesel
+Moc w kW (KM)
+110 (150)
+Moment obrotowy w Nm
+360
+Skrzynia biegów
+7-stopniowa, automatyczna
+Rodzaj napędu
+Napęd przedni
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+4
+Pojemność w cm³
+1 995
+Moc znamionowa w kW (KM) / obr/min
+110 (150) / 3 750 - 4 000
+Znamionowy moment obrotowy w Nm / obr/min
+360 / 1 500 - 2 500
+Wydajność
+Przyspieszenie 0-100 km/h w s
+8,9
+5
+Prędkość maksymalna w km/h
+210
+Zużycie i emisja
+1
+,
+6
+Zuż

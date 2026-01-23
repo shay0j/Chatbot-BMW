@@ -1,0 +1,66 @@
+pędu
+Benzyna
+-
+-
+Moc w kW (KM)
+390 (530)
+-
+-
+Moment obrotowy w Nm
+650
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+4
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW M2 CS Coupe
+Cylindry
+6
+-
+-
+Pojemność w cm³
+2 993
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+390 (530) / 6 250
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+650 / 2 750 - 5 730
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW M2 CS Coupe
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW M2 CS Coupe
+Przyspieszenie 0-100 km/h w s
+3,8
+3
+-
+-
+Przyspieszenie 0 - 100 km/h meto

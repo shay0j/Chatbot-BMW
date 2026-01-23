@@ -1,0 +1,85 @@
+ie paliwa, cykl mieszany WLTP w l/100 km
+13
+2,6–2,1
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+13
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+null
+-
+-
+Fuel consumption with a discharged battery, highway in km/l
+null
+-
+-
+Zużycie paliwa z rozładowanym akumulatorem, WLTP łącznie w l/100 km
+null
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+13
+59–48
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+13
+null
+-
+-
+CO₂-Emissions (comb. for NI)
+null
+-
+-
+Zużycie energii, łączny WLTP w kWh/100 km
+13
+16,8–16
+-
+-
+Zużycie energii, cykl mieszany WLTP w kWh/100 km
+13
+null
+-
+-
+Energy consumption (comb. for NI)
+null
+-
+-
+Energy consumption, city in km/kWh
+null
+-
+-
+Energy consumption, highway in km/kWh
+null
+-
+-
+Zasięg elektryczny, WLTP w km
+1
+94–105
+-
+-
+Zasięg elektryczny, WLTP w km
+1
+null
+-
+-
+Zasięg elektryczny, WLTP (Miasto) w km
+null
+-
+-
+Electric range (comb. f

@@ -1,0 +1,113 @@
+
+285/35 R 21 105 Y XL
+STD
+Goodyear
+-
+21"
+Rear
+285/35 R 21 105 Y XL
+STD
+Pirelli
+-
+22"
+Front
+HL 255/35 R 22 102 Y XL
+STD
+Goodyear
+SZ
+22"
+Rear
+HL 285/30 R 22 104 Y XL
+STD
+Goodyear
+SZ
+-
+X4
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+18"
+All-round
+225/60 R 18 104 W XL
+STD
+Bridgestone
+-
+18"
+All-round
+225/60 R 18 104 W XL
+STD
+Bridgestone
+-
+18"
+All-round
+225/60 R 18 104 W XL
+STD
+Pirelli
+-
+18"
+All-round
+225/60 R 18 104 W XL
+STD
+Yokohama
+-
+18"
+All-round
+225/60 R 18 104 H XL M+S
+STD
+Bridgestone
+SZ
+18"
+All-round
+225/60 R 18 104 H XL M+S
+STD
+Hankook
+SZ
+18"
+All-round
+225/60 R 18 104 H XL M+S
+STD
+Pirelli
+SZ
+18"
+All-round
+225/60 R 18 104 W XL RSC
+RSC
+Bridgestone
+-
+18"
+All-round
+225/60 R 18 104 W XL RSC
+RSC
+Hankook
+-
+18"
+All-round
+225/60 R 18 104 W XL RSC
+RSC
+Pirelli
+-
+18"
+All-round
+225/60 R 18 104 H XL M+S RSC
+RSC
+Bridgestone
+SZ
+18"
+All-round
+225/60 R 18 104 H XL M+S RSC
+RSC
+Michelin
+SZ
+18"
+All-round
+225/60 R 18 104 H XL M+S RSC
+RSC
+Pirelli
+SZ
+19"
+All-round
+245/50 R 19 10

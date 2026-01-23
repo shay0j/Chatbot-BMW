@@ -1,0 +1,69 @@
+kW (hp)
+145 (197)
+-
+-
+(Nominal) torque in Nm
+280
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW M5 Limuzyna
+Przyspieszenie 0-100 km/h w s
+3,5
+7
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+250
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+140
+-
+-
+Zużycie i emisja
+8
+,
+12
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW M5 Limuzyna
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+13
+5–4,4
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+13
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+null
+-
+-
+Fuel consumption with a discharged battery, highway in km/l
+null
+-
+-
+Zużycie paliwa z rozładowan

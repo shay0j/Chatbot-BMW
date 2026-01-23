@@ -1,0 +1,7 @@
+ wybrany jest określony pozostały poziom naładowania, a po dotarciu do celu rzeczywisty poziom będzie od niego niższy. Jeśli wiesz, że w miejscu docelowym tak czy inaczej będziesz ładować pojazd, pozostały poziom możesz indywidualnie dostosować w ustawieniach.
+Nie otrzymuję informacji o przystankach na ładowanie wzdłuż trasy.
+Może to mieć różne przyczyny. Jesteś offline lub funkcja tras zoptymalizowanych pod kątem ładowania jest dezaktywowana. Możliwe jest również, że na podstawie ustawienia i pozostałego zasięgu bez problemu dotrzesz do celu bez konieczności ładowania.
+Nawigacja wymaga na trasie dwukrotnego ładowania pojazdu elektrycznego zamiast jednokrotnego pełnego ładowania.
+Pojazd zawsze oblicza najszybszą trasę do celu i automatycznie uwzględnia przy tym najlepsze przystanki na ładowanie. Często korzystniej czasowo jest zrobić kilka postojów i doładowywać akumulator e-samochodu jedynie częściowo.
+Nie można odłączyć kabla ładowania od terminala ładującego.
+Lekki opór jest czymś z

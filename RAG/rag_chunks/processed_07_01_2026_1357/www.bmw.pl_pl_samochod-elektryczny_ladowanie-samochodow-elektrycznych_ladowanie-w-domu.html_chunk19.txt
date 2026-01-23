@@ -1,0 +1,8 @@
+z My BMW App
+Najczęściej zadawane pytania.
+Jak ładować pojazd elektryczny w domu?
+Pojazd elektryczny możesz ładować z każdego domowego gniazdka elektrycznego. Z oferowanym oddzielnie odpowiednim kablem adaptera szybka ładowarka uniwersalna pozwala również na ładowanie z gniazd przemysłowych („siłowych”) z mocą do 11 kW.
+Ładowanie w domu z reguły mniej obciąża akumulator ze względu na mniejsze moce ładowania. Jeśli w podróży jesteś pod presją czasu, pojazd elektryczny możesz ładować również na stacji szybkiego ładowania prądem stałym (DC), uzyskując w krótkim czasie duży zasięg.
+Szczególnie wygodne, szybkie i bezpieczne ładowanie zapewnia stacja Wallbox, która znacznie skraca czas ładowania w porównaniu z ładowaniem ze zwykłego gniazdka elektrycznego.
+Kto zainstaluje u mnie w domu stację BMW Wallbox Plus lub gniazdo przemysłowe do szybkiej ładowarki uniwersalnej?
+Razem ze stacją Wallbox możesz zamówić nasz usługę montażu. Gwarantuje to bezpieczny i profesjonalny montaż oraz konfigurację

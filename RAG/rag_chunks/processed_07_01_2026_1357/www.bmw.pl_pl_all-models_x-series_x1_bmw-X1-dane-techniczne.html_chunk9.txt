@@ -1,0 +1,67 @@
+6 500
+Znamionowy moment obrotowy w Nm / obr/min
+230 / 1 500 - 4 000
+Wydajność
+Przyspieszenie 0-100 km/h w s
+9,2
+5
+Prędkość maksymalna w km/h
+208
+Zużycie i emisja
+1
+,
+6
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+6,8–6,4
+Emisja CO₂, cykl mieszany WLTP w g/km
+153–144
+Hałas przejściowy w dB (A)
+66
+12
+Stacjonarny poziom hałasu w dB (A) /1/min
+72 / 3 750
+12
+Wymiary i ciężar
+4 500 mm
+1 845 mm
+1 642 mm
+Długość w mm
+4 500
+Szerokość w mm
+1 845
+Wysokość w mm
+1 642
+Szerokość w mm / z lusterkami
+2 104
+Rozstaw osi w mm
+2 692
+Masa własna pojazdu w kg
+10
+1 575
+Dopuszczalna masa brutto w kg
+2 075
+Ładowność w kg
+575
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+11
+1 700 / 80
+Pojemność bagażnika w l
+540–1 600
+Pojemność zbiornika w l
+54
+Całkowity układ napędowy
+1
+Typ napędu
+Benzynowy – mild hybrid 48 V
+Moc w kW (KM)
+125 (170)
+13
+Moment obrotowy w Nm
+280
+13
+Skrzynia biegów
+7-stopniowa, automatyczna
+Rodzaj napędu
+Napęd przedn

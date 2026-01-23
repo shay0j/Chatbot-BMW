@@ -1,0 +1,60 @@
+napędu
+Całkowicie elektryczny
+-
+-
+Moc w kW (KM)
+442 (601)
+-
+-
+Moment obrotowy w Nm
+795
+-
+-
+Skrzynia biegów
+1-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW i5 M60 xDrive Limuzyna
+Cylindry
+-
+-
+-
+Pojemność w cm³
+-
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+-
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+-
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW i5 M60 xDrive Limuzyna
+(Nominal) power/30 minutes power in kW (hp)
+442 (601) / 150 (204)
+-
+-
+(Nominal) torque in Nm
+795
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW i5 M60 xDrive Limuzyna
+Przyspieszenie 0-100 km/h w 

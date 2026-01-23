@@ -1,0 +1,8 @@
+ulatora pojazdu elektrycznego. Akumulator chronią dodatkowo zintegrowane funkcje.
+Więcej o kosztach pojazdów elektrycznych
+Back to Navigation
+Zobacz, jaki masz wpływ na żywotność akumulatora w swoim pojeździe elektrycznym.
+Akumulator pojazdu elektrycznego został zaprojektowany z największą starannością. Jednak w miarę upływu czasu zasięg i wydajność ładowania ulegają zmniejszeniu – wynika to z naturalnego i nieuniknionego procesu starzenia. Maksymalną pojemność używanego akumulatora pojazdu elektrycznego w porównaniu z nowym określa się mianem State of Health (SoH). Im niższy stan SoH, tym mniejszy zasięg. Poprzez dbałość i styl jazdy można utrzymywać optymalną kondycję akumulatora i pozytywnie wpłynąć na jego żywotność.
+Zalecenia dotyczące optymalizacji żywotności akumulatora pojazdu elektrycznego.
+Powolne ładowanie chroni akumulator.
+Akumulatory pojazdów elektrycznych lepiej znoszą powolne ładowanie w stacjach Wallbox, stacjach ładowania AC lub DC z mocą maksymalnie 100 kW. Z ładowan

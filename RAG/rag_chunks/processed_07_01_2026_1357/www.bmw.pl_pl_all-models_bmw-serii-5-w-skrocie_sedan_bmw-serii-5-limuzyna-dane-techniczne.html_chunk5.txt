@@ -1,0 +1,59 @@
+13–626
+Hałas przejściowy w dB (A)
+66
+7
+Akumulator wysokiego napięcia/48 V, ładowanie
+4
+Pojemność akumulatora w kWh
+81,2
+Doładowany zasięg po 10 minutach ładowania z wysoką mocą w km
+157 - 211
+Maksymalna moc ładowania AC w kW
+11
+Minmalny czas ładowania AC 0-100% w h
+8:30
+Maksymalna moc ładowania DC w kW
+205
+Minimalny czas ładowania DC 10-80% w h
+0:30
+Wymiary i ciężar
+5 060 mm
+1 900 mm
+1 515 mm
+Długość w mm
+5 060
+Szerokość w mm
+1 900
+Wysokość w mm
+1 515
+Szerokość w mm / z lusterkami
+2 156
+Rozstaw osi w mm
+2 995
+Masa własna pojazdu w kg
+5
+2 195
+Dopuszczalna masa brutto w kg
+2 740
+Ładowność w kg
+620
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+6
+1 500 / 80
+Pojemność bagażnika w l
+490
+Całkowity układ napędowy
+Typ napędu
+Elektryczny
+Moc w kW (KM)
+290 (394)
+Moment obrotowy w Nm
+590
+Skrzynia biegów
+1-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)

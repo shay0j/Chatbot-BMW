@@ -1,0 +1,59 @@
+Moc w kW (KM)
+295 (401)
+Moment obrotowy w Nm
+600
+Skrzynia biegów
+1-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+295 (401) / 125 (170)
+(Znamionowy) moment obrotowy w Nm
+600
+Wydajność
+Przyspieszenie 0-100 km/h w s
+5,1
+1
+Prędkość maksymalna na napędzie elektrycznym w km/h
+200
+Zużycie i emisja
+2
+Emisja CO₂, cykl mieszany WLTP w g/km
+0
+Zużycie energii, łączny WLTP w kWh/100 km
+19–16,7
+Zasięg elektryczny, WLTP w km
+3
+483–546
+Hałas przejściowy w dB (A)
+66
+7
+Akumulator wysokiego napięcia/48 V, ładowanie
+4
+Pojemność akumulatora w kWh
+81,3
+Doładowany zasięg po 10 minutach ładowania z wysoką mocą w km
+149 - 185
+Maksymalna moc ładowania AC w kW
+11
+Minmalny czas ładowania AC 0-100% w h
+8:30
+Maksymalna moc ładowania DC w kW
+205
+Minimalny czas ładowania DC 10-80% w h
+0:30
+Wymiary i ciężar
+4 783 mm
+1 852 mm
+1 448 mm
+Długość w mm
+4 783
+Szerokość w mm
+1 852
+Wysokość w mm
+1 448
+Szerokość w mm / z lusterkami
+2 073
+Rozstaw osi w mm
+2 856

@@ -1,0 +1,8 @@
+poprzez wybór Partnera Serwisowego i wpisania danych pojazdu. Wybrany Partner Serwisowy skontaktuje się z klientem bezpośrednio po otrzymaniu formularza szkody.
+Jazda próbna.
+Klienci mogą rezerwować jazdę próbną samochodem z wybranej serii modelowej za pomocą opcji
+Umów jazdę próbną
+, wprowadzając dane osobowe i wybierając odpowiednią datę i godzinę, a także Partnera BMW, do którego chcieliby się udać na tę jazdę próbną. Aby zarezerwować jazdę próbną, jest wymagane konto BMW ID.
+Zgodność z wymaganiami w zakresie dostępności.
+BMW dokłada wszelkich starań, aby jej strona internetowa była dostępna na różne sposoby i przygotowana do korzystania z technologii asystujących. W tym celu tworzenie stron internetowych jest zgodne z normami technicznymi europejskiej normy EN 301 549 oraz kryteriami sukcesu Web Content Accessibility Guidelines (WCAG) 2.1, o których mowa w tej normie, na poziomach zgodności A i AA.
+Odpowiednie podstrony strony internetowej również zawierają informacje wymagane zgod

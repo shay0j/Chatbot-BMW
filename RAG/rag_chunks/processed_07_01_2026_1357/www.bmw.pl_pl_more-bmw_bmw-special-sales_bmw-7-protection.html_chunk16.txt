@@ -1,0 +1,5 @@
+ g/km: 328
+BMW X5 Protection VR6: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 13,9; emisja CO₂, cykl mieszany WLTP w g/km: 307
+Podane wartości wyznaczono zgodnie z wymaganą procedurą pomiarową WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+Dane dotyczące osiągów silników benzynowych dotyczą ich eksploatacji z paliwem o jakości LO 98. Dane dotyczące zużycia dotyczą eksploatacji z paliwem referencyjnym zgodnie z rozporządzeniem (UE) 715/2007. Dopuszczalne są jakości paliwa bezołowiowego LO 91 i wyższe o maksymalnym udziale etanolu wynoszącym 10% (E10). BMW zaleca stosowanie paliwa o LO 95. W przypadku samochodów o wysokich osiągach BMW zaleca stosowanie paliwa o LO 98.
+Wskazane dane dotyczące zużycia paliwa, emisji CO₂, zużycia energii i zasięgu w trybie elektrycznym zostały ustalone na podstawie nowej procedury WLTP określo

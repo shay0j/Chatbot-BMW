@@ -1,0 +1,17 @@
+ition: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 12,9–12,8; emisja CO₂, cykl mieszany WLTP w g/km: 292–289
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+BMW X5 M60i xDrive: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 12,6–11,8; emisja CO₂, cykl mieszany WLTP w g/km: 286–270
+Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+Wybierz swoje BMW X5 M
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visuali

@@ -1,0 +1,60 @@
+łkowity układ napędowy
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Całkowity układ napędowy
+BMW 520i Touring
+Typ napędu
+Petrol – 48 Volt Mild-Hybrid
+-
+-
+Moc w kW (KM)
+153 (208)
+3
+-
+-
+Moment obrotowy w Nm
+330
+3
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 520i Touring
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 998
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+140 (190) / 4 400 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+310 / 1 500 - 4 000
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 520i Touring
+(Nominal) power/30 minutes power in kW (hp)
+13 (18) / -
+-
+-
+(Nominal) torque in

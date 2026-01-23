@@ -1,0 +1,67 @@
+wy
+1
+Typ napędu
+Wysokoprężny – mild hybrid 48 V
+Moc w kW (KM)
+259 (352)
+13
+Moment obrotowy w Nm
+720
+13
+Skrzynia biegów
+8-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+6
+Pojemność w cm³
+2 993
+Moc znamionowa w kW (KM) / obr/min
+250 (340) / 4 400
+Znamionowy moment obrotowy w Nm / obr/min
+700 / 1 750 - 2 250
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+9 (12) / -
+(Znamionowy) moment obrotowy w Nm
+200
+Wydajność
+Przyspieszenie 0-100 km/h w s
+5,5
+5
+Prędkość maksymalna w km/h
+245
+Zużycie i emisja
+1
+,
+6
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+8,4–7,2
+Emisja CO₂, cykl mieszany WLTP w g/km
+220–189
+Hałas przejściowy w dB (A)
+68
+12
+Stacjonarny poziom hałasu w dB (A) /1/min
+74 / 3 300
+12
+Akumulator wysokiego napięcia/48 V, ładowanie
+9
+Pojemność akumulatora w kWh
+0,4
+Wymiary i ciężar
+4 935 mm
+2 004 mm
+1 765 mm
+Długość w mm
+4 935
+Szerokość w mm
+2 004
+Wysokość w mm
+1 765
+Szerokość w mm / z lusterkami
+2 218
+Rozstaw osi w mm
+2 975

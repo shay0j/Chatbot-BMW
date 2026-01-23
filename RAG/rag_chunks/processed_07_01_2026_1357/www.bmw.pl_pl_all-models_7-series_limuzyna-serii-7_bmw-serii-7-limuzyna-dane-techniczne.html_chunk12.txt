@@ -1,0 +1,64 @@
+brotowy w Nm
+800
+10
+Skrzynia biegów
+8-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+8
+Cylindry
+6
+Pojemność w cm³
+2 998
+Moc znamionowa w kW (KM) / obr/min
+280 (381) / 5 200 - 6 250
+Znamionowy moment obrotowy w Nm / obr/min
+520 / 1 850 - 5 000
+Silnik elektryczny
+9
+,
+11
+Moc (nominalna) /moc 30 minut w kW (KM)
+145 (197)
+(Znamionowy) moment obrotowy w Nm
+280
+Wydajność
+Przyspieszenie 0-100 km/h w s
+4,3
+1
+Prędkość maksymalna w km/h
+250
+Prędkość maksymalna na napędzie elektrycznym w km/h
+140
+Zużycie i emisja
+8
+,
+2
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+12
+4,1–3,4
+Emisja CO₂, cykl mieszany WLTP w g/km
+12
+93–77
+Zużycie energii, łączny WLTP w kWh/100 km
+12
+17,2–16,3
+Zasięg elektryczny, WLTP w km
+3
+72–80
+Hałas przejściowy w dB (A)
+67
+6
+Stacjonarny poziom hałasu w dB (A) /1/min
+72 / 3 750
+6
+Akumulator wysokiego napięcia/48 V, ładowanie
+4
+Pojemność akumulatora w kWh
+17,6
+Maksymalna moc ładowania AC w kW
+11
+Minmalny czas ładowania AC 0-100% w h
+2:00
+W

@@ -1,0 +1,8 @@
+acować w celu utrzymania fizycznych, elektronicznych i proceduralnych zabezpieczeń dla ochrony Państwa danych zgodnie z obowiązującymi wymogami ochrony danych.
+Stosujemy między innymi następujące środki:
+ściśle ograniczony dostęp do Państwa danych uzależniony od potrzeb konkretnych osób i wyłącznie w określonym celu,
+przesył zgromadzonych danych wyłącznie w postaci zaszyfrowanej,
+przechowywanie bardzo poufnych danych - np. dotyczących kart kredytowych - wyłącznie w zaszyfrowanej postaci,
+systemy informatyczne zostały zabezpieczone zaporami sieciowymi (firewall) w celu uniemożliwienia dostępu osób nieupoważnionych np. hakerów, oraz
+stałe monitorowanie dostępu do systemów informatycznych w celu wykrycia i powstrzymania nieprawidłowego wykorzystania danych osobowych.
+W przypadku, gdy udostępniliśmy Państwu (lub gdy wybrali Państwo) hasło umożliwiające dostęp do niektórych części naszej strony internetowej lub innego portalu, aplikacji bądź serwisu, który prowadzimy, są Państwo odpowiedzia

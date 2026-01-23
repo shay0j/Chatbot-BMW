@@ -1,0 +1,12 @@
+ny obejmuje piątą fazę: fazę miejską. Tworzą ją średnia prędkości wolnej (low) i średniej (medium).
+Co WLTP oznacza dla mnie?
+Wprowadzenie procedury WLTP spowoduje zbliżenie się deklarowanych wartości zużycia paliwa i emisji CO
+2
+do wartości realnych. Niezależnie od tego uwzględnienie indywidualnego wyposażenia dodatkowego w procedurze WLTP zapewnia jeszcze bardziej realistyczne dane, ponieważ bazują one na konkretnej konfiguracji pojazdu. Jednocześnie bardziej realistyczne wartości oznaczają również wyższe wartości normatywne zużycia paliwa i emisji CO
+2
+w samochodach z silnikiem spalinowym i mniejszy zasięg w samochodach elektrycznych i hybrydach typu plug-in. W zależności od przepisów w niektórych krajach może wzrosnąć podatek zależny od emisji CO
+2
+.
+Więcej informacji na ten temat znaleźć można tutaj
+Co to jest RDE?
+RDE to skrót od „Real Driving Emissions”. Jest to nowa procedura obliczania emisji substancji szkodliwych, takich jak tlenki azotu i cząstki stałe. Decydujące jest to, 

@@ -1,0 +1,8 @@
+ane RTTI (dane wejściowe nawigacji), temperatura zewnętrzna, przebieg, średnia prędkość. zużycie paliwa lub energii elektrycznej, łączna ilość przejechanych kilometrów (dane OBFCM).
+Dane o lokalizacji pojazdu / urządzenia : lokalizacja Państwa pojazdu lub urządzenia mobilnego.
+Jak mogą być wykorzystane Państwa dane?
+Zgodnie z przepisami UE dotyczącymi ochrony danych, korzystanie z danych osobowych może odbywać się wyłącznie w oparciu o jedną z podstaw prawnych, którą mamy obowiązek wskazać w niniejszej Polityce dla każdego sposobu przetwarzania danych. Wyjaśnienia na temat możliwych podstaw prawnych można znaleźć
+tutaj
+. Wraz z informacją na temat sposobu wykorzystania Państwa danych umieszczamy także informację o podstawie prawnej takiego wykorzystania.
+Wsparcie klienta i marketing - aby odpowiedzieć na zapytania oraz przedstawić Państwu nowości i oferty :
+BMW Polska gromadzi dane obejmujące Dane kontaktowe, Personalia, Zainteresowania, Korzystanie z naszych stron internetowych i wiad

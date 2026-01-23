@@ -1,0 +1,68 @@
+indry
+4
+Pojemność w cm³
+1 998
+Moc znamionowa w kW (KM) / obr/min
+221 (300) / 5 750 - 6 500
+Znamionowy moment obrotowy w Nm / obr/min
+400 / 2 000 - 4 500
+Wydajność
+Przyspieszenie 0-100 km/h w s
+4,9
+2
+Prędkość maksymalna w km/h
+250
+Zużycie i emisja
+1
+,
+3
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+8,3–7,6
+Emisja CO₂, cykl mieszany WLTP w g/km
+188–173
+Hałas przejściowy w dB (A)
+67
+6
+Stacjonarny poziom hałasu w dB (A) /1/min
+73 / 3 750
+6
+Wymiary i ciężar
+4 361 mm
+1 800 mm
+1 459 mm
+Długość w mm
+4 361
+Szerokość w mm
+1 800
+Wysokość w mm
+1 459
+Szerokość w mm / z lusterkami
+2 072
+Rozstaw osi w mm
+2 670
+Masa własna pojazdu w kg
+4
+1 625
+Dopuszczalna masa brutto w kg
+2 100
+Ładowność w kg
+550
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+5
+750 / 75
+Pojemność bagażnika w l
+380–1 200
+Pojemność zbiornika w l
+49
+Całkowity układ napędowy
+1
+Typ napędu
+Diesel
+Moc w kW (KM)
+110 (150)
+Moment obrotowy w Nm
+360
+Skrzynia biegów
+7

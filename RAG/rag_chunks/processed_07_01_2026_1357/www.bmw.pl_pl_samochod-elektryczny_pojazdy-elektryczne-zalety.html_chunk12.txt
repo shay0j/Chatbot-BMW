@@ -1,0 +1,6 @@
+locków hamulcowych.
+BMW i5 M60 xDrive Limuzyna: zużycie energii w cyklu mieszanym WLTP, w kWh/100 km¹: 19,5–17,1; zasięg elektryczny, WLTP w km: 473–539
+Podane wartości wyznaczono zgodnie z wymaganą procedurą pomiarową WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+Współczynnik sprawności jest wyższy.
+Wysoka sprawność elektrycznego układu napędowego, w raz z akumulatorem litowym pozwala obecnej generacji BMW na osiągnięcie całkowitej sprawności na poziomie 75%. Jeśli wziąć pod uwagę cykl jazdy zdefiniowany w przepisach UE (WLTP) oraz straty podczas ładowania i rozładowywania akumulatora, oznacza to, że 3/4 energii za która zapłaciłeś podczas ładowania wykorzystywane jest na ruch samochodu.
+Jest to wynik ponad 2 krotnie lepszy niż spalinowy, gdzie większość energii podczas jazdy jest marnowane na wytworzenie ciepła. Współczynnik s

@@ -1,0 +1,57 @@
+ive40d
+Wybierz skrzynię biegów
+Sportowa skrzynia Steptronic
+Sportowa skrzynia Steptronic
+Sportowa skrzynia Steptronic
+Sportowa skrzynia Steptronic
+Całkowity układ napędowy
+1
+Typ napędu
+Benzynowy – mild hybrid 48 V
+Moc w kW (KM)
+280 (381)
+Moment obrotowy w Nm
+540
+2
+Skrzynia biegów
+8-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+6
+Pojemność w cm³
+2 998
+Moc znamionowa w kW (KM) / obr/min
+280 (381) / 5 200 - 6 250
+Znamionowy moment obrotowy w Nm / obr/min
+520 / 1 850 - 5 000
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+9 (12) / -
+(Znamionowy) moment obrotowy w Nm
+200
+Wydajność
+Przyspieszenie 0-100 km/h w s
+5,8
+3
+Prędkość maksymalna w km/h
+250
+Zużycie i emisja
+1
+,
+4
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+10,6–9,6
+Emisja CO₂, cykl mieszany WLTP w g/km
+239–217
+Hałas przejściowy w dB (A)
+69
+8
+Stacjonarny poziom hałasu w dB (A) /1/min
+72 / 3 750
+8
+Akumulator wysokiego napięcia/48 V, ładowanie
+5
+Pojemność akumulatora w kW

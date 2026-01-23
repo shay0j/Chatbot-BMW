@@ -1,0 +1,62 @@
+)
+-
+-
+Moment obrotowy w Nm
+540
+3
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW X6 xDrive40i
+Cylindry
+6
+-
+-
+Pojemność w cm³
+2 998
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+280 (381) / 5 200 - 6 250
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+520 / 1 850 - 5 000
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW X6 xDrive40i
+(Nominal) power/30 minutes power in kW (hp)
+9 (12) / -
+-
+-
+(Nominal) torque in Nm
+200
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW X6 xDrive40i
+Przyspieszenie 0-100 km/h w s
+5,4
+6
+-
+-
+Przyspieszenie 0 - 100 km/h metodą 

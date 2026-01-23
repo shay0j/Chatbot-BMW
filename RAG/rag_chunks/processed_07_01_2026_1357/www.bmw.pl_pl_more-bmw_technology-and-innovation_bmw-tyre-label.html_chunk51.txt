@@ -1,0 +1,119 @@
+V XL M+S
+STD
+Pirelli
+SZ
+21"
+All-round
+245/35 R 21 96 Y XL
+STD
+Continental
+-
+21"
+All-round
+245/35 R 21 96 Y XL
+STD
+Pirelli
+-
+-
+X3
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+18"
+All-round
+225/60 R 18 104 Y XL
+STD
+Continental
+-
+18"
+All-round
+225/60 R 18 104 Y XL
+STD
+Nexen
+-
+18"
+All-round
+225/60 R 18 104 Y XL
+STD
+Pirelli
+-
+18"
+All-round
+225/60 R 18 104 H XL M+S
+STD
+Hankook
+SZ
+19"
+All-round
+245/50 R 19 105 Y XL
+STD
+Continental
+-
+19"
+All-round
+245/50 R 19 105 Y XL
+STD
+Goodyear
+-
+19"
+All-round
+245/50 R 19 105 Y XL
+STD
+Michelin
+-
+19"
+All-round
+245/50 R 19 105 Y XL
+STD
+Nexen
+-
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Goodyear
+-
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Goodyear
+SZ
+19"
+All-round
+245/50 R 19 105 H XL M+S
+STD
+Pirelli
+SZ
+19"
+All-round
+245/50 R 19 105 W XL RSC
+RSC
+Pirelli
+-
+20"
+Front
+255/45 R 20 105 Y XL
+STD
+Continental
+-
+20"
+Front
+255/45 R 20 105 Y XL P
+STD
+Continental
+-
+20"
+Front
+255/45 R 20 105 Y XL
+STD
+Goodyear
+-
+20"
+Front
+255/45 R 20 105 Y XL
+S

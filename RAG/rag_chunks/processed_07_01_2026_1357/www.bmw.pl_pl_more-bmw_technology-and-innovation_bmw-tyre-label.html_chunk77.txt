@@ -1,0 +1,120 @@
+Pirelli
+SZ
+22"
+All-round
+275/40 R 22 107 Y XL HP
+STD
+Pirelli
+-
+23"
+All-round
+HL 275/35 R 23 108 Y XL
+STD
+Goodyear
+-
+23"
+All-round
+HL 275/35 R 23 108 Y XL
+STD
+Hankook
+-
+23"
+All-round
+HL 275/35 R 23 108 Y XL
+STD
+Pirelli
+-
+-
+iX3
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+20"
+All-round
+255/45 R 20 105 W XL
+STD
+Hankook
+-
+20"
+All-round
+255/45 R 20 105 Y XL
+STD
+Hankook
+-
+20"
+All-round
+255/45 R 20 105 H XL M+S
+STD
+Apollo Vredestein
+-
+20"
+All-round
+255/45 R 20 105 H XL M+S
+STD
+Goodyear
+-
+21"
+All-round
+255/40 R 21 102 W XL
+STD
+Goodyear
+-
+21"
+All-round
+255/40 R 21 102 Y XL
+STD
+Hankook
+-
+21"
+All-round
+255/40 R 21 102 Y XL
+STD
+Yokohama
+-
+21"
+All-round
+255/40 R 21 102 H XL M+S
+STD
+Goodyear
+SZ
+21"
+All-round
+255/40 R 21 102 H XL M+S
+STD
+Hankook
+SZ
+21"
+Front
+255/40 R 21 102 Y XL
+STD
+Yokohama
+-
+21"
+Rear
+275/40 R 21 107 Y XL
+STD
+Yokohama
+-
+21"
+Rear
+275/40 R 21 107 Y XL P
+STD
+Michelin
+-
+22"
+Front
+255/35 R 22 99 Y XL
+STD
+Pirelli
+-
+22"
+Rear
+275/35 R 22 104 Y XL
+STD
+Pirelli
+-
+-

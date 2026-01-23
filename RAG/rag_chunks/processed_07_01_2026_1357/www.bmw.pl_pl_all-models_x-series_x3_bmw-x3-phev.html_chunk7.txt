@@ -1,0 +1,43 @@
+YCZNOŚĆ NA MIARĘ TWOICH POTRZEB.
+Moc ładowania AC 11 kW
+Zasięg elektryczny 80–88 km
+[1]
+, WLTP
+Pojemność bagażnika 460–1 600 l
+BMW X3 PLUG-IN HYBRID.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+Pakiet sportowy M Pro
+Pakiet sportowy M
+Biel Alpejska Niemetalizowany
+Czarny szafirowy metalizowany
+Szary Sophisto Z Brylantowym Połyskiem Metalizowany
+Niebieski Tanzanit Metalizowany Bmw Individual
+Niebieski Arctic Race Metalizowany
+Szary M Brooklyn Metalizowany
+Ognista Czerwień Metalizowany
+Szary Dune Metalizowany
+Biel Mineralna Metalizowany
+Szary Skyscraper metalizowany
+Biel Alpejska Niemetalizowany
+Czarny szafirowy metalizowany
+Szary Sophisto Z Brylantowym Połyskiem Metalizowany
+Niebieski Tanzanit Metalizowany Bmw Individual
+Niebieski Arctic Race

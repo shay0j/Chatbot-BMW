@@ -1,0 +1,60 @@
+ tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW i5 M60 xDrive Touring
+(Nominal) power/30 minutes power in kW (hp)
+442 (601)
+-
+-
+(Nominal) torque in Nm
+795
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW i5 M60 xDrive Touring
+Przyspieszenie 0-100 km/h w s
+3,9
+6
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+-
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+230
+-
+-
+Zużycie i emisja
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW i5 M60 xDrive Touring
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+-
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+null
+-
+-
+Fuel consumption (comb. for NI)
+null
+-
+-
+Fuel consumption, city in km/kWh
+null
+-
+-
+Fuel consumption, highway in km/kWh
+null
+-
+-
+Fuel consumption with a discha

@@ -1,0 +1,5 @@
+przykład na parkingach podziemnych lub w strefach o słabym zasięgu sieci.
+Czym jest Setup Card i jak jej używać?
+Dzięki karcie Setup Card jako właściciel pojazdu możesz wygodnie skonfigurować BMW Digital Key w smartfonie bez żadnych warunków wstępnych. Przytrzymaj kartę przy urządzeniu lub zeskanuj kod QR z tyłu i postępuj zgodnie z instrukcjami.
+Karta Setup Card to nowy i najszybszy sposób konfiguracji kluczyka BMW Digital Key, który od marca 2025 roku będzie dostarczany z wieloma modelami BMW. Po skonfigurowaniu BMW Digital Key należy przechowywać kartę Setup Card w bezpiecznym miejscu poza pojazdem. W celu udostępniania cyfrowego kluczyka karta nie jest wymagana.
+Jeśli Twoje BMW zostało przekazane bez karty Setup Card, a jedynie z dwoma klasycznymi kluczykami, proces konfiguracji przebiega nieco inaczej. Najpierw połącz swoje BMW z kontem BMW ID oraz aplikacją My BMW. Następnie rozpocznij konfigurację w aplikacji, w sekcji „Konfiguracja pojazdu”. Aby zakończyć proces, oba kluczyki m

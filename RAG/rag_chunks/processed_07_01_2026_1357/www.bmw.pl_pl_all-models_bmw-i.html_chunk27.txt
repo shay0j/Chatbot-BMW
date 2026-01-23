@@ -1,0 +1,5 @@
+ycie energii w cyklu mieszanym WLTP, w kWh/100 km¹: 23,6–20,6; zasięg elektryczny, WLTP w km: 519–600
+¹ Oficjalne dane dotyczące zużycia paliwa, emisji CO₂, zużycia energii elektrycznej i zasięgu elektrycznego zostały określone zgodnie z wymaganą procedurą pomiarową i są zgodne z rozporządzeniem (UE) nr 715/2007 w aktualnie obowiązującej wersji. Zakresy danych WLTP uwzględniają wszelkie wyposażenie dodatkowe (w tym przypadku z rynku niemieckiego). W przypadku pojazdów, których homologację typu przeprowadzono na nowo od dnia 01.01.2021 roku, oficjalne dane są dostępne tylko według WLTP. Ponadto, zgodnie z rozporządzeniem UE 2022/195, od dnia 01.01.2023 roku w certyfikatach zgodności WE nie są już podawane wartości według NEDC. Więcej informacji o procedurach pomiarowych NEDC i WLTP można znaleźć na stronie
+www.bmw.com/wltp
+.
+Więcej informacji dotyczących oficjalnego zużycia paliwa oraz oficjalnych specyficznych emisji CO₂ nowych samochodów osobowych podano w „Przewodniku po zużyciu pali

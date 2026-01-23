@@ -1,0 +1,126 @@
+-
+21"
+Rear
+265/40 ZR 21 105 Y XL
+STD
+Continental
+-
+21"
+Rear
+265/40 ZR 21 105 Y XL
+STD
+Hankook
+-
+21"
+Rear
+265/40 ZR 21 105 Y XL
+STD
+Michelin
+-
+-
+X5 M
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+21"
+Front
+295/35 R 21 107 V XL M+S
+STD
+Michelin
+-
+21"
+Rear
+295/35 R 21 107 V XL M+S
+STD
+Michelin
+-
+21"
+Front
+295/35 ZR 21 107 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+315/35 ZR 21 111 Y XL
+STD
+Pirelli
+-
+21"
+Front
+295/35 ZR 21 107 Y XL
+STD
+Michelin
+-
+21"
+Front
+295/35 ZR 21 107 Y XL
+STD
+Pirelli
+-
+22"
+Rear
+315/30 ZR 22 107 Y XL
+STD
+Michelin
+-
+22"
+Rear
+315/30 ZR 22 107 Y XL
+STD
+Pirelli
+-
+-
+X6 M
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+21"
+Front
+295/35 R 21 107 V XL M+S
+STD
+Michelin
+-
+21"
+Rear
+295/35 R 21 107 V XL M+S
+STD
+Michelin
+-
+21"
+Front
+295/35 ZR 21 107 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+315/35 ZR 21 111 Y XL
+STD
+Pirelli
+-
+21"
+Front
+295/35 ZR 21 107 Y XL
+STD
+Michelin
+-
+21"
+Front
+295/35 ZR 21 107 Y XL
+STD
+Pirelli
+-
+22"
+Rear
+315/30 ZR 22 107 Y XL
+STD
+Mich

@@ -1,0 +1,14 @@
+7–98
+[1]
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+[2]
+W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+[3]
+Generowana przez silnik spalinowy 140 oraz silnik elektryczny 135. Napęd elektryczny zależny od stanu naładowania akumulatora.
+[4]
+W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+[5]
+Hybrydy plug-in: W temperaturach poniżej -10°C napęd w pełni elektryczny jest dostępny dopiero po przejechaniu kilku kilometrów – gdy tylko akumulator osiągnie temperaturę roboczą.
+[6]
+Przestawione usługi i funkcje mogą nie być dostępne na wszystkich rynkach i we wszystkich językach oraz mogą wymagać wykupienia oddzielnego abonamentu.
+Dane dotyczące osiągów silników benzynowych dotyczą ich eksploatacji z paliwem o jakoś

@@ -1,0 +1,34 @@
+a w cyklu mieszanym WLTP w l/100 km: 7,3–7; emisja CO2, cykl mieszany WLTP w g/km: 164–158
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+TWOJE BMW SERII 3 SEDAN.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+Podstawowy
+M Sport
+Biel alpejska niemetalizowany
+Czarny niemetalizowany
+Biel mineralna metalizowany
+Szary Skyscraper metalizowany
+Czarny szafir metalizowany
+Niebieski Arctic Race metalizowany
+Niebieski tanzanit metalizowany BMW Individual
+Szary Drawit metalizowany BMW Individual
+Biel alpejska niem

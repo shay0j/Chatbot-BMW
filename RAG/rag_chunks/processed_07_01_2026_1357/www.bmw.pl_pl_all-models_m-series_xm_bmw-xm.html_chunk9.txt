@@ -1,0 +1,40 @@
+ogumienia, stanu starzenia akumulatora.
+Wybierz swoje modele BMW XM.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW XM Label
+BMW XM 50e
+Szafirowoczarny metalizowany
+Biel mineralna metalizowany
+Zielony Cape York metalizowany
+Żółty São Paulo M niemetalizowany
+Czarny karbon M metalizowany
+Niebieski Marina Bay M metalizowany
+Czerwony Toronto M metalizowany
+Zielony Isle of Man M metalizowany
+Szary Brooklyn M metalizowany
+Szary drawit BMW Individual metalizowany
+BMW Individual Frozen Tansanite Blue II
+Szafirowoczarny metalizowany
+Biel mineralna metalizowany
+Zielony Cape York metalizowany
+Żółty São Paulo M niemetalizowany
+Czarny karbon M metalizowany
+Niebieski Marina Bay M metalizowany
+Zielony Isle of Man M metalizowany
+Czerwony Toronto M metalizowany
+Szary drawit BMW Individual metal

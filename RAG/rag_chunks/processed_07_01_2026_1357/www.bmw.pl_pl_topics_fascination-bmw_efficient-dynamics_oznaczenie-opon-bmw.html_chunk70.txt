@@ -1,0 +1,118 @@
+ront
+245/35 R 21 96 Y XL
+STD
+Continental
+-
+21"
+Front
+245/35 R 21 96 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Bridgestone
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Continental
+-
+21"
+Rear
+275/30 R 21 98 Y XL
+STD
+Pirelli
+-
+21"
+Front
+HL 255/35 R 21 101 Y XL
+STD
+Continental
+-
+21"
+Front
+HL 255/35 R 21 101 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+HL 285/30 R 21 103 Y XL
+STD
+Continental
+-
+21"
+Rear
+HL 285/30 R 21 103 Y XL
+STD
+Pirelli
+-
+-
+i5 Touring
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+18"
+All-round
+225/55 R 18 102 Y XL
+STD
+Apollo Vredestein
+-
+18"
+All-round
+225/55 R 18 102 Y XL
+STD
+Bridgestone
+-
+18"
+All-round
+225/55 R 18 102 Y XL
+STD
+Continental
+-
+18"
+All-round
+225/55 R 18 102 Y XL
+STD
+Hankook
+-
+18"
+All-round
+225/55 R 18 102 Y XL
+STD
+Nexen
+-
+18"
+All-round
+225/55 R 18 102 H XL M+S
+STD
+Bridgestone
+SZ
+18"
+All-round
+225/55 R 18 102 H XL M+S
+STD
+Continental
+SZ
+18"
+All-round
+225/55 R 18 102 H XL M+S
+STD
+Pirelli
+SZ
+19"
+All-round
+245/45 R 19 102 Y XL
+STD
+Bridgestone
+-
+19"
+All

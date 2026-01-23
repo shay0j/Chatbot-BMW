@@ -1,0 +1,41 @@
+ X5 M
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW X5 M Competition
+BMW X5 M60i xDrive
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Biel mineralna metalizowany
+Czarny karbon M metalizowany
+Niebieski M Marina Bay metalizowany
+Czerwony M Toronto metalizowany
+Zielony M Isle of Man metalizowany
+Szary M Brooklyn metalizowany
+Szary Drawit metalizowany BMW Individual
+Frozen Pure Grey metalizowany BMW Individual
+Biel alpejska niemetalizowany
+Szary Skyscraper metalizowany
+Szafirowoczarny metalizowany
+Biel mineralna metalizowany
+Manhattan metalizowany
+Niebieski Marina Bay metalizowany M
+M Carbon Black metallic
+M Brooklyn Grey metallic
+Szary Drawit metalizowany BMW Individual
+Niebieski Tanzanit metalizowany BMW Individual
+Mroźny czysty szary metalizowany BMW Individual
+21

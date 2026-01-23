@@ -1,0 +1,61 @@
+ą w km
+131 - 168
+Maksymalna moc ładowania AC w kW
+11
+Minmalny czas ładowania AC 0-100% w h
+9:45
+Maksymalna moc ładowania DC w kW
+175
+Minimalny czas ładowania DC 10-80% w h
+0:34
+Wymiary i ciężar
+4 965 mm
+1 970 mm
+1 695 mm
+Długość w mm
+4 965
+Szerokość w mm
+1 970
+Wysokość w mm
+1 695
+Szerokość w mm / z lusterkami
+2 230
+Rozstaw osi w mm
+3 000
+Masa własna pojazdu w kg
+6
+2 525
+Dopuszczalna masa brutto w kg
+3 100
+Ładowność w kg
+650
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+7
+2 500 / 100
+Pojemność bagażnika w l
+500–1 750
+Całkowity układ napędowy
+Typ napędu
+Elektryczny
+Moc w kW (KM)
+400 (544)
+Moment obrotowy w Nm
+765
+Skrzynia biegów
+1-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik elektryczny
+Moc (nominalna) /moc 30 minut w kW (KM)
+400 (544) / 150 (204)
+(Znamionowy) moment obrotowy w Nm
+765
+Wydajność
+Przyspieszenie 0-100 km/h w s
+4,6
+1
+Prędkość maksymalna na napędzie elektrycznym w km/h
+200
+Zużyci

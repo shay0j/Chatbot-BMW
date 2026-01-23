@@ -1,0 +1,8 @@
+ii w cyklu mieszanym WLTP, w kWh/100 km¹: 19,6–18,5; zasięg elektryczny, WLTP w km: 589–624
+BMW i7 M70 xDrive Limuzyna²: zużycie energii w cyklu mieszanym WLTP, w kWh/100 km¹: 23,7–20,8; zasięg elektryczny, WLTP w km: 490–559
+BMW iX3 50 xDrive²: zużycie energii w cyklu mieszanym WLTP, w kWh/100 km¹: 17–15,1; zasięg elektryczny, WLTP w km: 720–805
+BMW iX1 eDrive20²: zużycie energii w cyklu mieszanym WLTP, w kWh/100 km¹: 17,1–15,5; zasięg elektryczny, WLTP w km: 431–473
+BMW iX2 xDrive30²: zużycie energii w cyklu mieszanym WLTP, w kWh/100 km¹: 17,7–16,3; zasięg elektryczny, WLTP w km: 418–449
+BMW iX xDrive60²: zużycie energii w cyklu mieszanym WLTP, w kWh/100 km¹: 21–17,9; zasięg elektryczny, WLTP w km: 597–701
+BMW iX M70 xDrive²: zużycie energii w cyklu mieszanym WLTP, w kWh/100 km¹: 23,6–20,6; zasięg elektryczny, WLTP w km: 519–600
+¹ Oficjalne dane dotyczące zużycia paliwa, emisji CO₂, zużycia energii elektrycznej i zasięgu elektrycznego zostały określone zgodnie z wymaganą procedurą po

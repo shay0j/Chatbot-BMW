@@ -1,0 +1,34 @@
+zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+TWOJE BMW i4 M60 xDRIVE.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW i4 M60 xDrive
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Zielony Cape York metalizowany
+Biel mineralna metalizowany
+Ognista czerwień metalizowany
+Niebieski Portimao M metalizowany
+Szary Brooklyn M metalizowany
+Szary Drawit metalizowany BMW Individual
+Niebieski tanzanit metalizowany BMW Individual
+Mroźny niebieski Portimao metalizowany BMW Individual
+Mroźny czysty szary metalizowany BMW Individual
+20" obręcze kół M

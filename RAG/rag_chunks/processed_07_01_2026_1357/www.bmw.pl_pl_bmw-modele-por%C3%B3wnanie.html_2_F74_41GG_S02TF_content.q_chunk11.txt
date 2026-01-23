@@ -1,0 +1,61 @@
+ji nie występuje dla wybranych modeli.
+Całkowity układ napędowy
+BMW 216 Gran Coupé
+Typ napędu
+Benzyna
+-
+-
+Moc w kW (KM)
+90 (122)
+-
+-
+Moment obrotowy w Nm
+230
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd przedni
+-
+-
+Silnik spalinowy TwinPower Turbo
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 216 Gran Coupé
+Cylindry
+3
+-
+-
+Pojemność w cm³
+1 499
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+90 (122) / 3 900 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+230 / 1 500 - 3 600
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 216 Gran Coupé
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych mod

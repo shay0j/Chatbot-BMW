@@ -1,0 +1,56 @@
+zy na pewno chcesz usunąć ten pojazd?
+Tak
+Nie
+PORÓWNANIE MODELI BMW
+Dodaj pojazd BMW
+Wybierz pojazd.
+BMW X1 xDrive25e
+Konfiguracja i ceny
+Gotowe do odbioru
+Od
+234 500 zł
+Informacja o cenie
+Na ilustracjach pokazane są dodatkowo płatne opcje wyposażenia. Podane są niewiążące, niebędące wynikiem zmowy kartelowej sugestie cenowe producenta zawierające podatek VAT i podatek od emisji (NoVA) przy założeniu modelu podstawowego bez opcji wyposażenia, bez kosztów transportu. Zastrzega się możliwość zmian i pomyłek. Wiążących informacji o cenie może udzielić partner BMW.
+Wybierz pojazd.
+Seria
+X
+1
+2
+3
+4
+5
+7
+M
+Z
+X
+i
+X
+Model
+BMW X1
+BMW X1
+BMW X2
+BMW X3
+BMW iX3
+BMW X5
+BMW X6
+BMW X7
+BMW X1
+Model
+Silnik
+BMW X1 xDrive25e
+BMW iX1 eDrive20
+BMW iX1 xDrive30
+BMW X1 xDrive25e
+BMW X1 xDrive30e
+BMW X1 sDrive18i
+BMW X1 sDrive20i
+BMW X1 xDrive23i
+BMW X1 M35i xDrive
+BMW X1 sDrive18d
+BMW X1 sDrive20d
+BMW X1 xDrive20d
+BMW X1 xDrive23d
+BMW X1 xDrive25e
+Silnik
+Skrzynia biegów
+Sportowa skrzynia Steptronic z podwójnym

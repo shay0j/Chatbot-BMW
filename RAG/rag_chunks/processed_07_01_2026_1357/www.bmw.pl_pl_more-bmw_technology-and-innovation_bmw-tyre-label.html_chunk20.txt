@@ -1,0 +1,120 @@
+ll-round
+225/45 R 18 95 Y XL RSC
+RSC
+Michelin
+-
+18"
+All-round
+225/45 R 18 95 H XL M+S RSC
+RSC
+Bridgestone
+SZ
+18"
+All-round
+225/45 R 18 95 H XL M+S RSC
+RSC
+Continental
+SZ
+18"
+All-round
+225/45 R 18 95 H XL M+S RSC
+RSC
+Hankook
+SZ
+18"
+All-round
+225/45 R 18 95 H XL M+S RSC
+RSC
+Pirelli
+SZ
+18"
+All-round
+HL 225/45 R 18 98 H XL M+S RSC
+RSC
+Pirelli
+-
+18"
+Front
+225/45 R 18 95 Y XL
+STD
+Hankook
+-
+18"
+Front
+225/45 R 18 95 Y XL
+STD
+Michelin
+-
+18"
+Front
+225/45 R 18 95 Y XL
+STD
+Pirelli
+-
+18"
+Rear
+255/40 R 18 99 Y XL
+STD
+Hankook
+-
+18"
+Rear
+255/40 R 18 99 Y XL
+STD
+Michelin
+-
+18"
+Rear
+255/40 R 18 99 Y XL
+STD
+Pirelli
+-
+18"
+Front
+225/45 R 18 95 Y XL RSC
+RSC
+Bridgestone
+-
+18"
+Front
+225/45 R 18 95 Y XL RSC
+RSC
+Goodyear
+-
+18"
+Front
+225/45 R 18 95 Y XL RSC
+RSC
+Hankook
+-
+18"
+Front
+225/45 R 18 95 Y XL RSC
+RSC
+Michelin
+-
+18"
+Rear
+255/40 R 18 99 Y XL RSC
+RSC
+Bridgestone
+-
+18"
+Rear
+255/40 R 18 99 Y XL RSC
+RSC
+Goodyear
+-
+18"
+Rear
+255/40 R 18 99 Y XL RSC
+RSC
+Hankook
+-
+18"
+Rear
+255/40 R 18 99 Y XL RSC
+RSC
+Michelin
+-
+18

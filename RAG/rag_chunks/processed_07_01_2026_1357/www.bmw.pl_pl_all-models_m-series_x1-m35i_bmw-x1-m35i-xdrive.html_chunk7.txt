@@ -1,0 +1,31 @@
+durze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Twoje BMW X1 M35i xDrive.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Lakiery
+Tapicerka
+Skonfiguruj
+BMW X1 M35i xDrive
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Zielony Cape York metalizowany
+Kosmiczny srebrny metalizowany
+Niebieski Portimao metalizowany M
+Storm Bay metalizowany BMW Individual
+Frozen Pure Grey metalizowany BMW Individual
+Czerwony Fire Red
+Mroźny niebieski Portimao metalizowany BMW Individual
+Obręcze 20” M felga Y 872 M
+Veganza perforowana | Koralowo-czarna
+Połączenie Alcantary i Veganzy M | czarny z kontrastującym niebieskim pikowaniem
+Veganza Smoke White perfo

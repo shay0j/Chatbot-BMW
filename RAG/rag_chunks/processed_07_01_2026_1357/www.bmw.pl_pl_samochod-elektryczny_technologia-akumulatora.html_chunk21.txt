@@ -1,0 +1,6 @@
+o mojego pojazdu elektrycznego?
+To, czy potrzebujesz akumulatora z większą lub mniejszą pojemnością, zależy od Twoich zwyczajów użytkowania. O tego, jak często pokonujesz długie trasy. Lub od tego, czy często przemierzasz tylko kilka kilometrów, aby dotrzeć do pobliskiego supermarketu. Dlatego ważne jest, aby wcześniej sprawdzić, jak często pojazd ładowany będzie w miejscach publicznych lub czy w domu dostępna będzie stacja Wallbox.
+Jak działa silnik elektryczny?
+Silnik elektryczny wykorzystuje energię elektryczną w celu wytwarzania energii mechanicznej. W tym procesie prąd pochodzący z akumulatora pojazdu elektrycznego jest wykorzystywany do wytwarzania pól magnetycznych. Pola te obracają wirnik, który za pośrednictwem zintegrowanej skrzyni biegów napędza koła pojazdu elektrycznego.
+Czym jest rekuperacja w pojazdach elektrycznych?
+Rekuperację nazywa się również hamowaniem odzyskowym. Gdy pojazd elektryczny hamuje, silnik elektryczny staje się alternatorem. Przekształca on energię kine

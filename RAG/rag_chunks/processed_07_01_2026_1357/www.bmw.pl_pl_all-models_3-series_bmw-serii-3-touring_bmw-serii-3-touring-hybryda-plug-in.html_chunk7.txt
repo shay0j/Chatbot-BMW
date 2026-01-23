@@ -1,0 +1,43 @@
+cji akumulatora.
+Back to Navigation
+TWOJE BMW SERII 3 TOURING PLUG-IN HYBRID.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+Podstawowy
+M Sport
+M Sport Pro
+Biel alpejska niemetalizowany
+Czarny niemetalizowany
+Biel mineralna metalizowany
+Szary Skyscraper metalizowany
+Czarny szafir metalizowany
+Niebieski Arctic Race metalizowany
+Niebieski tanzanit metalizowany BMW Individual
+Szary Drawit metalizowany BMW Individual
+Niebieski Portimao M metalizowany
+Szary Brooklyn M metalizowany
+Ognista czerwień metalizowany
+Mroźny czysty szary BMW Individual metalizowany
+Mroźny niebieski tanzanit BMW Individual metalizowany
+Biel alpejska niemetalizowany
+Biel mineralna metalizowany
+Szary Skyscraper metalizowany
+Czarny szafir metalizowany
+Ognista czerwień metalizo

@@ -1,0 +1,62 @@
+oment obrotowy w Nm
+600
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+4
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW M2 Coupé
+Cylindry
+6
+-
+-
+Pojemność w cm³
+2 993
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+353 (480) / 6 250
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+600 / 2 700 - 5 620
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW M2 Coupé
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW M2 Coupé
+Przyspieszenie 0-100 km/h w s
+4
+3
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna

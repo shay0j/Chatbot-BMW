@@ -1,0 +1,26 @@
+DEV DIARY
+10.12 BMW.pl ściągnięte, zrobiłam ingest chroma. Trzeba będzie sprawdzić jak to wygląda po obróbce a następnie puścić crawl na zk motors i jednocześnie przetestować bota jak gada.
+
+Sławek chce ejajki na telefonie
+
+12.12 coś się nie zgrywa z cohere - bot nie odpowiada. Ostatni krok na gpt to to co teraz muszę zrobić
+
+13.01 niby zescrapowało - znormalizować, sprawdzić jakość
+
+14.01 działa, ale ciągle myli ceny. Deepseek nad tym pracuje. Być może warto sprawdzić pozostałe dane, a ceny póki co olać i ew. poprawić na sztywno z palca albo kazać czatbotowi w sprawie ustalenia ceny kontaktować się z deslerem?
+
+15.01
+scraper_with_browser.py dał obiecujące wyniki. 
+Więcej specyfikacji - tylko 18 stron ma moc silnika
+
+Więcej cen - tylko 11 stron ma ceny z 50 zebranych
+
+Lepsze parsowanie cen - niektóre ceny mogą być nieprawidłowe
+Kontynuować normalizację. 
+
+16.01 
+Normalizacja przeszła, chunker, embeddingi, vector db, rag test - przeszły. Jest git, zatwierdzam.
+Następny krok: dodać LLM i pracować nad czatbotem per se.
+
+19.01
+WŁĄCZAĆ TYM: uvicorn app.main:app --reload

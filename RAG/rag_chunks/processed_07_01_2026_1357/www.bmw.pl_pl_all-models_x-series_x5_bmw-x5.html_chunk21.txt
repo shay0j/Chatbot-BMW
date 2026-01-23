@@ -1,0 +1,7 @@
+mieszany WLTP w l/100 km 4–3; emisje CO₂, cykl mieszany WLTP w g/km: 90–68; zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 24,4–19,9; zasięg elektryczny, WLTP w km: 88–105
+¹ W przypadku hybrydy plug-in: W pełni elektryczny napęd w temperaturach poniżej -10°C jest dostępny dopiero po przejechaniu kilku kilometrów, gdy akumulator rozgrzeje się do temperatury roboczej.
+² W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+³ Składa się z napędu spalinowego 230 kW oraz napędu elektrycznego 145 kW. Napęd elektryczny zależny od poziomu naładowania akumulatora.
+⁴ Podane wartości wyznaczono zgodnie z wymaganą procedurą pomiarową WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+⁵ W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+Dane dotyczące osiągów silników benzynowych dotyczą ich ek

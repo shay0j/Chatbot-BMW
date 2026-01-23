@@ -1,0 +1,7 @@
+dy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+² W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+³ Składa się z napędu spalinowego 430 kW oraz napędu elektrycznego 145 kW. Napęd elektryczny zależny od poziomu naładowania akumulatora.
+⁴ W przypadku hybrydy plug-in: Moc zależna od poziomu naładowania akumulatora.
+⁵ Składa się z silnika spalinowego o mocy 230 kW oraz napędu elektrycznego o mocy 145 kW. Napęd elektryczny zależny od poziomu naładowania akumulatora.
+⁶ W przypadku hybrydy plug-in: W pełni elektryczny napęd przy temperaturach poniżej -10°C jest dostępny dopiero po przejechaniu kilku kilometrów, gdy akumulator rozgrzeje się do temperatury roboczej.
+Dane dotyczące osiągów silników benzynowych dotyczą ich eksploatacji z paliwem o jakości LO 98. Dane dotyczące zużycia dotyczą eksploatacji z paliwem referencyjnym zgodnie z rozporządzeniem (UE) 715/2007. Dopuszczalne są jakości p

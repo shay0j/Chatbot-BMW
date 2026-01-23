@@ -1,0 +1,85 @@
+użycie energii, cykl mieszany WLTP w kWh/100 km
+-
+-
+-
+Energy consumption (comb. for NI)
+-
+-
+-
+Energy consumption, city in km/kWh
+-
+-
+-
+Energy consumption, highway in km/kWh
+-
+-
+-
+Zasięg elektryczny, WLTP w km
+-
+-
+-
+Zasięg elektryczny, WLTP w km
+-
+-
+-
+Zasięg elektryczny, WLTP (Miasto) w km
+-
+-
+-
+Electric range (comb. for NI)
+-
+-
+-
+Klasa emisji CO₂ (min.)
+-
+-
+-
+Klasa emisji CO₂ (maks.)
+-
+-
+-
+Klasa emisji CO₂ przy rozładowanym akumulatorze (min.)
+-
+-
+-
+Klasa emisji CO₂ przy rozładowanym akumulatorze (maks.)
+-
+-
+-
+Hałas przejściowy w dB (A)
+-
+-
+-
+Stacjonarny poziom hałasu w dB (A) /1/min
+-
+-
+-
+CO₂ Equivalent Overall
+-
+-
+-
+CO₂
+-
+-
+-
+Petrol Equivalent Overall
+-
+-
+-
+Petrol Equivalent Best
+-
+-
+-
+Primary Energy Petrol Equivalent
+-
+-
+-
+Primary Energy Petrol Best
+-
+-
+-
+Ślad węglowy pojazdu
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Ślad węglowy pojazdu
+Emisje wyrażone jako równoważnik emisji dwutlenku węgla – CO₂e – do 

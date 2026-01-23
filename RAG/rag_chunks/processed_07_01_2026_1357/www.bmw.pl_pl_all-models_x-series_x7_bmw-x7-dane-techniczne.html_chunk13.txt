@@ -1,0 +1,10 @@
+ typu przeprowadzono na nowo od 01.01.2021 r., oficjalne dane są dostępne tylko według WLTP. Więcej informacji o procedurze pomiarowej WLTP można znaleźć na stronie www.bmw.com/wltp
+5
+Wydajność ładowania zależy od stanu naładowania, temperatury otoczenia, indywidualnego profilu jazdy i wykorzystania odbiorników dodatkowych. Podane zakresy są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania.
+6
+Masa własna (UE) odnosi się do pojazdu z wyposażeniem standardowym bez wyposażenia dodatkowego. Masa własna uwzględnia 90-procentowe napełnienie zbiornika paliwa i 75 kg wagi kierowcy. Wyposażenie dodatkowe może wpływać na masę samochodu, ładowność oraz, w przypadku wpływu na aerodynamikę, na prędkość maksymalną.
+7
+Masa przyczepy zależna od wyposażenia pojazdu
+8
+Wartości zmierzone zgodnie z regulaminem EKG ONZ nr 51/UE 540/2014 są zaokrąglone.
+My BMW App. Łącz się bezpośre

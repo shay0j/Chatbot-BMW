@@ -1,0 +1,63 @@
+98)
+3
+-
+-
+Moment obrotowy w Nm
+670
+3
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW X6 xDrive30d
+Cylindry
+6
+-
+-
+Pojemność w cm³
+2 993
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+210 (286) / 4 000
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+650 / 1 500 - 2 500
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW X6 xDrive30d
+(Nominal) power/30 minutes power in kW (hp)
+9 (12) / -
+-
+-
+(Nominal) torque in Nm
+200
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW X6 xDrive30d
+Przyspieszenie 0-100 km/h w s
+6,1
+6
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-f

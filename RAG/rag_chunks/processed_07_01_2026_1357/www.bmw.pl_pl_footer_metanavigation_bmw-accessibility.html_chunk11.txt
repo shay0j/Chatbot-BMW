@@ -1,0 +1,9 @@
+urację, wyświetlić podsumowanie i wyświetlić pojazdy podobne do skonfigurowanego.
+Decyzja o zakupie, leasingu lub finansowaniu jest podejmowana po wybraniu pojazdu w ramach procesu zakupu.
+W przypadku leasingu lub finansowania po zakończeniu procesu zakupu należy wypełnić wniosek online o usługę finansowania. Ta aplikacja online jest dostępna na stronach internetowych BMW Financial Services.
+Podczas dokonywania zakupu klienci mogą wyrazić chęć pozostawienia swojego pojazdu w rozliczeniu za pośrednictwem uczestniczących w programie Partnerów i otrzymać jego niewiążącą wycenę, wprowadzając swoje dane osobowe i dane pojazdu.
+Aby zamówić pojazd, jest wymagane konto użytkownika BMW (BMW ID).
+BMW Connected.
+Usługi cyfrowe do swojego pojazdu klienci znajdą w
+Sklepie BMW Online dla BMW Connected
+. Mogą dodawać usługi do już posiadanego pojazdu i kupować je online. Oferowane usługi zależą od pojazdu klienta i mogą się różnić. Wymagane jest konto BMW ID, a pojazd musi być powiązany z kontem BMW 

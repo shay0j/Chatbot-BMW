@@ -1,0 +1,6 @@
+: 9,9–9,7; emisja CO₂, cykl mieszany WLTP w g/km: 223–219
+BMW XM 50e: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 4,7–4,4; emisja CO₂, cykl mieszany WLTP w g/km: 106–100; zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 25,4–24,9; zasięg elektryczny, WLTP w km: 80–85
+BMW M2 CS Coupe: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 10; emisja CO₂, cykl mieszany WLTP w g/km: 226
+BMW XM Label: Zużycie energii w cyklu mieszanym WLTP w l/100 km: 6,2–5,6; emisja CO₂, cykl mieszany WLTP w g/km: 140–127; zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 23–22,6; zasięg elektryczny, WLTP w km: 76–82
+BMW i7 M70 xDrive Limuzyna: Zużycie energii w trybie elektrycznym, cykl mieszany WLTP w kWh/100 km: 23,7–20,8; zasięg elektryczny, WLTP w km: 490–559
+Podane wartości wyznaczono zgodnie z wymaganą procedurą pomiarową WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogu

@@ -1,0 +1,5 @@
+ydy plug-in: W temperaturach poniżej -10°C napęd w pełni elektryczny jest dostępny dopiero po przejechaniu kilku kilometrów – gdy tylko akumulator osiągnie temperaturę roboczą.
+⁴ Składa się z napędu spalinowego 110 kW oraz napędu elektrycznego 130 kW. Napęd elektryczny zależny od poziomu naładowania akumulatora.
+⁵ Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+⁶ W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+Wskazane dane dotyczące zużycia paliwa, emisji CO₂, zużycia energii i zasięgu w trybie elektrycznym zostały ustalone na podstawie nowej procedury WLTP określonej w Rozporządzeniu (UE) 2017/1151 z dnia 1 czerwca 2017 r. w uzupełnieniu Rozporządzenia (WE) nr 2007/715 Parlamentu Europejskiego i Rady w sprawie homologacji typu pojazdów 

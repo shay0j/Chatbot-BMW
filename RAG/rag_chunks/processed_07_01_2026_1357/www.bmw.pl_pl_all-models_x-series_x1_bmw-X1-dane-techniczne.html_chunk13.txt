@@ -1,0 +1,66 @@
+a brutto w kg
+2 220
+Ładowność w kg
+565
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+11
+2 000 / 80
+Pojemność bagażnika w l
+500–1 545
+Pojemność zbiornika w l
+54
+Całkowity układ napędowy
+1
+Typ napędu
+Benzynowy
+Moc w kW (KM)
+221 (300)
+Moment obrotowy w Nm
+400
+Skrzynia biegów
+7-stopniowa, automatyczna
+Rodzaj napędu
+na wszystkie koła
+Silnik spalinowy TwinPower Turbo
+1
+Cylindry
+4
+Pojemność w cm³
+1 998
+Moc znamionowa w kW (KM) / obr/min
+221 (300) / 5 750 - 6 500
+Znamionowy moment obrotowy w Nm / obr/min
+400 / 2 000 - 4 500
+Wydajność
+Przyspieszenie 0-100 km/h w s
+5,4
+5
+Prędkość maksymalna w km/h
+250
+Zużycie i emisja
+1
+,
+6
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+8,2–7,7
+Emisja CO₂, cykl mieszany WLTP w g/km
+185–175
+Hałas przejściowy w dB (A)
+67
+12
+Stacjonarny poziom hałasu w dB (A) /1/min
+76 / 3 750
+12
+Wymiary i ciężar
+4 505 mm
+1 845 mm
+1 622 mm
+Długość w mm
+4 505
+Szerokość w mm
+1 845
+Wysokość w mm
+1 622
+Szero

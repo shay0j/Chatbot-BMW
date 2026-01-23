@@ -1,0 +1,35 @@
+zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Twoje BMW iX M70 xDrive.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Skonfiguruj
+BMW iX M70 xDrive
+Biel alpejska niemetalizowany
+Czarny szafirowy metalizowany
+Biel mineralna metalizowany
+Niebieski Arctic Race metalizowany
+Czerwony awenturynowy metalizowany
+Szary Dune metalizowany
+Czarny karbon M metalizowany
+Storm Bay metalizowany BMW Individual
+Niebieski tanzanit metalizowany BMW Individual
+Mroźny czysty szary metalizowany BMW Individual
+Mroźny głęboki szary BMW Individual metalizowany
+Obręcze aerodynamiczne 22" M 1026 M Multicolor szlifowanie na połysk 3D
+Stylistyka wnętrza 

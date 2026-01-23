@@ -1,0 +1,27 @@
+kowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+NIEPOWTARZALNE M.
+Cztery rury wydechowe, opcjonalne fotele sportowe M, charakterystyczne dla M komponenty aerodynamiczne – BMW X2 M35i xDrive już na pierwszy rzut oka sygnalizuje swój status modelu BMW M. Silnik benzynowy M Twin-Power Turbo o mocy 221 kW (300 KM), adaptacyjny układ jezdny M i potężne hamulce sportowe M modelu BMW X2 M35i xDrive gwarantują typowe dla M wrażenia z jazdy.
+Skonfiguruj
+BMW X2 M35i xDRIVE.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model
+Lakiery
+Obręcze kół
+Miękki dach
+Tapicerka
+Listwy ozdobne
+Konfiguracja i ceny
+BMW X2 M35i xDrive
+Biel 

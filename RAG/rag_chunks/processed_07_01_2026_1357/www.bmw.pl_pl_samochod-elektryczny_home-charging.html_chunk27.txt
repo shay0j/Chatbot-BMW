@@ -1,0 +1,6 @@
+sz wykorzystać swój samochód jako magazyn nadwyżek energii słonecznej z instalacji fotowoltaicznej. Energia zgromadzona w ciągu dnia jest wówczas dostępna wieczorem, w nocy lub następnego ranka na potrzeby Twojego gospodarstwa domowego. W ten sposób zwiększasz wykorzystanie własnej energii słonecznej (autokonsumpcję) i zmniejszasz pobór prądu z sieci.
+Aby zawsze pozostawać mobilnym, system dba o to, by akumulator Twojego samochodu był odpowiednio naładowany na zaplanowaną godzinę wyjazdu. Wystarczy, że w aplikacji lub w pojeździe podasz planowany czas odjazdu oraz żądany poziom naładowania. Wtedy Twoje BMW zajmie się optymalizacją procesu ładowania i rozładowywania akumulatora.
+Jakie są zalety ładowania dwukierunkowego?
+Dzięki ładowaniu dwukierunkowemu Twój samochód
+³
+staje się jednocześnie magazynem energii. W przypadku funkcji Vehicle-to-Home (V2H) nadwyżki energii z instalacji fotowoltaicznej są magazynowane w akumulatorze Twojego auta elektrycznego. Całą energię, której nie potrzeb

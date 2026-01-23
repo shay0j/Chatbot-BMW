@@ -1,0 +1,60 @@
+cząca tej sekcji nie występuje dla wybranych modeli.
+Całkowity układ napędowy
+BMW M440d xDrive Cabrio
+Typ napędu
+Diesel – 48 Volt Mild-Hybrid
+-
+-
+Moc w kW (KM)
+250 (340)
+-
+-
+Moment obrotowy w Nm
+700
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+6
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW M440d xDrive Cabrio
+Cylindry
+6
+-
+-
+Pojemność w cm³
+2 993
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+250 (340) / 4 400
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+700 / 1 750 - 2 250
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW M440d xDrive Cabrio
+(Nominal) power/30 minutes power in kW (hp)
+8 (11) / -
+-
+-
+(Nominal) torque in Nm
+25
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.

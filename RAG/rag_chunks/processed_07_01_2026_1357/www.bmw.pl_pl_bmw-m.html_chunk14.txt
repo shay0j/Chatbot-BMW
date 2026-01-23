@@ -1,0 +1,10 @@
+anym WLTP w l/100 km: 8,1 - 7,6; emisja CO₂, cykl mieszany WLTP w g/km: 184 - 173
+BMW M235 xDrive Gran Coupe: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km: 8,2–7,5; emisja CO₂, cykl mieszany WLTP w g/km: 185–170
+BMW i5 M60 xDrive Touring: Zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 20,8 - 18,3; zasięg elektryczny, WLTP w km: 445 - 506
+BMW M4 CS: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km: 10,2; emisja CO₂, cykl mieszany WLTP w g/km: 232
+BMW M3 Competition Touring: Zużycie paliwa, cykl mieszany WLTP, w l/100 km: 10,3; emisja CO2, cykl mieszany WLTP w g/km: 235
+BMW M4 Coupe: Zużycie paliwa w cyklu mieszanym WLTP w l/100 km: 10,1 - 9,9; emisja CO₂, cykl mieszany WLTP w g/km: 230 - 226
+BMW M2 Coupé: Zużycie paliwa, cykl mieszany WLTP w l/100 km: 9,9–9,6; emisja CO₂, cykl mieszany WLTP w g/km: 223–218
+Wskazane dane dotyczące zużycia paliwa, emisji CO
+2
+, zużycia energii i zasięgu w trybie elektrycznym zostały ustalone na podstawie nowej procedury WLTP określonej w Rozporz

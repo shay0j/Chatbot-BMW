@@ -1,0 +1,63 @@
+wy
+BMW X3 M50 xDrive
+Typ napędu
+Petrol – 48 Volt Mild-Hybrid
+-
+-
+Moc w kW (KM)
+293 (398)
+3
+-
+-
+Moment obrotowy w Nm
+580
+3
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd na wszystkie koła
+-
+-
+Silnik spalinowy TwinPower Turbo
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW X3 M50 xDrive
+Cylindry
+6
+-
+-
+Pojemność w cm³
+2 998
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+280 (381) / 5 200 - 6 250
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+540 / 1 900 - 4 800
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW X3 M50 xDrive
+(Nominal) power/30 minutes power in kW (hp)
+13 (18) / -
+-
+-
+(Nominal) torque in Nm
+200
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność

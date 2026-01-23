@@ -1,0 +1,5 @@
+m bez wyposażenia dodatkowego. Masa własna uwzględnia 90-procentowe napełnienie zbiornika paliwa i 75 kg wagi kierowcy. Wyposażenie dodatkowe może wpływać na masę samochodu, ładowność oraz, w przypadku wpływu na aerodynamikę, na prędkość maksymalną.
+Wartości zmierzone zgodnie z regulaminem EKG ONZ nr 51/UE 540/2014 są zaokrąglone.
+Masa przyczepy zależna od wyposażenia pojazdu
+Dodatkowy zasięg w kilometrach po 10-minutowym ładowaniu o dużej mocy (HPC) jest określany zgodnie z normą DIN70080 w cyklu WLTP. Zależy on od wyposażenia pojazdu, indywidualnego profilu jazdy, temperatury otoczenia, poziomu naładowania i korzystania z zewnętrznych odbiorników.
+Dane dotyczące mocy silników benzynowych odnoszą się do paliwa o liczbie oktanowej 98. Dane dotyczące zużycia odnoszą się do paliwa referencyjnego zgodnie z rozporządzeniem (WE) 1151/2017. Dopuszczalne jest stosowanie paliwa bezołowiowego o liczbie oktanowej 91 lub wyższej i zawartości etanolu do  25% (E25). BMW zaleca stosowanie paliwa o L

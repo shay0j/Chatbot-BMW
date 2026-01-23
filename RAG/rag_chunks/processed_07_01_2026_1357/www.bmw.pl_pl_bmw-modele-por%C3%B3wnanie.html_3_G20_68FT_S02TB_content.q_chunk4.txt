@@ -1,0 +1,46 @@
+zy na pewno chcesz usunąć ten pojazd?
+Tak
+Nie
+PORÓWNANIE MODELI BMW
+Dodaj pojazd BMW
+Wybierz pojazd.
+BMW M340i xDrive Limuzyna
+Konfiguracja i ceny
+Gotowe do odbioru
+Od
+330 000 zł
+Informacja o cenie
+Na ilustracjach pokazane są dodatkowo płatne opcje wyposażenia. Podane są niewiążące, niebędące wynikiem zmowy kartelowej sugestie cenowe producenta zawierające podatek VAT i podatek od emisji (NoVA) przy założeniu modelu podstawowego bez opcji wyposażenia, bez kosztów transportu. Zastrzega się możliwość zmian i pomyłek. Wiążących informacji o cenie może udzielić partner BMW.
+Wybierz pojazd.
+Seria
+3
+1
+2
+3
+4
+5
+7
+M
+Z
+X
+i
+3
+Model
+BMW serii 3 Limuzyna
+BMW serii 3 Limuzyna
+BMW serii 3 Touring
+BMW serii 3 Limuzyna
+Model
+Silnik
+BMW M340i xDrive Limuzyna
+BMW 330e Limuzyna
+BMW 330e xDrive Limuzyna
+BMW 318i Limuzyna
+BMW 320i Limuzyna
+BMW 320i xDrive Limuzyna
+BMW 330i xDrive Limuzyna
+BMW M340i xDrive Limuzyna
+BMW M3 Limuzyna
+BMW M3 Competition Limuzyna
+BMW M3 Competition xDrive Limuzyna
+BMW 318d Limuzy

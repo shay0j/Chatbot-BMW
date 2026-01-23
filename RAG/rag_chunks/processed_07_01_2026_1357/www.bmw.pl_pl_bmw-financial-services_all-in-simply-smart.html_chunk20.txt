@@ -1,0 +1,5 @@
+anym WLTP w l/100 km: 7,6–6,9; emisja CO2, cykl mieszany WLTP w g/km: 172–156
+BMW X5 xDrive30d: Zużycie paliwa, cykl mieszany WLTP w l/100 km: 8,2-7,2;  emisja CO2, cykl mieszany WLTP w g/km:  215-189
+BMW i7 xDrive60: Zużycie energii w kWh/100 km (cykl mieszany, WLTP): 20,3–18,5; zasięg elektryczny w km (WLTP): 572–624
+BMW 520i sDrive: zużycie paliwa w cyklu mieszanym WLTP w l/100 km: 6,4–5,8; emisja CO2 w cyklu mieszanym WLTP: 144–130
+Wskazane dane dotyczące zużycia paliwa, emisji CO₂, zużycia energii i zasięgu na napędzie elektrycznym zostały ustalone na podstawie nowej procedury WLTP określonej w Rozporządzeniu (UE) 2017/1151 z dnia 1 czerwca 2017 r. w uzupełnieniu Rozporządzenia (WE) nr 2007/715 Parlamentu Europejskiego i Rady w sprawie homologacji typu pojazdów silnikowych w odniesieniu do emisji zanieczyszczeń pochodzących z lekkich pojazdów pasażerskich i użytkowych oraz w sprawie dostępu do informacji dotyczących naprawy i utrzymania pojazdów w brzmieniu obowiązującym w chwili 

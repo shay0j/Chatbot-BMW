@@ -1,0 +1,20 @@
+{
+  "total_chunks": 671,
+  "total_vectors": 671,
+  "dimension": 768,
+  "model_chunks": 646,
+  "other_chunks": 25,
+  "chunks_with_prices": 234,
+  "chunks_with_specs": 275,
+  "avg_text_length": 771.4232488822653,
+  "created_at": "2026-01-16T15:35:09.104430",
+  "top_models": {
+    "X3": 323,
+    "i4": 238,
+    "X1": 187,
+    "X5": 134,
+    "iX": 97,
+    "M5": 60,
+    "M3": 26
+  }
+}

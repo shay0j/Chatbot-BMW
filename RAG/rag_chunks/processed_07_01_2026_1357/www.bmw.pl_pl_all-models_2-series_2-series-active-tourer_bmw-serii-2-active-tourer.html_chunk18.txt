@@ -1,0 +1,6 @@
+isje CO₂, cykl mieszany WLTP w g/km: 66–60; zużycie energii w cyklu mieszanym WLTP w kWh/100 km: 11,9–11,5; zasięg elektryczny, WLTP w km: 81–87
+¹ Podane wartości określono zgodnie z wymaganą procedurą pomiaru WLTP. Rzeczywiste wartości zależą od różnych czynników, np. obciążenia, stylu jazdy, trasy, warunków pogodowych, włączonych odbiorników energii (w tym klimatyzacji), ogumienia, stanu starzenia akumulatora.
+² Składa się z silnika spalinowego o mocy 115 kW oraz napędu elektrycznego o mocy 15 kW.
+³ Składa się z silnika spalinowego o mocy 110 kW oraz napędu elektrycznego o mocy 130 kW. Napęd elektryczny zależny od poziomu naładowania akumulatora.
+⁴ W przypadku hybrydy plug-in: ważone, cykl mieszany (EC AC Charge Weighted)
+Dane dotyczące osiągów silników benzynowych dotyczą ich eksploatacji z paliwem o jakości LO 98. Dane dotyczące zużycia dotyczą eksploatacji z paliwem referencyjnym zgodnie z rozporządzeniem (UE) 715/2007. Dopuszczalne są jakości paliwa bezołowiowego LO 91 i wyższe o

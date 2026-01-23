@@ -1,0 +1,69 @@
+ nie występuje dla wybranych modeli.
+Wydajność
+BMW M4 Coupé
+Przyspieszenie 0-100 km/h w s
+-
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+-
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w km/h
+-
+-
+-
+Zużycie i emisja
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Zużycie i emisja
+BMW M4 Coupé
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+-
+-
+-
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+-
+-
+-
+Fuel consumption (comb. for NI)
+-
+-
+-
+Fuel consumption, city in km/kWh
+-
+-
+-
+Fuel consumption, highway in km/kWh
+-
+-
+-
+Fuel consumption with a discharged battery, city in km/l
+-
+-
+-
+Fuel consumption with a discharged battery, highway in km/l
+-
+-
+-
+Zużycie paliwa z rozładowanym akumulatorem, WLTP łącznie w l/100 km
+-
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+-
+-
+-
+Emisja CO₂, cykl mieszany WLTP w g/km
+-
+-
+-
+CO₂-Emissions (comb. for NI)
+-
+-
+-
+Zużycie energii, łączny WL

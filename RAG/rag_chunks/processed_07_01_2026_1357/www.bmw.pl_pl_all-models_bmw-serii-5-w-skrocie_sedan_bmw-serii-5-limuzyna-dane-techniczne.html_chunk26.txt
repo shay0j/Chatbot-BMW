@@ -1,0 +1,11 @@
+aleźć na stronie www.bmw.com/wltp
+3
+Zasięg zależny od wielu różnych czynników, przede wszystkim: indywidualnego stylu jazdy, uwarunkowań trasy, temperatury zewnętrznej, ogrzewania lub klimatyzacji oraz zastanej temperatury.
+4
+Wydajność ładowania zależy od stanu naładowania, temperatury otoczenia, indywidualnego profilu jazdy i wykorzystania odbiorników dodatkowych. Podane zakresy są oparte na najlepszym scenariuszu WLTP. Czasy ładowania odnoszą się do temperatury otoczenia 23°C po wcześniejszej jeździe i mogą się różnić w zależności od sposobu użytkowania.
+5
+Masa własna (UE) odnosi się do pojazdu z wyposażeniem standardowym bez wyposażenia dodatkowego. Masa własna uwzględnia 90-procentowe napełnienie zbiornika paliwa i 75 kg wagi kierowcy. Wyposażenie dodatkowe może wpływać na masę samochodu, ładowność oraz, w przypadku wpływu na aerodynamikę, na prędkość maksymalną.
+6
+Masa przyczepy zależna od wyposażenia pojazdu
+7
+Wartości zmierzone zgodnie z regulaminem EKG ONZ nr 51/UE 540/2014 są 

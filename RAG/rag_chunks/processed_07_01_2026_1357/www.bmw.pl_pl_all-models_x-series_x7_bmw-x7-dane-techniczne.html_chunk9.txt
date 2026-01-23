@@ -1,0 +1,60 @@
+ kW (KM)
+9 (12) / -
+(Znamionowy) moment obrotowy w Nm
+200
+Wydajność
+Przyspieszenie 0-100 km/h w s
+5,9
+3
+Prędkość maksymalna w km/h
+245
+Zużycie i emisja
+1
+,
+4
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+8,8–8
+Emisja CO₂, cykl mieszany WLTP w g/km
+232–210
+Hałas przejściowy w dB (A)
+66
+8
+Stacjonarny poziom hałasu w dB (A) /1/min
+73 / 3 300
+8
+Akumulator wysokiego napięcia/48 V, ładowanie
+5
+Pojemność akumulatora w kWh
+0,4
+Wymiary i ciężar
+5 181 mm
+2 000 mm
+1 835 mm
+Długość w mm
+5 181
+Szerokość w mm
+2 000
+Wysokość w mm
+1 835
+Szerokość w mm / z lusterkami
+2 218
+Rozstaw osi w mm
+3 105
+Masa własna pojazdu w kg
+6
+2 565
+Dopuszczalna masa brutto w kg
+3 325
+Ładowność w kg
+835
+Uchwyt na relingi dachowe bez relingów w kg
+100
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+7
+3 500 / 140
+Pojemność bagażnika w l
+750–2 120
+Pojemność zbiornika w l
+80
+Koła i opony BMW.
+Opony w naszych pojazdach poddajemy rygorystycznym testom obejmującym do 50 różnych kryteriów jakościowych

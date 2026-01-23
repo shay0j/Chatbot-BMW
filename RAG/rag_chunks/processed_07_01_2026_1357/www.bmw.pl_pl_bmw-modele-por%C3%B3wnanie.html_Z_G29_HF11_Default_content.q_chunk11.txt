@@ -1,0 +1,62 @@
+egów
+6-biegowa, ręczna
+-
+-
+Rodzaj napędu
+Napęd tylny
+-
+-
+Silnik spalinowy TwinPower Turbo
+4
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW Z4 sDrive20i
+Cylindry
+4
+-
+-
+Pojemność w cm³
+1 998
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+145 (197) / 4 500 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+320 / 1 450 - 4 200
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW Z4 sDrive20i
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW Z4 sDrive20i
+Przyspieszenie 0-100 km/h w s
+6,8
+3
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+241
+-
+-
+Prędkoś

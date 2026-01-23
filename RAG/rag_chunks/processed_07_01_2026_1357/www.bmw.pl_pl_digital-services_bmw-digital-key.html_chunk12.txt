@@ -1,0 +1,7 @@
+a NFC, jak i technologia ultraszerokopasmowa (UWB).
+Co zrobić, jeśli mój smartfon wymaga naładowania?
+Możesz odblokować i uruchomić swój pojazd, nawet jeśli smartfon lub smartwatch wymaga naładowania. Przy odpowiedniej konfiguracji nadal możesz używać go jako kluczyka przez kilka godzin po wyłączeniu. Aby to zrobić, przytrzymaj urządzenie mobilne przy zewnętrznej klamce i postępuj zgodnie z instrukcjami na wyświetlaczu.
+Co się stanie w razie braku połączenia z Internetem?
+Połączenie z Internetem jest wymagane jedynie do konfiguracji kluczyka BMW Digital Key. Po zainstalowaniu kluczyka na Twoim urządzeniu połączenie nie jest już wymagane w celu otwarcia i zamknięcia pojazdu, a także uruchomienia silnika. Pozwala to na korzystanie z cyfrowego kluczyka całkowicie niezależnie od Internetu, na przykład na parkingach podziemnych lub w strefach o słabym zasięgu sieci.
+Czym jest Setup Card i jak jej używać?
+Dzięki karcie Setup Card jako właściciel pojazdu możesz wygodnie skonfigurować BMW Digi

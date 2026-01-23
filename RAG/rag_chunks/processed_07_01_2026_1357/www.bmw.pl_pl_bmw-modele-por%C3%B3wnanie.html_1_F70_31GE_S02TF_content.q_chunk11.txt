@@ -1,0 +1,61 @@
+matyczna
+-
+-
+Rodzaj napędu
+Napęd przedni
+-
+-
+Silnik spalinowy TwinPower Turbo
+5
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW 116
+Cylindry
+3
+-
+-
+Pojemność w cm³
+1 499
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+90 (122) / 3 900 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+230 / 1 500 - 3 600
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW 116
+(Nominal) power/30 minutes power in kW (hp)
+-
+-
+-
+(Nominal) torque in Nm
+-
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW 116
+Przyspieszenie 0-100 km/h w s
+9,8
+4
+-
+-
+Przyspieszenie 0 - 100 km/h metodą „1-foot rollout” w sekundach
+-
+-
+-
+Prędkość maksymalna w km/h
+210
+-
+-
+Prędkość maksymalna na napędzie elektrycznym w 

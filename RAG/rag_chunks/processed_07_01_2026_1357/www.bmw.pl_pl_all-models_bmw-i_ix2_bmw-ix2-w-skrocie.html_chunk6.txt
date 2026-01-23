@@ -1,0 +1,22 @@
+WLTP w km: 418–449
+Prezentowane wartości bazują na obowiązkowej procedurze pomiarowej WLTP. Rzeczywiste wartości zależą od różnych czynników, np. masy ładunku, stylu jazdy, trasy, warunków pogodowych, dodatkowego zużycia energii elektrycznej (w tym klimatyzacji), opon, kondycji akumulatora.
+Back to Navigation
+POCZUJ ELEKTRYZUJĄCĄ MOC.
+Elektryczne BMW iX2 xDrive30 już na pierwszy rzut oka wyróżnia się swoją sylwetką SUV-a coupé i atrapą chłodnicy BMW Iconic Glow. Łączy elastyczność i przestronność BMW serii X z innowacyjnym, w pełni elektrycznym napędem. Jego zasięg elektryczny 418–449 km (WLTP)
+[1]
+i przyśpieszenie wynoszące 5,6 sekund (0–100km/h) sprawiają, że idealnie nadaje się również do codziennego pokonywania dłuższych tras.
+Umów się na jazdę próbną
+BMW iX2.
+Wnętrze
+Wygląd zewnętrzny
+Włącz widok nocny
+Wyłącz widok nocny
+Zamknij dach
+Otwórz dach
+Obróć w lewo
+Obróć w prawo
+Obróć w górę
+Obróć w dół
+bmw.web.visualizer.controls.Layer open
+bmw.web.visualizer.controls.Layer close
+Model

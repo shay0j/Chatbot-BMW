@@ -1,0 +1,64 @@
+20i
+Typ napędu
+Petrol – 48 Volt Mild-Hybrid
+-
+-
+Moc w kW (KM)
+125 (170)
+3
+-
+-
+Moment obrotowy w Nm
+280
+3
+-
+-
+Skrzynia biegów
+8-biegowa, automatyczna
+-
+-
+Rodzaj napędu
+Napęd przedni
+-
+-
+Silnik spalinowy TwinPower Turbo
+7
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik spalinowy TwinPower Turbo
+BMW X2 sDrive20i
+Cylindry
+3
+-
+-
+Pojemność w cm³
+1 499
+-
+-
+Moc znamionowa w kW (KM) / obr/min
+115 (156) / 4 700 - 6 500
+-
+-
+Znamionowy moment obrotowy w Nm / obr/min
+240 / 1 500 - 4 400
+-
+-
+Silnik elektryczny
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Silnik elektryczny
+BMW X2 sDrive20i
+(Nominal) power/30 minutes power in kW (hp)
+15 (20) / -
+-
+-
+(Nominal) torque in Nm
+55
+-
+-
+Wydajność
+Wybrane modele w tym obszarze niczym się nie różnią.
+Informacja dotycząca tej sekcji nie występuje dla wybranych modeli.
+Wydajność
+BMW X2 sDrive20i
+Przyspieszeni

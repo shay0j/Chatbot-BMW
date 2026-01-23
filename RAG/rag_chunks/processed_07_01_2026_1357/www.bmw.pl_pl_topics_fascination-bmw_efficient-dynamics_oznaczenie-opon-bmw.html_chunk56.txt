@@ -1,0 +1,112 @@
+ 106 W XL RSC
+RSC
+Michelin
+-
+20"
+Rear
+275/40 R 20 106 W XL RSC
+RSC
+Pirelli
+-
+20"
+Front
+245/45 R 20 103 V XL M+S RSC
+RSC
+Pirelli
+SZ
+20"
+Rear
+275/40 R 20 106 V XL M+S RSC
+RSC
+Pirelli
+SZ
+21"
+Front
+245/40 R 21 100 Y XL RSC
+RSC
+Bridgestone
+-
+21"
+Front
+245/40 R 21 100 Y XL RSC
+RSC
+Bridgestone
+-
+21"
+Front
+245/40 R 21 100 Y XL RSC
+RSC
+Pirelli
+-
+21"
+Rear
+275/35 R 21 103 Y XL RSC
+RSC
+Bridgestone
+-
+21"
+Rear
+275/35 R 21 103 Y XL RSC
+RSC
+Bridgestone
+-
+21"
+Rear
+275/35 R 21 103 Y XL RSC
+RSC
+Pirelli
+-
+-
+X5
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+19"
+All-round
+265/50 R 19 110 W XL
+STD
+Bridgestone
+-
+19"
+All-round
+265/50 R 19 110 W XL
+STD
+Pirelli
+-
+19"
+All-round
+265/50 R 19 110 W XL RSC
+RSC
+Hankook
+-
+19"
+All-round
+265/50 R 19 110 W XL RSC
+RSC
+Pirelli
+-
+19"
+All-round
+265/50 R 19 110 H XL M+S RSC
+RSC
+Bridgestone
+-
+19"
+All-round
+265/50 R 19 110 H XL M+S RSC
+RSC
+Continental
+-
+19"
+All-round
+265/50 R 19 110 H XL M+S RSC
+RSC
+Michelin
+-
+19"
+All-round
+265/50 R 19 110 H XL M+S RSC

@@ -1,0 +1,111 @@
+destein
+-
+17"
+All-round
+205/60 R 17 97 W XL
+STD
+Bridgestone
+-
+17"
+All-round
+205/60 R 17 97 W XL
+STD
+Hankook
+-
+17"
+All-round
+205/60 R 17 97 H XL M+S
+STD
+Continental
+-
+17"
+All-round
+205/60 R 17 97 H XL M+S
+STD
+Hankook
+-
+18"
+All-round
+225/50 R 18 99 W XL
+STD
+Apollo Vredestein
+-
+18"
+All-round
+225/50 R 18 99 W XL
+STD
+Bridgestone
+-
+18"
+All-round
+225/50 R 18 99 W XL
+STD
+Continental
+-
+18"
+All-round
+225/50 R 18 99 W XL HP
+STD
+Pirelli
+-
+18"
+All-round
+225/50 R 18 99 V XL M+S
+STD
+Continental
+SZ
+18"
+All-round
+225/50 R 18 99 V XL M+S
+STD
+Goodyear
+SZ
+19"
+All-round
+225/45 R 19 96 W XL
+STD
+Continental
+-
+19"
+All-round
+225/45 R 19 96 W XL
+STD
+Goodyear
+-
+-
+Modele BMW serii 3
+Seria 3 Limuzyna
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+16"
+All-round
+205/60 R 16 96 H XL M+S
+STD
+Bridgestone
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S
+STD
+Continental
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S
+STD
+Michelin
+SZ
+16"
+All-round
+205/60 R 16 96 H XL M+S
+STD
+Pirelli
+SZ
+16"
+All-round
+205/60 R 1

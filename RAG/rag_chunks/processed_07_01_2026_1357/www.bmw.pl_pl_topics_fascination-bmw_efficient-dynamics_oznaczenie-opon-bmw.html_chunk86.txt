@@ -1,0 +1,121 @@
+elli
+SZ
+20"
+Rear
+HL 285/40 R 20 111 V XL M+S
+STD
+Hankook
+SZ
+20"
+Rear
+HL 285/40 R 20 111 V XL M+S
+STD
+Michelin
+SZ
+20"
+Rear
+HL 285/40 R 20 111 V XL M+S
+STD
+Pirelli
+SZ
+20"
+Front
+HL 285/40 ZR 20 111 Y XL
+STD
+Hankook
+-
+20"
+Front
+HL 285/40 ZR 20 111 Y XL
+STD
+Michelin
+-
+20"
+Front
+HL 285/40 ZR 20 111 Y XL
+STD
+Pirelli
+-
+20"
+Front
+HL 285/40 ZR 20 111 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+HL 295/35 ZR 21 110 Y XL
+STD
+Hankook
+-
+21"
+Rear
+HL 295/35 ZR 21 110 Y XL
+STD
+Michelin
+-
+21"
+Rear
+HL 295/35 ZR 21 110 Y XL
+STD
+Pirelli
+-
+21"
+Rear
+HL 295/35 ZR 21 110 Y XL
+STD
+Pirelli
+-
+-
+M8 Cabrio
+Wheel size
+Fitment
+Tire Dimension
+STD*/RSC**
+Manufacturer
+Info
+Eprel Link
+19"
+All-round
+265/40 R 19 102 V XL M+S
+STD
+Continental
+-
+19"
+All-round
+265/40 R 19 102 V XL M+S
+STD
+Michelin
+-
+19"
+Front
+275/40 ZR 19 105 Y XL
+STD
+Pirelli
+-
+19"
+Front
+275/40 ZR 19 105 Y XL
+STD
+Yokohama
+-
+19"
+Rear
+285/40 ZR 19 107 Y XL
+STD
+Pirelli
+-
+19"
+Rear
+285/40 ZR 19 107 Y XL
+STD
+Yokohama
+-
+19"
+Front
+265/40 R 19 102 V XL M+S
+STD
+Continental
+SZ
+19"
+Front

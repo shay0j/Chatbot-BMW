@@ -1,0 +1,6 @@
+eźć można tutaj
+Co to jest RDE?
+RDE to skrót od „Real Driving Emissions”. Jest to nowa procedura obliczania emisji substancji szkodliwych, takich jak tlenki azotu i cząstki stałe. Decydujące jest to, że pomiary dokonywane są w realnych warunkach podczas jazdy na drogach, a nie w laboratorium. Do pomiaru na rurze wydechowej testowanego samochodu montowany jest tzw. Portable Emissions Measurement System (PEMS).
+Więcej informacji na ten temat znaleźć można tutaj
+Czym jest Euro 6?
+Aktualna norma emisji spalin to Euro 6. Wyznacza ona niższe wartości maksymalne emisji cząstek stałych i tlenków azotu niż norma Euro 5. Od września 2018 r.* obowiązuje norma emisji spalin Euro 6c, która w porównaniu z normą Euro 6b narzuca jeszcze niższe wartości graniczne dla emisji cząstek stałych w pojazdach z silnikiem benzynowym. Dla samochodów z silnikiem wysokoprężnym w normie Euro 6b i Euro 6c obowiązują te same wartości graniczne. Normy emisji spalin Euro 6d-TEMP (od września 2019 r.*) i Euro 6d (od sty

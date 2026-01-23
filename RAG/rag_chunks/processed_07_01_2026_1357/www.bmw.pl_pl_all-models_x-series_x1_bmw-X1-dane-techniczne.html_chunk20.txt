@@ -1,0 +1,54 @@
+7,4
+5
+Prędkość maksymalna w km/h
+225
+Zużycie i emisja
+1
+,
+6
+Zużycie paliwa, cykl mieszany WLTP w l/100 km
+5–4,7
+Emisja CO₂, cykl mieszany WLTP w g/km
+132–124
+Hałas przejściowy w dB (A)
+68
+12
+Stacjonarny poziom hałasu w dB (A) /1/min
+75 / 3 000
+12
+Akumulator wysokiego napięcia/48 V, ładowanie
+9
+Pojemność akumulatora w kWh
+0,9
+Wymiary i ciężar
+4 500 mm
+1 845 mm
+1 642 mm
+Długość w mm
+4 500
+Szerokość w mm
+1 845
+Wysokość w mm
+1 642
+Szerokość w mm / z lusterkami
+2 104
+Rozstaw osi w mm
+2 692
+Masa własna pojazdu w kg
+10
+1 765
+Dopuszczalna masa brutto w kg
+2 265
+Ładowność w kg
+575
+Uchwyt na relingi dachowe bez relingów w kg
+75
+Masa przyczepy, opcjonalnie hamowanej fabrycznie do 12% / obciążenie haka w kg
+11
+2 000 / 80
+Pojemność bagażnika w l
+500–1 545
+Pojemność zbiornika w l
+54
+1
+Dane dotyczące mocy silników benzynowych odnoszą się do paliwa o liczbie oktanowej 98. Dane dotyczące zużycia odnoszą się do paliwa referencyjnego zgodnie z rozporządzeniem (WE) 1151/2017. Dopuszczalne jest stosowanie 
