@@ -1,0 +1,21 @@
+=== PODSUMOWANIE NORMALIZACJI ===
+Data: 2026-01-24 13:12:15
+Folder źródłowy: bmw_complete_20260124_000539
+Stron ogółem: 50
+Stron z modelami: 40
+Innych stron: 10
+Średnio znaków/stronę: 8493
+
+Najczęstsze modele:
+  X3: 32 stron
+  i4: 24 stron
+  X1: 18 stron
+  X5: 12 stron
+  iX: 10 stron
+  M5: 8 stron
+  M3: 6 stron
+
+Statystyki cen:
+  Znalezionych cen: 29
+  Średnia cena: 268 397 zł
+  Zakres: 122,295 - 535,000 zł

@@ -24,3 +24,22 @@ Następny krok: dodać LLM i pracować nad czatbotem per se.
 
 19.01
 WŁĄCZAĆ TYM: uvicorn app.main:app --reload
+
+24.01
+"Zamiast polegać na sztywnej liście URL-i, które szybko się dezaktualizują, lepiej jest podejść do tego mądrzej:
+
+Skup się na działających stronach "bramowych": Twoje skrypty już świetnie pobrały treść ze strony all-models.html. Ta strona to prawdopodobnie hub, z którego można "wyskrobać" aktualne linki do wszystkich modeli. Jest tam mnóstwo cennych danych.
+
+Zmień strategię na "od ogółu do szczegółu":
+
+Krok 1: Pobierz główną stronę z modelami (all-models.html).
+
+Krok 2: Przeanalizuj jej kod HTML (lub renderowany tekst) i wyszukaj w nim wszystkie linki prowadzące do szczegółowych opisów modeli (np. linki zawierające seria-5, x3, i4).
+
+Krok 3: Użyj tej dynamicznie znalezionej listy linków do dalszego scrapowania. Dzięki temu zawsze będziesz podążać za aktualną strukturą strony.
+
+Rozważ uproszczenie: Jeśli celem jest szybkie zbudowanie bazy wiedzy dla chatbota, dane zebrane z dwóch głównych działających stron mogą być całkowicie wystarczające na początek. Zawierają one informacje o modelach, cenach, typach napędu i ofertach leasingowych.
+
+Czy chcesz, żebym pomógł ci przeanalizować pobraną już treść ze strony all-models.html i pokazał, jak automatycznie wyciągnąć z niej aktualne linki?"
+
+odpalić wszystkie ponumerowane pliki ogarniające wyniki scrapowania

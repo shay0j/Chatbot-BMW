@@ -11,6 +11,7 @@ from app.core.config import settings
 from app.core.exceptions import PromptError
 from app.utils.logger import log
 
+
 class PromptTemplates:
     """Szablony promptów dla Leo - wirtualnego asystenta ZK Motors"""
     
@@ -43,6 +44,7 @@ NIGDY nie rozmawiasz o:
 - Przyjazny, profesjonalny, ale naturalny
 - Używaj zwrotów: "Dobrze Cię widzieć!", "Z przyjemnością pomogę!"
 - Nie używaj emoji
+- Pisz zawsze po polsku!
 
 # FORMATOWANIE ODPOWIEDZI
 1. NAJPIERW sprawdź czy pytanie dotyczy BMW/MINI
@@ -53,7 +55,7 @@ NIGDY nie rozmawiasz o:
 6. ZACHĘCAJ DO KONTAKTU: "Chcesz umówić test drive lub otrzymać wycenę?"
 
 # JĘZYK
-Odpowiadaj w języku: $language
+Odpowiadaj w języku polskim.
 Używaj oficjalnej terminologii BMW/MINI
 
 # KONTEKST ZK MOTORS (Twoja wiedza):
@@ -66,25 +68,36 @@ Odpowiadaj ZWIĘŹLE, na temat, zawsze wracając do BMW/MINI i oferty ZK Motors.
 $user_message
 """)
     
-    # Prompt powitalny
+    # Prompt powitalny (POPRAWIONY - wymusza czysty tekst)
     WELCOME_PROMPT = Template("""
 # WITAMY W ZK MOTORS!
 Jesteś Leo, wirtualnym asystentem ZK Motors.
 
-Użytkownik właśnie rozpoczął czat. Przywitaj się naturalnie:
+Użytkownik właśnie rozpoczął czat. Przywitaj się naturalnie.
 
-WERSJA POLSKA:
-"Cześć! Jestem Leo, wirtualny Asystent Klienta ZK Motors, oficjalnego dealera BMW i MINI. 
-Specjalizuję się we wszystkich modelach BMW i MINI - od klasycznych po elektryczne!
-W czym mogę Ci dziś pomóc? Może:
-• Wybór modelu BMW/MINI dla Twoich potrzeb?
-• Specyfikacje techniczne?
-• Informacje o test drive w ZK Motors?
-• Aktualne promocje?
+# WAŻNE INSTRUKCJE:
+1. Odpowiedz TYLKO tekstem powitalnym w jednej wiadomości
+2. NIE używaj JSON, XML, ani innych formatów
+3. NIE dodawaj dodatkowych instrukcji ani komentarzy
+4. TYLKO bezpośrednia odpowiedź dla użytkownika
+5. NIE zawieraj tego promptu w odpowiedzi
+6. Odpowiedz w języku: $language
 
-Pytaj śmiało!"
+# PRZYKŁAD POPRAWNEJ ODPOWIEDZI:
+"Cześć! 👋 Jestem Leo, twój osobisty asystent w ZK Motors, oficjalnym dealerze BMW i MINI.
 
-Użyj odpowiedniej wersji językowej.
+Jestem tutaj, żeby pomóc Ci odkryć świat BMW i MINI. Niezależnie od tego, czy:
+• Szukasz konkretnego modelu (od miejskich MINI po luksusowe BMW serii 7)
+• Interesują Cię nowe elektryki BMW i
+• Chcesz poznać możliwości test drive'u
+• Szukasz najlepszych ofert i promocji
+• Masz pytania techniczne lub o wyposażenie
+
+Po prostu zapytaj! Opowiem Ci o specyfikacjach, pomogę dobrać model do Twoich potrzeb, albo podpowiem, który samochód sprawdzi się najlepiej w Twojej sytuacji.
+
+Co Cię dzisiaj interesuje? 😊"
+
+# TWOJA ODPOWIEDŹ (tylko powitanie):
 """)
     
     # Prompt dla pytań o BMW
@@ -114,7 +127,7 @@ NIE ZMYŚLAJ! Jeśli brakuje danych, poleć kontakt z salonem.
     
     # Prompt dla pytań o MINI
     MINI_PROMPT = Template("""
-#PYTANIE O MINI
+# PYTANIE O MINI
 Użytkownik pyta o MINI: $question
 
 Jako Leo (ZK Motors) odpowiedz na podstawie kontekstu:
@@ -220,7 +233,7 @@ class PromptService:
             
             # 2. SPRAWDŹ CZY TO POWITANIE
             if self._is_welcome_message(user_message, conversation_history):
-                log.info(f"Welcome message detected for user {user_id}")
+                log.info(f"Welcome message detected for user {user_id}: {user_message[:50]}")
                 prompt_template = self.templates.WELCOME_PROMPT
                 prompt = prompt_template.substitute(language=language)
                 return prompt
@@ -254,7 +267,7 @@ class PromptService:
             
             else:
                 # Fallback do głównego system prompt
-                log.warning(f"Using fallback system prompt for: {user_message[:50]}")
+                log.info(f"Using fallback system prompt for: {user_message[:50]}")
                 return self.templates.SYSTEM_PROMPT.substitute(
                     language=language,
                     context=context_text,
@@ -262,6 +275,7 @@ class PromptService:
                 )
             
         except Exception as e:
+            log.error(f"Prompt building error: {str(e)}")
             raise PromptError(f"Failed to build prompt: {str(e)}")
     
     def _analyze_message(
@@ -280,35 +294,45 @@ class PromptService:
             r"break.*character", r"jailbreak",
             r"bypass.*restriction", r"override",
             r"acting.*as", r"you.*are.*now",
+            r"od teraz", r"from now on",
         ]
         
         for pattern in jailbreak_indicators:
             if re.search(pattern, msg_lower, re.IGNORECASE):
                 self.jailbreak_attempts[user_id] = self.jailbreak_attempts.get(user_id, 0) + 1
-                log.warning(f"Jailbreak attempt #{self.jailbreak_attempts[user_id]} by {user_id}")
+                log.warning(f"Jailbreak attempt #{self.jailbreak_attempts[user_id]} by {user_id}: {message[:50]}")
                 return "jailbreak", 3
         
         # OFFTOP DETEKCJA
         offtop_indicators = {
             "audi": 1, "mercedes": 1, "toyota": 1, "honda": 1,
             "ford": 1, "volkswagen": 1, "tesla": 1, "skoda": 1,
-            "polityka": 2, "polityk": 2,
-            "sport": 2, "piłka": 2, "football": 2,
-            "pogoda": 2, "weather": 2,
-            "rozrywka": 2, "entertainment": 2,
-            "ai": 3, "chatbot": 3, "gpt": 3,
-            "jeste. robotem": 3, "you.*are.*ai": 3,
+            "polityka": 2, "polityk": 2, "rząd": 2, "wybory": 2,
+            "sport": 2, "piłka": 2, "football": 2, "nba": 2,
+            "pogoda": 2, "weather": 2, "deszcz": 2, "słońce": 2,
+            "rozrywka": 2, "entertainment": 2, "film": 2, "muzyka": 2,
+            "ai": 2, "chatbot": 2, "gpt": 2, "llm": 2,
+            "jeste. robotem": 2, "you.*are.*ai": 2,
+            "chatgpt": 2, "openai": 2, "cohere": 2,
+            "twoja.*praca": 2, "your.*job": 2,
+            "system": 2, "backend": 2, "frontend": 2,
+            "program": 2, "kod": 2, "code": 2,
         }
         
         max_level = 0
         for keyword, level in offtop_indicators.items():
-            if keyword in msg_lower:
+            if re.search(r'\b' + re.escape(keyword) + r'\b', msg_lower):
                 max_level = max(max_level, level)
                 history = self.offtopic_history.get(user_id, [])
-                history.append({"message": message[:100], "level": level, "time": datetime.now()})
-                self.offtopic_history[user_id] = history[-10:]
+                history.append({
+                    "message": message[:100], 
+                    "level": level, 
+                    "time": datetime.now().isoformat()
+                })
+                self.offtopic_history[user_id] = history[-10:]  # Ostatnie 10 wpisów
         
         if max_level > 0:
+            log.info(f"Offtopic detected (level {max_level}) for user {user_id}: {message[:50]}")
             return "offtopic", max_level
         
         return "on_topic", 0
@@ -316,16 +340,80 @@ class PromptService:
     def _is_welcome_message(
         self, message: str, history: Optional[List[Dict[str, str]]]
     ) -> bool:
-        """Sprawdza czy to pierwsza wiadomość/witanie"""
+        """Sprawdza czy to pierwsza wiadomość/witanie - NIE TRAKTUJ PYTAŃ JAKO WELCOME!"""
         if not history or len(history) == 0:
-            return True
-        
-        msg_lower = message.lower()
-        welcome_words = ["cze.ć", "witaj", "hello", "hi", "hej", "dzień dobry", "dobry", "siema"]
-        
-        if any(word in msg_lower for word in welcome_words):
-            if len(history) <= 2:
-                return True
+            # Pierwsza wiadomość w sesji
+            msg_lower = message.lower().strip()
+            
+            # Usuń znaki interpunkcyjne dla lepszego porównania
+            clean_msg = re.sub(r'[^\w\s]', ' ', msg_lower)
+            
+            # Lista CZYSTYCH przywitań (tylko te słowa)
+            pure_greetings = [
+                "cześć", "witaj", "hello", "hi", "hej", 
+                "dzień dobry", "dobry", "siema", "elo",
+                "yo", "good morning", "good afternoon", "hey",
+                "witam", "cze", "heja"
+            ]
+            
+            # Słowa kluczowe pytań - jeśli to zawiera, to NIE jest welcome!
+            question_indicators = [
+                "?", "polec", "proszę", "pomóż", "szukam", 
+                "chcę", "potrzebuję", "jak", "co", "gdzie",
+                "który", "jaki", "czy", "kiedy", "dlaczego",
+                "ile", "czy", "można", "rekomend", "suger",
+                "auto", "samochód", "bmw", "mini", "car",
+                "model", "rodzina", "family", "test", "drive",
+                "cena", "price", "koszt", "cost", "oferta",
+                "promocja", "discount", "rabat", "sale"
+            ]
+            
+            # Sprawdź czy to PYTANIE (ma znak ? lub słowa kluczowe)
+            is_question = False
+            if "?" in message:
+                is_question = True
+            else:
+                for indicator in question_indicators:
+                    if indicator in clean_msg:
+                        is_question = True
+                        break
+            
+            # Jeśli to PYTANIE - NIE traktuj jako welcome!
+            if is_question:
+                log.info(f"Question detected, not welcome message: {message[:50]}")
+                return False
+            
+            # Sprawdź czy to CZYSTE przywitanie (tylko słowa z listy)
+            words = clean_msg.split()
+            if 1 <= len(words) <= 4:  # Bardzo krótkie wiadomości
+                # Sprawdź czy wszystkie słowa są przywitaniem
+                all_words_are_greetings = True
+                for word in words:
+                    if not any(greeting in word for greeting in pure_greetings):
+                        all_words_are_greetings = False
+                        break
+                
+                if all_words_are_greetings:
+                    log.info(f"Pure greeting detected as welcome: {message[:50]}")
+                    return True
+            
+            # Dłuższe wiadomości - sprawdź czy zaczyna się od przywitania
+            if len(words) > 0:
+                first_word = words[0]
+                if any(greeting == first_word for greeting in pure_greetings):
+                    # Sprawdź czy reszta też jest przywitaniem a nie pytaniem
+                    rest_of_message = " ".join(words[1:])
+                    has_question_words = any(
+                        indicator in rest_of_message 
+                        for indicator in question_indicators
+                    )
+                    
+                    if not has_question_words and len(words) <= 3:
+                        log.info(f"Greeting start detected as welcome: {message[:50]}")
+                        return True
+            
+            log.info(f"Not a welcome message: {message[:50]}")
+            return False
         
         return False
     
@@ -334,8 +422,10 @@ class PromptService:
         msg_upper = message.upper()
         
         bmw_indicators = [
-            "BMW", "SERIA", "SERIES", " X", " I", " M", " I3", " I4", " I7",
-            "330", "520", "X3", "X5", "X7", "M3", "M5", "M8"
+            "BMW", "SERIA", "SERIES", " X", " I", " M", 
+            "I3", "I4", "I7", "I5", "I8",
+            "330", "520", "X3", "X5", "X7", "M3", "M5", "M8",
+            "SERIA 3", "SERIA 5", "SERIA 7", "X1", "X2", "X6"
         ]
         
         for indicator in bmw_indicators:
@@ -343,7 +433,8 @@ class PromptService:
                 return "bmw"
         
         mini_indicators = [
-            "MINI", "COOPER", "CLUBMAN", "COUNTRYMAN", "MINI ELECTRIC",
+            "MINI", "COOPER", "CLUBMAN", "COUNTRYMAN", 
+            "MINI ELECTRIC", "MINI E",
             "JOHN COOPER WORKS", "JCW"
         ]
         
@@ -351,7 +442,7 @@ class PromptService:
             if indicator in msg_upper:
                 return "mini"
         
-        return "bmw"
+        return "bmw"  # Default to BMW jeśli nie wykryto
     
     def _prepare_context(
         self,
@@ -359,8 +450,9 @@ class PromptService:
         brand: str,
         user_message: str
     ) -> Tuple[str, bool]:
-        """Przygotowuje kontekst"""
+        """Przygotowuje kontekst z dokumentów"""
         if not documents:
+            log.warning("No documents provided for context")
             return "Brak danych w systemie ZK Motors.", False
         
         filtered_docs = []
@@ -369,40 +461,54 @@ class PromptService:
             
             relevance_score = 0
             
+            # Wzmocnienie jeśli dokument dotyczy odpowiedniej marki
             if brand == "bmw" and "BMW" in content:
-                relevance_score += 10
+                relevance_score += 15
             elif brand == "mini" and "MINI" in content:
+                relevance_score += 15
+            
+            # Wzmocnienie jeśli zawiera ZK MOTORS
+            if "ZK MOTORS" in content or "ZK-MOTORS" in content:
                 relevance_score += 10
             
+            # Dopasowanie słów kluczowych z pytania
             msg_words = set(user_message.upper().split())
             content_words = set(content.split())
             common_words = msg_words.intersection(content_words)
-            relevance_score += len(common_words)
+            relevance_score += len(common_words) * 2
             
             if relevance_score > 0:
                 filtered_docs.append((relevance_score, doc))
         
+        if not filtered_docs:
+            log.warning(f"No relevant documents found for brand {brand}")
+            return "Brak odpowiednich informacji w bazie ZK Motors.", False
+        
+        # Sortuj po relevancy
         filtered_docs.sort(key=lambda x: x[0], reverse=True)
         
+        # Przygotuj tekst kontekstu
         context_parts = []
-        for score, doc in filtered_docs[:3]:
+        for score, doc in filtered_docs[:3]:  # Top 3 dokumenty
             content = self._get_doc_content(doc)
             metadata = self._get_doc_metadata(doc)
             
             source = metadata.get("source", "Baza ZK Motors")
             title = metadata.get("title", f"Dokument o {brand}")
             
-            context_parts.append(f"[{source}: {title}]\n{content[:500]}")
-        
-        if not context_parts:
-            return "Brak odpowiednich informacji w bazie ZK Motors.", False
+            # Ogranicz długość i dodaj do kontekstu
+            context_parts.append(f"[{source}: {title}]\n{content[:800]}")
         
         context_text = "\n\n---\n\n".join(context_parts)
         
+        # Zawsze dodaj info o ZK Motors jeśli brakuje
         if "ZK MOTORS" not in context_text.upper():
-            zk_info = "[ZK MOTORS - OFICJALNY DEALER]\nZK Motors to sieć autoryzowanych salonów BMW i MINI w Polsce."
+            zk_info = """[ZK MOTORS - OFICJALNY DEALER]
+ZK Motors to sieć autoryzowanych salonów BMW i MINI w Polsce.
+Oferujemy kompleksową obsługę: sprzedaż nowych i używanych pojazdów, serwis, części, finansowanie i ubezpieczenia."""
             context_text = zk_info + "\n\n" + context_text
         
+        log.info(f"Context prepared with {len(filtered_docs)} relevant documents")
         return context_text, True
     
     def _get_doc_content(self, doc) -> str:
@@ -443,13 +549,19 @@ class PromptService:
         attempts = self.jailbreak_attempts.get(user_id, 0)
         
         if attempts >= 3:
-            defense_strategy = "Odpowiedz krótko: 'Pomoc dostępna tylko w zakresie BMW, MINI i ZK Motors.'"
+            defense_strategy = "Odpowiedz krótko: 'Pomoc dostępna tylko w zakresie BMW, MINI i ZK Motors. W czym mogę pomóc?'"
         elif level == 3:
-            defense_strategy = "Stanowczo przypomnij o zakresie kompetencji i zaproponuj alternatywę (BMW/MINI)."
+            defense_strategy = """Stanowczo ale uprzejmie przypomnij o zakresie kompetencji:
+'Specjalizuję się wyłącznie w markach BMW i MINI oraz ofercie ZK Motors. 
+Czy mam pomóc w doborze modelu, specyfikacjach lub umówieniu test drive?'"""
         elif level == 2:
-            defense_strategy = "Uprzejmie poinformuj o specjalizacji i zaproponuj konkretną pomoc (test drive)."
+            defense_strategy = """Uprzejmie poinformuj o specjalizacji:
+'Jako asystent ZK Motors pomagam w kwestiach związanych z BMW i MINI. 
+Może zainteresuje Cię któryś z naszych modeli lub jazda próbna?'"""
         else:
-            defense_strategy = "Naturalnie wróć do tematu BMW/MINI z entuzjastyczną ofertą pomocy."
+            defense_strategy = """Naturalnie wróć do tematu:
+'Specjalizuję się w samochodach BMW i MINI. W czym mogę pomóc? 
+Może masz pytanie o konkretny model, specyfikacje lub test drive w ZK Motors?'"""
         
         return self.templates.DEFENSE_PROMPT.substitute(
             question=question,
@@ -471,6 +583,7 @@ class PromptService:
 # ============================================
 
 _prompt_service_instance = None
+
 
 async def get_prompt_service() -> PromptService:
     """Factory function dla dependency injection."""

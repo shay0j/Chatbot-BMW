@@ -1,0 +1,31 @@
+{
+  "total_chunks": 1476,
+  "size_distribution": {
+    "small": 276,
+    "medium": 1142,
+    "large": 58
+  },
+  "thematic_distribution": {
+    "spec_chunks": 178,
+    "model_chunks": 1476,
+    "price_chunks": 526
+  },
+  "size_stats": {
+    "avg_chars": 310.7012195121951,
+    "min_chars": 54,
+    "max_chars": 400,
+    "median_chars": 361
+  },
+  "priority_distribution": {
+    "1": 0,
+    "2": 0,
+    "3": 1298,
+    "4": 22,
+    "5": 156
+  },
+  "saved_at": "2026-01-24T13:12:38.372847",
+  "chunker_settings": {
+    "chunk_size": 500,
+    "chunk_overlap": 100
+  }
+}

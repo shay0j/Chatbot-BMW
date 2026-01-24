@@ -1,0 +1,441 @@
+[
+  {
+    "url": "https://www.bmw.pl/pl/index.html",
+    "title": "Oficjalna strona internetowa BMW Polska: Pojazdy i innowacje klasy premium",
+    "model": null,
+    "detected_models": [
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 237150.0,
+      "currency": "PLN",
+      "formatted": "237 150 zł",
+      "source_text": "237 150 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/index.html",
+    "title": "Oficjalna strona internetowa BMW Polska: Pojazdy i innowacje klasy premium",
+    "model": null,
+    "detected_models": [
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 198915.0,
+      "currency": "PLN",
+      "formatted": "198 915 zł",
+      "source_text": "198 915,00 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/all-models.html",
+    "title": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "model": null,
+    "detected_models": [
+      "X5",
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 535000.0,
+      "currency": "PLN",
+      "formatted": "535 000 zł",
+      "source_text": "535 000 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/all-models.html",
+    "title": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "model": null,
+    "detected_models": [
+      "X5",
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 410000.0,
+      "currency": "PLN",
+      "formatted": "410 000 zł",
+      "source_text": "410 000 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/all-models.html",
+    "title": "Odkryj i skonfiguruj wszystkie modele BMW.pl",
+    "model": null,
+    "detected_models": [
+      "X5",
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 263500.0,
+      "currency": "PLN",
+      "formatted": "263 500 zł",
+      "source_text": "263 500 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/Shop-Online/bmw-oferty.html",
+    "title": "Oferty i promocje BMW",
+    "model": null,
+    "detected_models": [
+      "X1",
+      "i4",
+      "iX",
+      "X5",
+      "X3"
+    ],
+    "price": {
+      "amount": 198915.0,
+      "currency": "PLN",
+      "formatted": "198 915 zł",
+      "source_text": "198 915 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/Shop-Online/bmw-oferty.html",
+    "title": "Oferty i promocje BMW",
+    "model": null,
+    "detected_models": [
+      "X1",
+      "i4",
+      "iX",
+      "X5",
+      "X3"
+    ],
+    "price": {
+      "amount": 206925.0,
+      "currency": "PLN",
+      "formatted": "206 925 zł",
+      "source_text": "206 925 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/Shop-Online/bmw-oferty.html",
+    "title": "Oferty i promocje BMW",
+    "model": null,
+    "detected_models": [
+      "X1",
+      "i4",
+      "iX",
+      "X5",
+      "X3"
+    ],
+    "price": {
+      "amount": 122295.0,
+      "currency": "PLN",
+      "formatted": "122 295 zł",
+      "source_text": "122 295 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/bmw-financial-services.html",
+    "title": "BMW Financial Services: oferty leasingowe i finansowe. ",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 206925.0,
+      "currency": "PLN",
+      "formatted": "206 925 zł",
+      "source_text": "206 925 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/bmw-financial-services/bmw-leasing.html",
+    "title": "Leasing BMW: oferty i informacje",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 259125.0,
+      "currency": "PLN",
+      "formatted": "259 125 zł",
+      "source_text": "259 125 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/bmw-financial-services/bmw-leasing.html",
+    "title": "Leasing BMW: oferty i informacje",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 206925.0,
+      "currency": "PLN",
+      "formatted": "206 925 zł",
+      "source_text": "206 925,00 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/bmw-financial-services/bmw-leasing.html",
+    "title": "Leasing BMW: oferty i informacje",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 220720.0,
+      "currency": "PLN",
+      "formatted": "220 720 zł",
+      "source_text": "220 720 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/bmw-financial-services/bmw-comfort-lease.html",
+    "title": "Finansowanie BMW: oferty i informacje",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 206925.0,
+      "currency": "PLN",
+      "formatted": "206 925 zł",
+      "source_text": "206 925,00 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/bmw-financial-services/bmw-comfort-lease.html",
+    "title": "Finansowanie BMW: oferty i informacje",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 220720.0,
+      "currency": "PLN",
+      "formatted": "220 720 zł",
+      "source_text": "220 720 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/konfigurator.html",
+    "title": "BMW Polska | Konfigurator",
+    "model": null,
+    "detected_models": [
+      "X5",
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 535000.0,
+      "currency": "PLN",
+      "formatted": "535 000 zł",
+      "source_text": "535 000 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/konfigurator.html",
+    "title": "BMW Polska | Konfigurator",
+    "model": null,
+    "detected_models": [
+      "X5",
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 410000.0,
+      "currency": "PLN",
+      "formatted": "410 000 zł",
+      "source_text": "410 000 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/konfigurator.html",
+    "title": "BMW Polska | Konfigurator",
+    "model": null,
+    "detected_models": [
+      "X5",
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 263500.0,
+      "currency": "PLN",
+      "formatted": "263 500 zł",
+      "source_text": "263 500 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/konfigurator.html",
+    "title": "BMW Polska | Konfigurator",
+    "model": null,
+    "detected_models": [
+      "X5",
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 237150.0,
+      "currency": "PLN",
+      "formatted": "237 150 zł",
+      "source_text": "237 150 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/samochod-elektryczny/koszty-samochodu-elektrycznego.html",
+    "title": "Koszty pojazdu elektrycznego: ceny, dotacje i utrzymanie",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 280000.0,
+      "currency": "PLN",
+      "formatted": "280 000 zł",
+      "source_text": "280 000 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/samochod-elektryczny/koszty-samochodu-elektrycznego.html",
+    "title": "Koszty pojazdu elektrycznego: ceny, dotacje i utrzymanie",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 350000.0,
+      "currency": "PLN",
+      "formatted": "350 000 zł",
+      "source_text": "350 000 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/samochod-elektryczny/koszty-samochodu-elektrycznego.html",
+    "title": "Koszty pojazdu elektrycznego: ceny, dotacje i utrzymanie",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 335000.0,
+      "currency": "PLN",
+      "formatted": "335 000 zł",
+      "source_text": "335 000 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/samochod-elektryczny/hybryda-plug-in.html",
+    "title": "Hybrydy plug-in BMW: modele, zalety i opcje zakupu",
+    "model": null,
+    "detected_models": [
+      "M5",
+      "X3"
+    ],
+    "price": {
+      "amount": 229500.0,
+      "currency": "PLN",
+      "formatted": "229 500 zł",
+      "source_text": "229 500 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/samochod-elektryczny/hybryda-plug-in.html",
+    "title": "Hybrydy plug-in BMW: modele, zalety i opcje zakupu",
+    "model": null,
+    "detected_models": [
+      "M5",
+      "X3"
+    ],
+    "price": {
+      "amount": 255000.0,
+      "currency": "PLN",
+      "formatted": "255 000 zł",
+      "source_text": "255 000 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/samochod-elektryczny/hybryda-plug-in.html",
+    "title": "Hybrydy plug-in BMW: modele, zalety i opcje zakupu",
+    "model": null,
+    "detected_models": [
+      "M5",
+      "X3"
+    ],
+    "price": {
+      "amount": 271500.0,
+      "currency": "PLN",
+      "formatted": "271 500 zł",
+      "source_text": "271 500 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/topics/offers-and-services/bmw-financial-services/bmw-leasing.html",
+    "title": "Leasing BMW: oferty i informacje",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 259125.0,
+      "currency": "PLN",
+      "formatted": "259 125 zł",
+      "source_text": "259 125 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/topics/offers-and-services/bmw-financial-services/bmw-leasing.html",
+    "title": "Leasing BMW: oferty i informacje",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 206925.0,
+      "currency": "PLN",
+      "formatted": "206 925 zł",
+      "source_text": "206 925,00 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/topics/offers-and-services/bmw-financial-services/bmw-leasing.html",
+    "title": "Leasing BMW: oferty i informacje",
+    "model": null,
+    "detected_models": [
+      "i4"
+    ],
+    "price": {
+      "amount": 220720.0,
+      "currency": "PLN",
+      "formatted": "220 720 zł",
+      "source_text": "220 720 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/topics/offers-and-services/Uslugi_serwisowe_BMW/bmw-service-inclusive.html",
+    "title": "Oficjalna strona internetowa BMW Polska: Pojazdy i innowacje klasy premium",
+    "model": null,
+    "detected_models": [
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 237150.0,
+      "currency": "PLN",
+      "formatted": "237 150 zł",
+      "source_text": "237 150 zł"
+    }
+  },
+  {
+    "url": "https://www.bmw.pl/pl/topics/offers-and-services/Uslugi_serwisowe_BMW/bmw-service-inclusive.html",
+    "title": "Oficjalna strona internetowa BMW Polska: Pojazdy i innowacje klasy premium",
+    "model": null,
+    "detected_models": [
+      "X1",
+      "X3"
+    ],
+    "price": {
+      "amount": 198915.0,
+      "currency": "PLN",
+      "formatted": "198 915 zł",
+      "source_text": "198 915,00 zł"
+    }
+  }
+]

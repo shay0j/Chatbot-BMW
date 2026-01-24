@@ -1,0 +1,30 @@
+﻿Silniki BMW dostÄ™pne w Polsce:
+
+BENZY NOWE:
+- B38: 1.5L 3-cylindrowy, 136-140 KM
+- B48: 2.0L 4-cylindrowy, 156-245 KM
+- B58: 3.0L 6-cylindrowy, 340-387 KM
+- S58: 3.0L 6-cylindrowy M, 480-510 KM
+
+DIESLE:
+- B37: 1.5L 3-cylindrowy, 116 KM
+- B47: 2.0L 4-cylindrowy, 150-190 KM
+- B57: 3.0L 6-cylindrowy, 286-340 KM
+
+HYBRYDY:
+- 330e: 2.0L + silnik elektryczny, 292 KM
+- 530e: 2.0L + silnik elektryczny, 299 KM
+- 745e: 3.0L + silnik elektryczny, 394 KM
+
+ELEKTRYCZNE:
+- eDrive35: 286 KM, zasiÄ™g 400 km
+- eDrive40: 340 KM, zasiÄ™g 500 km
+- M60: 619 KM, zasiÄ™g 450 km
+
+MOCY TYPOWE:
+- 118i: 136 KM
+- 320i: 184 KM  
+- 330i: 245 KM
+- 520d: 190 KM
+- 530d: 286 KM
+- M3: 510 KM
