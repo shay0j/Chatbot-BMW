@@ -1,13 +1,12 @@
 """
 Główny plik aplikacji BMW Assistant - ZK Motors Edition.
-Z pełną integracją z działającym RAG z 6_rag_test.py.
-POPRAWIONY - LEPSZE ODPOWIEDZI, MNIEJ POWTARZALNOŚCI
+POPRAWIONA WERSJA - WYSOKA JAKOŚĆ ODPOWIEDZI, RAG JEDYNIE JAKO ŹRÓDŁO DANYCH
 """
 import json
 import time
 import re
 from datetime import datetime
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, Tuple
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks, Request, status
@@ -22,41 +21,32 @@ from app.core.config import settings, validate_configuration
 from app.core.exceptions import BMWAssistantException
 from app.utils.logger import setup_logger, log
 from app.services.llm_service import LLMService, get_llm_service
-from app.services.prompt_service import PromptService, get_prompt_service
+# USUNIĘTO: from app.services.prompt_service import PromptService, get_prompt_service
 from app.services.cache import init_cache
 
 # ============================================
-# IMPORT NASZEGO DZIAŁAJĄCEGO RAG Z 6_rag_test.py
+# IMPORT NASZEGO DZIAŁAJĄCEGO RAG
 # ============================================
 
 import sys
 import os
 from pathlib import Path
 
-# Ustaw ścieżkę do pliku RAG
 RAG_FILE_PATH = Path(r"C:\Users\hellb\Documents\Chatbot_BMW\RAG\src\scrapers\6_rag_test.py")
 
-print(f"Szukam RAG w: {RAG_FILE_PATH}")
-print(f"   Plik istnieje: {RAG_FILE_PATH.exists()}")
-
 def import_rag_module():
-    """Dynamicznie importuje moduł RAG z pliku zaczynającego się od cyfry"""
+    """Dynamicznie importuje moduł RAG"""
     try:
         if not RAG_FILE_PATH.exists():
             raise FileNotFoundError(f"Nie znaleziono pliku RAG: {RAG_FILE_PATH}")
         
-        # Dodaj katalog nadrzędny do sys.path
         rag_dir = RAG_FILE_PATH.parent
         if str(rag_dir) not in sys.path:
             sys.path.insert(0, str(rag_dir))
         
-        # Użyj importlib do załadowania modułu
         import importlib.util
         
-        # Specjalna nazwa modułu (nie może zaczynać się od cyfry)
         module_name = "rag_module_6_test"
-        
-        # Utwórz specyfikację z pliku
         spec = importlib.util.spec_from_file_location(
             module_name, 
             str(RAG_FILE_PATH)
@@ -65,16 +55,12 @@ def import_rag_module():
         if spec is None:
             raise ImportError(f"Nie można utworzyć specyfikacji dla {RAG_FILE_PATH}")
         
-        # Utwórz i załaduj moduł
         module = importlib.util.module_from_spec(spec)
         sys.modules[module_name] = module
-        
-        # Wykonaj moduł
         spec.loader.exec_module(module)
         
-        print(f"Zaladowano modul RAG: {module_name}")
+        print(f"Załadowano moduł RAG: {module_name}")
         
-        # Sprawdź czy klasa RAGSystem istnieje
         if not hasattr(module, 'RAGSystem'):
             raise AttributeError("Brak klasy RAGSystem w module")
         
@@ -84,29 +70,27 @@ def import_rag_module():
         return module
         
     except Exception as e:
-        print(f"Blad ladowania modulu RAG: {e}")
+        print(f"Błąd ładowania modułu RAG: {e}")
         raise
 
-# Próbuj zaimportować RAG
 try:
     rag_module = import_rag_module()
     RAGSystem = rag_module.RAGSystem
     find_latest_vector_db = rag_module.find_latest_vector_db
     RAG_AVAILABLE = True
-    print("RAG system gotowy do uzycia")
+    print("RAG system gotowy do użycia")
 except Exception as e:
     print(f"Warning: Could not import RAG module: {e}")
-    print("Aplikacja bedzie dzialac bez RAG")
+    print("Aplikacja będzie działać bez RAG")
     RAG_AVAILABLE = False
     
-    # Fallback classes
     class RAGSystem:
         def __init__(self, vector_db_path=None):
             self.vector_db_path = vector_db_path
-            print(f"Uzywam dummy RAGSystem (bez rzeczywistego RAG)")
+            print(f"Używam dummy RAGSystem")
         
         def query(self, query, k=3, use_model_filter=False, use_priority=True):
-            print(f"Dummy RAG query: '{query[:50]}...' (k={k}, filter={use_model_filter})")
+            print(f"Dummy RAG query: '{query[:50]}...'")
             return []
         
         def get_database_info(self):
@@ -124,57 +108,49 @@ except Exception as e:
         return None
 
 # ============================================
-# RAG SINGLETON - NIE TWÓRZ NOWEJ INSTANCJI ZA KAŻDYM RAZEM
+# RAG SINGLETON
 # ============================================
 
 _rag_service_instance = None
 
 def get_rag_service_singleton():
-    """Singleton dla RAG service - tworzy tylko raz"""
+    """Singleton dla RAG service"""
     global _rag_service_instance
     if _rag_service_instance is None:
-        print("Tworze singleton RAG service...")
+        print("Tworzę singleton RAG service...")
         _rag_service_instance = SimpleRAGService()
     return _rag_service_instance
 
 # ============================================
-# NOWY RAG SERVICE - ADAPTER DLA NASZEGO DZIAŁAJĄCEGO RAG
+# POPRAWIONY RAG SERVICE Z LEPSZĄ WALIDACJĄ
 # ============================================
 
 class SimpleRAGService:
-    """Adapter dla naszego działającego RAG-a z 6_rag_test.py"""
+    """Adapter dla RAG-a z zaawansowaną walidacją danych"""
     
     def __init__(self):
         print(f"Inicjalizacja SimpleRAGService...")
-        print(f"   RAG_AVAILABLE: {RAG_AVAILABLE}")
         
         if not RAG_AVAILABLE:
-            # Nie rzucaj wyjątku, tylko informuj i tworz dummy
-            print("RAG nie dostepny - tworze dummy service")
+            print("RAG nie dostępny - tworzę dummy service")
             self._create_dummy_service()
             return
         
         try:
-            # Znajdź najnowszą bazę
             db_file = find_latest_vector_db()
             if not db_file:
-                print("Nie znaleziono bazy RAG - tworze dummy service")
+                print("Nie znaleziono bazy RAG - tworzę dummy service")
                 self._create_dummy_service()
                 return
             
-            print(f"Ladowanie bazy RAG z: {db_file}")
-            
-            # Utwórz instancję RAGSystem
+            print(f"Ładowanie bazy RAG z: {db_file}")
             self.rag = RAGSystem(vector_db_path=db_file)
-            
-            # Pobierz info o bazie
             self.db_info = self.rag.get_database_info()
-            print(f"RAG zaladowany: {self.db_info.get('total_chunks', 0)} fragmentow, "
-                  f"model: {self.db_info.get('model_name', 'unknown')}")
+            print(f"RAG załadowany: {self.db_info.get('total_chunks', 0)} fragmentów")
             
         except Exception as e:
-            print(f"Blad inicjalizacji RAG: {e}")
-            print("Tworze dummy service jako fallback")
+            print(f"Błąd inicjalizacji RAG: {e}")
+            print("Tworzę dummy service jako fallback")
             self._create_dummy_service()
     
     def _create_dummy_service(self):
@@ -183,7 +159,7 @@ class SimpleRAGService:
         self.db_info = {
             'total_chunks': 0,
             'total_vectors': 0,
-            'model_name': 'dummy (RAG niedostepny)',
+            'model_name': 'dummy (RAG niedostępny)',
             'embedding_dim': 0,
             'index_type': 'none',
             'loaded_at': datetime.now().isoformat()
@@ -192,136 +168,260 @@ class SimpleRAGService:
     
     async def retrieve(self, query: str, top_k: int = 3, similarity_threshold: float = 0.7) -> Any:
         """
-        Wyszukuje dokumenty w RAG dla danego zapytania.
-        
-        Args:
-            query: Zapytanie użytkownika
-            top_k: Liczba wyników do zwrócenia
-            similarity_threshold: Próg podobieństwa
-        
-        Returns:
-            Obiekt z dokumentami i metadanymi
+        Wyszukuje dokumenty w RAG z zaawansowaną walidacją
         """
         print(f"RAG retrieve: '{query[:50]}...' (top_k={top_k})")
         
-        # Lista modeli BMW do inteligentnego wykrywania
+        # Wykryj modele BMW w zapytaniu
         bmw_models = ['i3', 'i4', 'i5', 'i7', 'i8', 'ix', 'x1', 'x2', 'x3', 'x4', 'x5', 
                      'x6', 'x7', 'xm', '2 series', '3 series', '4 series', '5 series',
                      '7 series', '8 series', 'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
                      'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8']
         
-        # Sprawdź czy query zawiera konkretny model BMW
         query_lower = query.lower()
         detected_models_in_query = []
         
         for model in bmw_models:
             if model in query_lower:
-                # Konwertuj na format z metadanych (np. 'x5' -> 'X5')
                 detected_models_in_query.append(model.upper())
         
-        # Inteligentne filtrowanie: tylko jeśli wykryliśmy konkretny model w zapytaniu
         use_filter = len(detected_models_in_query) > 0
         
         if detected_models_in_query:
-            print(f"   Wykryto modele w zapytaniu: {detected_models_in_query}, uzywam filtrowania: {use_filter}")
+            print(f"   Wykryto modele: {detected_models_in_query}, filtrowanie: {use_filter}")
         
         try:
-            # Użyj naszego działającego RAG-a z INTELIGENTNYM filtrowaniem
-            results = self.rag.query(
-                query, 
-                k=top_k, 
-                use_model_filter=use_filter,  # INTELIGENTNE - tylko gdy wykryto model
-                use_priority=True
-            )
-            
-            print(f"   Znaleziono {len(results)} wynikow (filtrowanie: {use_filter})")
-            
-            # Fallback: jeśli z filtrem nie znaleziono, spróbuj bez filtra
-            if use_filter and len(results) == 0:
-                print("   Nie znaleziono z filtrem, probuje bez filtra...")
+            # Pierwsze wyszukiwanie z filtrem jeśli wykryto modele
+            if use_filter:
                 results = self.rag.query(
                     query, 
-                    k=top_k, 
-                    use_model_filter=False,  # Fallback bez filtra
+                    k=top_k * 2,  # Więcej wyników do filtrowania
+                    use_model_filter=True,
                     use_priority=True
                 )
-                print(f"   Po fallback: {len(results)} wynikow")
+                print(f"   Znaleziono {len(results)} wyników z filtrem modelu")
+            else:
+                results = self.rag.query(
+                    query, 
+                    k=top_k,
+                    use_model_filter=False,
+                    use_priority=True
+                )
+                print(f"   Znaleziono {len(results)} wyników bez filtra")
+            
+            # Fallback: jeśli z filtrem nie ma wyników, spróbuj bez filtra
+            if use_filter and len(results) < 2:
+                print("   Mało wyników z filtrem, próbuję bez filtra...")
+                fallback_results = self.rag.query(
+                    query, 
+                    k=top_k,
+                    use_model_filter=False,
+                    use_priority=True
+                )
+                # Dodaj fallback wyniki, ale zachowaj priorytet
+                for result in fallback_results:
+                    if result not in results:
+                        results.append(result)
+                results = results[:top_k * 2]
+                print(f"   Po fallback: {len(results)} wyników")
             
             if not results:
-                print("   Brak wynikow - zwracam pusta odpowiedz")
-                # Zwróć pusty wynik
-                class EmptyResult:
-                    def __init__(self):
-                        self.documents = []
-                        self.average_similarity = 0.0
-                    
-                    def to_api_response(self):
-                        return {"sources": []}
-                
-                return EmptyResult()
+                print("   Brak wyników - zwracam pustą odpowiedź")
+                return self._create_empty_result()
             
-            # Konwertuj wyniki na format oczekiwany przez aplikację
-            documents = []
-            total_similarity = 0.0
-            
+            # WALIDUJ i sortuj wyniki
+            validated_docs = []
             for result in results:
-                doc = {
-                    'content': result.get('text', ''),
-                    'metadata': result.get('metadata', {}),
-                    'similarity': result.get('similarity_score', 0.0),
-                    'relevance_score': result.get('relevance_score', result.get('similarity_score', 0.0))
-                }
-                documents.append(doc)
-                total_similarity += result.get('similarity_score', 0.0)
+                doc_text = result.get('text', '')
+                metadata = result.get('metadata', {})
+                similarity = result.get('similarity_score', 0.0)
+                
+                # Walidacja jakości danych
+                validation_result = self._validate_document_advanced(doc_text, metadata, query_lower)
+                
+                if validation_result['is_valid'] or similarity > 0.6:
+                    doc = {
+                        'content': doc_text,
+                        'metadata': metadata,
+                        'similarity': similarity,
+                        'relevance_score': self._calculate_relevance_score(
+                            result.get('relevance_score', similarity),
+                            validation_result,
+                            detected_models_in_query,
+                            metadata.get('models', [])
+                        ),
+                        'validated': validation_result['is_valid'],
+                        'warnings': validation_result['warnings'],
+                        'quality_score': validation_result['quality_score']
+                    }
+                    validated_docs.append(doc)
             
-            avg_similarity = total_similarity / len(documents) if documents else 0.0
+            # Sortuj po relevance_score
+            validated_docs.sort(key=lambda x: x['relevance_score'], reverse=True)
+            validated_docs = validated_docs[:top_k]  # Weź najlepsze top_k
             
-            # Zwróć obiekt z metodami jak oryginalny RAGService
+            # Oblicz średnie podobieństwo tylko dla zwalidowanych
+            valid_similarities = [d['similarity'] for d in validated_docs if d.get('validated', False)]
+            avg_similarity = sum(valid_similarities) / len(valid_similarities) if valid_similarities else 0.0
+            
             class ResultWrapper:
-                def __init__(self, docs, avg_sim):
+                def __init__(self, docs, avg_sim, detected_models):
                     self.documents = docs
                     self.average_similarity = avg_sim
+                    self.detected_models = detected_models
+                    self.has_valid_data = len([d for d in docs if d.get('validated', False)]) > 0
+                    self.total_warnings = sum(len(d.get('warnings', [])) for d in docs)
+                    self.quality_scores = [d.get('quality_score', 0.0) for d in docs]
                 
                 def to_api_response(self):
                     sources = []
-                    for doc in self.documents:
+                    for i, doc in enumerate(self.documents):
                         metadata = doc['metadata']
                         content = doc['content']
                         source_info = {
-                            'title': metadata.get('title', 'Brak tytulu')[:100],
+                            'id': i + 1,
+                            'title': metadata.get('title', 'Brak tytułu')[:100],
                             'content': content[:300] + ('...' if len(content) > 300 else ''),
                             'similarity': round(doc['similarity'], 3),
                             'relevance': round(doc.get('relevance_score', doc['similarity']), 3),
+                            'quality': round(doc.get('quality_score', 0.0), 3),
                             'url': metadata.get('source_url', ''),
                             'models': metadata.get('models', []),
-                            'categories': metadata.get('categories', []),
-                            'has_target_model': doc.get('source_info', {}).get('has_target_model', False),
-                            'retrieval_priority': metadata.get('retrieval_priority', 1)
+                            'validated': doc.get('validated', False),
+                            'warnings': doc.get('warnings', []),
+                            'has_technical_data': self._has_technical_data(content)
                         }
                         sources.append(source_info)
                     
                     return {"sources": sources}
+                
+                def _has_technical_data(self, text):
+                    """Sprawdza czy tekst zawiera dane techniczne"""
+                    tech_keywords = ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'bieg', 'napęd', 'pojemność']
+                    text_lower = text.lower()
+                    return any(keyword in text_lower for keyword in tech_keywords)
             
-            return ResultWrapper(documents, avg_similarity)
+            return ResultWrapper(validated_docs, avg_similarity, detected_models_in_query)
             
         except Exception as e:
-            print(f"Blad RAG retrieve: {e}")
-            # Fallback - zwróć pusty wynik
-            class ErrorResult:
-                def __init__(self):
-                    self.documents = []
-                    self.average_similarity = 0.0
-                
-                def to_api_response(self):
-                    return {"sources": []}
+            print(f"Błąd RAG retrieve: {e}")
+            return self._create_empty_result()
+    
+    def _validate_document_advanced(self, text: str, metadata: Dict, query: str) -> Dict[str, Any]:
+        """
+        Zaawansowana walidacja dokumentu
+        """
+        text_lower = text.lower()
+        query_lower = query.lower()
+        
+        # Sprawdź czy dokument jest aktualny
+        year = metadata.get('year', '')
+        is_recent = False
+        try:
+            if year and year.isdigit():
+                year_int = int(year)
+                is_recent = year_int >= 2020
+        except:
+            pass
+        
+        # Sprawdź czy zawiera dane techniczne
+        has_technical_data = any(keyword in text_lower for keyword in [
+            'km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'bieg', 
+            'napęd', 'pojemność', 'przyspieszenie', 'moment', 'v-max'
+        ])
+        
+        # Sprawdź czy pasuje do zapytania
+        query_words = set(query_lower.split())
+        text_words = set(text_lower.split())
+        matching_words = len(query_words.intersection(text_words))
+        query_match_ratio = matching_words / max(len(query_words), 1)
+        
+        # Sprawdź ostrzeżenia
+        warnings = []
+        warning_patterns = [
+            (r'6[\s\-]*biegow', 'Przestarzała skrzynia biegów'),
+            (r'190\s*km', 'Nierealistyczna moc'),
+            (r'stary', 'Stare dane'),
+            (r'201[0-5]', 'Przestarzały rok'),
+        ]
+        
+        for pattern, warning_msg in warning_patterns:
+            if re.search(pattern, text_lower):
+                warnings.append(warning_msg)
+        
+        # Oblicz jakość dokumentu (0.0 - 1.0)
+        quality_score = 0.5  # Bazowy
+        
+        if is_recent:
+            quality_score += 0.2
+        if has_technical_data:
+            quality_score += 0.2
+        if query_match_ratio > 0.3:
+            quality_score += 0.1
+        if len(warnings) == 0:
+            quality_score += 0.1
+        if 'specyfikacja' in text_lower or 'dane techniczne' in text_lower:
+            quality_score += 0.1
+        
+        # Normalizuj do 0.0-1.0
+        quality_score = min(1.0, max(0.0, quality_score))
+        
+        is_valid = quality_score >= 0.6 and has_technical_data
+        
+        return {
+            'is_valid': is_valid,
+            'quality_score': quality_score,
+            'is_recent': is_recent,
+            'has_technical_data': has_technical_data,
+            'query_match_ratio': query_match_ratio,
+            'warnings': warnings
+        }
+    
+    def _calculate_relevance_score(self, base_score: float, validation_result: Dict, 
+                                 query_models: List[str], doc_models: List[str]) -> float:
+        """Oblicza wynik relewancji z uwzględnieniem wielu czynników"""
+        relevance = base_score
+        
+        # Bonus za zgodność modeli
+        if query_models and doc_models:
+            matching_models = set(m.upper() for m in query_models) & set(m.upper() for m in doc_models)
+            if matching_models:
+                relevance += 0.2
+        
+        # Bonus za jakość
+        relevance += validation_result['quality_score'] * 0.1
+        
+        # Bonus za aktualność
+        if validation_result['is_recent']:
+            relevance += 0.1
+        
+        # Bonus za dane techniczne
+        if validation_result['has_technical_data']:
+            relevance += 0.15
+        
+        # Kara za ostrzeżenia
+        relevance -= len(validation_result['warnings']) * 0.05
+        
+        return max(0.0, min(1.0, relevance))
+    
+    def _create_empty_result(self):
+        """Tworzy pusty wynik"""
+        class EmptyResult:
+            def __init__(self):
+                self.documents = []
+                self.average_similarity = 0.0
+                self.detected_models = []
+                self.has_valid_data = False
+                self.total_warnings = 0
             
-            return ErrorResult()
+            def to_api_response(self):
+                return {"sources": []}
+        
+        return EmptyResult()
     
     async def health_check(self) -> Dict[str, Any]:
-        """Health check dla RAG service - SZYBKA WERSJA BEZ TESTOWEGO ZAPYTANIA"""
+        """Health check dla RAG"""
         try:
-            print(f"Health check RAG: dostepny={RAG_AVAILABLE}")
-            
             if not RAG_AVAILABLE:
                 return {
                     "status": "unavailable", 
@@ -329,14 +429,16 @@ class SimpleRAGService:
                     "is_dummy": True
                 }
             
-            # SZYBKI health check - NIE wykonujemy testowego zapytania!
-            # To zaoszczędzi 1-2 sekundy na każde health check
+            # Sprawdź czy możemy wykonać testowe zapytanie
+            test_result = self.query("BMW X5", k=1, use_model_filter=True)
+            test_ok = len(test_result) > 0
+            
             return {
-                "status": "healthy",
+                "status": "healthy" if test_ok else "degraded",
                 "chunks": self.db_info.get('total_chunks', 0),
                 "vectors": self.db_info.get('total_vectors', 0),
                 "embedding_model": self.db_info.get('model_name', 'unknown'),
-                "test_query_ok": True,  # Zakładamy że działa
+                "test_query_ok": test_ok,
                 "is_dummy": self.db_info.get('model_name', '').startswith('dummy')
             }
         except Exception as e:
@@ -358,7 +460,6 @@ class SimpleRAGService:
             "is_dummy": "dummy" in str(self.db_info.get('model_name', '')).lower()
         }
 
-# Dependency dla RAG service
 async def get_rag_service():
     """Zwraca singleton RAG service"""
     return get_rag_service_singleton()
@@ -370,14 +471,12 @@ async def get_rag_service():
 logger = setup_logger(__name__)
 security = HTTPBearer(auto_error=False)
 
-# Ścieżki do plików
 BASE_DIR = Path(__file__).parent.absolute()
-TEMPLATES_DIR = BASE_DIR / "templates"  # app/templates
+TEMPLATES_DIR = BASE_DIR / "templates"
 STATIC_DIR = BASE_DIR / "static"
 
-# Prosta pamięć konwersacji (w pamięci RAM)
 conversation_memory: Dict[str, List[Dict]] = {}
-MAX_HISTORY = 8  # MNIEJ historii dla krótszych odpowiedzi
+MAX_HISTORY = 8
 
 # ============================================
 # MODELS
@@ -386,26 +485,25 @@ MAX_HISTORY = 8  # MNIEJ historii dla krótszych odpowiedzi
 class ChatRequest(BaseModel):
     """Request model dla endpointu chat"""
     message: str = Field(..., min_length=1, max_length=1000)
-    session_id: Optional[str] = Field(default="default", description="ID sesji dla pamięci konwersacji")
+    session_id: Optional[str] = Field(default="default", description="ID sesji")
     stream: bool = Field(default=False, description="Czy streamować odpowiedź")
     temperature: float = Field(
         default=0.7,
         ge=0.0, 
         le=1.0,
-        description="Kreatywność odpowiedzi (0.0 - faktualna, 1.0 - kreatywna)"
+        description="Kreatywność odpowiedzi"
     )
     language: str = Field(
         default="pl",
         pattern="^(pl|en|de)$",
-        description="Język odpowiedzi (pl, en, de)"
+        description="Język odpowiedzi"
     )
     
     @validator('message')
     def message_not_empty(cls, v):
         if not v.strip():
-            raise ValueError('Wiadomosc nie moze byc pusta')
+            raise ValueError('Wiadomość nie może być pusta')
         return v.strip()
-
 
 class ChatResponse(BaseModel):
     """Response model dla endpointu chat"""
@@ -416,21 +514,24 @@ class ChatResponse(BaseModel):
     processing_time: float = Field(..., description="Czas przetwarzania w sekundach")
     sources: List[Dict[str, Any]] = Field(
         default_factory=list,
-        description="Zrodla uzyte do wygenerowania odpowiedzi"
+        description="Źródła użyte do wygenerowania odpowiedzi"
     )
     model_used: str = Field(default="", description="Model użyty do generacji")
-    tokens_used: Optional[Dict[str, int]] = Field(default=None, description="Uzyte tokeny")
+    tokens_used: Optional[Dict[str, int]] = Field(default=None, description="Użyte tokeny")
     confidence: Optional[float] = Field(
         default=None,
         ge=0.0,
         le=1.0,
-        description="Pewnosc odpowiedzi (srednie podobienstwo dokumentow)"
+        description="Pewność odpowiedzi"
     )
     rag_info: Optional[Dict[str, Any]] = Field(
         default=None,
-        description="Informacje o RAG (modele wykryte, trafnosc itp.)"
+        description="Informacje o RAG"
     )
-
+    data_quality: Optional[str] = Field(
+        default=None,
+        description="Jakość danych: high/medium/low"
+    )
 
 class HealthResponse(BaseModel):
     """Model odpowiedzi health check"""
@@ -442,14 +543,12 @@ class HealthResponse(BaseModel):
     memory: Dict[str, Any]
     rag_stats: Optional[Dict[str, Any]] = None
 
-
 class ResetResponse(BaseModel):
     """Model odpowiedzi reset"""
     success: bool
     message: str
     session_id: str
     history_length: int
-
 
 class HistoryResponse(BaseModel):
     """Model odpowiedzi historii"""
@@ -458,9 +557,8 @@ class HistoryResponse(BaseModel):
     total_messages: int
     limit: int
 
-
 # ============================================
-# FUNKCJE PAMIĘCI KONWERSACJI
+# POPRAWIONE FUNKCJE POMOCNICZE
 # ============================================
 
 def get_conversation_history(session_id: str) -> List[Dict[str, Any]]:
@@ -468,7 +566,6 @@ def get_conversation_history(session_id: str) -> List[Dict[str, Any]]:
     if session_id not in conversation_memory:
         conversation_memory[session_id] = []
     return conversation_memory[session_id]
-
 
 def add_to_history(session_id: str, role: str, message: str):
     """Dodaje wiadomość do historii"""
@@ -479,21 +576,224 @@ def add_to_history(session_id: str, role: str, message: str):
         "timestamp": datetime.now().isoformat()
     })
     
-    # Ogranicz historię do MAX_HISTORY
     if len(history) > MAX_HISTORY:
         conversation_memory[session_id] = history[-MAX_HISTORY:]
-
 
 def format_history_for_prompt(history: List[Dict]) -> List[Dict[str, str]]:
     """Formatuje historię na format dla PromptService"""
     formatted = []
-    for msg in history[-4:]:  # TYLKO OSTATNIE 4 wiadomości
+    for msg in history[-4:]:
         formatted.append({
             "role": msg["role"],
             "content": msg["message"]
         })
     return formatted
 
+def validate_and_correct_bmw_data(text: str, query_type: str = "", sources: List[Dict] = None) -> Tuple[str, str, Dict[str, Any]]:
+    """
+    Waliduje i poprawia dane BMW w tekście.
+    Zwraca: (poprawiony_tekst, jakość_danych, szczegóły_walidacji)
+    """
+    if sources:
+        # Sprawdź jakość źródeł
+        source_quality_scores = [s.get('quality', 0.0) for s in sources if s.get('has_technical_data', False)]
+        avg_source_quality = sum(source_quality_scores) / len(source_quality_scores) if source_quality_scores else 0.0
+        
+        if avg_source_quality >= 0.8:
+            # Źródła wysokiej jakości - minimalne poprawki
+            return text.strip(), "high", {"source_quality": avg_source_quality, "corrections": 0}
+    
+    text_lower = text.lower()
+    corrections = []
+    warnings = []
+    
+    # Tylko stylistyczne poprawki
+    style_corrections = [
+        (r'koni mechanicznych', 'KM'),
+        (r'bmw i', 'BMW i'),
+        (r'bmw x', 'BMW X'),
+        (r'bmw m', 'BMW M'),
+        (r'limuzyna.*?x5', 'SUV X5'),
+        (r'x5.*?limuzyna', 'SUV X5'),
+    ]
+    
+    for wrong, correct in style_corrections:
+        if re.search(wrong, text, re.IGNORECASE):
+            text = re.sub(wrong, correct, text, flags=re.IGNORECASE)
+            corrections.append((wrong, correct))
+    
+    # Sprawdź spójność danych technicznych
+    lines = text.split('\n')
+    tech_lines = [line for line in lines if any(keyword in line.lower() for keyword in 
+                ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'bieg'])]
+    
+    if len(tech_lines) >= 2:
+        # Sprawdź czy dane są spójne
+        km_values = []
+        for line in tech_lines:
+            km_matches = re.findall(r'(\d+)\s*km', line, re.IGNORECASE)
+            km_values.extend([int(km) for km in km_matches])
+        
+        if km_values:
+            if max(km_values) > 700:
+                warnings.append(f"Nierealistyczna moc: {max(km_values)} KM")
+    
+    # Określ jakość danych na podstawie treści
+    if query_type == "specyfikacje":
+        # Dla pytań o specyfikacje, wymagamy dokładności
+        has_technical_data = any(keyword in text_lower for keyword in 
+                               ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia'])
+        
+        if has_technical_data and len(corrections) == 0:
+            data_quality = "high"
+        elif has_technical_data:
+            data_quality = "medium"
+        else:
+            data_quality = "low"
+    else:
+        # Dla innych pytań mniejsze wymagania
+        data_quality = "high" if len(corrections) == 0 else "medium"
+    
+    validation_details = {
+        "corrections_made": len(corrections),
+        "warnings": warnings,
+        "technical_lines_found": len(tech_lines),
+        "has_sources": len(sources) > 0 if sources else False
+    }
+    
+    return text.strip(), data_quality, validation_details
+
+def create_smart_prompt(user_message: str, history: List[Dict], context: str = "", 
+                       question_type: str = "", detected_models: List[str] = None) -> str:
+    """
+    Tworzy inteligentny prompt na podstawie typu pytania
+    BEZ DANYCH TECHNICZNYCH - tylko struktura odpowiedzi
+    """
+    detected_models = detected_models or []
+    is_first_message = len(history) == 0
+    
+    # SYSTEM PROMPT - tylko ogólne instrukcje
+    system_prompt = """Jesteś Leo - ekspertem BMW w ZK Motors, oficjalnym dealerze BMW i MINI.
+
+ZASADY ODPOWIADANIA:
+1. Odpowiadaj KROTKO i konkretnie - maksymalnie 3-4 zdania lub punktory
+2. Bądź rzetelny i profesjonalny
+3. Używaj poprawnych terminów motoryzacyjnych
+4. Jeśli nie masz pewności - odwołaj się do źródła lub zaproś do salonu
+5. Zawsze kończ zachętą do kontaktu z ZK Motors"""
+
+    if is_first_message:
+        system_prompt += "\nPrzywitaj się krótko i zapytaj czym możesz pomóc."
+    
+    # SPECJALNE INSTRUKCJE DLA RÓŻNYCH TYPÓW PYTAŃ (BEZ DANYCH!)
+    special_instructions = ""
+    
+    if question_type == "specyfikacje":
+        special_instructions = """INSTRUKCJE DLA SPECYFIKACJI:
+• Używaj DANYCH Z ŹRÓDEŁ - nie wymyślaj!
+• Przedstaw dane techniczne w punktach
+• Podkreśl kluczowe parametry: silnik, moc, skrzynia, napęd
+• Wskaż różnice między wersjami
+• Jeśli dane się różnią - zaznacz to"""
+    
+    elif question_type == "porownanie":
+        special_instructions = """INSTRUKCJE DLA PORÓWNANIA:
+• Wymień 2-3 kluczowe różnice między modelami
+• Porównaj: przeznaczenie, rozmiar, charakterystykę
+• Zachęć do wizyty w salonie aby zobaczyć różnice"""
+    
+    elif question_type == "rodzinny":
+        special_instructions = """INSTRUKCJE DLA PYTAŃ RODZINNYCH:
+• Polecaj modele odpowiednie dla rodzin
+• Wymień praktyczne cechy: przestrzeń, bezpieczeństwo, funkcjonalność
+• Zapytaj o szczególne potrzeby (liczba osób, bagaż, itp.)"""
+    
+    elif question_type == "sportowy":
+        special_instructions = """INSTRUKCJE DLA SPORTOWYCH:
+• Polecaj modele z serii M i sportowe
+• Opisz charakterystykę jazdy BMW M
+• Podkreśl osiągi i doświadczenie z jazdy"""
+    
+    elif question_type == "elektryczny":
+        special_instructions = """INSTRUKCJE DLA ELEKTRYCZNYCH:
+• Polecaj modele z serii i (i4, i5, i7, iX)
+• Opisz zalety elektryków BMW
+• Wymień kluczowe parametry: zasięg, ładowanie, technologie"""
+    
+    elif question_type == "cena":
+        special_instructions = """INSTRUKCJE DLA CEN:
+• Nie podawaj dokładnych cen - zmieniają się!
+• Wymień zakres cenowy jeśli znasz ze źródeł
+• Podkreśl, że cena zależy od wyposażenia
+• Zaproś do salonu po indywidualną wycenę"""
+    
+    # WYKRYCIE INNYCH MAREK
+    user_query_lower = user_message.lower()
+    other_brands = ['audi', 'mercedes', 'tesla', 'volvo', 'skoda', 'toyota']
+    detected_other_brand = None
+    
+    for brand in other_brands:
+        if brand in user_query_lower:
+            detected_other_brand = brand.capitalize()
+            break
+    
+    if detected_other_brand:
+        special_instructions += f"""
+
+PYTANIE DOTYCZY MARKI {detected_other_brand.upper()}:
+• Jesteś ekspertem BMW - skup się na BMW
+• Podkreśl mocne strony BMW w porównaniu
+• Zaproś do salonu ZK Motors gdzie można zobaczyć różnice"""
+    
+    # KONTEKST Z RAG (jeśli jest)
+    context_part = ""
+    if context:
+        context_part = f"DANE Z BAZY WIEDZY:\n{context}\n\nUWAGA: Używaj tych danych w odpowiedzi!"
+    else:
+        context_part = "BRAK DANYCH W BAZE - odpowiadaj ogólnie lub zaproś do salonu po szczegóły."
+    
+    # HISTORIA
+    history_part = ""
+    if history and not is_first_message:
+        recent = history[-2:]
+        history_lines = []
+        for h in recent:
+            role = "Klient" if h['role'] == 'user' else 'Ty'
+            history_lines.append(f"{role}: {h['content']}")
+        history_part = f"OSTATNIA ROZMOWA:\n" + "\n".join(history_lines)
+    
+    # PYTANIE
+    question_part = f"PYTANIE KLIENTA: \"{user_message}\""
+    
+    # INFORMACJE O WYKRYTYCH MODELACH (tylko informacyjnie)
+    models_info = ""
+    if detected_models:
+        models_info = f"WYKRYTE MODELE: {', '.join(detected_models)}"
+    
+    # FINALNE INSTRUKCJE
+    final_instructions = f"""STRUKTURA ODPOWIEDZI:
+1. Odpowiedz bezpośrednio na pytanie
+2. Użyj danych z kontekstu jeśli są dostępne
+3. Bądź konkretny ale nie techniczny bez potrzeby
+4. Jeśli brakuje danych - zaproś do kontaktu z ZK Motors
+5. Używaj punktów • dla list
+6. Zakończ zachętą do test drive w ZK Motors
+
+{models_info}
+
+ODPOWIEDŹ (po polsku, 3-4 zdania):"""
+
+    # SKŁADAJ PROMPT
+    prompt_parts = [
+        system_prompt,
+        special_instructions,
+        context_part,
+        history_part,
+        question_part,
+        final_instructions
+    ]
+    
+    return "\n\n".join(filter(None, prompt_parts))
 
 # ============================================
 # FASTAPI APPLICATION
@@ -508,38 +808,24 @@ app = FastAPI(
     openapi_url="/openapi.json" if not settings.IS_PRODUCTION else None,
 )
 
-# ============================================
-# STATIC FILES & TEMPLATES
-# ============================================
-
-# Static files (jeśli istnieje static directory)
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
-# ============================================
-# MIDDLEWARE - POPRAWIONE CORS
-# ============================================
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Pozwól wszystkim w development
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
     expose_headers=["*"]
 )
 
-# Dodaj specjalny middleware dla OPTIONS requests
 @app.middleware("http")
 async def add_cors_middleware(request: Request, call_next):
-    """Dodaje nagłówki CORS do wszystkich odpowiedzi"""
     response = await call_next(request)
-    
-    # Dodaj nagłówki CORS
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With"
-    
     return response
 
 @app.middleware("http")
@@ -556,11 +842,9 @@ async def add_process_time_header(request: Request, call_next):
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    """Strona główna z czatem - ładuje HTML z templates/chat.html"""
     chat_html_path = TEMPLATES_DIR / "chat.html"
     
     if not chat_html_path.exists():
-        logger.error(f"File not found: {chat_html_path}")
         return HTMLResponse(f"""
         <!DOCTYPE html>
         <html>
@@ -568,9 +852,6 @@ async def root():
         <body>
             <h1>Error: chat.html not found</h1>
             <p>Expected path: {chat_html_path}</p>
-            <p>Current directory: {BASE_DIR}</p>
-            <p>Templates directory: {TEMPLATES_DIR}</p>
-            <p>Directory exists: {TEMPLATES_DIR.exists()}</p>
         </body>
         </html>
         """)
@@ -581,15 +862,8 @@ async def root():
         
         logger.info(f"Loaded chat.html from {chat_html_path}")
         
-        # Automatyczne ustawianie hosta dla JavaScript
-        import socket
-        hostname = socket.gethostname()
-        ip_address = socket.gethostbyname(hostname)
-        
-        # Dodaj zmienne JavaScript z informacjami o hostowaniu
         js_config = f"""
         <script>
-            // Auto-configure API endpoints
             window.API_BASE_URL = window.location.origin;
             window.API_ENDPOINTS = {{
                 chat: '/chat',
@@ -600,21 +874,10 @@ async def root():
                 rag_info: '/rag/info'
             }};
             console.log('API Base URL:', window.API_BASE_URL);
-            console.log('API Endpoints:', window.API_ENDPOINTS);
-            
-            // Test connection on load
-            window.addEventListener('load', function() {{
-                fetch('/ping')
-                    .then(r => r.json())
-                    .then(data => console.log('Backend ping:', data))
-                    .catch(err => console.warn('Backend ping failed:', err));
-            }});
         </script>
         """
         
-        # Wstaw konfigurację przed zamknięciem </head>
         html_content = html_content.replace('</head>', js_config + '</head>')
-        
         return HTMLResponse(content=html_content)
         
     except Exception as e:
@@ -626,24 +889,16 @@ async def root():
         <body>
             <h1>Error loading chat interface</h1>
             <pre>{str(e)}</pre>
-            <p>Path: {chat_html_path}</p>
         </body>
         </html>
         """)
 
-
-# ============================================
-# TEST ENDPOINTS DLA FRONTENDU
-# ============================================
-
 @app.get("/ping")
 async def ping():
-    """Prosty endpoint do testowania połączenia"""
     return {"status": "online", "timestamp": datetime.utcnow().isoformat()}
 
 @app.get("/api/status")
 async def api_status():
-    """Status API dla frontendu"""
     return {
         "online": True,
         "service": settings.APP_NAME,
@@ -655,7 +910,6 @@ async def api_status():
 
 @app.get("/health/quick")
 async def quick_health_check():
-    """SZYBKI health check bez testowania RAG i LLM"""
     try:
         memory_stats = {
             "active_sessions": len(conversation_memory),
@@ -675,19 +929,14 @@ async def quick_health_check():
     except Exception as e:
         return {"status": "error", "error": str(e), "quick_check": True}
 
-
 @app.get("/health", response_model=HealthResponse)
 async def health_check(
     rag_service: SimpleRAGService = Depends(get_rag_service),
     llm_service: LLMService = Depends(get_llm_service)
 ):
-    """Health check - sprawdza status wszystkich komponentów"""
     try:
-        # Sprawdź RAG (szybka wersja)
         rag_health = await rag_service.health_check()
-        
-        # Sprawdź LLM (szybko)
-        llm_health = {"status": "operational"}  # Zakładamy że działa
+        llm_health = {"status": "operational"}
         
         services_status = {
             "rag_system": rag_health.get("status", "unknown"),
@@ -697,21 +946,13 @@ async def health_check(
             "memory": "enabled"
         }
         
-        # Sprawdź czy wszystkie kluczowe serwisy są zdrowe
         critical_services = ["rag_system", "llm_service", "api"]
-        cache_status = services_status["cache"]
-        
-        # Cache może być "connected" lub "in_memory" - oba są akceptowalne
-        cache_ok = cache_status in ["connected", "in_memory"]
-        
-        # Sprawdź krytyczne serwisy
         all_critical_healthy = all(
             services_status[s] in ["healthy", "operational"]
             for s in critical_services
         )
         
-        # Status ogólny: healthy jeśli krytyczne są zdrowe i cache jest OK
-        overall_status = "healthy" if (all_critical_healthy and cache_ok) else "degraded"
+        overall_status = "healthy" if all_critical_healthy else "degraded"
         
         memory_stats = {
             "active_sessions": len(conversation_memory),
@@ -719,7 +960,6 @@ async def health_check(
             "max_history": MAX_HISTORY
         }
         
-        # Statystyki RAG
         rag_stats = await rag_service.get_stats()
         
         logger.info(f"Health check: {overall_status}, RAG: {rag_health.get('chunks', 0)} chunks")
@@ -746,28 +986,17 @@ async def health_check(
             rag_stats=None
         )
 
-
 @app.get("/rag/info")
 async def get_rag_info(rag_service: SimpleRAGService = Depends(get_rag_service)):
-    """Informacje o RAG systemie"""
     try:
         health = await rag_service.health_check()
         stats = await rag_service.get_stats()
         
-        # Testowe zapytanie tylko jeśli RAG jest dostępny
-        if health.get("status") == "healthy" and not stats.get("is_dummy", False):
-            test_query = "BMW X3"
-            test_results = await rag_service.retrieve(test_query, top_k=1)
-            test_results_count = len(test_results.documents) if hasattr(test_results, 'documents') else 0
-        else:
-            test_results_count = 0
-        
         return {
             "healthy": health.get("status") == "healthy" and not stats.get("is_dummy", False),
             "chunks": stats.get("total_chunks", 0),
-            "vectors": stats.get("total_vectors", 0),
-            "embedding_model": stats.get("model_name", "unknown"),
-            "test_query_results": test_results_count,
+            "vectors": stats.get('total_vectors', 0),
+            "embedding_model": stats.get('model_name', "unknown"),
             "status": health.get("status", "unknown"),
             "is_dummy": stats.get("is_dummy", False),
             "details": stats
@@ -780,10 +1009,8 @@ async def get_rag_info(rag_service: SimpleRAGService = Depends(get_rag_service))
             "is_dummy": True
         }
 
-
 @app.get("/models")
 async def list_models():
-    """Lista dostępnych modeli LLM"""
     models = [
         {
             "id": "command-r",
@@ -800,28 +1027,19 @@ async def list_models():
             "max_tokens": 128000,
             "context_length": 128000,
             "description": "Zaawansowany model z lepszym rozumieniem"
-        },
-        {
-            "id": "command",
-            "name": "Command",
-            "provider": "Cohere",
-            "max_tokens": 4096,
-            "context_length": 4096,
-            "description": "Model zoptymalizowany pod wykonywanie poleceń"
         }
     ]
     
     return {
         "models": models,
         "default_model": settings.COHERE_CHAT_MODEL,
-        "embedding_model": "paraphrase-multilingual-mpnet-base-v2 (SentenceTransformer)",
         "memory_enabled": True,
         "max_history": MAX_HISTORY,
         "rag_available": RAG_AVAILABLE
     }
 
 # ============================================
-# CHAT ENDPOINT (GŁÓWNY) - POPRAWIONY, KROTSZE ODPOWIEDZI
+# POPRAWIONY CHAT ENDPOINT
 # ============================================
 
 @app.post("/chat", response_model=ChatResponse)
@@ -829,192 +1047,128 @@ async def chat(
     request: ChatRequest,
     background_tasks: BackgroundTasks,
     rag_service: SimpleRAGService = Depends(get_rag_service),
-    llm_service: LLMService = Depends(get_llm_service),
-    prompt_service: PromptService = Depends(get_prompt_service)
+    llm_service: LLMService = Depends(get_llm_service)
 ):
     """
-    Glowny endpoint chat - KROTSZE, LEPSZE ODPOWIEDZI
+    Główny endpoint chat - używa RAG jako jedynego źródła danych technicznych
     """
     start_time = time.time()
     
     try:
         session_id = request.session_id
-        logger.info(f"Chat request from session {session_id}: {request.message[:50]}...")
+        user_message = request.message
+        user_query_lower = user_message.lower()
         
-        # 1. Pobierz historię konwersacji
+        logger.info(f"Chat request: {user_message[:50]}...")
+        
+        # 1. Pobierz historię
         history = get_conversation_history(session_id)
         conversation_history = format_history_for_prompt(history)
-        
-        # 2. Sprawdź czy to pierwsza wiadomość w sesji
         is_first_message = len(history) == 0
         
-        # 3. ANALIZA PYTANIA - prosta, bez LLM
-        user_query_lower = request.message.lower()
+        # 2. Wykryj typ pytania
+        question_type = "general"
+        if any(word in user_query_lower for word in ['specyfikacj', 'dane', 'parametr', 'silnik', 'moc']):
+            question_type = "specyfikacje"
+        elif any(word in user_query_lower for word in ['różni', 'różnica', 'porównaj', 'vs', 'contra']):
+            question_type = "porownanie"
+        elif any(word in user_query_lower for word in ['rodzin', 'dzieci', 'osób']):
+            question_type = "rodzinny"
+        elif any(word in user_query_lower for word in ['sport', 'szybk', 'mocny']):
+            question_type = "sportowy"
+        elif any(word in user_query_lower for word in ['elektryczn', 'ev', 'elektryk']):
+            question_type = "elektryczny"
+        elif any(word in user_query_lower for word in ['cen', 'koszt', 'drogi']):
+            question_type = "cena"
         
-        # Wykryj kategorię pytania
-        category = ""
-        if any(word in user_query_lower for word in ['rodzin', 'dzieci', 'osób', 'osobowa', 'rodzinn']):
-            category = "RODZINNY"
-        elif any(word in user_query_lower for word in ['sport', 'sportow', 'mocny', 'szybk', 'wyścig', 'prędkość']):
-            category = "SPORTOWY"
-        elif any(word in user_query_lower for word in ['elektryczn', 'ev', 'elektryk', 'prąd', 'ładowanie', 'bateria']):
-            category = "ELEKTRYCZNY"
-        elif any(word in user_query_lower for word in ['cen', 'koszt', 'drogi', 'tani', 'cena', 'pieniądze']):
-            category = "CENA"
-        elif any(word in user_query_lower for word in ['serwis', 'napraw', 'gwarancj', 'obsług', 'warsztat']):
-            category = "SERWIS"
-        elif any(word in user_query_lower for word in ['specyfikacj', 'dane', 'parametr', 'technicz', 'silnik', 'moc']):
-            category = "TECHNICZNY"
-        else:
-            category = "OGÓLNY"
+        # 3. Wykryj modele BMW
+        bmw_models = ['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'xm',
+                     'i3', 'i4', 'i5', 'i7', 'i8', 'ix',
+                     'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
+                     'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8']
         
-        logger.debug(f"Category detected: {category}")
-        
-        # 4. Wykryj imię użytkownika
-        user_name = None
-        if 'jestem' in user_query_lower:
-            # Proste wykrywanie imienia po "jestem"
-            words = request.message.split()
-            for i, word in enumerate(words):
-                if word.lower() == 'jestem' and i + 1 < len(words):
-                    potential_name = words[i + 1]
-                    # Sprawdź czy to może być imię (pierwsza litera wielka, reszta mała)
-                    if len(potential_name) > 2 and potential_name[0].isupper():
-                        # Usuń znaki interpunkcyjne
-                        clean_name = re.sub(r'[^\w]', '', potential_name)
-                        user_name = clean_name
-                        break
-        
-        # 5. Sprawdź czy to pytanie o konkretny model BMW
-        bmw_models_keywords = ['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'xm',
-                              'i3', 'i4', 'i5', 'i7', 'i8', 'ix',
-                              'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
-                              'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8',
-                              '2 series', '3 series', '4 series', '5 series', '7 series', '8 series']
-        
-        specific_model = None
-        for model in bmw_models_keywords:
+        detected_models = []
+        for model in bmw_models:
             if model in user_query_lower:
-                specific_model = model.upper()
-                break
+                model_upper = model.upper()
+                if 'SERIA' in model_upper:
+                    model_upper = model_upper.replace('SERIA', 'Seria')
+                detected_models.append(model_upper)
         
-        # 6. Użyj RAG tylko dla specyficznych pytań technicznych lub o konkretne modele
-        needs_rag = category in ["TECHNICZNY", "SERWIS"] or specific_model is not None
-        
+        # 4. Użyj RAG dla pytań technicznych
+        needs_rag = False
         context_text = ""
+        rag_result = None
         sources_count = 0
-        confidence_score = 0.8  # Domyślna pewność
+        confidence_score = 0.8
+        
+        # RAG tylko dla pytań wymagających danych
+        rag_needed_types = ["specyfikacje", "porownanie", "elektryczny", "sportowy", "cena"]
+        if question_type in rag_needed_types or detected_models:
+            needs_rag = True
         
         if needs_rag:
-            # Użyj RAG dla konkretnych pytań
-            context_result = await rag_service.retrieve(
-                query=request.message,
-                top_k=2,  # MNIEJ dokumentów dla szybszej odpowiedzi
+            rag_result = await rag_service.retrieve(
+                query=user_message,
+                top_k=3,
                 similarity_threshold=0.5
             )
             
-            if hasattr(context_result, 'documents') and context_result.documents:
-                relevant_docs = []
-                for doc in context_result.documents:
-                    similarity = doc.get('similarity', 0)
-                    if similarity > 0.4:  # Niższy próg dla lepszego dopasowania
-                        relevant_docs.append(doc)
+            if hasattr(rag_result, 'documents') and rag_result.documents:
+                # Weź tylko zwalidowane dokumenty z danymi technicznymi
+                valid_docs = [
+                    d for d in rag_result.documents 
+                    if d.get('validated', False) and d.get('quality_score', 0) >= 0.6
+                ]
+                sources_count = len(valid_docs)
                 
-                sources_count = len(relevant_docs)
-                
-                if relevant_docs:
-                    # Przygotuj krótki kontekst
+                if valid_docs:
+                    # Przygotuj kontekst z najlepszych źródeł
                     context_parts = []
-                    for doc in relevant_docs[:2]:
+                    for i, doc in enumerate(valid_docs[:2], 1):
                         content = doc['content']
-                        # Skróć zawartość
-                        if len(content) > 200:
-                            content = content[:200] + "..."
-                        context_parts.append(content)
+                        # Skróć ale zachowaj kluczowe informacje
+                        if len(content) > 250:
+                            # Znajdź kluczowe zdania
+                            sentences = re.split(r'[.!?]+', content)
+                            key_sentences = []
+                            keywords = ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'napęd']
+                            
+                            for sentence in sentences:
+                                if any(keyword in sentence.lower() for keyword in keywords):
+                                    key_sentences.append(sentence.strip())
+                            
+                            if key_sentences:
+                                content = ' '.join(key_sentences[:3])
+                        
+                        metadata = doc.get('metadata', {})
+                        source = metadata.get('title', 'Źródło')[:50]
+                        quality = f" (jakość: {doc.get('quality_score', 0):.1f})"
+                        
+                        context_parts.append(f"{i}. [{source}{quality}]: {content[:200]}...")
                     
                     context_text = "\n\n".join(context_parts)
                     
-                    # Oblicz pewność
-                    similarities = [d.get('similarity', 0) for d in relevant_docs]
-                    if similarities:
-                        confidence_score = sum(similarities) / len(similarities)
+                    # Oblicz pewność na podstawie jakości źródeł
+                    quality_scores = [d.get('quality_score', 0) for d in valid_docs]
+                    confidence_score = sum(quality_scores) / len(quality_scores)
         
-        # 7. Przygotuj historię konwersacji (krótko)
-        history_text = ""
-        if conversation_history and not is_first_message:
-            # Tylko ostatnie 2 wiadomości
-            recent_history = conversation_history[-2:]
-            history_lines = []
-            for msg in recent_history:
-                role = "Klient" if msg['role'] == 'user' else "Asystent"
-                history_lines.append(f"{role}: {msg['content']}")
-            history_text = "\n".join(history_lines)
+        # 5. Stwórz prompt BEZ DANYCH TECHNICZNYCH
+        prompt = create_smart_prompt(
+            user_message=user_message,
+            history=conversation_history,
+            context=context_text if context_text else "BRAK DANYCH TECHNICZNYCH W BAZIE",
+            question_type=question_type,
+            detected_models=detected_models
+        )
         
-        # 8. Zbuduj PROMPT - KROTSZY I LEPSZY
-        prompt_parts = []
-        
-        # SYSTEM PROMPT
-        system_prompt = """Jesteś Leo - ekspertem BMW w ZK Motors, oficjalnym dealerze BMW i MINI.
-Odpowiadaj KROTKO, konkretnie i przyjaźnie. Używaj punktów • zamiast długich akapitów.
-Maksymalnie 4-5 zdań. Nie powtarzaj się."""
-        
-        if is_first_message:
-            system_prompt += "\nPrzywitaj się krótko i zapytaj czym możesz pomóc."
-        
-        prompt_parts.append(system_prompt)
-        
-        # Dodaj kategorie jeśli wykryta
-        if category:
-            category_instructions = {
-                "RODZINNY": "Polecaj: BMW X3, X5, X7, seria 2 Active Tourer. Wymień korzyści dla rodzin.",
-                "SPORTOWY": "Polecaj: BMW M2/M3/M4, M5, Z4, X3 M/X5 M. Podkreśl sportowe cechy.",
-                "ELEKTRYCZNY": "Polecaj: BMW i4, i5, i7, iX. Wymień zalety elektryków BMW.",
-                "CENA": "Nie podawaj konkretnych cen - zaproś do kontaktu z salonem ZK Motors.",
-                "SERWIS": "Opowiedz o autoryzowanych serwisach BMW i pakietach serwisowych.",
-                "TECHNICZNY": "Użyj konkretnych danych technicznych jeśli dostępne.",
-                "OGÓLNY": "Polecaj modele odpowiednie do potrzeb. Zachęć do kontaktu."
-            }
-            
-            if category in category_instructions:
-                prompt_parts.append(f"KATEGORIA: {category}")
-                prompt_parts.append(f"INSTRUKCJE: {category_instructions[category]}")
-        
-        # Dodaj kontekst z RAG jeśli jest
-        if context_text and needs_rag:
-            prompt_parts.append(f"KONTEKST Z BAZY WIEDZY:\n{context_text}")
-        
-        # Dodaj historię jeśli jest
-        if history_text:
-            prompt_parts.append(f"OSTATNIA ROZMOWA:\n{history_text}")
-        
-        # Dodaj pytanie użytkownika
-        user_question = f"Pytanie klienta{f' ({user_name})' if user_name else ''}: \"{request.message}\""
-        prompt_parts.append(user_question)
-        
-        # Dodaj ważne zasady
-        prompt_parts.append("""WAŻNE:
-1. Odpowiedz bezpośrednio na pytanie
-2. Nie zaczynaj od "Dziękuję za pytanie" ani "Dzień dobry" (chyba że pierwsza wiadomość)
-3. Nie opowiadaj ciągle o tym samym
-4. Nie pisz długich powitań ani pożegnań
-5. Proponuj konkretne modele BMW
-6. Zaproś do kontaktu z ZK Motors tylko raz na końcu""")
-        
-        # Specjalne instrukcje dla konkretnych modeli
-        if specific_model:
-            prompt_parts.append(f"UWAGA: Klient pyta o model {specific_model}. Skup się na tym modelu.")
-        
-        prompt_parts.append("ODPOWIEDŹ (krótko, po polsku):")
-        
-        final_prompt = "\n\n".join(prompt_parts)
-        
-        # 9. Generuj odpowiedź
+        # 6. Generuj odpowiedź
         try:
             llm_result = await llm_service.generate(
-                prompt=final_prompt,
+                prompt=prompt,
                 model=settings.COHERE_CHAT_MODEL,
                 temperature=0.7,
-                max_tokens=400  # MNIEJ tokenów = krótsza odpowiedź
+                max_tokens=500  # Więcej tokenów dla bardziej szczegółowych odpowiedzi
             )
             
             # Wyodrębnij tekst
@@ -1027,86 +1181,42 @@ Maksymalnie 4-5 zdań. Nie powtarzaj się."""
             else:
                 response_text = str(llm_result)
             
-            # OCZYŚĆ ODPOWIEDŹ - usuń powtarzające się frazy
-            patterns_to_remove = [
-                r'Jestem Leo,.*?ZK Motors.*?(?=[.!?])[.!?]',
-                r'Dziękuję.*?za pytanie.*?(?=[.!?])[.!?]',
-                r'Zapraszam.*?do kontaktu.*?salonu.*?(?=[.!?])[.!?]',
-                r'W ZK Motors.*?finansowania.*?(?=[.!?])[.!?]',
-                r'Pamiętaj.*?usług dodatkowych.*?(?=[.!?])[.!?]',
-                r'Jesteśmy gotowi.*?pomóc.*?(?=[.!?])[.!?]',
-                r'Specjalizuję się.*?BMW.*?MINI.*?(?=[.!?])[.!?]',
+            # 7. OCZYŚĆ ODPOWIEDŹ
+            # Usuń powtarzające się frazy
+            cleanup_patterns = [
+                r'Dziękuję.*?za pytanie.*?\.',
+                r'Zapraszam.*?do kontaktu.*?salonu.*?\.',
+                r'Jestem Leo.*?ZK Motors.*?\.',
+                r'Specjalizuję się.*?BMW.*?\.',
             ]
             
-            for pattern in patterns_to_remove:
+            for pattern in cleanup_patterns:
                 response_text = re.sub(pattern, '', response_text, flags=re.IGNORECASE)
             
-            # Usuń puste linie i nadmiarowe spacje
+            # Usuń nadmiarowe białe znaki
             response_text = re.sub(r'\n\s*\n+', '\n\n', response_text)
-            response_text = re.sub(r'\.\.+', '.', response_text)
             response_text = re.sub(r'\s+', ' ', response_text)
             response_text = response_text.strip()
             
-            # Formatowanie - dodaj punktory zamiast długich akapitów
-            if '•' not in response_text and len(response_text) > 150:
-                # Podziel na zdania i zamień niektóre na punktory
-                sentences = re.split(r'(?<=[.!?])\s+', response_text)
-                if len(sentences) > 3:
-                    # Pierwsze 1-2 zdania zostaw jako wprowadzenie, resztę jako punktory
-                    intro = sentences[0]
-                    bullet_points = sentences[1:min(5, len(sentences))]
-                    
-                    bulleted = []
-                    for point in bullet_points:
-                        # Usuń początkowe "A" "I" "Oraz" itp.
-                        point = re.sub(r'^(A|I|Oraz|Również|Ponadto)\s+', '', point)
-                        if point:
-                            bulleted.append(f"• {point}")
-                    
-                    if bulleted:
-                        response_text = f"{intro}\n\n" + "\n".join(bulleted)
+            # Dodaj przywitanie jeśli pierwsza wiadomość
+            if is_first_message and not response_text.startswith(("Cześć", "Dzień dobry", "Witaj", "Hej")):
+                response_text = f"Cześć! Jestem Leo, ekspert BMW w ZK Motors.\n\n{response_text}"
             
-            # Dodaj przywitanie z imieniem jeśli to pierwsza wiadomość i wykryto imię
-            if is_first_message and user_name and not response_text.startswith(f"Cześć {user_name}"):
-                response_text = f"Cześć {user_name}!\n\n{response_text}"
-            elif is_first_message and not response_text.startswith(("Cześć", "Dzień dobry", "Witaj", "Hej", "Czołem")):
-                response_text = f"Cześć!\n\n{response_text}"
+            # 8. WALIDUJ odpowiedź na podstawie źródeł RAG
+            sources_data = []
+            if rag_result and hasattr(rag_result, 'to_api_response'):
+                sources_response = rag_result.to_api_response()
+                sources_data = sources_response.get("sources", [])
             
-            # Upewnij się że odpowiedź nie jest pusta
-            if not response_text or len(response_text) < 20:
-                # Fallback odpowiedź
-                if category == "RODZINNY":
-                    response_text = """Cześć!
-
-Dla rodziny polecam:
-• BMW X3 - średni SUV, idealny dla 4-5 osób
-• BMW X5 - duży SUV, dostępny w wersji 7-miejscowej
-• BMW X7 - luksusowy SUV dla większej rodziny
-
-Który model Cię interesuje?"""
-                elif category == "SPORTOWY":
-                    response_text = """Cześć!
-
-Modele sportowe BMW:
-• BMW M2/M3/M4 - sportowe sedany/coupe
-• BMW M5 - supersedan z mocą 600+ KM
-• BMW Z4 - roadster dla miłośników jazdy z otwartym dachem
-
-Chcesz poznać szczegóły któregoś modelu?"""
-                elif category == "ELEKTRYCZNY":
-                    response_text = """Cześć!
-
-Elektryczne BMW:
-• BMW i4 - sportowy sedan elektryczny
-• BMW i5 - elektryczna limuzyna premium
-• BMW iX - fl agshipowy elektryczny SUV
-
-Zasięgi od 400 do 600 km."""
-                else:
-                    response_text = """Cześć!
-
-Jestem Leo, ekspertem BMW w ZK Motors.
-W czym mogę Ci pomóc?"""
+            corrected_text, data_quality, validation_details = validate_and_correct_bmw_data(
+                response_text, 
+                question_type,
+                sources_data
+            )
+            
+            # Jeśli słaba jakość i mamy źródła, dodaj informację
+            if data_quality == "low" and sources_data:
+                corrected_text += "\n\nℹ️ *Dane oparte na dostępnych źródłach. Dla najświeższych informacji zapraszam do salonu ZK Motors.*"
             
             tokens_used = None
             if hasattr(llm_result, 'tokens_used'):
@@ -1117,35 +1227,44 @@ W czym mogę Ci pomóc?"""
         except Exception as llm_error:
             logger.error(f"LLM error: {str(llm_error)}")
             
-            # Krótkie fallback odpowiedzi
-            if category == "RODZINNY":
-                response_text = "Cześć! Dla rodziny polecam BMW X3, X5 lub X7. Który model Cię interesuje?"
-            elif category == "SPORTOWY":
-                response_text = "Cześć! Modele sportowe: BMW M2/M3/M4, M5, Z4. Chcesz poznać szczegóły?"
-            elif '6 osobow' in user_query_lower:
-                response_text = "Cześć! Dla 6 osób: BMW X5 (7-miejscowy) lub X7. Zapraszam do ZK Motors!"
+            # FALLBACK odpowiedzi na podstawie RAG jeśli dostępny
+            if rag_result and hasattr(rag_result, 'documents') and rag_result.documents:
+                # Stwórz odpowiedź z danych RAG
+                valid_docs = [d for d in rag_result.documents if d.get('validated', False)]
+                if valid_docs:
+                    doc = valid_docs[0]
+                    content = doc['content'][:200] + "..." if len(doc['content']) > 200 else doc['content']
+                    corrected_text = f"""Cześć!
+
+Na podstawie dostępnych danych:
+• {content}
+
+Dla dokładnych i aktualnych informacji zapraszam do salonu ZK Motors!"""
+                else:
+                    corrected_text = "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
             else:
-                response_text = "Cześć! Jestem Leo, ekspert BMW w ZK Motors. W czym mogę pomóc?"
+                corrected_text = "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
             
+            data_quality = "medium"
+            validation_details = {"fallback_used": True, "llm_error": str(llm_error)}
             tokens_used = None
         
-        # 10. Dodaj do historii
-        add_to_history(session_id, "user", request.message)
-        add_to_history(session_id, "assistant", response_text)
+        # 9. Dodaj do historii
+        add_to_history(session_id, "user", user_message)
+        add_to_history(session_id, "assistant", corrected_text)
         
-        # 11. Przygotuj odpowiedź
+        # 10. Przygotuj odpowiedź
         processing_time = time.time() - start_time
         
-        # 12. Przygotuj źródła (tylko jeśli użyto RAG)
+        # 11. Przygotuj źródła do odpowiedzi
         sources = []
-        if needs_rag and sources_count > 0:
-            if hasattr(context_result, 'to_api_response'):
-                sources_response = context_result.to_api_response()
-                sources = sources_response.get("sources", [])[:2]
+        if rag_result and hasattr(rag_result, 'to_api_response'):
+            sources_response = rag_result.to_api_response()
+            sources = sources_response.get("sources", [])[:2]  # Maks 2 źródła w odpowiedzi
         
-        # 13. Stwórz odpowiedź API
+        # 12. Stwórz odpowiedź API
         response = ChatResponse(
-            answer=response_text,
+            answer=corrected_text,
             session_id=session_id,
             history_length=len(get_conversation_history(session_id)),
             processing_time=processing_time,
@@ -1154,35 +1273,34 @@ W czym mogę Ci pomóc?"""
             tokens_used=tokens_used,
             confidence=confidence_score,
             rag_info={
+                "question_type": question_type,
+                "detected_models": detected_models,
                 "sources_count": sources_count,
-                "category": category,
-                "specific_model": specific_model,
-                "needs_rag": needs_rag,
-                "confidence": round(confidence_score, 2)
-            } if needs_rag else {
-                "category": category,
-                "specific_model": specific_model,
-                "needs_rag": False
-            }
+                "data_validated": True,
+                "validation_details": validation_details,
+                "used_rag": needs_rag
+            },
+            data_quality=data_quality
         )
         
-        # 14. Loguj w tle
+        # 13. Loguj w tle
         background_tasks.add_task(
             log_interaction,
-            user_message=request.message,
-            assistant_response=response_text,
+            user_message=user_message,
+            assistant_response=corrected_text,
             session_id=session_id,
             sources_count=sources_count,
             tokens_used=tokens_used,
             processing_time=processing_time,
             confidence=confidence_score,
-            rag_info={"category": category, "specific_model": specific_model}
+            rag_info={"question_type": question_type, "models": detected_models}
         )
         
-        logger.info(f"Response in {processing_time:.2f}s, length: {len(response_text)} chars", extra={
-            "category": category,
-            "specific_model": specific_model,
-            "history": len(get_conversation_history(session_id))
+        logger.info(f"Response in {processing_time:.2f}s, quality: {data_quality}", extra={
+            "question_type": question_type,
+            "models": detected_models,
+            "used_rag": needs_rag,
+            "sources": sources_count
         })
         
         return response
@@ -1196,12 +1314,10 @@ W czym mogę Ci pomóc?"""
             detail="Błąd serwera" if settings.IS_PRODUCTION else str(e)
         )
 
-
 @app.post("/chat/stream")
 async def chat_stream(request: ChatRequest):
-    """Placeholder dla streaming - nie zaimplementowane"""
     async def event_generator():
-        yield f"data: {json.dumps({'error': 'Streaming not implemented in current version'})}\n\n"
+        yield f"data: {json.dumps({'error': 'Streaming not implemented'})}\n\n"
         yield "data: [DONE]\n\n"
     
     return StreamingResponse(
@@ -1210,10 +1326,8 @@ async def chat_stream(request: ChatRequest):
         headers={"Cache-Control": "no-cache"}
     )
 
-
 @app.post("/chat/reset", response_model=ResetResponse)
 async def reset_chat(session_id: str = "default"):
-    """Resetuje historię konwersacji dla danej sesji"""
     if session_id in conversation_memory:
         conversation_memory[session_id] = []
         logger.info(f"Reset conversation history for session: {session_id}")
@@ -1225,10 +1339,8 @@ async def reset_chat(session_id: str = "default"):
         history_length=len(get_conversation_history(session_id))
     )
 
-
 @app.get("/chat/history", response_model=HistoryResponse)
 async def get_history(session_id: str = "default", limit: int = 10):
-    """Pobiera historię konwersacji"""
     history = get_conversation_history(session_id)
     
     return HistoryResponse(
@@ -1239,16 +1351,15 @@ async def get_history(session_id: str = "default", limit: int = 10):
     )
 
 # ============================================
-# DEBUG ENDPOINTS (tylko development)
+# DEBUG ENDPOINTS
 # ============================================
 
 @app.get("/debug/rag")
 async def debug_rag(
     query: str,
-    top_k: int = settings.TOP_K_DOCUMENTS,
+    top_k: int = 3,
     rag_service: SimpleRAGService = Depends(get_rag_service)
 ):
-    """Debug endpoint do testowania RAG (tylko development)"""
     if settings.IS_PRODUCTION:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -1261,16 +1372,16 @@ async def debug_rag(
         "query": query,
         "result": result.to_api_response() if hasattr(result, 'to_api_response') else {"sources": []},
         "documents_count": len(result.documents) if hasattr(result, 'documents') else 0,
-        "average_similarity": result.average_similarity if hasattr(result, 'average_similarity') else 0
+        "average_similarity": result.average_similarity if hasattr(result, 'average_similarity') else 0,
+        "has_valid_data": result.has_valid_data if hasattr(result, 'has_valid_data') else False,
+        "quality_scores": result.quality_scores if hasattr(result, 'quality_scores') else []
     }
-
 
 @app.get("/debug/stats")
 async def debug_stats(
     rag_service: SimpleRAGService = Depends(get_rag_service),
     llm_service: LLMService = Depends(get_llm_service)
 ):
-    """Statystyki serwisów (tylko development)"""
     if settings.IS_PRODUCTION:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -1307,7 +1418,6 @@ async def log_interaction(
     confidence: Optional[float],
     rag_info: Optional[Dict[str, Any]] = None
 ):
-    """Loguje interakcję w tle"""
     try:
         log_entry = {
             "timestamp": datetime.utcnow().isoformat(),
@@ -1315,18 +1425,10 @@ async def log_interaction(
             "user_message_preview": user_message[:100],
             "assistant_response_preview": assistant_response[:100],
             "sources_count": sources_count,
-            "tokens_used": tokens_used,
             "processing_time": round(processing_time, 2),
             "confidence": round(confidence, 2) if confidence else None,
-            "category": rag_info.get('category', 'unknown') if rag_info else 'unknown'
+            "question_type": rag_info.get('question_type', 'unknown') if rag_info else 'unknown'
         }
-        
-        if rag_info:
-            log_entry["rag_info"] = {
-                "category": rag_info.get('category'),
-                "specific_model": rag_info.get('specific_model'),
-                "needs_rag": rag_info.get('needs_rag', False)
-            }
         
         logger.info(f"Interaction logged", extra=log_entry)
         
@@ -1339,27 +1441,20 @@ async def log_interaction(
 
 @app.on_event("startup")
 async def startup_event():
-    """Uruchamiane przy starcie aplikacji"""
     try:
-        # Walidacja konfiguracji
         validate_configuration()
-        
-        # Inicjalizacja cache
         await init_cache()
         
-        # Inicjalizacja RAG
         rag_info = "NOT AVAILABLE"
         if RAG_AVAILABLE:
             try:
-                # Sprawdź czy plik RAG istnieje
                 if RAG_FILE_PATH.exists():
-                    # Utwórz RAG service (singleton)
                     rag_service = get_rag_service_singleton()
                     rag_health = await rag_service.health_check()
                     rag_stats = await rag_service.get_stats()
                     
                     if rag_stats.get("is_dummy", False):
-                        rag_info = f"DUMMY MODE (brak prawdziwego RAG)"
+                        rag_info = f"DUMMY MODE"
                     else:
                         rag_info = f"LOADED ({rag_stats.get('total_chunks', 0)} chunks)"
                 else:
@@ -1369,23 +1464,19 @@ async def startup_event():
         else:
             rag_info = "IMPORT FAILED"
         
-        # Informacje o starcie
         logger.info(f"{settings.APP_NAME} v{settings.APP_VERSION} starting up...")
         logger.info(f"Environment: {settings.ENVIRONMENT}")
         logger.info(f"LLM Model: {settings.COHERE_CHAT_MODEL}")
         logger.info(f"RAG: {rag_info}")
-        logger.info(f"RAG Documents: {settings.TOP_K_DOCUMENTS} docs")
-        logger.info(f"Memory: Enabled (last {MAX_HISTORY} messages per session)")
+        logger.info(f"Memory: {MAX_HISTORY} messages per session")
         logger.info(f"API: http://{settings.HOST}:{settings.PORT}")
-        logger.info(f"Docs: http://{settings.HOST}:{settings.PORT}/docs")
         logger.info(f"Chat: http://{settings.HOST}:{settings.PORT}/")
         
-        # Sprawdź czy chat.html istnieje
         chat_html_path = TEMPLATES_DIR / "chat.html"
         if chat_html_path.exists():
-            logger.info(f"HTML Interface: chat.html found at {chat_html_path}")
+            logger.info(f"HTML Interface: chat.html found")
         else:
-            logger.warning(f"HTML Interface: chat.html NOT FOUND at {chat_html_path}")
+            logger.warning(f"HTML Interface: chat.html NOT FOUND")
         
         logger.info("Application started successfully")
         
@@ -1396,10 +1487,8 @@ async def startup_event():
         logger.critical(f"Startup failed: {str(e)}", exc_info=True)
         raise
 
-
 @app.on_event("shutdown")
 async def shutdown_event():
-    """Uruchamiane przy zamykaniu aplikacji"""
     logger.info("Shutting down application...")
     logger.info(f"Memory stats: {len(conversation_memory)} sessions, {sum(len(h) for h in conversation_memory.values())} total messages")
 
@@ -1409,7 +1498,6 @@ async def shutdown_event():
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
-    """Handler dla HTTPException"""
     logger.warning(
         f"HTTP {exc.status_code}: {exc.detail}",
         extra={"path": request.url.path, "method": request.method}
@@ -1420,10 +1508,8 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         content={"detail": exc.detail},
     )
 
-
 @app.exception_handler(Exception)
 async def generic_exception_handler(request: Request, exc: Exception):
-    """Handler dla nieprzewidzianych wyjątków"""
     logger.critical(
         f"Unhandled exception: {str(exc)}",
         extra={"path": request.url.path, "method": request.method},
@@ -1444,7 +1530,6 @@ async def generic_exception_handler(request: Request, exc: Exception):
 # ============================================
 
 def main():
-    """Główna funkcja uruchamiająca aplikację"""
     import sys
     
     try:
@@ -1463,27 +1548,11 @@ def main():
             print(f"{settings.APP_NAME} v{settings.APP_VERSION}")
             print(f"Environment: {settings.ENVIRONMENT}")
             print(f"Czat: http://{settings.HOST}:{settings.PORT}/")
-            print(f"Docs: http://{settings.HOST}:{settings.PORT}/docs")
             print(f"Model: {settings.COHERE_CHAT_MODEL}")
-            
-            # Sprawdź RAG
-            print(f"RAG file: {RAG_FILE_PATH}")
-            print(f"RAG exists: {RAG_FILE_PATH.exists()}")
-            
-            if RAG_AVAILABLE:
-                print(f"RAG: IMPORTED")
-            else:
-                print(f"RAG: IMPORT FAILED - running in dummy mode")
-            
-            # Sprawdź HTML
-            chat_html_path = TEMPLATES_DIR / "chat.html"
-            print(f"HTML Interface: {'Found' if chat_html_path.exists() else 'Not found'} at {chat_html_path}")
-            
+            print(f"RAG: {'AVAILABLE' if RAG_AVAILABLE else 'NOT AVAILABLE'}")
+            print(f"Data validation: ENABLED")
             print(f"Memory: {MAX_HISTORY} messages per session")
-            print(f"API: http://{settings.HOST}:{settings.PORT}/chat")
             print(f"Test: http://{settings.HOST}:{settings.PORT}/ping")
-            print(f"Quick Health: http://{settings.HOST}:{settings.PORT}/health/quick")
-            print(f"Status: http://{settings.HOST}:{settings.PORT}/api/status")
             print(f"{'='*60}\n")
         
         uvicorn.run(**config)
@@ -1491,7 +1560,6 @@ def main():
     except Exception as e:
         print(f"Failed to start: {e}", file=sys.stderr)
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
