@@ -1,12 +1,11 @@
 """
-Główny plik aplikacji BMW Assistant - ZK Motors Edition.
-POPRAWIONA WERSJA - WYSOKA JAKOŚĆ ODPOWIEDZI, RAG JEDYNIE JAKO ŹRÓDŁO DANYCH
+BMW Assistant - Production Version with Improved RAG and Intent Detection
 """
+
 import json
 import time
-import re
 from datetime import datetime
-from typing import Optional, Dict, Any, List, Tuple
+from typing import Optional, Dict, Any, List
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks, Request, status
@@ -18,451 +17,11 @@ from pydantic import BaseModel, Field, validator
 import uvicorn
 
 from app.core.config import settings, validate_configuration
-from app.core.exceptions import BMWAssistantException
 from app.utils.logger import setup_logger, log
 from app.services.llm_service import LLMService, get_llm_service
-# USUNIĘTO: from app.services.prompt_service import PromptService, get_prompt_service
+from app.services.prompt_service import PromptService, get_prompt_service
+from app.services.rag_service import get_rag_service, RAGService
 from app.services.cache import init_cache
-
-# ============================================
-# IMPORT NASZEGO DZIAŁAJĄCEGO RAG
-# ============================================
-
-import sys
-import os
-from pathlib import Path
-
-RAG_FILE_PATH = Path(r"C:\Users\hellb\Documents\Chatbot_BMW\RAG\src\scrapers\6_rag_test.py")
-
-def import_rag_module():
-    """Dynamicznie importuje moduł RAG"""
-    try:
-        if not RAG_FILE_PATH.exists():
-            raise FileNotFoundError(f"Nie znaleziono pliku RAG: {RAG_FILE_PATH}")
-        
-        rag_dir = RAG_FILE_PATH.parent
-        if str(rag_dir) not in sys.path:
-            sys.path.insert(0, str(rag_dir))
-        
-        import importlib.util
-        
-        module_name = "rag_module_6_test"
-        spec = importlib.util.spec_from_file_location(
-            module_name, 
-            str(RAG_FILE_PATH)
-        )
-        
-        if spec is None:
-            raise ImportError(f"Nie można utworzyć specyfikacji dla {RAG_FILE_PATH}")
-        
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[module_name] = module
-        spec.loader.exec_module(module)
-        
-        print(f"Załadowano moduł RAG: {module_name}")
-        
-        if not hasattr(module, 'RAGSystem'):
-            raise AttributeError("Brak klasy RAGSystem w module")
-        
-        if not hasattr(module, 'find_latest_vector_db'):
-            raise AttributeError("Brak funkcji find_latest_vector_db w module")
-        
-        return module
-        
-    except Exception as e:
-        print(f"Błąd ładowania modułu RAG: {e}")
-        raise
-
-try:
-    rag_module = import_rag_module()
-    RAGSystem = rag_module.RAGSystem
-    find_latest_vector_db = rag_module.find_latest_vector_db
-    RAG_AVAILABLE = True
-    print("RAG system gotowy do użycia")
-except Exception as e:
-    print(f"Warning: Could not import RAG module: {e}")
-    print("Aplikacja będzie działać bez RAG")
-    RAG_AVAILABLE = False
-    
-    class RAGSystem:
-        def __init__(self, vector_db_path=None):
-            self.vector_db_path = vector_db_path
-            print(f"Używam dummy RAGSystem")
-        
-        def query(self, query, k=3, use_model_filter=False, use_priority=True):
-            print(f"Dummy RAG query: '{query[:50]}...'")
-            return []
-        
-        def get_database_info(self):
-            return {
-                'total_chunks': 0,
-                'total_vectors': 0,
-                'model_name': 'dummy (no RAG)',
-                'embedding_dim': 0,
-                'index_type': 'none',
-                'loaded_at': 'never'
-            }
-    
-    def find_latest_vector_db():
-        print("Dummy find_latest_vector_db: zwracam None")
-        return None
-
-# ============================================
-# RAG SINGLETON
-# ============================================
-
-_rag_service_instance = None
-
-def get_rag_service_singleton():
-    """Singleton dla RAG service"""
-    global _rag_service_instance
-    if _rag_service_instance is None:
-        print("Tworzę singleton RAG service...")
-        _rag_service_instance = SimpleRAGService()
-    return _rag_service_instance
-
-# ============================================
-# POPRAWIONY RAG SERVICE Z LEPSZĄ WALIDACJĄ
-# ============================================
-
-class SimpleRAGService:
-    """Adapter dla RAG-a z zaawansowaną walidacją danych"""
-    
-    def __init__(self):
-        print(f"Inicjalizacja SimpleRAGService...")
-        
-        if not RAG_AVAILABLE:
-            print("RAG nie dostępny - tworzę dummy service")
-            self._create_dummy_service()
-            return
-        
-        try:
-            db_file = find_latest_vector_db()
-            if not db_file:
-                print("Nie znaleziono bazy RAG - tworzę dummy service")
-                self._create_dummy_service()
-                return
-            
-            print(f"Ładowanie bazy RAG z: {db_file}")
-            self.rag = RAGSystem(vector_db_path=db_file)
-            self.db_info = self.rag.get_database_info()
-            print(f"RAG załadowany: {self.db_info.get('total_chunks', 0)} fragmentów")
-            
-        except Exception as e:
-            print(f"Błąd inicjalizacji RAG: {e}")
-            print("Tworzę dummy service jako fallback")
-            self._create_dummy_service()
-    
-    def _create_dummy_service(self):
-        """Tworzy dummy service gdy RAG nie jest dostępny"""
-        self.rag = RAGSystem() if RAG_AVAILABLE else RAGSystem(None)
-        self.db_info = {
-            'total_chunks': 0,
-            'total_vectors': 0,
-            'model_name': 'dummy (RAG niedostępny)',
-            'embedding_dim': 0,
-            'index_type': 'none',
-            'loaded_at': datetime.now().isoformat()
-        }
-        print("Dummy RAG service utworzony")
-    
-    async def retrieve(self, query: str, top_k: int = 3, similarity_threshold: float = 0.7) -> Any:
-        """
-        Wyszukuje dokumenty w RAG z zaawansowaną walidacją
-        """
-        print(f"RAG retrieve: '{query[:50]}...' (top_k={top_k})")
-        
-        # Wykryj modele BMW w zapytaniu
-        bmw_models = ['i3', 'i4', 'i5', 'i7', 'i8', 'ix', 'x1', 'x2', 'x3', 'x4', 'x5', 
-                     'x6', 'x7', 'xm', '2 series', '3 series', '4 series', '5 series',
-                     '7 series', '8 series', 'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
-                     'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8']
-        
-        query_lower = query.lower()
-        detected_models_in_query = []
-        
-        for model in bmw_models:
-            if model in query_lower:
-                detected_models_in_query.append(model.upper())
-        
-        use_filter = len(detected_models_in_query) > 0
-        
-        if detected_models_in_query:
-            print(f"   Wykryto modele: {detected_models_in_query}, filtrowanie: {use_filter}")
-        
-        try:
-            # Pierwsze wyszukiwanie z filtrem jeśli wykryto modele
-            if use_filter:
-                results = self.rag.query(
-                    query, 
-                    k=top_k * 2,  # Więcej wyników do filtrowania
-                    use_model_filter=True,
-                    use_priority=True
-                )
-                print(f"   Znaleziono {len(results)} wyników z filtrem modelu")
-            else:
-                results = self.rag.query(
-                    query, 
-                    k=top_k,
-                    use_model_filter=False,
-                    use_priority=True
-                )
-                print(f"   Znaleziono {len(results)} wyników bez filtra")
-            
-            # Fallback: jeśli z filtrem nie ma wyników, spróbuj bez filtra
-            if use_filter and len(results) < 2:
-                print("   Mało wyników z filtrem, próbuję bez filtra...")
-                fallback_results = self.rag.query(
-                    query, 
-                    k=top_k,
-                    use_model_filter=False,
-                    use_priority=True
-                )
-                # Dodaj fallback wyniki, ale zachowaj priorytet
-                for result in fallback_results:
-                    if result not in results:
-                        results.append(result)
-                results = results[:top_k * 2]
-                print(f"   Po fallback: {len(results)} wyników")
-            
-            if not results:
-                print("   Brak wyników - zwracam pustą odpowiedź")
-                return self._create_empty_result()
-            
-            # WALIDUJ i sortuj wyniki
-            validated_docs = []
-            for result in results:
-                doc_text = result.get('text', '')
-                metadata = result.get('metadata', {})
-                similarity = result.get('similarity_score', 0.0)
-                
-                # Walidacja jakości danych
-                validation_result = self._validate_document_advanced(doc_text, metadata, query_lower)
-                
-                if validation_result['is_valid'] or similarity > 0.6:
-                    doc = {
-                        'content': doc_text,
-                        'metadata': metadata,
-                        'similarity': similarity,
-                        'relevance_score': self._calculate_relevance_score(
-                            result.get('relevance_score', similarity),
-                            validation_result,
-                            detected_models_in_query,
-                            metadata.get('models', [])
-                        ),
-                        'validated': validation_result['is_valid'],
-                        'warnings': validation_result['warnings'],
-                        'quality_score': validation_result['quality_score']
-                    }
-                    validated_docs.append(doc)
-            
-            # Sortuj po relevance_score
-            validated_docs.sort(key=lambda x: x['relevance_score'], reverse=True)
-            validated_docs = validated_docs[:top_k]  # Weź najlepsze top_k
-            
-            # Oblicz średnie podobieństwo tylko dla zwalidowanych
-            valid_similarities = [d['similarity'] for d in validated_docs if d.get('validated', False)]
-            avg_similarity = sum(valid_similarities) / len(valid_similarities) if valid_similarities else 0.0
-            
-            class ResultWrapper:
-                def __init__(self, docs, avg_sim, detected_models):
-                    self.documents = docs
-                    self.average_similarity = avg_sim
-                    self.detected_models = detected_models
-                    self.has_valid_data = len([d for d in docs if d.get('validated', False)]) > 0
-                    self.total_warnings = sum(len(d.get('warnings', [])) for d in docs)
-                    self.quality_scores = [d.get('quality_score', 0.0) for d in docs]
-                
-                def to_api_response(self):
-                    sources = []
-                    for i, doc in enumerate(self.documents):
-                        metadata = doc['metadata']
-                        content = doc['content']
-                        source_info = {
-                            'id': i + 1,
-                            'title': metadata.get('title', 'Brak tytułu')[:100],
-                            'content': content[:300] + ('...' if len(content) > 300 else ''),
-                            'similarity': round(doc['similarity'], 3),
-                            'relevance': round(doc.get('relevance_score', doc['similarity']), 3),
-                            'quality': round(doc.get('quality_score', 0.0), 3),
-                            'url': metadata.get('source_url', ''),
-                            'models': metadata.get('models', []),
-                            'validated': doc.get('validated', False),
-                            'warnings': doc.get('warnings', []),
-                            'has_technical_data': self._has_technical_data(content)
-                        }
-                        sources.append(source_info)
-                    
-                    return {"sources": sources}
-                
-                def _has_technical_data(self, text):
-                    """Sprawdza czy tekst zawiera dane techniczne"""
-                    tech_keywords = ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'bieg', 'napęd', 'pojemność']
-                    text_lower = text.lower()
-                    return any(keyword in text_lower for keyword in tech_keywords)
-            
-            return ResultWrapper(validated_docs, avg_similarity, detected_models_in_query)
-            
-        except Exception as e:
-            print(f"Błąd RAG retrieve: {e}")
-            return self._create_empty_result()
-    
-    def _validate_document_advanced(self, text: str, metadata: Dict, query: str) -> Dict[str, Any]:
-        """
-        Zaawansowana walidacja dokumentu
-        """
-        text_lower = text.lower()
-        query_lower = query.lower()
-        
-        # Sprawdź czy dokument jest aktualny
-        year = metadata.get('year', '')
-        is_recent = False
-        try:
-            if year and year.isdigit():
-                year_int = int(year)
-                is_recent = year_int >= 2020
-        except:
-            pass
-        
-        # Sprawdź czy zawiera dane techniczne
-        has_technical_data = any(keyword in text_lower for keyword in [
-            'km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'bieg', 
-            'napęd', 'pojemność', 'przyspieszenie', 'moment', 'v-max'
-        ])
-        
-        # Sprawdź czy pasuje do zapytania
-        query_words = set(query_lower.split())
-        text_words = set(text_lower.split())
-        matching_words = len(query_words.intersection(text_words))
-        query_match_ratio = matching_words / max(len(query_words), 1)
-        
-        # Sprawdź ostrzeżenia
-        warnings = []
-        warning_patterns = [
-            (r'6[\s\-]*biegow', 'Przestarzała skrzynia biegów'),
-            (r'190\s*km', 'Nierealistyczna moc'),
-            (r'stary', 'Stare dane'),
-            (r'201[0-5]', 'Przestarzały rok'),
-        ]
-        
-        for pattern, warning_msg in warning_patterns:
-            if re.search(pattern, text_lower):
-                warnings.append(warning_msg)
-        
-        # Oblicz jakość dokumentu (0.0 - 1.0)
-        quality_score = 0.5  # Bazowy
-        
-        if is_recent:
-            quality_score += 0.2
-        if has_technical_data:
-            quality_score += 0.2
-        if query_match_ratio > 0.3:
-            quality_score += 0.1
-        if len(warnings) == 0:
-            quality_score += 0.1
-        if 'specyfikacja' in text_lower or 'dane techniczne' in text_lower:
-            quality_score += 0.1
-        
-        # Normalizuj do 0.0-1.0
-        quality_score = min(1.0, max(0.0, quality_score))
-        
-        is_valid = quality_score >= 0.6 and has_technical_data
-        
-        return {
-            'is_valid': is_valid,
-            'quality_score': quality_score,
-            'is_recent': is_recent,
-            'has_technical_data': has_technical_data,
-            'query_match_ratio': query_match_ratio,
-            'warnings': warnings
-        }
-    
-    def _calculate_relevance_score(self, base_score: float, validation_result: Dict, 
-                                 query_models: List[str], doc_models: List[str]) -> float:
-        """Oblicza wynik relewancji z uwzględnieniem wielu czynników"""
-        relevance = base_score
-        
-        # Bonus za zgodność modeli
-        if query_models and doc_models:
-            matching_models = set(m.upper() for m in query_models) & set(m.upper() for m in doc_models)
-            if matching_models:
-                relevance += 0.2
-        
-        # Bonus za jakość
-        relevance += validation_result['quality_score'] * 0.1
-        
-        # Bonus za aktualność
-        if validation_result['is_recent']:
-            relevance += 0.1
-        
-        # Bonus za dane techniczne
-        if validation_result['has_technical_data']:
-            relevance += 0.15
-        
-        # Kara za ostrzeżenia
-        relevance -= len(validation_result['warnings']) * 0.05
-        
-        return max(0.0, min(1.0, relevance))
-    
-    def _create_empty_result(self):
-        """Tworzy pusty wynik"""
-        class EmptyResult:
-            def __init__(self):
-                self.documents = []
-                self.average_similarity = 0.0
-                self.detected_models = []
-                self.has_valid_data = False
-                self.total_warnings = 0
-            
-            def to_api_response(self):
-                return {"sources": []}
-        
-        return EmptyResult()
-    
-    async def health_check(self) -> Dict[str, Any]:
-        """Health check dla RAG"""
-        try:
-            if not RAG_AVAILABLE:
-                return {
-                    "status": "unavailable", 
-                    "error": "RAG system not imported",
-                    "is_dummy": True
-                }
-            
-            # Sprawdź czy możemy wykonać testowe zapytanie
-            test_result = self.query("BMW X5", k=1, use_model_filter=True)
-            test_ok = len(test_result) > 0
-            
-            return {
-                "status": "healthy" if test_ok else "degraded",
-                "chunks": self.db_info.get('total_chunks', 0),
-                "vectors": self.db_info.get('total_vectors', 0),
-                "embedding_model": self.db_info.get('model_name', 'unknown'),
-                "test_query_ok": test_ok,
-                "is_dummy": self.db_info.get('model_name', '').startswith('dummy')
-            }
-        except Exception as e:
-            return {
-                "status": "unhealthy", 
-                "error": str(e),
-                "is_dummy": True
-            }
-    
-    async def get_stats(self) -> Dict[str, Any]:
-        """Statystyki RAG"""
-        return {
-            "total_chunks": self.db_info.get('total_chunks', 0),
-            "total_vectors": self.db_info.get('total_vectors', 0),
-            "embedding_dim": self.db_info.get('embedding_dim', 0),
-            "model_name": self.db_info.get('model_name', 'unknown'),
-            "index_type": self.db_info.get('index_type', 'unknown'),
-            "loaded_at": self.db_info.get('loaded_at', 'unknown'),
-            "is_dummy": "dummy" in str(self.db_info.get('model_name', '')).lower()
-        }
-
-async def get_rag_service():
-    """Zwraca singleton RAG service"""
-    return get_rag_service_singleton()
 
 # ============================================
 # INITIALIZATION
@@ -476,7 +35,7 @@ TEMPLATES_DIR = BASE_DIR / "templates"
 STATIC_DIR = BASE_DIR / "static"
 
 conversation_memory: Dict[str, List[Dict]] = {}
-MAX_HISTORY = 8
+MAX_HISTORY = 5
 
 # ============================================
 # MODELS
@@ -558,7 +117,7 @@ class HistoryResponse(BaseModel):
     limit: int
 
 # ============================================
-# POPRAWIONE FUNKCJE POMOCNICZE
+# HELPER FUNCTIONS
 # ============================================
 
 def get_conversation_history(session_id: str) -> List[Dict[str, Any]]:
@@ -580,7 +139,7 @@ def add_to_history(session_id: str, role: str, message: str):
         conversation_memory[session_id] = history[-MAX_HISTORY:]
 
 def format_history_for_prompt(history: List[Dict]) -> List[Dict[str, str]]:
-    """Formatuje historię na format dla PromptService"""
+    """Formatuje historię na format dla promptu"""
     formatted = []
     for msg in history[-4:]:
         formatted.append({
@@ -589,211 +148,39 @@ def format_history_for_prompt(history: List[Dict]) -> List[Dict[str, str]]:
         })
     return formatted
 
-def validate_and_correct_bmw_data(text: str, query_type: str = "", sources: List[Dict] = None) -> Tuple[str, str, Dict[str, Any]]:
-    """
-    Waliduje i poprawia dane BMW w tekście.
-    Zwraca: (poprawiony_tekst, jakość_danych, szczegóły_walidacji)
-    """
-    if sources:
-        # Sprawdź jakość źródeł
-        source_quality_scores = [s.get('quality', 0.0) for s in sources if s.get('has_technical_data', False)]
-        avg_source_quality = sum(source_quality_scores) / len(source_quality_scores) if source_quality_scores else 0.0
+async def log_interaction(
+    user_message: str,
+    assistant_response: str,
+    session_id: str,
+    sources_count: int,
+    tokens_used: Dict[str, int],
+    processing_time: float,
+    confidence: Optional[float],
+    rag_used: bool = False,
+    rag_has_data: bool = False,
+    rag_tech_data: bool = False,
+    intent: str = "general"
+):
+    """Loguje interakcję w tle"""
+    try:
+        log_entry = {
+            "timestamp": datetime.utcnow().isoformat(),
+            "session_id": session_id,
+            "user_message_preview": user_message[:100],
+            "assistant_response_preview": assistant_response[:100],
+            "sources_count": sources_count,
+            "processing_time": round(processing_time, 2),
+            "confidence": round(confidence, 2) if confidence else None,
+            "rag_used": rag_used,
+            "rag_has_data": rag_has_data,
+            "rag_tech_data": rag_tech_data,
+            "intent": intent
+        }
         
-        if avg_source_quality >= 0.8:
-            # Źródła wysokiej jakości - minimalne poprawki
-            return text.strip(), "high", {"source_quality": avg_source_quality, "corrections": 0}
-    
-    text_lower = text.lower()
-    corrections = []
-    warnings = []
-    
-    # Tylko stylistyczne poprawki
-    style_corrections = [
-        (r'koni mechanicznych', 'KM'),
-        (r'bmw i', 'BMW i'),
-        (r'bmw x', 'BMW X'),
-        (r'bmw m', 'BMW M'),
-        (r'limuzyna.*?x5', 'SUV X5'),
-        (r'x5.*?limuzyna', 'SUV X5'),
-    ]
-    
-    for wrong, correct in style_corrections:
-        if re.search(wrong, text, re.IGNORECASE):
-            text = re.sub(wrong, correct, text, flags=re.IGNORECASE)
-            corrections.append((wrong, correct))
-    
-    # Sprawdź spójność danych technicznych
-    lines = text.split('\n')
-    tech_lines = [line for line in lines if any(keyword in line.lower() for keyword in 
-                ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'bieg'])]
-    
-    if len(tech_lines) >= 2:
-        # Sprawdź czy dane są spójne
-        km_values = []
-        for line in tech_lines:
-            km_matches = re.findall(r'(\d+)\s*km', line, re.IGNORECASE)
-            km_values.extend([int(km) for km in km_matches])
+        logger.info(f"Interaction logged", extra=log_entry)
         
-        if km_values:
-            if max(km_values) > 700:
-                warnings.append(f"Nierealistyczna moc: {max(km_values)} KM")
-    
-    # Określ jakość danych na podstawie treści
-    if query_type == "specyfikacje":
-        # Dla pytań o specyfikacje, wymagamy dokładności
-        has_technical_data = any(keyword in text_lower for keyword in 
-                               ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia'])
-        
-        if has_technical_data and len(corrections) == 0:
-            data_quality = "high"
-        elif has_technical_data:
-            data_quality = "medium"
-        else:
-            data_quality = "low"
-    else:
-        # Dla innych pytań mniejsze wymagania
-        data_quality = "high" if len(corrections) == 0 else "medium"
-    
-    validation_details = {
-        "corrections_made": len(corrections),
-        "warnings": warnings,
-        "technical_lines_found": len(tech_lines),
-        "has_sources": len(sources) > 0 if sources else False
-    }
-    
-    return text.strip(), data_quality, validation_details
-
-def create_smart_prompt(user_message: str, history: List[Dict], context: str = "", 
-                       question_type: str = "", detected_models: List[str] = None) -> str:
-    """
-    Tworzy inteligentny prompt na podstawie typu pytania
-    BEZ DANYCH TECHNICZNYCH - tylko struktura odpowiedzi
-    """
-    detected_models = detected_models or []
-    is_first_message = len(history) == 0
-    
-    # SYSTEM PROMPT - tylko ogólne instrukcje
-    system_prompt = """Jesteś Leo - ekspertem BMW w ZK Motors, oficjalnym dealerze BMW i MINI.
-
-ZASADY ODPOWIADANIA:
-1. Odpowiadaj KROTKO i konkretnie - maksymalnie 3-4 zdania lub punktory
-2. Bądź rzetelny i profesjonalny
-3. Używaj poprawnych terminów motoryzacyjnych
-4. Jeśli nie masz pewności - odwołaj się do źródła lub zaproś do salonu
-5. Zawsze kończ zachętą do kontaktu z ZK Motors"""
-
-    if is_first_message:
-        system_prompt += "\nPrzywitaj się krótko i zapytaj czym możesz pomóc."
-    
-    # SPECJALNE INSTRUKCJE DLA RÓŻNYCH TYPÓW PYTAŃ (BEZ DANYCH!)
-    special_instructions = ""
-    
-    if question_type == "specyfikacje":
-        special_instructions = """INSTRUKCJE DLA SPECYFIKACJI:
-• Używaj DANYCH Z ŹRÓDEŁ - nie wymyślaj!
-• Przedstaw dane techniczne w punktach
-• Podkreśl kluczowe parametry: silnik, moc, skrzynia, napęd
-• Wskaż różnice między wersjami
-• Jeśli dane się różnią - zaznacz to"""
-    
-    elif question_type == "porownanie":
-        special_instructions = """INSTRUKCJE DLA PORÓWNANIA:
-• Wymień 2-3 kluczowe różnice między modelami
-• Porównaj: przeznaczenie, rozmiar, charakterystykę
-• Zachęć do wizyty w salonie aby zobaczyć różnice"""
-    
-    elif question_type == "rodzinny":
-        special_instructions = """INSTRUKCJE DLA PYTAŃ RODZINNYCH:
-• Polecaj modele odpowiednie dla rodzin
-• Wymień praktyczne cechy: przestrzeń, bezpieczeństwo, funkcjonalność
-• Zapytaj o szczególne potrzeby (liczba osób, bagaż, itp.)"""
-    
-    elif question_type == "sportowy":
-        special_instructions = """INSTRUKCJE DLA SPORTOWYCH:
-• Polecaj modele z serii M i sportowe
-• Opisz charakterystykę jazdy BMW M
-• Podkreśl osiągi i doświadczenie z jazdy"""
-    
-    elif question_type == "elektryczny":
-        special_instructions = """INSTRUKCJE DLA ELEKTRYCZNYCH:
-• Polecaj modele z serii i (i4, i5, i7, iX)
-• Opisz zalety elektryków BMW
-• Wymień kluczowe parametry: zasięg, ładowanie, technologie"""
-    
-    elif question_type == "cena":
-        special_instructions = """INSTRUKCJE DLA CEN:
-• Nie podawaj dokładnych cen - zmieniają się!
-• Wymień zakres cenowy jeśli znasz ze źródeł
-• Podkreśl, że cena zależy od wyposażenia
-• Zaproś do salonu po indywidualną wycenę"""
-    
-    # WYKRYCIE INNYCH MAREK
-    user_query_lower = user_message.lower()
-    other_brands = ['audi', 'mercedes', 'tesla', 'volvo', 'skoda', 'toyota']
-    detected_other_brand = None
-    
-    for brand in other_brands:
-        if brand in user_query_lower:
-            detected_other_brand = brand.capitalize()
-            break
-    
-    if detected_other_brand:
-        special_instructions += f"""
-
-PYTANIE DOTYCZY MARKI {detected_other_brand.upper()}:
-• Jesteś ekspertem BMW - skup się na BMW
-• Podkreśl mocne strony BMW w porównaniu
-• Zaproś do salonu ZK Motors gdzie można zobaczyć różnice"""
-    
-    # KONTEKST Z RAG (jeśli jest)
-    context_part = ""
-    if context:
-        context_part = f"DANE Z BAZY WIEDZY:\n{context}\n\nUWAGA: Używaj tych danych w odpowiedzi!"
-    else:
-        context_part = "BRAK DANYCH W BAZE - odpowiadaj ogólnie lub zaproś do salonu po szczegóły."
-    
-    # HISTORIA
-    history_part = ""
-    if history and not is_first_message:
-        recent = history[-2:]
-        history_lines = []
-        for h in recent:
-            role = "Klient" if h['role'] == 'user' else 'Ty'
-            history_lines.append(f"{role}: {h['content']}")
-        history_part = f"OSTATNIA ROZMOWA:\n" + "\n".join(history_lines)
-    
-    # PYTANIE
-    question_part = f"PYTANIE KLIENTA: \"{user_message}\""
-    
-    # INFORMACJE O WYKRYTYCH MODELACH (tylko informacyjnie)
-    models_info = ""
-    if detected_models:
-        models_info = f"WYKRYTE MODELE: {', '.join(detected_models)}"
-    
-    # FINALNE INSTRUKCJE
-    final_instructions = f"""STRUKTURA ODPOWIEDZI:
-1. Odpowiedz bezpośrednio na pytanie
-2. Użyj danych z kontekstu jeśli są dostępne
-3. Bądź konkretny ale nie techniczny bez potrzeby
-4. Jeśli brakuje danych - zaproś do kontaktu z ZK Motors
-5. Używaj punktów • dla list
-6. Zakończ zachętą do test drive w ZK Motors
-
-{models_info}
-
-ODPOWIEDŹ (po polsku, 3-4 zdania):"""
-
-    # SKŁADAJ PROMPT
-    prompt_parts = [
-        system_prompt,
-        special_instructions,
-        context_part,
-        history_part,
-        question_part,
-        final_instructions
-    ]
-    
-    return "\n\n".join(filter(None, prompt_parts))
+    except Exception as e:
+        logger.error(f"Failed to log interaction: {str(e)}")
 
 # ============================================
 # FASTAPI APPLICATION
@@ -821,19 +208,10 @@ app.add_middleware(
 )
 
 @app.middleware("http")
-async def add_cors_middleware(request: Request, call_next):
-    response = await call_next(request)
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With"
-    return response
-
-@app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
     start_time = time.time()
     response = await call_next(request)
-    process_time = time.time() - start_time
-    response.headers["X-Process-Time"] = str(process_time)
+    response.headers["X-Process-Time"] = str(time.time() - start_time)
     return response
 
 # ============================================
@@ -898,14 +276,21 @@ async def ping():
     return {"status": "online", "timestamp": datetime.utcnow().isoformat()}
 
 @app.get("/api/status")
-async def api_status():
+async def api_status(rag_service: RAGService = Depends(get_rag_service)):
+    rag_stats = await rag_service.get_stats()
+    
     return {
         "online": True,
         "service": settings.APP_NAME,
         "version": settings.APP_VERSION,
-        "rag_available": RAG_AVAILABLE,
+        "rag_status": rag_stats.get("status", "unknown"),
         "llm_ready": True,
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.utcnow().isoformat(),
+        "rag_stats": {
+            "documents": rag_stats.get("documents_in_store", 0),
+            "queries_processed": rag_stats.get("queries_processed", 0),
+            "confidence_threshold": rag_stats.get("min_confidence_threshold", 0.6)
+        }
     }
 
 @app.get("/health/quick")
@@ -923,7 +308,6 @@ async def quick_health_check():
             "version": settings.APP_VERSION,
             "timestamp": datetime.utcnow().isoformat(),
             "memory": memory_stats,
-            "rag_available": RAG_AVAILABLE,
             "quick_check": True
         }
     except Exception as e:
@@ -931,28 +315,12 @@ async def quick_health_check():
 
 @app.get("/health", response_model=HealthResponse)
 async def health_check(
-    rag_service: SimpleRAGService = Depends(get_rag_service),
+    rag_service: RAGService = Depends(get_rag_service),
     llm_service: LLMService = Depends(get_llm_service)
 ):
     try:
         rag_health = await rag_service.health_check()
-        llm_health = {"status": "operational"}
-        
-        services_status = {
-            "rag_system": rag_health.get("status", "unknown"),
-            "llm_service": llm_health.get("status", "unknown"),
-            "api": "healthy",
-            "cache": "connected" if settings.REDIS_URL else "in_memory",
-            "memory": "enabled"
-        }
-        
-        critical_services = ["rag_system", "llm_service", "api"]
-        all_critical_healthy = all(
-            services_status[s] in ["healthy", "operational"]
-            for s in critical_services
-        )
-        
-        overall_status = "healthy" if all_critical_healthy else "degraded"
+        rag_stats = await rag_service.get_stats()
         
         memory_stats = {
             "active_sessions": len(conversation_memory),
@@ -960,16 +328,17 @@ async def health_check(
             "max_history": MAX_HISTORY
         }
         
-        rag_stats = await rag_service.get_stats()
-        
-        logger.info(f"Health check: {overall_status}, RAG: {rag_health.get('chunks', 0)} chunks")
-        
         return HealthResponse(
-            status=overall_status,
+            status=rag_health.get("status", "unknown"),
             timestamp=datetime.utcnow().isoformat(),
             version=settings.APP_VERSION,
             environment=settings.ENVIRONMENT,
-            services=services_status,
+            services={
+                "rag": rag_health.get("status", "unknown"),
+                "llm": "operational",
+                "embedding": rag_health.get("embedding_service", "unknown"),
+                "vector_store": rag_health.get("vector_store", "unknown")
+            },
             memory=memory_stats,
             rag_stats=rag_stats
         )
@@ -987,26 +356,27 @@ async def health_check(
         )
 
 @app.get("/rag/info")
-async def get_rag_info(rag_service: SimpleRAGService = Depends(get_rag_service)):
+async def get_rag_info(rag_service: RAGService = Depends(get_rag_service)):
     try:
         health = await rag_service.health_check()
         stats = await rag_service.get_stats()
         
         return {
-            "healthy": health.get("status") == "healthy" and not stats.get("is_dummy", False),
-            "chunks": stats.get("total_chunks", 0),
-            "vectors": stats.get('total_vectors', 0),
-            "embedding_model": stats.get('model_name', "unknown"),
-            "status": health.get("status", "unknown"),
-            "is_dummy": stats.get("is_dummy", False),
+            "healthy": health.get("status") == "healthy",
+            "vector_store": health.get("vector_store", "unknown"),
+            "documents": stats.get("documents_in_store", 0),
+            "queries_processed": stats.get("queries_processed", 0),
+            "cache_hit_rate": stats.get("cache_hit_rate", 0),
+            "intent_skipped": stats.get("intent_skipped", 0),
+            "low_confidence_skipped": stats.get("low_confidence_skipped", 0),
+            "confidence_threshold": stats.get("min_confidence_threshold", 0.6),
             "details": stats
         }
     except Exception as e:
         return {
             "healthy": False,
             "error": str(e),
-            "available": RAG_AVAILABLE,
-            "is_dummy": True
+            "details": "RAG service error"
         }
 
 @app.get("/models")
@@ -1034,273 +404,202 @@ async def list_models():
         "models": models,
         "default_model": settings.COHERE_CHAT_MODEL,
         "memory_enabled": True,
-        "max_history": MAX_HISTORY,
-        "rag_available": RAG_AVAILABLE
+        "max_history": MAX_HISTORY
     }
 
 # ============================================
-# POPRAWIONY CHAT ENDPOINT
+# CHAT ENDPOINT - UPDATED WITH NEW RAG & PROMPT SERVICE
 # ============================================
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(
     request: ChatRequest,
     background_tasks: BackgroundTasks,
-    rag_service: SimpleRAGService = Depends(get_rag_service),
-    llm_service: LLMService = Depends(get_llm_service)
+    rag_service: RAGService = Depends(get_rag_service),
+    llm_service: LLMService = Depends(get_llm_service),
+    prompt_service: PromptService = Depends(get_prompt_service)
 ):
     """
-    Główny endpoint chat - używa RAG jako jedynego źródła danych technicznych
+    Główny endpoint chat z nowym RAG i PromptService
     """
     start_time = time.time()
     
     try:
         session_id = request.session_id
         user_message = request.message
-        user_query_lower = user_message.lower()
         
-        logger.info(f"Chat request: {user_message[:50]}...")
+        logger.info(f"Chat request: {user_message[:50]}... | {{'name': 'app.main'}}")
         
-        # 1. Pobierz historię
+        # 1. Pobierz historię konwersacji
         history = get_conversation_history(session_id)
         conversation_history = format_history_for_prompt(history)
         is_first_message = len(history) == 0
         
-        # 2. Wykryj typ pytania
-        question_type = "general"
-        if any(word in user_query_lower for word in ['specyfikacj', 'dane', 'parametr', 'silnik', 'moc']):
-            question_type = "specyfikacje"
-        elif any(word in user_query_lower for word in ['różni', 'różnica', 'porównaj', 'vs', 'contra']):
-            question_type = "porownanie"
-        elif any(word in user_query_lower for word in ['rodzin', 'dzieci', 'osób']):
-            question_type = "rodzinny"
-        elif any(word in user_query_lower for word in ['sport', 'szybk', 'mocny']):
-            question_type = "sportowy"
-        elif any(word in user_query_lower for word in ['elektryczn', 'ev', 'elektryk']):
-            question_type = "elektryczny"
-        elif any(word in user_query_lower for word in ['cen', 'koszt', 'drogi']):
-            question_type = "cena"
-        
-        # 3. Wykryj modele BMW
-        bmw_models = ['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'xm',
-                     'i3', 'i4', 'i5', 'i7', 'i8', 'ix',
-                     'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
-                     'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8']
-        
-        detected_models = []
-        for model in bmw_models:
-            if model in user_query_lower:
-                model_upper = model.upper()
-                if 'SERIA' in model_upper:
-                    model_upper = model_upper.replace('SERIA', 'Seria')
-                detected_models.append(model_upper)
-        
-        # 4. Użyj RAG dla pytań technicznych
-        needs_rag = False
-        context_text = ""
-        rag_result = None
-        sources_count = 0
-        confidence_score = 0.8
-        
-        # RAG tylko dla pytań wymagających danych
-        rag_needed_types = ["specyfikacje", "porownanie", "elektryczny", "sportowy", "cena"]
-        if question_type in rag_needed_types or detected_models:
-            needs_rag = True
-        
-        if needs_rag:
-            rag_result = await rag_service.retrieve(
-                query=user_message,
-                top_k=3,
-                similarity_threshold=0.5
-            )
-            
-            if hasattr(rag_result, 'documents') and rag_result.documents:
-                # Weź tylko zwalidowane dokumenty z danymi technicznymi
-                valid_docs = [
-                    d for d in rag_result.documents 
-                    if d.get('validated', False) and d.get('quality_score', 0) >= 0.6
-                ]
-                sources_count = len(valid_docs)
-                
-                if valid_docs:
-                    # Przygotuj kontekst z najlepszych źródeł
-                    context_parts = []
-                    for i, doc in enumerate(valid_docs[:2], 1):
-                        content = doc['content']
-                        # Skróć ale zachowaj kluczowe informacje
-                        if len(content) > 250:
-                            # Znajdź kluczowe zdania
-                            sentences = re.split(r'[.!?]+', content)
-                            key_sentences = []
-                            keywords = ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'napęd']
-                            
-                            for sentence in sentences:
-                                if any(keyword in sentence.lower() for keyword in keywords):
-                                    key_sentences.append(sentence.strip())
-                            
-                            if key_sentences:
-                                content = ' '.join(key_sentences[:3])
-                        
-                        metadata = doc.get('metadata', {})
-                        source = metadata.get('title', 'Źródło')[:50]
-                        quality = f" (jakość: {doc.get('quality_score', 0):.1f})"
-                        
-                        context_parts.append(f"{i}. [{source}{quality}]: {content[:200]}...")
-                    
-                    context_text = "\n\n".join(context_parts)
-                    
-                    # Oblicz pewność na podstawie jakości źródeł
-                    quality_scores = [d.get('quality_score', 0) for d in valid_docs]
-                    confidence_score = sum(quality_scores) / len(quality_scores)
-        
-        # 5. Stwórz prompt BEZ DANYCH TECHNICZNYCH
-        prompt = create_smart_prompt(
-            user_message=user_message,
-            history=conversation_history,
-            context=context_text if context_text else "BRAK DANYCH TECHNICZNYCH W BAZIE",
-            question_type=question_type,
-            detected_models=detected_models
+        # 2. Użyj nowego RAGService z filtrowaniem intencji - POPRAWIONE: użyj retrieve zamiast retrieve_simple
+        rag_results = await rag_service.retrieve_with_intent_check(
+            query=user_message,
+            top_k=3,
+            confidence_threshold=0.6
         )
         
-        # 6. Generuj odpowiedź
-        try:
-            llm_result = await llm_service.generate(
-                prompt=prompt,
-                model=settings.COHERE_CHAT_MODEL,
-                temperature=0.7,
-                max_tokens=500  # Więcej tokenów dla bardziej szczegółowych odpowiedzi
-            )
-            
-            # Wyodrębnij tekst
-            if hasattr(llm_result, 'text'):
-                response_text = llm_result.text
-            elif isinstance(llm_result, dict) and 'text' in llm_result:
-                response_text = llm_result['text']
-            elif isinstance(llm_result, dict) and 'generations' in llm_result:
-                response_text = llm_result['generations'][0]['text']
-            else:
-                response_text = str(llm_result)
-            
-            # 7. OCZYŚĆ ODPOWIEDŹ
-            # Usuń powtarzające się frazy
-            cleanup_patterns = [
-                r'Dziękuję.*?za pytanie.*?\.',
-                r'Zapraszam.*?do kontaktu.*?salonu.*?\.',
-                r'Jestem Leo.*?ZK Motors.*?\.',
-                r'Specjalizuję się.*?BMW.*?\.',
-            ]
-            
-            for pattern in cleanup_patterns:
-                response_text = re.sub(pattern, '', response_text, flags=re.IGNORECASE)
-            
-            # Usuń nadmiarowe białe znaki
-            response_text = re.sub(r'\n\s*\n+', '\n\n', response_text)
-            response_text = re.sub(r'\s+', ' ', response_text)
-            response_text = response_text.strip()
-            
-            # Dodaj przywitanie jeśli pierwsza wiadomość
-            if is_first_message and not response_text.startswith(("Cześć", "Dzień dobry", "Witaj", "Hej")):
-                response_text = f"Cześć! Jestem Leo, ekspert BMW w ZK Motors.\n\n{response_text}"
-            
-            # 8. WALIDUJ odpowiedź na podstawie źródeł RAG
-            sources_data = []
-            if rag_result and hasattr(rag_result, 'to_api_response'):
-                sources_response = rag_result.to_api_response()
-                sources_data = sources_response.get("sources", [])
-            
-            corrected_text, data_quality, validation_details = validate_and_correct_bmw_data(
-                response_text, 
-                question_type,
-                sources_data
-            )
-            
-            # Jeśli słaba jakość i mamy źródła, dodaj informację
-            if data_quality == "low" and sources_data:
-                corrected_text += "\n\nℹ️ *Dane oparte na dostępnych źródłach. Dla najświeższych informacji zapraszam do salonu ZK Motors.*"
-            
-            tokens_used = None
-            if hasattr(llm_result, 'tokens_used'):
-                tokens_used = llm_result.tokens_used
-            elif isinstance(llm_result, dict) and 'tokens_used' in llm_result:
-                tokens_used = llm_result['tokens_used']
+        logger.info(f"RAG results: has_data={rag_results.get('has_data')}, skip_rag={rag_results.get('skip_rag')}, below_threshold={rag_results.get('below_threshold')}, confidence={rag_results.get('confidence', 0.0):.2f}")
+        
+        # 3. Zbuduj prompt z nowym PromptService
+        prompt_data = prompt_service.build_chat_prompt(
+            user_message=user_message,
+            rag_results=rag_results,
+            conversation_history=conversation_history,
+            session_id=session_id,
+            language=request.language
+        )
+        
+        # 4. Generuj odpowiedź
+        response_text = ""
+        tokens_used = None
+        model_used = ""
+        
+        # Scenariusz A: Bezpośrednia odpowiedź (przywitania)
+        if not prompt_data["use_llm"]:
+            response_text = prompt_data["direct_response"]
+            llm_success = True
+            model_used = "greeting"
+            logger.info(f"Using direct greeting response (skip_rag={rag_results.get('skip_rag')})")
+        
+        # Scenariusz B: Generuj przez LLM
+        else:
+            try:
+                llm_result = await llm_service.generate(
+                    prompt=prompt_data["prompt"],
+                    model=settings.COHERE_CHAT_MODEL,
+                    temperature=request.temperature,
+                    max_tokens=400
+                )
                 
-        except Exception as llm_error:
-            logger.error(f"LLM error: {str(llm_error)}")
-            
-            # FALLBACK odpowiedzi na podstawie RAG jeśli dostępny
-            if rag_result and hasattr(rag_result, 'documents') and rag_result.documents:
-                # Stwórz odpowiedź z danych RAG
-                valid_docs = [d for d in rag_result.documents if d.get('validated', False)]
-                if valid_docs:
-                    doc = valid_docs[0]
-                    content = doc['content'][:200] + "..." if len(doc['content']) > 200 else doc['content']
-                    corrected_text = f"""Cześć!
-
-Na podstawie dostępnych danych:
-• {content}
-
-Dla dokładnych i aktualnych informacji zapraszam do salonu ZK Motors!"""
+                # Wyodrębnij tekst odpowiedzi
+                if hasattr(llm_result, 'text'):
+                    response_text = llm_result.text
+                    llm_success = True
+                elif isinstance(llm_result, dict) and 'text' in llm_result:
+                    response_text = llm_result['text']
+                    llm_success = True
+                elif isinstance(llm_result, dict) and 'generations' in llm_result:
+                    response_text = llm_result['generations'][0]['text']
+                    llm_success = True
                 else:
-                    corrected_text = "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
-            else:
-                corrected_text = "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
-            
-            data_quality = "medium"
-            validation_details = {"fallback_used": True, "llm_error": str(llm_error)}
-            tokens_used = None
+                    llm_success = False
+                
+                # Pobierz użyte tokeny
+                if hasattr(llm_result, 'tokens_used'):
+                    tokens_used = llm_result.tokens_used
+                elif isinstance(llm_result, dict) and 'tokens_used' in llm_result:
+                    tokens_used = llm_result['tokens_used']
+                    
+                model_used = settings.COHERE_CHAT_MODEL
+                    
+            except Exception as llm_error:
+                logger.error(f"LLM error: {str(llm_error)}")
+                llm_success = False
         
-        # 9. Dodaj do historii
+        # 5. Jeśli LLM zawiódł, użyj fallback
+        if not llm_success or not response_text.strip():
+            logger.warning("LLM failed, using fallback")
+            response_text = prompt_service.build_fallback_response(
+                intent=rag_results.get('intent', 'general'),
+                detected_models=rag_results.get('detected_models', []),
+                confidence=rag_results.get('confidence', 0.0),
+                is_technical=rag_results.get('tech', False)
+            )
+            model_used = "fallback"
+        elif prompt_data["use_llm"]:
+            # Czyść odpowiedź z formatowania LLM
+            response_text = prompt_service.clean_response(
+                response=response_text,
+                session_id=session_id,
+                rag_used=prompt_data.get("rag_used", False),
+                rag_has_data=rag_results.get('has_data', False),
+                confidence=rag_results.get('confidence', 0.0),
+                intent=rag_results.get('intent', 'general')
+            )
+        
+        # 6. Dodaj do historii
         add_to_history(session_id, "user", user_message)
-        add_to_history(session_id, "assistant", corrected_text)
+        add_to_history(session_id, "assistant", response_text)
         
-        # 10. Przygotuj odpowiedź
+        # 7. Przygotuj odpowiedź API
         processing_time = time.time() - start_time
         
-        # 11. Przygotuj źródła do odpowiedzi
+        # Przygotuj źródła
         sources = []
-        if rag_result and hasattr(rag_result, 'to_api_response'):
-            sources_response = rag_result.to_api_response()
-            sources = sources_response.get("sources", [])[:2]  # Maks 2 źródła w odpowiedzi
+        if rag_results.get('has_data') and rag_results.get('sources'):
+            for i, source in enumerate(rag_results['sources'][:2], 1):
+                sources.append({
+                    'id': i,
+                    'title': source.get('title', 'Źródło')[:80],
+                    'content_preview': source.get('content', '')[:150] + ('...' if len(source.get('content', '')) > 150 else ''),
+                    'similarity': round(source.get('score', 0), 3),
+                    'url': source.get('url', ''),
+                    'source': source.get('source', 'unknown')
+                })
         
-        # 12. Stwórz odpowiedź API
+        # Określ jakość danych
+        if rag_results.get('tech', False):
+            data_quality = "high"
+        elif rag_results.get('has_data', False):
+            data_quality = "medium"
+        else:
+            data_quality = "low"
+        
+        # Aktualizuj quality w zależności od confidence
+        confidence = rag_results.get('confidence', 0.0)
+        if confidence < 0.4:
+            data_quality = "low"
+        elif confidence < 0.7:
+            data_quality = "medium"
+        else:
+            data_quality = "high"
+        
         response = ChatResponse(
-            answer=corrected_text,
+            answer=response_text,
             session_id=session_id,
             history_length=len(get_conversation_history(session_id)),
             processing_time=processing_time,
             sources=sources,
-            model_used=settings.COHERE_CHAT_MODEL,
+            model_used=model_used,
             tokens_used=tokens_used,
-            confidence=confidence_score,
+            confidence=confidence,
             rag_info={
-                "question_type": question_type,
-                "detected_models": detected_models,
-                "sources_count": sources_count,
-                "data_validated": True,
-                "validation_details": validation_details,
-                "used_rag": needs_rag
+                "has_data": rag_results.get('has_data', False),
+                "has_technical_data": rag_results.get('tech', False),
+                "confidence": confidence,
+                "intent": rag_results.get('intent', 'general'),
+                "skip_rag": rag_results.get('skip_rag', False),
+                "below_threshold": rag_results.get('below_threshold', False)
             },
             data_quality=data_quality
         )
         
-        # 13. Loguj w tle
+        # 8. Loguj w tle
         background_tasks.add_task(
             log_interaction,
             user_message=user_message,
-            assistant_response=corrected_text,
+            assistant_response=response_text,
             session_id=session_id,
-            sources_count=sources_count,
+            sources_count=len(sources),
             tokens_used=tokens_used,
             processing_time=processing_time,
-            confidence=confidence_score,
-            rag_info={"question_type": question_type, "models": detected_models}
+            confidence=confidence,
+            rag_used=prompt_data.get("rag_used", False),
+            rag_has_data=rag_results.get('has_data', False),
+            rag_tech_data=rag_results.get('tech', False),
+            intent=rag_results.get('intent', 'general')
         )
         
         logger.info(f"Response in {processing_time:.2f}s, quality: {data_quality}", extra={
-            "question_type": question_type,
-            "models": detected_models,
-            "used_rag": needs_rag,
-            "sources": sources_count
+            'name': 'app.main',
+            'extra': {
+                'rag_data': rag_results.get('has_data', False),
+                'sources': len(sources)
+            }
         })
         
         return response
@@ -1309,9 +608,23 @@ Dla dokładnych i aktualnych informacji zapraszam do salonu ZK Motors!"""
         raise
     except Exception as e:
         logger.error(f"Chat error: {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Błąd serwera" if settings.IS_PRODUCTION else str(e)
+        
+        # Ostateczny fallback
+        fallback_response = """Przepraszam, wystąpił błąd systemu. 
+Jestem Leo, ekspertem BMW w ZK Motors. 
+Proszę spróbować ponownie lub skontaktować się bezpośrednio z naszym salonem."""
+        
+        return ChatResponse(
+            answer=fallback_response,
+            success=False,
+            session_id=request.session_id,
+            history_length=len(get_conversation_history(request.session_id)),
+            processing_time=time.time() - start_time,
+            sources=[],
+            model_used="fallback",
+            confidence=0.0,
+            rag_info={"error": str(e)},
+            data_quality="error"
         )
 
 @app.post("/chat/stream")
@@ -1354,11 +667,37 @@ async def get_history(session_id: str = "default", limit: int = 10):
 # DEBUG ENDPOINTS
 # ============================================
 
+@app.get("/test/rag")
+async def test_rag(
+    query: str = "BMW X5 moc silnik",
+    rag_service: RAGService = Depends(get_rag_service)
+):
+    """Testowy endpoint do sprawdzenia działania RAG"""
+    if settings.IS_PRODUCTION:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Debug endpoints disabled in production"
+        )
+    
+    result = await rag_service.retrieve_with_intent_check(query=query, top_k=3)
+    
+    return {
+        "query": query,
+        "has_data": result['has_data'],
+        "skip_rag": result.get('skip_rag', False),
+        "below_threshold": result.get('below_threshold', False),
+        "confidence": result['confidence'],
+        "intent": result.get('intent', 'general'),
+        "tech": result.get('tech', False),
+        "documents_count": len(result.get('documents', [])),
+        "sources_count": len(result.get('sources', []))
+    }
+
 @app.get("/debug/rag")
 async def debug_rag(
     query: str,
     top_k: int = 3,
-    rag_service: SimpleRAGService = Depends(get_rag_service)
+    rag_service: RAGService = Depends(get_rag_service)
 ):
     if settings.IS_PRODUCTION:
         raise HTTPException(
@@ -1366,21 +705,18 @@ async def debug_rag(
             detail="Debug endpoints disabled in production"
         )
     
-    result = await rag_service.retrieve(query=query, top_k=top_k)
+    result = await rag_service.retrieve_with_intent_check(query=query, top_k=top_k)
     
     return {
         "query": query,
-        "result": result.to_api_response() if hasattr(result, 'to_api_response') else {"sources": []},
-        "documents_count": len(result.documents) if hasattr(result, 'documents') else 0,
-        "average_similarity": result.average_similarity if hasattr(result, 'average_similarity') else 0,
-        "has_valid_data": result.has_valid_data if hasattr(result, 'has_valid_data') else False,
-        "quality_scores": result.quality_scores if hasattr(result, 'quality_scores') else []
+        "result": result
     }
 
 @app.get("/debug/stats")
 async def debug_stats(
-    rag_service: SimpleRAGService = Depends(get_rag_service),
-    llm_service: LLMService = Depends(get_llm_service)
+    rag_service: RAGService = Depends(get_rag_service),
+    llm_service: LLMService = Depends(get_llm_service),
+    prompt_service: PromptService = Depends(get_prompt_service)
 ):
     if settings.IS_PRODUCTION:
         raise HTTPException(
@@ -1401,39 +737,12 @@ async def debug_stats(
         "rag_service": rag_stats,
         "llm_service": llm_stats,
         "memory": memory_stats,
+        "prompt_service": {
+            "response_history_size": len(prompt_service.response_history),
+            "max_history": prompt_service.max_history
+        },
         "timestamp": datetime.utcnow().isoformat()
     }
-
-# ============================================
-# UTILITY FUNCTIONS
-# ============================================
-
-async def log_interaction(
-    user_message: str,
-    assistant_response: str,
-    session_id: str,
-    sources_count: int,
-    tokens_used: Dict[str, int],
-    processing_time: float,
-    confidence: Optional[float],
-    rag_info: Optional[Dict[str, Any]] = None
-):
-    try:
-        log_entry = {
-            "timestamp": datetime.utcnow().isoformat(),
-            "session_id": session_id,
-            "user_message_preview": user_message[:100],
-            "assistant_response_preview": assistant_response[:100],
-            "sources_count": sources_count,
-            "processing_time": round(processing_time, 2),
-            "confidence": round(confidence, 2) if confidence else None,
-            "question_type": rag_info.get('question_type', 'unknown') if rag_info else 'unknown'
-        }
-        
-        logger.info(f"Interaction logged", extra=log_entry)
-        
-    except Exception as e:
-        logger.error(f"Failed to log interaction: {str(e)}")
 
 # ============================================
 # APPLICATION EVENTS
@@ -1445,29 +754,15 @@ async def startup_event():
         validate_configuration()
         await init_cache()
         
-        rag_info = "NOT AVAILABLE"
-        if RAG_AVAILABLE:
-            try:
-                if RAG_FILE_PATH.exists():
-                    rag_service = get_rag_service_singleton()
-                    rag_health = await rag_service.health_check()
-                    rag_stats = await rag_service.get_stats()
-                    
-                    if rag_stats.get("is_dummy", False):
-                        rag_info = f"DUMMY MODE"
-                    else:
-                        rag_info = f"LOADED ({rag_stats.get('total_chunks', 0)} chunks)"
-                else:
-                    rag_info = f"FILE NOT FOUND: {RAG_FILE_PATH.name}"
-            except Exception as rag_error:
-                rag_info = f"ERROR: {str(rag_error)[:50]}"
-        else:
-            rag_info = "IMPORT FAILED"
+        # Inicjalizuj serwisy
+        rag_service = await get_rag_service()
+        rag_stats = await rag_service.get_stats()
         
         logger.info(f"{settings.APP_NAME} v{settings.APP_VERSION} starting up...")
         logger.info(f"Environment: {settings.ENVIRONMENT}")
         logger.info(f"LLM Model: {settings.COHERE_CHAT_MODEL}")
-        logger.info(f"RAG: {rag_info}")
+        logger.info(f"RAG Documents: {rag_stats.get('documents_in_store', 0)}")
+        logger.info(f"RAG Confidence Threshold: {rag_stats.get('min_confidence_threshold', 0.6)}")
         logger.info(f"Memory: {MAX_HISTORY} messages per session")
         logger.info(f"API: http://{settings.HOST}:{settings.PORT}")
         logger.info(f"Chat: http://{settings.HOST}:{settings.PORT}/")
@@ -1547,12 +842,11 @@ def main():
             print(f"\n{'='*60}")
             print(f"{settings.APP_NAME} v{settings.APP_VERSION}")
             print(f"Environment: {settings.ENVIRONMENT}")
-            print(f"Czat: http://{settings.HOST}:{settings.PORT}/")
+            print(f"Chat: http://{settings.HOST}:{settings.PORT}/")
             print(f"Model: {settings.COHERE_CHAT_MODEL}")
-            print(f"RAG: {'AVAILABLE' if RAG_AVAILABLE else 'NOT AVAILABLE'}")
-            print(f"Data validation: ENABLED")
             print(f"Memory: {MAX_HISTORY} messages per session")
-            print(f"Test: http://{settings.HOST}:{settings.PORT}/ping")
+            print(f"Test RAG: http://{settings.HOST}:{settings.PORT}/test/rag?query=BMW+X5")
+            print(f"Health: http://{settings.HOST}:{settings.PORT}/health")
             print(f"{'='*60}\n")
         
         uvicorn.run(**config)

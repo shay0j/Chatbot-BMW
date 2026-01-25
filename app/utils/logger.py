@@ -7,29 +7,16 @@ import json
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional
-from enum import Enum
 
 from loguru import logger
-from app.core.config import settings
 
 # ============================================
 # 🎯 CONFIGURATION
 # ============================================
 
-class LogLevel(str, Enum):
-    """Poziomy logowania"""
-    DEBUG = "DEBUG"
-    INFO = "INFO"
-    WARNING = "WARNING"
-    ERROR = "ERROR"
-    CRITICAL = "CRITICAL"
-
-
-class LogFormat(str, Enum):
-    """Formaty logowania"""
-    SIMPLE = "simple"
-    JSON = "json"
-    DETAILED = "detailed"
+# Proste enums bez pydantic
+LOG_LEVELS = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+LOG_FORMATS = ["simple", "json", "detailed"]
 
 
 # ============================================
@@ -38,74 +25,65 @@ class LogFormat(str, Enum):
 
 def setup_logger(
     name: str = "bmw_assistant",
-    level: str = None,
-    log_format: str = None,
-    log_dir: Path = None
+    level: str = "INFO",
+    log_format: str = "detailed",
+    log_dir: Path = None,
+    is_production: bool = False,
+    is_development: bool = True
 ) -> logger:
     """
     Konfiguruje i zwraca logger.
     
     Args:
         name: Nazwa loggera
-        level: Poziom logowania (string)
-        log_format: Format logów (string)
+        level: Poziom logowania
+        log_format: Format logów
         log_dir: Katalog dla plików logów
+        is_production: Czy produkcja
+        is_development: Czy development
     
     Returns:
         Skonfigurowany logger
     """
-    # Użyj ustawień z configa jeśli nie podano
-    if level is None:
-        level = settings.LOG_LEVEL
-    if log_format is None:
-        log_format = LogFormat.JSON if settings.IS_PRODUCTION else LogFormat.DETAILED
-    if log_dir is None:
-        log_dir = Path(settings.LOG_DIR)
-    
     # Walidacja poziomu logowania
-    try:
-        level_enum = LogLevel(level)
-        level = level_enum.value
-    except ValueError:
-        # Jeśli poziom nie jest poprawnym Enum, użyj domyślnego
-        level = LogLevel.INFO.value
-        logger.warning(f"Invalid log level '{level}', using INFO instead")
+    if level not in LOG_LEVELS:
+        level = "INFO"
+        print(f"⚠️  Invalid log level, using INFO instead")
     
     # Walidacja formatu
-    try:
-        format_enum = LogFormat(log_format)
-        log_format = format_enum.value
-    except ValueError:
-        # Jeśli format nie jest poprawnym Enum, użyj domyślnego
-        log_format = LogFormat.DETAILED.value if settings.IS_DEVELOPMENT else LogFormat.JSON.value
-        logger.warning(f"Invalid log format '{log_format}', using default instead")
+    if log_format not in LOG_FORMATS:
+        log_format = "json" if is_production else "detailed"
+        print(f"⚠️  Invalid log format, using {log_format} instead")
     
     # Upewnij się że katalog istnieje
-    log_dir.mkdir(parents=True, exist_ok=True)
+    if log_dir:
+        try:
+            log_dir.mkdir(parents=True, exist_ok=True)
+        except Exception as e:
+            print(f"⚠️  Could not create log directory: {e}")
+            log_dir = None
     
     # Usuń domyślnego handlera
     logger.remove()
     
     # Konfiguracja formatu
-    if log_format == LogFormat.JSON:
+    if log_format == "json":
         format_string = (
-            '{"time": "{time:YYYY-MM-DD HH:mm:ss.SSS}", '
+            '{{"time": "{time:YYYY-MM-DD HH:mm:ss.SSS}", '
             '"level": "{level}", '
             '"name": "{name}", '
             '"function": "{function}", '
             '"line": {line}, '
-            '"message": "{message}", '
-            '"extra": {extra}}'
+            '"message": "{message}"}}'
         )
-    elif log_format == LogFormat.DETAILED:
+    elif log_format == "detailed":
         format_string = (
             "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | "
             "<level>{level: <8}</level> | "
             "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> | "
-            "<level>{message}</level> | "
-            "<yellow>{extra}</yellow>"
+            "<level>{message}</level>"
         )
-    else:  # SIMPLE
+    else:  # simple
         format_string = (
             "{time:YYYY-MM-DD HH:mm:ss} | "
             "{level: <8} | "
@@ -120,46 +98,38 @@ def setup_logger(
         level=level,
         colorize=True,
         backtrace=True,
-        diagnose=settings.IS_DEVELOPMENT
+        diagnose=is_development
     )
     
-    # Handler dla pliku (wszystkie logi)
-    log_file = log_dir / f"{name}.log"
-    logger.add(
-        str(log_file),
-        format=format_string,
-        level=level,
-        rotation="500 MB",
-        retention="30 days",
-        compression="zip",
-        backtrace=True,
-        diagnose=settings.IS_DEVELOPMENT
-    )
-    
-    # Handler dla błędów (osobny plik)
-    error_log_file = log_dir / f"{name}_errors.log"
-    logger.add(
-        str(error_log_file),
-        format=format_string,
-        level="ERROR",
-        rotation="100 MB",
-        retention="90 days",
-        compression="zip",
-        backtrace=True,
-        diagnose=True
-    )
-    
-    # Handler dla requestów (jeśli potrzebny)
-    request_log_file = log_dir / f"{name}_requests.log"
-    logger.add(
-        str(request_log_file),
-        format=format_string,
-        level="INFO",
-        filter=lambda record: "request_id" in record["extra"],
-        rotation="200 MB",
-        retention="7 days",
-        compression="zip"
-    )
+    # Handler dla pliku tylko jeśli mamy katalog
+    if log_dir:
+        try:
+            log_file = log_dir / f"{name}.log"
+            logger.add(
+                str(log_file),
+                format=format_string,
+                level=level,
+                rotation="10 MB",  # Mniejszy limit dla testów
+                retention="7 days",
+                compression="zip",
+                backtrace=True,
+                diagnose=is_development
+            )
+            
+            # Handler dla błędów
+            error_log_file = log_dir / f"{name}_errors.log"
+            logger.add(
+                str(error_log_file),
+                format=format_string,
+                level="ERROR",
+                rotation="5 MB",
+                retention="30 days",
+                compression="zip",
+                backtrace=True,
+                diagnose=True
+            )
+        except Exception as e:
+            print(f"⚠️  Could not setup file logging: {e}")
     
     return logger.bind(name=name)
 
@@ -171,8 +141,8 @@ def setup_logger(
 class StructuredLogger:
     """Logger do strukturalnego logowania"""
     
-    def __init__(self, logger_instance=logger):
-        self.logger = logger_instance
+    def __init__(self, logger_instance=None):
+        self.logger = logger_instance or logger
     
     def debug(self, message: str, **kwargs):
         """Log debug z dodatkowymi polami"""
@@ -194,45 +164,21 @@ class StructuredLogger:
         """Log critical z dodatkowymi polami"""
         self.logger.critical(message, **kwargs)
     
-    def log_request(
-        self,
-        method: str,
-        path: str,
-        status_code: int,
-        processing_time: float,
-        request_id: str,
-        user_id: Optional[str] = None,
-        **kwargs
-    ):
-        """Loguje request HTTP"""
-        self.info(
-            f"{method} {path} {status_code}",
-            request_method=method,
-            request_path=path,
-            status_code=status_code,
-            processing_time=processing_time,
-            request_id=request_id,
-            user_id=user_id,
-            **kwargs
-        )
-    
     def log_chat_interaction(
         self,
         conversation_id: str,
         user_message: str,
         assistant_response: str,
-        tokens_used: Dict[str, int],
         processing_time: float,
         sources_count: int = 0,
         **kwargs
     ):
         """Loguje interakcję chat"""
         self.info(
-            f"Chat interaction: {conversation_id}",
+            f"Chat: {conversation_id}",
             conversation_id=conversation_id,
-            user_message_preview=user_message[:100],
-            assistant_response_preview=assistant_response[:100],
-            tokens_used=tokens_used,
+            user_message=user_message[:100],
+            response=assistant_response[:100],
             processing_time=processing_time,
             sources_count=sources_count,
             **kwargs
@@ -241,19 +187,13 @@ class StructuredLogger:
     def log_llm_call(
         self,
         model: str,
-        prompt_length: int,
-        response_length: int,
-        tokens_used: Dict[str, int],
         processing_time: float,
         **kwargs
     ):
         """Loguje wywołanie LLM"""
         self.debug(
-            f"LLM call: {model}",
+            f"LLM: {model}",
             model=model,
-            prompt_length=prompt_length,
-            response_length=response_length,
-            tokens_used=tokens_used,
             processing_time=processing_time,
             **kwargs
         )
@@ -262,16 +202,16 @@ class StructuredLogger:
         self,
         query: str,
         documents_count: int,
-        average_similarity: float,
+        confidence: float,
         processing_time: float,
         **kwargs
     ):
         """Loguje wyszukiwanie w RAG"""
         self.debug(
-            f"RAG retrieval: {query[:50]}...",
-            query_preview=query[:100],
+            f"RAG: {query[:50]}...",
+            query=query[:100],
             documents_count=documents_count,
-            average_similarity=average_similarity,
+            confidence=confidence,
             processing_time=processing_time,
             **kwargs
         )
@@ -284,11 +224,6 @@ class StructuredLogger:
 def log_exceptions(func):
     """
     Dekorator do logowania wyjątków.
-    
-    Usage:
-        @log_exceptions
-        async def some_function():
-            ...
     """
     import functools
     
@@ -300,8 +235,7 @@ def log_exceptions(func):
             logger.error(
                 f"Exception in {func.__name__}: {str(e)}",
                 function=func.__name__,
-                exception_type=e.__class__.__name__,
-                exc_info=True
+                exception_type=e.__class__.__name__
             )
             raise
     
@@ -309,128 +243,94 @@ def log_exceptions(func):
 
 
 class PerformanceLogger:
-    """Logger wydajności"""
+    """Logger wydajności - uproszczony"""
     
-    def __init__(self, operation_name: str, logger_instance=logger):
-        self.operation_name = operation_name
-        self.logger = logger_instance
-        self.start_time = None
-    
-    def __enter__(self):
-        self.start_time = datetime.now()
-        return self
-    
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        elapsed = (datetime.now() - self.start_time).total_seconds()
+    @staticmethod
+    def measure(name: str):
+        """Context manager do mierzenia czasu"""
+        import time
+        from contextlib import contextmanager
         
-        if exc_type is None:
-            self.logger.debug(
-                f"{self.operation_name} completed in {elapsed:.3f}s",
-                operation=self.operation_name,
-                duration=elapsed
-            )
-        else:
-            self.logger.error(
-                f"{self.operation_name} failed after {elapsed:.3f}s",
-                operation=self.operation_name,
-                duration=elapsed,
-                exception=str(exc_val)
-            )
-    
-    @classmethod
-    def measure(cls, operation_name: str):
-        """Kontekst manager do mierzenia czasu operacji"""
-        return cls(operation_name)
-
-
-# ============================================
-# 📊 LOG ANALYTICS
-# ============================================
-
-class LogAnalyzer:
-    """Analiza logów"""
-    
-    @staticmethod
-    def count_logs_by_level(log_file: Path, level: str) -> int:
-        """Liczy logi danego poziomu w pliku"""
-        try:
-            count = 0
-            with open(log_file, 'r', encoding='utf-8') as f:
-                for line in f:
-                    if f'"level": "{level}"' in line or f'| {level} ' in line:
-                        count += 1
-            return count
-        except:
-            return 0
-    
-    @staticmethod
-    def get_recent_errors(log_file: Path, limit: int = 10) -> list:
-        """Pobiera ostatnie błędy z pliku logów"""
-        errors = []
-        try:
-            with open(log_file, 'r', encoding='utf-8') as f:
-                for line in f:
-                    if '"level": "ERROR"' in line or '| ERROR ' in line:
-                        try:
-                            if line.strip().startswith('{'):
-                                errors.append(json.loads(line.strip()))
-                            else:
-                                errors.append({"raw": line.strip()})
-                        except:
-                            errors.append({"raw": line.strip()})
-            
-            return errors[-limit:]
-        except:
-            return []
-    
-    @staticmethod
-    def calculate_error_rate(total_logs: int, error_logs: int) -> float:
-        """Oblicza wskaźnik błędów"""
-        if total_logs == 0:
-            return 0.0
-        return (error_logs / total_logs) * 100
+        @contextmanager
+        def timer():
+            start_time = time.time()
+            try:
+                yield
+            finally:
+                elapsed = time.time() - start_time
+                logger.debug(f"⏱️  {name}: {elapsed:.3f}s")
+        
+        return timer()
 
 
 # ============================================
 # 🎯 GLOBAL LOGGER INSTANCE
 # ============================================
 
-# Tworzymy globalną instancję loggera
+# Tworzymy tymczasową instancję
 log = StructuredLogger()
-
-# Aliasy dla łatwego dostępu
-debug = log.debug
-info = log.info
-warning = log.warning
-error = log.error
-critical = log.critical
 
 # ============================================
 # 🚀 INITIALIZATION
 # ============================================
 
-def init_logging():
+def init_logging(
+    level: str = "INFO",
+    log_dir: str = "./logs",
+    is_production: bool = False
+):
     """Inicjalizuje system logowania"""
-    # Ustaw globalny logger
     global log
-    logger_instance = setup_logger()
-    log = StructuredLogger(logger_instance)
     
-    # Loguj informacje o starcie
-    log.info("Logging system initialized", 
-             environment=settings.ENVIRONMENT,  # Użyj bez .value
-             log_level=settings.LOG_LEVEL,     # Użyj bez .value
-             log_dir=str(settings.LOG_DIR))
-    
-    return logger_instance
-
-
-# Auto-inicjalizacja przy imporcie
-if not settings.TEST_MODE:
     try:
-        init_logging()
+        # Ustaw ścieżkę
+        log_dir_path = Path(log_dir) if log_dir else None
+        
+        # Skonfiguruj logger
+        logger_instance = setup_logger(
+            name="bmw_assistant",
+            level=level,
+            log_format="json" if is_production else "detailed",
+            log_dir=log_dir_path,
+            is_production=is_production,
+            is_development=not is_production
+        )
+        
+        # Ustaw globalny logger
+        log = StructuredLogger(logger_instance)
+        
+        # Loguj informacje o starcie
+        log.info("Logging system initialized", 
+                 log_level=level,
+                 log_dir=str(log_dir) if log_dir else "console_only")
+        
+        return logger_instance
+        
     except Exception as e:
         # Minimalna inicjalizacja w przypadku błędu
+        print(f"⚠️  Failed to initialize logging: {e}")
         logger.remove()
         logger.add(sys.stdout, level="INFO", format="{time} | {level} | {message}")
-        logger.warning(f"Failed to initialize logging system: {e}")
+        log = StructuredLogger()
+        return logger
+
+
+# Prosta auto-inicjalizacja (możesz to potem wywołać ręcznie)
+try:
+    # Spróbuj zaimportować settings
+    from app.core.config import settings
+    
+    # Inicjalizuj z settings
+    init_logging(
+        level=getattr(settings, 'LOG_LEVEL', 'INFO'),
+        log_dir=getattr(settings, 'LOG_DIR', './logs'),
+        is_production=getattr(settings, 'IS_PRODUCTION', False)
+    )
+    
+except ImportError:
+    # Jeśli nie ma settings, użyj domyślnych
+    print("⚠️  Could not import settings, using default logging")
+    init_logging(level="INFO", log_dir="./logs", is_production=False)
+except Exception as e:
+    print(f"⚠️  Logging initialization error: {e}")
+    init_logging(level="INFO", log_dir="./logs", is_production=False)

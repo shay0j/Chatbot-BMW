@@ -1,5 +1,5 @@
 """
-Konfiguracja BMW Assistant z .env i dobrymi praktykami.
+Konfiguracja BMW Assistant z .env - DOSTOSOWANA DO RAG I CHROMADB
 """
 import os
 from pathlib import Path
@@ -11,7 +11,7 @@ import secrets
 
 
 class Settings(BaseSettings):
-    """Konfiguracja z .env i walidacją Pydantic."""
+    """Konfiguracja z .env - dostosowana do twojego projektu"""
     
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -21,11 +21,11 @@ class Settings(BaseSettings):
         env_prefix="",
     )
     
-    # API KEYS (z .env)
-    COHERE_API_KEY: Optional[str] = Field(default=None, description="Cohere API Key")
+    # ========== API KEYS (z .env) ==========
+    COHERE_API_KEY: str = Field(default="", description="Cohere API Key")
     FIRECRAWL_API_KEY: Optional[str] = Field(default=None, description="Firecrawl API Key")
     
-    # APPLICATION SETTINGS
+    # ========== APPLICATION SETTINGS ==========
     APP_NAME: str = "BMW Assistant"
     APP_VERSION: str = "1.0.0"
     ENVIRONMENT: str = "development"
@@ -34,109 +34,83 @@ class Settings(BaseSettings):
     HOST: str = "0.0.0.0"
     PORT: int = 8000
     DEBUG: bool = True
-    RELOAD: bool = True
+    RELOAD: bool = Field(default=True)
     
-    # Security
-    SECRET_KEY: str = Field(
-        default_factory=lambda: secrets.token_urlsafe(32) 
-        if os.getenv("ENVIRONMENT") == "production" 
-        else "dev-secret-key-change-in-production"
-    )
-    JWT_SECRET_KEY: str = Field(
-        default_factory=lambda: secrets.token_urlsafe(32)
-        if os.getenv("ENVIRONMENT") == "production"
-        else "dev-jwt-secret-change-in-production"
-    )
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    
-    # CORS - jako string, potem parsujemy
-    CORS_ORIGINS_STR: Optional[str] = Field(
-        default="http://localhost:3000,http://localhost:8000,http://localhost:8080,http://127.0.0.1:3000,http://127.0.0.1:8000",
-        description="CORS origins separated by commas"
+    # CORS - JAKO STRING, parsujemy w validatorze
+    CORS_ORIGINS_STR: str = Field(
+        default="http://localhost:3000,http://localhost:8000,http://localhost:8080",
+        description="CORS origins as comma-separated string"
     )
     
-    # AI & RAG SETTINGS
-    # LLM
+    # ========== AI & RAG SETTINGS ==========
+    # LLM - dopasowane do twojego .env
     COHERE_CHAT_MODEL: str = Field(
         default="command-r7b-12-2024",
-        description="Cohere chat model (command-r7b-12-2024, command-a-001, etc)"
+        description="Cohere chat model"
     )
     LLM_TEMPERATURE: float = Field(default=0.7, ge=0.0, le=1.0)
-    MAX_TOKENS: int = Field(default=2000, ge=100, le=4096)
+    MAX_TOKENS: int = Field(default=1000, ge=100, le=2000)
     
-    # RAG
-    TOP_K_DOCUMENTS: int = Field(default=5, ge=1, le=20)
-    SIMILARITY_THRESHOLD: float = Field(default=0.7, ge=0.0, le=1.0)
-    CHROMA_DB_PATH: str = "./data/chroma_db"
-    CHROMA_COLLECTION_NAME: str = "bmw_knowledge_base"
+    # RAG - KLUCZOWE ZMIANY DLA CHROMADB!
+    TOP_K_DOCUMENTS: int = Field(default=3, ge=1, le=10)
+    SIMILARITY_THRESHOLD: float = Field(default=0.6, ge=0.0, le=1.0)
     
-    # Embeddings
+    # WAŻNE: ta sama ścieżka co w twoim embedderze!
+    CHROMA_DB_PATH: str = Field(
+        default=r"C:\Users\hellb\Documents\Chatbot_BMW\RAG\chroma_db_working",
+        description="Path to ChromaDB database"
+    )
+    
+    # WAŻNE: ta sama nazwa kolekcji co w twoim embedderze!
+    CHROMA_COLLECTION_NAME: str = Field(
+        default="bmw_docs",
+        description="ChromaDB collection name"
+    )
+    
+    # Embeddings - dopasowane do twojego .env
     COHERE_EMBED_MODEL: str = Field(
         default="embed-multilingual-v3.0",
         description="Cohere embedding model"
     )
-    CHUNK_SIZE: int = Field(default=1000, ge=100, le=2000)
-    CHUNK_OVERLAP: int = Field(default=200, ge=0, le=500)
     
-    # PATHS & DIRECTORIES
+    # ========== PATHS & DIRECTORIES ==========
     # Base directories
     BASE_DIR: Path = Path(__file__).parent.parent.parent
-    OUTPUT_DIR: Path = Field(default_factory=lambda: Path("./data"))
+    
+    # WAŻNE: Zmieniamy OUTPUT_DIR na RAG folder zamiast ./data
+    OUTPUT_DIR: Path = Field(
+        default_factory=lambda: Path(r"C:\Users\hellb\Documents\Chatbot_BMW\RAG\output"),
+        description="RAG output directory"
+    )
+    
     LOG_DIR: Path = Field(default_factory=lambda: Path("./logs"))
     TEMP_DIR: Path = Field(default_factory=lambda: Path("./tmp"))
     
-    # WEB SCRAPING
-    SOURCES: List[str] = [
-        "https://www.bmw.pl",
-        "https://www.bmw-zkmotors.pl/",
-        "https://www.zkmotors.pl/",
-        "https://www.mini.com.pl/"
-    ]
-    
-    REQUEST_DELAY: float = Field(default=1.0, ge=0.1, le=10.0)
-    MAX_DEPTH: int = Field(default=3, ge=1, le=10)
-    MAX_PAGES: int = Field(default=1000, ge=1, le=10000)
-    USER_AGENT: str = "Mozilla/5.0 (compatible; BMW-Assistant-Bot/1.0)"
-    REQUEST_TIMEOUT: int = Field(default=30, ge=5, le=120)
-    
-    # DATABASE & CACHE
-    REDIS_URL: str = "redis://localhost:6379/0"
-    REDIS_CACHE_TTL: int = Field(default=3600, ge=60, le=86400)
-    DATABASE_URL: str = "sqlite:///./data/bmw_assistant.db"
-    
-    # MONITORING & LOGGING
+    # ========== LOGGING ==========
     LOG_LEVEL: str = Field(default="INFO")
-    SENTRY_DSN: str = ""
-    METRICS_PORT: int = Field(default=9090, ge=1024, le=65535)
-    ENABLE_METRICS: bool = False
     
-    # PERFORMANCE & RATE LIMITING
-    RATE_LIMIT_PER_MINUTE: int = Field(default=60, ge=1, le=1000)
-    API_TIMEOUT: int = Field(default=60, ge=10, le=300)
-    MAX_WORKERS: int = Field(default=4, ge=1, le=os.cpu_count() or 4)
-    EMBEDDING_BATCH_SIZE: int = Field(default=32, ge=1, le=256)
-    
-    # APPLICATION SPECIFIC
+    # ========== APPLICATION SPECIFIC ==========
     DEFAULT_LANGUAGE: str = Field(default="pl")
     SUPPORTED_LANGUAGES: List[str] = ["pl", "en", "de"]
-    MAX_CONVERSATION_HISTORY: int = Field(default=20, ge=1, le=100)
+    MAX_CONVERSATION_HISTORY: int = Field(default=10, ge=1, le=100)
     ENABLE_STREAMING: bool = True
     
-    # TESTING & DEVELOPMENT
-    TEST_MODE: bool = False
-    MOCK_EXTERNAL_APIS: bool = Field(
-        default_factory=lambda: os.getenv("ENVIRONMENT") == "development"
+    # ========== SECURITY ==========
+    SECRET_KEY: str = Field(
+        default_factory=lambda: secrets.token_urlsafe(32)
     )
-    TEST_DATABASE_URL: str = "sqlite:///./data/test.db"
     
-    # SECURITY (production only)
-    ENABLE_HTTPS: bool = False
-    SSL_CERT_PATH: str = ""
-    SSL_KEY_PATH: str = ""
-    ADMIN_IPS: List[str] = ["127.0.0.1", "::1"]
-    ENABLE_ADMIN_PANEL: bool = False
+    # ========== TESTING - DODAJEMY ==========
+    TEST_MODE: bool = Field(default=False, description="Czy aplikacja działa w trybie testowym")
     
-    # VALIDATORS
+    # ========== VALIDATORS ==========
+    @field_validator('COHERE_API_KEY')
+    @classmethod
+    def validate_cohere_api_key(cls, v: str) -> str:
+        if not v or len(v) < 10:
+            raise ValueError("COHERE_API_KEY is required")
+        return v
+    
     @field_validator('LOG_LEVEL')
     @classmethod
     def validate_log_level(cls, v: str) -> str:
@@ -145,79 +119,27 @@ class Settings(BaseSettings):
             raise ValueError(f"LOG_LEVEL must be one of: {', '.join(valid_levels)}")
         return v.upper()
     
-    @field_validator('DEFAULT_LANGUAGE')
+    @field_validator('CHROMA_DB_PATH')
     @classmethod
-    def validate_default_language(cls, v: str) -> str:
-        valid_languages = ["pl", "en", "de"]
-        if v.lower() not in valid_languages:
-            raise ValueError(f"DEFAULT_LANGUAGE must be one of: {', '.join(valid_languages)}")
-        return v.lower()
-    
-    @field_validator('COHERE_CHAT_MODEL')
-    @classmethod
-    def validate_chat_model(cls, v: str) -> str:
-        # Aktualne modele Cohere (grudzień 2024 / styczeń 2026)
-        valid_models = [
-            "command-r7b-12-2024",  # Najnowszy model
-            "command-a-001",        # Główny model płatny
-            "command-a",            # Alternatywa
-            "command-r-001",        # Nowy R model
-            "command-light",        # Lekki (może deprecated)
-            "command",              # Stary (deprecated)
-            "command-r",            # Stary (deprecated)
-            "command-r-plus",       # Stary (deprecated)
-        ]
-        
-        # Log ostrzeżenie dla starych modeli, ale pozwól spróbować
-        deprecated_models = ["command", "command-r", "command-r-plus", "command-light"]
-        if v in deprecated_models:
-            print(f"Warning: Model {v} might be deprecated (check Cohere docs)")
-        
-        # Sprawdź czy model nie jest pusty
-        if not v or len(v) < 3:
-            raise ValueError("COHERE_CHAT_MODEL cannot be empty")
-        
-        # Nie blokuj jeśli model nie jest na liście - pozwól Cohere API zweryfikować
-        if v not in valid_models:
-            print(f"Note: Model {v} not in predefined list, letting Cohere API validate it")
-        
+    def validate_chroma_path(cls, v: str) -> str:
+        # Sprawdź czy ścieżka istnieje
+        path = Path(v)
+        if not path.exists():
+            print(f"⚠️  Warning: ChromaDB path does not exist: {v}")
+            # W development tworzymy katalog
+            if os.getenv("ENVIRONMENT") == "development":
+                path.mkdir(parents=True, exist_ok=True)
+                print(f"Created ChromaDB directory: {path}")
         return v
     
-    @field_validator('COHERE_EMBED_MODEL')
+    @field_validator('CHROMA_COLLECTION_NAME')
     @classmethod
-    def validate_embed_model(cls, v: str) -> str:
-        if not v.startswith("embed-"):
-            raise ValueError("COHERE_EMBED_MODEL must start with 'embed-'")
-        return v
+    def validate_collection_name(cls, v: str) -> str:
+        if not v or len(v.strip()) == 0:
+            raise ValueError("CHROMA_COLLECTION_NAME cannot be empty")
+        return v.strip()
     
-    @field_validator('FIRECRAWL_API_KEY')
-    @classmethod
-    def validate_firecrawl_key(cls, v: Optional[str]) -> Optional[str]:
-        if v and not v.startswith("fc-"):
-            raise ValueError("FIRECRAWL_API_KEY must start with 'fc-'")
-        return v
-    
-    @field_validator('PORT')
-    @classmethod
-    def validate_port(cls, v: int) -> int:
-        if not (1024 <= v <= 65535):
-            raise ValueError("PORT must be between 1024 and 65535")
-        return v
-    
-    # COMPUTED PROPERTIES
-    @property
-    def CORS_ORIGINS(self) -> List[str]:
-        """Parse CORS origins from string."""
-        if self.CORS_ORIGINS_STR:
-            return [origin.strip() for origin in self.CORS_ORIGINS_STR.split(",") if origin.strip()]
-        return [
-            "http://localhost:3000",
-            "http://localhost:8000", 
-            "http://localhost:8080",
-            "http://127.0.0.1:3000",
-            "http://127.0.0.1:8000",
-        ]
-    
+    # ========== COMPUTED PROPERTIES ==========
     @property
     def IS_DEVELOPMENT(self) -> bool:
         return self.ENVIRONMENT.lower() == "development"
@@ -227,65 +149,56 @@ class Settings(BaseSettings):
         return self.ENVIRONMENT.lower() == "production"
     
     @property
-    def IS_TESTING(self) -> bool:
-        return self.ENVIRONMENT.lower() == "testing"
-    
-    @property
     def API_URL(self) -> str:
-        protocol = "https" if self.ENABLE_HTTPS else "http"
-        return f"{protocol}://{self.HOST}:{self.PORT}"
+        return f"http://{self.HOST}:{self.PORT}"
     
     @property
     def ALLOW_ANONYMOUS_ACCESS(self) -> bool:
-        return self.IS_DEVELOPMENT or self.TEST_MODE
+        return self.IS_DEVELOPMENT
     
     @property
     def USE_MOCK_LLM(self) -> bool:
-        """Czy używać mock LLM zamiast prawdziwego API"""
-        return (
-            self.MOCK_EXTERNAL_APIS or 
-            not self.COHERE_API_KEY or 
-            self.IS_DEVELOPMENT and "test" in os.getenv("PYTEST_CURRENT_TEST", "")
-        )
-    
-    # Subdirectories jako properties
-    @property
-    def CACHE_DIR(self) -> Path:
-        return self.OUTPUT_DIR / "cache"
+        """Czy używać mock LLM (tylko dla testów)"""
+        return self.IS_DEVELOPMENT and (self.TEST_MODE or "test" in os.getenv("PYTEST_CURRENT_TEST", ""))
     
     @property
-    def MODELS_DIR(self) -> Path:
-        return self.OUTPUT_DIR / "models"
+    def CORS_ORIGINS(self) -> List[str]:
+        """Parsuje CORS_ORIGINS_STR do listy"""
+        if not self.CORS_ORIGINS_STR:
+            return ["http://localhost:3000", "http://localhost:8000", "http://localhost:8080"]
+        
+        origins = []
+        for origin in self.CORS_ORIGINS_STR.split(","):
+            origin = origin.strip()
+            if origin:
+                origins.append(origin)
+        
+        return origins
+    
+    # ========== PATHS RAG ==========
+    @property
+    def CHROMA_DB_PATH_OBJ(self) -> Path:
+        """Path jako Path object"""
+        return Path(self.CHROMA_DB_PATH)
     
     @property
-    def EMBEDDINGS_DIR(self) -> Path:
-        return self.OUTPUT_DIR / "embeddings"
+    def RAG_OUTPUT_DIR(self) -> Path:
+        """Folder z danymi RAG"""
+        return self.OUTPUT_DIR
     
     @property
-    def RAW_CRAWL_DIR(self) -> Path:
-        return self.OUTPUT_DIR / "raw_pages"
+    def CHROMA_COLLECTION_PATH(self) -> Path:
+        """Pełna ścieżka do kolekcji ChromaDB"""
+        return self.CHROMA_DB_PATH_OBJ / self.CHROMA_COLLECTION_NAME
     
-    # File paths
-    @property
-    def FIRECRAWL_OUTPUT(self) -> Path:
-        return self.OUTPUT_DIR / "firecrawl_all.json"
-    
-    @property
-    def FAILED_URLS(self) -> Path:
-        return self.OUTPUT_DIR / "failed_urls.json"
-    
-    # UTILITY METHODS
+    # ========== UTILITY METHODS ==========
     def ensure_dirs(self) -> List[Path]:
         """Tworzy wszystkie potrzebne katalogi."""
         dirs_to_create = [
-            self.OUTPUT_DIR,
             self.LOG_DIR,
             self.TEMP_DIR,
-            self.CACHE_DIR,
-            self.MODELS_DIR,
-            self.EMBEDDINGS_DIR,
-            self.RAW_CRAWL_DIR,
-            Path(self.CHROMA_DB_PATH),
+            self.CHROMA_DB_PATH_OBJ,
+            self.RAG_OUTPUT_DIR,
         ]
         
         created_dirs = []
@@ -301,18 +214,24 @@ class Settings(BaseSettings):
         """Waliduje konfigurację, zwraca listę błędów."""
         errors = []
         
-        # Sprawdź klucze API tylko jeśli nie używamy mocka
-        if not self.USE_MOCK_LLM:
-            if not self.COHERE_API_KEY or len(self.COHERE_API_KEY) < 10:
-                errors.append("COHERE_API_KEY jest wymagany lub nieprawidłowy")
-            
-            if not self.FIRECRAWL_API_KEY:
-                errors.append("FIRECRAWL_API_KEY jest wymagany")
+        # Sprawdź klucze API
+        if not self.COHERE_API_KEY:
+            errors.append("COHERE_API_KEY jest wymagany")
+        
+        # Sprawdź czy ChromaDB path istnieje
+        chroma_path = Path(self.CHROMA_DB_PATH)
+        if not chroma_path.exists():
+            errors.append(f"ChromaDB path nie istnieje: {self.CHROMA_DB_PATH}")
+            print(f"Hint: Sprawdź czy folder istnieje lub uruchom embedder")
+        
+        # Sprawdź port
+        if not (1024 <= self.PORT <= 65535):
+            errors.append(f"Nieprawidłowy port: {self.PORT}")
         
         return errors
     
     def get_safe_summary(self) -> dict:
-        """Zwraca bezpieczne podsumowanie konfiguracji (bez kluczy API)."""
+        """Zwraca bezpieczne podsumowanie konfiguracji."""
         return {
             "app": {
                 "name": self.APP_NAME,
@@ -324,33 +243,32 @@ class Settings(BaseSettings):
                 "host": self.HOST,
                 "port": self.PORT,
                 "url": self.API_URL,
-                "cors_origins": self.CORS_ORIGINS[:3],
+                "cors_origins": self.CORS_ORIGINS,
             },
             "ai": {
                 "llm_model": self.COHERE_CHAT_MODEL,
                 "embedding_model": self.COHERE_EMBED_MODEL,
                 "temperature": self.LLM_TEMPERATURE,
-                "use_mock": self.USE_MOCK_LLM,
             },
             "rag": {
                 "top_k_documents": self.TOP_K_DOCUMENTS,
                 "similarity_threshold": self.SIMILARITY_THRESHOLD,
+                "chroma_path": str(self.CHROMA_DB_PATH),
                 "collection_name": self.CHROMA_COLLECTION_NAME,
-            },
-            "security": {
-                "https_enabled": self.ENABLE_HTTPS,
-                "anonymous_access": self.ALLOW_ANONYMOUS_ACCESS,
             }
         }
     
     def __str__(self) -> str:
-        summary = self.get_safe_summary()
-        lines = [f"{self.APP_NAME} v{self.APP_VERSION}"]
-        lines.append(f"Environment: {self.ENVIRONMENT}")
-        lines.append(f"API: {self.API_URL}")
-        lines.append(f"LLM: {self.COHERE_CHAT_MODEL} (mock: {self.USE_MOCK_LLM})")
-        lines.append(f"Embeddings: {self.COHERE_EMBED_MODEL}")
-        return "\n".join(lines)
+        return f"""
+{self.APP_NAME} v{self.APP_VERSION}
+  Environment: {self.ENVIRONMENT}
+  API: {self.API_URL}
+  LLM: {self.COHERE_CHAT_MODEL}
+  Embeddings: {self.COHERE_EMBED_MODEL}
+  RAG: {self.TOP_K_DOCUMENTS} docs, threshold: {self.SIMILARITY_THRESHOLD}
+  ChromaDB: {self.CHROMA_DB_PATH}
+  Collection: {self.CHROMA_COLLECTION_NAME}
+        """.strip()
 
 
 @lru_cache()
@@ -360,19 +278,23 @@ def get_settings() -> Settings:
     
     # Automatycznie tworzymy katalogi
     if settings.IS_DEVELOPMENT:
-        settings.ensure_dirs()
+        try:
+            created_dirs = settings.ensure_dirs()
+            print(f"Created/verified directories: {[str(d) for d in created_dirs]}")
+        except Exception as e:
+            print(f"Warning: Could not create directories: {e}")
     
     # Walidacja
     errors = settings.validate_config()
     if errors:
-        print("Configuration errors:")
+        print("❌ Configuration errors:")
         for error in errors:
             print(f"   - {error}")
         
         if settings.IS_PRODUCTION:
             raise ValueError(f"Configuration errors: {', '.join(errors)}")
         else:
-            print("Continuing in development mode despite errors...")
+            print("⚠️  Continuing in development mode despite errors...")
     
     return settings
 
@@ -384,74 +306,77 @@ settings = get_settings()
 def validate_configuration():
     """
     Kompatybilność wsteczna z oryginalną funkcją.
-    Teraz walidacja jest wbudowana w Settings.
     """
     print("Validating configuration...")
     
     # Stwórz katalogi
-    created_dirs = settings.ensure_dirs()
-    for directory in created_dirs:
-        print(f"Created/verified: {directory}")
+    try:
+        created_dirs = settings.ensure_dirs()
+        for directory in created_dirs:
+            print(f"Created/verified: {directory}")
+    except Exception as e:
+        print(f"Warning: Could not create directories: {e}")
     
-    # Sprawdź ważne ustawienia
-    if settings.SECRET_KEY == "dev-secret-key-change-in-production":
-        print("WARNING: Using default SECRET_KEY - change in production!")
+    # Wyświetl podsumowanie
+    print("\n" + "="*60)
+    print(str(settings))
+    print("="*60 + "\n")
     
-    if settings.JWT_SECRET_KEY == "dev-jwt-secret-change-in-production":
-        print("WARNING: Using default JWT_SECRET_KEY - change in production!")
+    # Sprawdź ChromaDB
+    chroma_path = Path(settings.CHROMA_DB_PATH)
+    if chroma_path.exists():
+        print(f"✅ ChromaDB path exists: {chroma_path}")
+        
+        # Sprawdź czy są pliki ChromaDB
+        chroma_files = list(chroma_path.glob("*"))
+        if chroma_files:
+            print(f"   Found {len(chroma_files)} files in ChromaDB")
+        else:
+            print(f"   Warning: ChromaDB directory is empty")
+            print(f"   Hint: Run your embedder to populate ChromaDB")
+    else:
+        print(f"❌ ChromaDB path does not exist: {chroma_path}")
+        print(f"   Hint: Run your embedder first")
     
-    print("Configuration validated successfully!")
-    print(f"   App: {settings.APP_NAME} v{settings.APP_VERSION}")
-    print(f"   Environment: {settings.ENVIRONMENT}")
-    print(f"   API: {settings.API_URL}")
-    print(f"   LLM Model: {settings.COHERE_CHAT_MODEL}")
-    print(f"   RAG: {settings.TOP_K_DOCUMENTS} docs, threshold: {settings.SIMILARITY_THRESHOLD}")
-    print(f"   Default language: {settings.DEFAULT_LANGUAGE}")
-    
+    print("\nConfiguration validated successfully!")
     return True
 
 
 def setup_environment():
-    """Konfiguruje środowisko na podstawie settings."""
-    # Ustaw zmienne środowiskowe
-    os.environ["COHERE_API_KEY"] = settings.COHERE_API_KEY or ""
-    os.environ["FIRECRAWL_API_KEY"] = settings.FIRECRAWL_API_KEY or ""
-    
-    # Dla FastAPI
-    os.environ["HOST"] = settings.HOST
-    os.environ["PORT"] = str(settings.PORT)
+    """Konfiguruje środowisko."""
+    # Ustaw zmienne środowiskowe dla kompatybilności
+    os.environ["COHERE_API_KEY"] = settings.COHERE_API_KEY
+    if settings.FIRECRAWL_API_KEY:
+        os.environ["FIRECRAWL_API_KEY"] = settings.FIRECRAWL_API_KEY
 
 
 def print_config_summary():
     """Wyświetla podsumowanie konfiguracji."""
     print(str(settings))
     
-    if settings.USE_MOCK_LLM:
-        print("Using MOCK LLM (no API calls)")
     if settings.IS_DEVELOPMENT:
         print("Development mode: DEBUG=True, RELOAD=True")
-    if settings.IS_PRODUCTION and settings.DEBUG:
-        print("WARNING: DEBUG=True in production!")
 
 
-# TEST - uruchom bezpośrednio aby przetestować
+# TEST
 if __name__ == "__main__":
-    print("Testing configuration...")
+    print("Testing configuration...\n")
     
     try:
-        # Pobierz i wyświetl konfigurację
+        # Pobierz konfigurację
         config = get_settings()
         print_config_summary()
         
-        # Pokaż bezpieczne podsumowanie
-        print("\nSafe config summary:")
-        import json
-        print(json.dumps(config.get_safe_summary(), indent=2, ensure_ascii=False))
+        # Wyświetl CORS origins
+        print(f"\nCORS Origins: {config.CORS_ORIGINS}")
         
-        print("\nConfiguration OK!")
+        # Walidacja
+        validate_configuration()
+        
+        print("\n✅ Configuration OK!")
         
     except Exception as e:
-        print(f"Configuration failed: {e}")
+        print(f"\n❌ Configuration failed: {e}")
         import traceback
         traceback.print_exc()
         exit(1)

@@ -1,0 +1,19 @@
+{
+  "created_at": "2026-01-25T15:10:54.897463",
+  "source_normalized_data": "C:\\Users\\hellb\\Documents\\Chatbot_BMW\\RAG\\output\\bmw_complete_20260125_122514_normalized_filtered",
+  "chunker_settings": {
+    "chunk_size": 500,
+    "chunk_overlap": 100
+  },
+  "statistics": {
+    "total_chunks": 582,
+    "model_chunks": 45,
+    "other_chunks": 537,
+    "avg_chunk_size": 412.97250859106526
+  },
+  "files": {
+    "all_chunks": "all_chunks.jsonl",
+    "model_chunks": "model_chunks.jsonl",
+    "other_chunks": "other_chunks.jsonl"
+  }
+}

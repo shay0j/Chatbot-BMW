@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-01-25T15:14:38.153801",
+  "collection_name": "bmw_docs",
+  "collection_count": 582,
+  "embedding_function": "Cohere",
+  "metadata": {
+    "hnsw:space": "cosine"
+  },
+  "settings": {
+    "hnsw:space": "cosine",
+    "allow_reset": true
+  }
+}
