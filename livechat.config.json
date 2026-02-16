@@ -1,3 +1,24 @@
 {
-    "id": "vZ1msLvvg"
+    "id": "vZ1msLvvg",
+    "name": "ZK-Motors Chatbot",
+    "product": "livechat",
+    "blocks": {
+        "authorization": {
+            "clientId": "72cb99e9ced7f3fc7b866eb1eebb67af",
+            "type": "server_side_app",
+            "redirectUri": "http://localhost"
+        },
+        "repository": {
+            "provider": "github",
+            "name": "shay0j/Chatbot-BMW",
+            "branch": "main"
+        },
+        "widgets": {
+            "-AM79ryBCu": {
+                "url": "https://livechat-contact-form.netlify.app/",
+                "placement": "messagebox",
+                "initialState": ""
+            }
+        }
+    }
 }
