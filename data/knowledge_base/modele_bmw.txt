@@ -1,0 +1,38 @@
+﻿Modele BMW dostÄ™pne w Polsce:
+
+Seria 1 (F40):
+- Typ: Hatchback premium
+- Silniki: 118i, 120i, 118d, 120d
+- Cena: od 150 000 PLN
+
+Seria 3 (G20):
+- Typ: Sedan Ĺ›redniej klasy
+- Silniki: 318i, 320i, 330i, 318d, 320d, 330d, 330e
+- Cena: od 200 000 PLN
+
+Seria 5 (G30):
+- Typ: Sedan biznesowy
+- Silniki: 520i, 530i, 540i, 520d, 530d, 540d, 530e
+- Cena: od 300 000 PLN
+
+Seria 7 (G70):
+- Typ: Flagowy sedan luksusowy
+- Silniki: 740i, 760i, 740d
+- Cena: od 500 000 PLN
+
+SUV-y:
+- X1 (U11): maĹ‚y SUV, od 180 000 PLN
+- X3 (G01): Ĺ›redni SUV, od 250 000 PLN  
+- X5 (G05): duĹĽy SUV, od 350 000 PLN
+- X7 (G07): peĹ‚nowymiarowy SUV, od 450 000 PLN
+
+Sportowe:
+- Z4 (G29): roadster, od 250 000 PLN
+- M2 (G87): coupĂ© sportowe, od 350 000 PLN
+- M3 (G80): sedan sportowy, od 400 000 PLN
+- M4 (G82): coupĂ© sportowe, od 420 000 PLN
+
+Elektryczne:
+- i4: sedan elektryczny, od 250 000 PLN
+- iX: SUV elektryczny, od 400 000 PLN
+- i7: sedan elektryczny, od 600 000 PLN

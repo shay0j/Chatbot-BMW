@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMW Chat</title>
+    <title>Asystent BMW - ZK Motors</title>
     <style>
         /* Chat window styles */
         body {
@@ -91,6 +91,33 @@
             border-bottom-left-radius: 5px;
         }
         
+        .warning-message {
+            background: #fff3cd !important;
+            color: #856404 !important;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            max-width: 90% !important;
+            font-size: 14px;
+        }
+        
+        .info-message {
+            background: #d1ecf1 !important;
+            color: #0c5460 !important;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            max-width: 90% !important;
+            font-size: 14px;
+        }
+        
+        .success-message {
+            background: #d4edda !important;
+            color: #155724 !important;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            max-width: 90% !important;
+            font-size: 14px;
+        }
+        
         .chat-input {
             padding: 20px;
             border-top: 1px solid #ddd;
@@ -155,6 +182,30 @@
             border-top: 1px solid #eee;
         }
         
+        .health-status {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            padding: 3px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .health-ok {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .health-warning {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        
+        .health-error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
         /* Scrollbar styling */
         .chat-messages::-webkit-scrollbar {
             width: 8px;
@@ -172,30 +223,78 @@
         .chat-messages::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
         }
+        
+        .connection-test {
+            display: none;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .connection-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .connection-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .debug-info {
+            font-size: 10px;
+            color: #6c757d;
+            padding: 2px 5px;
+            background: #f8f9fa;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="chat-container">
         <div class="chat-header">
-            <h1>🚗 BMW Assistant</h1>
-            <p>Ask me anything about BMW (with conversation memory)</p>
-            <button id="resetBtn">Reset Chat</button>
+            <h1>🚗 Asystent BMW - ZK Motors</h1>
+            <p>Zapytaj mnie o cokolwiek dotyczące BMW (z pamięcią konwersacji)</p>
+            <button id="resetBtn">Resetuj Czat</button>
         </div>
+        
+        <div class="health-status" id="healthStatus">
+            Status serwera: <span id="serverStatus">sprawdzanie...</span>
+        </div>
+        
+        <div id="connectionTest" class="connection-test"></div>
         
         <div class="chat-messages" id="chat-window">
             <div class="message bot-message">
-                👋 Hello! I'm your BMW assistant. I can remember our conversation.
+                <strong>Cześć! 👋</strong><br><br>
+                Jestem Leo, wirtualny Asystent Klienta ZK Motors, oficjalnego dealera BMW i MINI.<br><br>
+                
+                Specjalizuję się we wszystkich modelach BMW i MINI - od klasycznych po elektryczne!<br><br>
+                
+                <strong>W czym mogę Ci dziś pomóc?</strong><br>
+                Może:<br>
+                • Wybór modelu BMW/MINI dla Twoich potrzeb?<br>
+                • Specyfikacje techniczne?<br>
+                • Informacje o test drive w ZK Motors?<br>
+                • Aktualne promocje?<br><br>
+                
+                Pytaj śmiało! 😊
             </div>
         </div>
         
         <div class="session-info" id="sessionInfo">
-            Session: <span id="sessionIdDisplay">loading...</span> | 
-            Messages: <span id="messageCount">0</span>
+            Sesja: <span id="sessionIdDisplay">ładowanie...</span> | 
+            Wiadomości: <span id="messageCount">0</span>
         </div>
         
         <div class="chat-input">
-            <input type="text" id="user-input" placeholder="Type your message here...">
-            <button id="send-button">Send</button>
+            <input type="text" id="user-input" placeholder="Wpisz swoją wiadomość tutaj..." autocomplete="off">
+            <button id="send-button">Wyślij</button>
         </div>
     </div>
 
@@ -209,8 +308,11 @@
             const resetButton = document.getElementById('resetBtn');
             const sessionIdDisplay = document.getElementById('sessionIdDisplay');
             const messageCount = document.getElementById('messageCount');
+            const serverStatus = document.getElementById('serverStatus');
+            const healthStatus = document.getElementById('healthStatus');
+            const connectionTest = document.getElementById('connectionTest');
             
-            console.log('✅ BMW Chat loaded');
+            console.log('✅ BMW Chat załadowany');
             
             // Generate or get session ID from localStorage
             let sessionId = localStorage.getItem('bmw_session_id');
@@ -223,20 +325,35 @@
             sessionIdDisplay.textContent = sessionId.substr(0, 8) + '...';
             
             // Function to add message to chat
-            function addMessage(text, isUser = false) {
+            function addMessage(text, isUser = false, messageType = 'normal') {
                 const messageDiv = document.createElement('div');
-                messageDiv.className = isUser ? 'message user-message' : 'message bot-message';
-                messageDiv.textContent = text;
+                
+                if (messageType === 'warning') {
+                    messageDiv.className = 'message warning-message';
+                } else if (messageType === 'info') {
+                    messageDiv.className = 'message info-message';
+                } else if (messageType === 'success') {
+                    messageDiv.className = 'message success-message';
+                } else {
+                    messageDiv.className = isUser ? 'message user-message' : 'message bot-message';
+                }
+                
+                // Formatowanie tekstu - zachowaj podziały linii
+                const formattedText = text.replace(/\n/g, '<br>');
+                messageDiv.innerHTML = formattedText;
+                
                 chatWindow.appendChild(messageDiv);
                 chatWindow.scrollTop = chatWindow.scrollHeight;
                 
-                // Update message count
-                updateMessageCount();
+                // Update message count (only for actual messages, not system messages)
+                if (messageType === 'normal') {
+                    updateMessageCount();
+                }
             }
             
             // Function to update message count
             function updateMessageCount() {
-                const messages = chatWindow.querySelectorAll('.message');
+                const messages = chatWindow.querySelectorAll('.message.user-message, .message.bot-message');
                 messageCount.textContent = messages.length;
             }
             
@@ -244,7 +361,7 @@
             function showTyping() {
                 const typingDiv = document.createElement('div');
                 typingDiv.className = 'typing';
-                typingDiv.textContent = 'BMW Assistant is typing...';
+                typingDiv.textContent = 'Asystent BMW pisze...';
                 typingDiv.id = 'typing-indicator';
                 chatWindow.appendChild(typingDiv);
                 chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -258,6 +375,111 @@
                 }
             }
             
+            // Function to update health status display
+            function updateHealthStatus(status, details = '') {
+                serverStatus.textContent = status;
+                serverStatus.className = '';
+                
+                switch(status.toLowerCase()) {
+                    case 'healthy':
+                        serverStatus.classList.add('health-ok');
+                        healthStatus.title = 'Serwer działa poprawnie';
+                        break;
+                    case 'degraded':
+                        serverStatus.classList.add('health-warning');
+                        healthStatus.title = 'Serwer działa, ale niektóre usługi mogą być ograniczone';
+                        break;
+                    case 'sprawdzanie...':
+                        serverStatus.classList.add('health-warning');
+                        break;
+                    default:
+                        serverStatus.classList.add('health-error');
+                        healthStatus.title = details || 'Problem z połączeniem serwera';
+                }
+            }
+            
+            // Function to test connection
+            async function testConnection() {
+                try {
+                    console.log('🔗 Testowanie połączenia z backendem...');
+                    
+                    // Show connection testing message
+                    connectionTest.textContent = 'Testowanie połączenia...';
+                    connectionTest.className = 'connection-test connection-info';
+                    connectionTest.style.display = 'block';
+                    
+                    // Test 1: Ping endpoint (najprostszy test)
+                    console.log('🔄 Test 1: Ping...');
+                    const pingResponse = await fetch('/ping', { 
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    
+                    if (!pingResponse.ok) {
+                        throw new Error(`Ping nie powiódł się: HTTP ${pingResponse.status}`);
+                    }
+                    
+                    const pingData = await pingResponse.json();
+                    console.log('✅ Ping udany:', pingData);
+                    
+                    // Test 2: Status endpoint
+                    console.log('🔄 Test 2: Status...');
+                    const statusResponse = await fetch('/api/status', { 
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    
+                    if (!statusResponse.ok) {
+                        throw new Error(`Status check failed: HTTP ${statusResponse.status}`);
+                    }
+                    
+                    const statusData = await statusResponse.json();
+                    console.log('✅ Status check:', statusData);
+                    
+                    // Test 3: Health endpoint
+                    console.log('🔄 Test 3: Health...');
+                    const healthResponse = await fetch('/health', { 
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    
+                    if (!healthResponse.ok) {
+                        throw new Error(`Health check failed: HTTP ${healthResponse.status}`);
+                    }
+                    
+                    const healthData = await healthResponse.json();
+                    console.log('✅ Health check:', healthData);
+                    
+                    // Connection successful
+                    connectionTest.textContent = `✅ Połączenie udane! Serwer: ${healthData.service} v${healthData.version}`;
+                    connectionTest.className = 'connection-test connection-success';
+                    
+                    // Hide connection test after 3 seconds
+                    setTimeout(() => {
+                        connectionTest.style.display = 'none';
+                    }, 3000);
+                    
+                    return true;
+                    
+                } catch (error) {
+                    console.error('❌ Test połączenia nieudany:', error);
+                    
+                    // Show detailed error
+                    connectionTest.innerHTML = `
+                        ❌ Problem z połączeniem:<br>
+                        <small>${error.message}</small><br><br>
+                        💡 Upewnij się że:<br>
+                        1. Backend jest uruchomiony: <code>python app/main.py</code><br>
+                        2. Serwer nasłuchuje na porcie 8000<br>
+                        3. Adres backendu: <code>http://localhost:8000</code>
+                    `;
+                    connectionTest.className = 'connection-test connection-error';
+                    connectionTest.style.display = 'block';
+                    
+                    return false;
+                }
+            }
+            
             // Function to send message
             async function sendMessage() {
                 const message = userInput.value.trim();
@@ -265,7 +487,7 @@
                 
                 // Disable send button while processing
                 sendButton.disabled = true;
-                sendButton.textContent = 'Sending...';
+                sendButton.textContent = 'Wysyłanie...';
                 
                 // Add user message
                 addMessage(message, true);
@@ -275,26 +497,35 @@
                 showTyping();
                 
                 try {
-                    console.log('📤 Sending message with session:', sessionId);
+                    console.log('📤 Wysyłanie wiadomości z sesją:', sessionId);
+                    
+                    // UŻYJ WZGLĘDNEJ ŚCIEŻKI - to jest kluczowe!
+                    const apiUrl = '/chat';
+                    console.log('🌐 Używam API URL:', apiUrl);
                     
                     // Send to server WITH session_id
-                    const response = await fetch('/chat', {
+                    const response = await fetch(apiUrl, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
                             message: message,
-                            session_id: sessionId  // IMPORTANT: Send session ID
+                            session_id: sessionId,
+                            language: 'pl',  // Język polski
+                            temperature: 0.7,
+                            stream: false
                         })
                     });
                     
                     if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                        const errorText = await response.text();
+                        console.error('❌ Błąd serwera:', errorText);
+                        throw new Error(`Błąd serwera: ${response.status}`);
                     }
                     
                     const data = await response.json();
-                    console.log('✅ Response received:', data);
+                    console.log('✅ Otrzymano odpowiedź:', data);
                     
                     // Hide typing indicator
                     hideTyping();
@@ -302,26 +533,53 @@
                     // Add bot response
                     if (data.success) {
                         addMessage(data.answer, false);
+                        
+                        // Show confidence if available
+                        if (data.confidence && data.confidence < 0.5) {
+                            addMessage('⚠️ Uwaga: Niska pewność odpowiedzi. Informacje mogą być nieprecyzyjne.', false, 'warning');
+                        }
+                        
+                        // Show sources if available
+                        if (data.sources && data.sources.length > 0) {
+                            const sourcesInfo = `📚 Źródła: ${data.sources.length} znalezionych`;
+                            addMessage(sourcesInfo, false, 'info');
+                        }
                     } else {
-                        addMessage('Error: ' + data.answer, false);
+                        addMessage(`Błąd: ${data.answer}`, false, 'warning');
                     }
                     
                 } catch (error) {
-                    console.error('❌ Error:', error);
+                    console.error('❌ Błąd:', error);
                     hideTyping();
-                    addMessage(`Error: ${error.message}`, false);
+                    
+                    let errorMessage = `Błąd: ${error.message}`;
+                    
+                    if (error.message.includes('Failed to fetch') || 
+                        error.message.includes('NetworkError') ||
+                        error.message.includes('fetch') ||
+                        error.message.includes('Network request failed')) {
+                        errorMessage = '⚠️ Nie można połączyć się z serwerem. Upewnij się że backend działa.';
+                        updateHealthStatus('offline', error.message);
+                        
+                        // Test connection again
+                        testConnection();
+                    }
+                    
+                    addMessage(errorMessage, false, 'warning');
+                    
                 } finally {
                     // Re-enable send button
                     sendButton.disabled = false;
-                    sendButton.textContent = 'Send';
+                    sendButton.textContent = 'Wyślij';
                     userInput.focus();
                 }
             }
             
             // Function to reset chat
             async function resetChat() {
-                if (confirm('Reset conversation history? This will start a new conversation.')) {
+                if (confirm('Zresetować historię konwersacji? Rozpocznie się nowa rozmowa.')) {
                     try {
+                        // UŻYJ WZGLĘDNEJ ŚCIEŻKI
                         const response = await fetch(`/chat/reset?session_id=${sessionId}`, {
                             method: 'POST'
                         });
@@ -330,11 +588,17 @@
                         if (data.success) {
                             // Clear chat window but keep first message
                             const firstMessage = chatWindow.querySelector('.bot-message');
+                            const warnings = chatWindow.querySelectorAll('.warning-message, .info-message, .success-message');
                             chatWindow.innerHTML = '';
                             
                             if (firstMessage) {
                                 chatWindow.appendChild(firstMessage);
                             }
+                            
+                            // Keep system messages if any
+                            warnings.forEach(warning => {
+                                chatWindow.appendChild(warning);
+                            });
                             
                             // Generate new session ID
                             sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
@@ -342,13 +606,13 @@
                             sessionIdDisplay.textContent = sessionId.substr(0, 8) + '...';
                             
                             // Add reset confirmation
-                            addMessage('✅ Chat history reset. New session started.', false);
+                            addMessage('✅ Historia czatu zresetowana. Rozpoczęto nową sesję.', false, 'success');
                             
-                            console.log('🔄 New session:', sessionId);
+                            console.log('🔄 Nowa sesja:', sessionId);
                         }
                     } catch (error) {
-                        console.error('Reset error:', error);
-                        addMessage('Error resetting chat: ' + error.message, false);
+                        console.error('Błąd resetowania:', error);
+                        addMessage('Błąd resetowania czatu: ' + error.message, false, 'warning');
                     }
                 }
             }
@@ -356,12 +620,57 @@
             // Function to check server health
             async function checkHealth() {
                 try {
-                    const response = await fetch('/health');
+                    updateHealthStatus('sprawdzanie...');
+                    
+                    // UŻYJ WZGLĘDNEJ ŚCIEŻKI
+                    const response = await fetch('/health', {
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
                     const data = await response.json();
-                    console.log('🏥 Server health:', data);
-                    return data.status === 'ok';
+                    console.log('🏥 Status serwera:', data);
+                    
+                    // Check server status
+                    if (data.status === 'healthy' || data.status === 'degraded') {
+                        updateHealthStatus(data.status);
+                        
+                        // Check RAG status
+                        if (data.rag_stats && data.rag_stats.is_dummy) {
+                            // Don't spam - show only once
+                            const existingWarning = chatWindow.querySelector('.warning-message[data-type="rag-warning"]');
+                            if (!existingWarning) {
+                                const ragWarning = document.createElement('div');
+                                ragWarning.className = 'message warning-message';
+                                ragWarning.setAttribute('data-type', 'rag-warning');
+                                ragWarning.textContent = 'ℹ️ Uwaga: RAG działa w trybie dummy. Odpowiedzi mogą być mniej precyzyjne.';
+                                chatWindow.appendChild(ragWarning);
+                            }
+                        }
+                        
+                        return true;
+                    } else {
+                        updateHealthStatus(data.status || 'błąd', 'Nieoczekiwany status');
+                        return false;
+                    }
+                    
                 } catch (error) {
                     console.error('Health check failed:', error);
+                    updateHealthStatus('offline', error.message);
+                    
+                    // Don't spam warnings - tylko pierwszy raz
+                    const existingWarning = chatWindow.querySelector('.warning-message[data-type="connection-warning"]');
+                    if (!existingWarning) {
+                        const warning = document.createElement('div');
+                        warning.className = 'message warning-message';
+                        warning.setAttribute('data-type', 'connection-warning');
+                        warning.textContent = '⚠️ Nie można połączyć się z serwerem. Sprawdź czy backend jest uruchomiony.';
+                        chatWindow.appendChild(warning);
+                    }
+                    
                     return false;
                 }
             }
@@ -377,29 +686,33 @@
                 }
             });
             
-            // Auto-resize textarea (if using textarea instead of input)
-            userInput.addEventListener('input', function() {
-                this.style.height = 'auto';
-                this.style.height = (this.scrollHeight) + 'px';
-            });
-            
             // Initialize
             userInput.focus();
             updateMessageCount();
             
-            // Check server health on startup
-            checkHealth().then(healthy => {
-                if (!healthy) {
-                    addMessage('⚠️ Warning: Server health check failed. Chat may not work properly.', false);
+            // Test connection on startup
+            testConnection().then(isConnected => {
+                if (isConnected) {
+                    console.log('✅ Połączenie ustanowione');
+                } else {
+                    console.log('❌ Połączenie nieudane - tryb offline');
                 }
             });
             
+            // Check server health on startup and every 30 seconds
+            checkHealth();
+            setInterval(checkHealth, 30000);
+            
             // Log to console for debugging
-            console.log('🎯 Chat ready with session memory!');
-            console.log('   Session ID:', sessionId);
-            console.log('   - Press Enter to send messages');
-            console.log('   - Click "Reset Chat" to start new conversation');
-            console.log('   - Session is saved in browser storage');
+            console.log('🎯 Czat gotowy z pamięcią sesji!');
+            console.log('   ID Sesji:', sessionId);
+            console.log('   - Naciśnij Enter aby wysłać wiadomość');
+            console.log('   - Kliknij "Resetuj Czat" aby rozpocząć nową rozmowę');
+            console.log('   - Sesja jest zapisana w pamięci przeglądarki');
+            console.log('   - Sprawdzanie zdrowia serwera co 30 sekund');
+            
+            // Dodaj informację o debugowaniu
+            addMessage('🔧 Tryb debugowania: otwórz konsolę przeglądarki (F12 → Console)', false, 'info');
         });
     </script>
 </body>

@@ -4,136 +4,181 @@ Integracja z Cohere API i zarządzanie modelami językowymi.
 """
 import asyncio
 from typing import Dict, Any, Optional, List
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import hashlib
 
 import cohere
-from cohere import Client
 
 from app.core.config import settings
-from app.core.exceptions import LLMError, RateLimitExceeded, APIError
-from app.utils.logger import log, PerformanceLogger
-from app.services.cache import CacheService
-
-# ============================================
-# 🎯 MODELS & CONSTANTS
-# ============================================
-
-class LLMResponse:
-    """Reprezentuje odpowiedź z modelu językowego"""
-    
-    def __init__(
-        self,
-        text: str,
-        model: str,
-        tokens_used: Dict[str, int],
-        finish_reason: str = "complete",
-        raw_response: Optional[Any] = None
-    ):
-        self.text = text
-        self.model = model
-        self.tokens_used = tokens_used
-        self.finish_reason = finish_reason
-        self.raw_response = raw_response
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Konwertuje do słownika"""
-        return {
-            "text": self.text,
-            "model": self.model,
-            "tokens_used": self.tokens_used,
-            "finish_reason": self.finish_reason,
-            "timestamp": datetime.now().isoformat()
-        }
-
-
-class LLMRequest:
-    """Reprezentuje request do modelu językowego"""
-    
-    def __init__(
-        self,
-        prompt: str,
-        model: str = None,
-        temperature: float = None,
-        max_tokens: int = None,
-        stop_sequences: Optional[List[str]] = None,
-        **kwargs
-    ):
-        self.prompt = prompt
-        self.model = model or settings.COHERE_CHAT_MODEL.value
-        self.temperature = temperature or settings.LLM_TEMPERATURE
-        self.max_tokens = max_tokens or settings.MAX_TOKENS
-        self.stop_sequences = stop_sequences or []
-        self.extra_params = kwargs
-    
-    def to_cohere_params(self) -> Dict[str, Any]:
-        """Konwertuje do parametrów Cohere API"""
-        params = {
-            "message": self.prompt,
-            "model": self.model,
-            "temperature": self.temperature,
-            "max_tokens": self.max_tokens,
-        }
-        
-        if self.stop_sequences:
-            params["stop_sequences"] = self.stop_sequences
-        
-        # Dodaj dodatkowe parametry
-        params.update(self.extra_params)
-        
-        return params
+from app.utils.logger import log
 
 
 # ============================================
-# 🚀 LLM SERVICE
+# EXCEPTIONS
+# ============================================
+
+class LLMError(Exception):
+    """Błąd LLM"""
+    pass
+
+
+class RateLimitExceeded(Exception):
+    """Przekroczono limit zapytań"""
+    def __init__(self, service: str = "Cohere API", detail: str = ""):
+        self.service = service
+        self.detail = detail
+        super().__init__(f"Rate limit exceeded for {service}. {detail}")
+
+
+# ============================================
+# RATE LIMITER
+# ============================================
+
+class RateLimiter:
+    """Prosty rate limiter"""
+    
+    def __init__(self, requests_per_minute: int = 60):
+        self.requests_per_minute = requests_per_minute
+        self.request_timestamps: List[datetime] = []
+        
+    async def check_limit(self):
+        """Sprawdza limit zapytań"""
+        now = datetime.now()
+        minute_ago = now - timedelta(minutes=1)
+        
+        # Usuń stare timestampy
+        self.request_timestamps = [
+            ts for ts in self.request_timestamps 
+            if ts > minute_ago
+        ]
+        
+        # Sprawdź czy nie przekraczamy limitu
+        if len(self.request_timestamps) >= self.requests_per_minute:
+            raise RateLimitExceeded()
+        
+        # Dodaj nowy timestamp
+        self.request_timestamps.append(now)
+
+
+# ============================================
+# LLM SERVICE
 # ============================================
 
 class LLMService:
     """
     Główny serwis LLM do komunikacji z Cohere API.
-    Obsługuje caching, rate limiting, fallback i monitoring.
     """
     
     def __init__(self):
         self.client = None
-        self.cache = CacheService(namespace="llm")
-        self.rate_limiter = RateLimiter()
-        self._stats = {
+        self.cache = {}
+        self.cache_ttl = 300  # 5 minut
+        self.rate_limiter = RateLimiter(requests_per_minute=60)
+        
+        # Statystyki
+        self.stats = {
             "requests_sent": 0,
-            "tokens_used": 0,
             "cache_hits": 0,
             "cache_misses": 0,
-            "errors": 0
+            "errors": 0,
+            "tokens_used": 0
         }
+        
         self._init_client()
     
     def _init_client(self):
         """Inicjalizuje klienta Cohere"""
         try:
             if not settings.COHERE_API_KEY:
-                raise LLMError("COHERE_API_KEY is not configured")
+                log.warning("COHERE_API_KEY not configured, using mock client")
+                self.client = None
+                return
             
-            self.client = Client(settings.COHERE_API_KEY)
-            
-            # Test połączenia
-            self.client.chat(
-                message="Test connection",
-                model="command",
-                max_tokens=1
-            )
-            
-            log.info(f"Cohere client initialized with model: {settings.COHERE_CHAT_MODEL.value}")
+            self.client = cohere.Client(settings.COHERE_API_KEY)
+            log.info(f"Cohere client initialized with model: {settings.COHERE_CHAT_MODEL}")
             
         except Exception as e:
             log.error(f"Failed to initialize Cohere client: {str(e)}")
-            
-            # W development możemy użyć mock clienta
-            if settings.IS_DEVELOPMENT:
-                log.warning("Using mock LLM client in development mode")
-                self.client = MockCohereClient()
-            else:
-                raise LLMError(f"Failed to initialize LLM service: {str(e)}")
+            self.client = None
+    
+    def _generate_cache_key(self, prompt: str, model: str, temperature: float) -> str:
+        """Generuje klucz cache"""
+        key_string = f"{prompt}_{model}_{temperature}"
+        return hashlib.md5(key_string.encode()).hexdigest()[:16]
+    
+    def _get_cached_response(self, cache_key: str) -> Optional[Dict[str, Any]]:
+        """Pobiera zcacheowaną odpowiedź"""
+        if cache_key in self.cache:
+            entry = self.cache[cache_key]
+            if datetime.now() - entry['timestamp'] < timedelta(seconds=self.cache_ttl):
+                return entry['response']
+        return None
+    
+    def _cache_response(self, cache_key: str, response: Dict[str, Any]):
+        """Cache'uje odpowiedź"""
+        self.cache[cache_key] = {
+            'response': response,
+            'timestamp': datetime.now()
+        }
+        
+        # Oczyść stary cache
+        self._clean_old_cache()
+    
+    def _clean_old_cache(self):
+        """Czyści stary cache"""
+        now = datetime.now()
+        keys_to_remove = []
+        
+        for key, entry in self.cache.items():
+            if now - entry['timestamp'] > timedelta(seconds=self.cache_ttl):
+                keys_to_remove.append(key)
+        
+        for key in keys_to_remove:
+            del self.cache[key]
+    
+    def _mock_response(self, prompt: str) -> str:
+        """Mock odpowiedzi dla developmentu"""
+        # Prosta logika dla common pytań
+        prompt_lower = prompt.lower()
+        
+        if "witaj" in prompt_lower or "cześć" in prompt_lower or "dzień dobry" in prompt_lower:
+            return "Witaj! Jestem BMW Assistant. Jak mogę Ci pomóc z Twoim BMW?"
+        
+        elif "serwis" in prompt_lower or "przegląd" in prompt_lower:
+            return ("BMW zaleca regularne przeglądy serwisowe co 15-20 tys. km lub raz do roku. "
+                    "Dla Twojego modelu BMW X5 z 2022 roku najbliższy przegląd powinien zostać "
+                    "wykonany za około 3 tys. km lub do końca kwartału.")
+        
+        elif "awaria" in prompt_lower or "problem" in prompt_lower:
+            return ("W przypadku awarii, zalecam kontakt z najbliższym autoryzowanym serwisem BMW. "
+                    "Jeśli problem dotyczy silnika lub bezpieczeństwa, nie kontynuuj jazdy i "
+                    "zadzwoń pod numer BMW Assistance: 123-456-789.")
+        
+        elif "paliwo" in prompt_lower or "spalanie" in prompt_lower:
+            return ("Średnie spalanie dla BMW X5 wynosi około 8-12 l/100km w zależności od stylu jazdy "
+                    "i warunków. Dla optymalnego zużycia paliwa zalecam płynną jazdę, unikanie "
+                    "gwałtownych przyspieszeń i regularne sprawdzanie ciśnienia w oponach.")
+        
+        elif "cena" in prompt_lower or "koszt" in prompt_lower:
+            return ("Koszt przeglądu serwisowego dla BMW X5 zaczyna się od 1500 zł. "
+                    "Cena może się różnić w zależności od zakresu prac i wymienianych części. "
+                    "Dokładną wycenę przygotuje dla Ciebie wybrany serwis BMW.")
+        
+        elif "gwarancja" in prompt_lower or "reklamacja" in prompt_lower:
+            return ("BMW oferuje 2-letnią gwarancję bez limitu kilometrów. W przypadku reklamacji "
+                    "skontaktuj się z autoryzowanym serwisem BMW, który dokona diagnostyki. "
+                    "Pamiętaj o regularnych przeglądach - to warunek utrzymania gwarancji.")
+        
+        elif "opony" in prompt_lower or "zimowe" in prompt_lower:
+            return ("Dla BMW X5 zalecane opony zimowe to 275/45 R20 110V. Ważne jest stosowanie "
+                    "opon zimowych od 16 października do 15 kwietnia, zgodnie z polskim prawem. "
+                    "BMW zaleca wymianę wszystkich 4 opon na raz dla optymalnej przyczepności.")
+        
+        else:
+            return ("Dziękuję za pytanie. Jako BMW Assistant specjalizuję się w tematach związanych "
+                    "z obsługą, serwisem i funkcjami pojazdów BMW. Czy możesz sprecyzować pytanie "
+                    "dotyczące konkretnego aspektu Twojego BMW?")
     
     async def generate(
         self,
@@ -141,355 +186,131 @@ class LLMService:
         model: str = None,
         temperature: float = None,
         max_tokens: int = None,
-        use_cache: bool = True,
-        conversation_history: Optional[List[Dict[str, str]]] = None,
         **kwargs
-    ) -> LLMResponse:
+    ) -> Dict[str, Any]:
         """
-        Główna metoda generowania odpowiedzi.
-        
-        Args:
-            prompt: Prompt do wysłania
-            model: Model Cohere (command-r, command-r-plus, command)
-            temperature: Kreatywność (0.0-1.0)
-            max_tokens: Maksymalna liczba tokenów
-            use_cache: Czy używać cache
-            conversation_history: Historia konwersacji
-            **kwargs: Dodatkowe parametry dla Cohere API
+        Generuje odpowiedź za pomocą Cohere API.
         
         Returns:
-            LLMResponse z odpowiedzią modelu
+            Słownik z odpowiedzią i metadanymi
         """
         start_time = datetime.now()
         
         # Sprawdź rate limiting
-        await self.rate_limiter.check_limit()
+        try:
+            await self.rate_limiter.check_limit()
+        except RateLimitExceeded as e:
+            log.warning(f"Rate limit: {e}")
+            # W development możemy kontynuować
+            if not settings.IS_DEVELOPMENT:
+                raise
         
-        # Przygotuj request
-        request = LLMRequest(
-            prompt=prompt,
-            model=model,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            **kwargs
-        )
-        
-        # Dodaj historię konwersacji jeśli dostępna
-        if conversation_history:
-            request.extra_params["chat_history"] = conversation_history
+        # Użyj domyślnych wartości
+        model = model or settings.COHERE_CHAT_MODEL
+        temperature = temperature or settings.LLM_TEMPERATURE
+        max_tokens = max_tokens or 500
         
         # Sprawdź cache
-        cache_key = None
-        if use_cache:
-            cache_key = self._generate_cache_key(request)
-            cached_response = await self.cache.get(cache_key)
-            if cached_response:
-                self._stats["cache_hits"] += 1
-                response_data = json.loads(cached_response)
-                response = LLMResponse(
-                    text=response_data["text"],
-                    model=response_data["model"],
-                    tokens_used=response_data["tokens_used"],
-                    finish_reason=response_data.get("finish_reason", "complete")
-                )
-                
-                processing_time = (datetime.now() - start_time).total_seconds()
-                log.debug(f"LLM cache hit ({processing_time:.3f}s): {prompt[:50]}...")
-                return response
+        cache_key = self._generate_cache_key(prompt, model, temperature)
+        cached = self._get_cached_response(cache_key)
         
-        self._stats["cache_misses"] += 1
-        self._stats["requests_sent"] += 1
+        if cached:
+            self.stats["cache_hits"] += 1
+            processing_time = (datetime.now() - start_time).total_seconds()
+            log.debug(f"LLM cache hit ({processing_time:.3f}s): {prompt[:50]}...")
+            return cached
+        
+        self.stats["cache_misses"] += 1
+        self.stats["requests_sent"] += 1
         
         try:
-            # Wywołaj Cohere API
-            with PerformanceLogger.measure("cohere_api_call"):
-                cohere_params = request.to_cohere_params()
+            # Jeśli nie mamy klienta (brak API key), użyj mocka
+            if self.client is None:
+                log.warning("Using mock LLM response (no API key)")
+                response_text = self._mock_response(prompt)
+                tokens_used = {"input_tokens": 100, "output_tokens": 200, "total_tokens": 300}
+            else:
+                # Wywołaj prawdziwe Cohere API
+                with log.measure("cohere_api_call"):
+                    response = self.client.chat(
+                        message=prompt,
+                        model=model,
+                        temperature=temperature,
+                        max_tokens=max_tokens,
+                        **kwargs
+                    )
                 
-                # Synchronous call - Cohere SDK nie ma async
-                # W prawdziwej aplikacji rozważ użycie httpx dla async
-                response = self.client.chat(**cohere_params)
+                response_text = response.text
+                
+                # Pobierz tokeny jeśli dostępne
+                if hasattr(response, 'meta') and hasattr(response.meta, 'tokens'):
+                    tokens_used = {
+                        "input_tokens": response.meta.tokens.input_tokens,
+                        "output_tokens": response.meta.tokens.output_tokens,
+                        "total_tokens": response.meta.tokens.input_tokens + response.meta.tokens.output_tokens
+                    }
+                else:
+                    tokens_used = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
             
-            # Przetwórz odpowiedź
-            llm_response = LLMResponse(
-                text=response.text,
-                model=request.model,
-                tokens_used={
-                    "input_tokens": response.meta.tokens.input_tokens,
-                    "output_tokens": response.meta.tokens.output_tokens,
-                    "total_tokens": response.meta.tokens.input_tokens + response.meta.tokens.output_tokens
-                } if hasattr(response, 'meta') and hasattr(response.meta, 'tokens') else {},
-                finish_reason=getattr(response, 'finish_reason', 'complete'),
-                raw_response=response
-            )
+            self.stats["tokens_used"] += tokens_used.get("total_tokens", 0)
             
-            self._stats["tokens_used"] += llm_response.tokens_used.get("total_tokens", 0)
+            # Przygotuj wynik
+            result = {
+                "text": response_text,
+                "tokens_used": tokens_used,
+                "model": model,
+                "processing_time": (datetime.now() - start_time).total_seconds(),
+                "success": True
+            }
             
-            # Zapisz w cache jeśli warto
-            if use_cache and cache_key:
-                cache_data = llm_response.to_dict()
-                await self.cache.set(
-                    cache_key,
-                    json.dumps(cache_data),
-                    ttl=3600  # 1 godzina dla odpowiedzi
-                )
+            # Cache'uj odpowiedź
+            self._cache_response(cache_key, result)
             
             processing_time = (datetime.now() - start_time).total_seconds()
             log.info(
-                f"LLM generated {len(llm_response.text)} chars, "
-                f"tokens: {llm_response.tokens_used.get('total_tokens', 'N/A')}, "
-                f"time: {processing_time:.3f}s"
+                f"LLM generated {len(response_text)} chars, "
+                f"tokens: {tokens_used.get('total_tokens', 'N/A')}, "
+                f"time: {processing_time:.2f}s"
             )
             
-            return llm_response
+            return result
             
-        except cohere.errors.RateLimitError as e:
-            self._stats["errors"] += 1
-            log.warning(f"Cohere rate limit exceeded: {str(e)}")
+        except cohere.RateLimitError as e:
+            self.stats["errors"] += 1
+            log.error(f"Cohere rate limit exceeded: {str(e)}")
             raise RateLimitExceeded(service="Cohere API", detail=str(e))
             
-        except cohere.errors.ClientError as e:
-            self._stats["errors"] += 1
-            log.error(f"Cohere client error: {str(e)}")
-            raise LLMError(f"Cohere API error: {str(e)}")
+        except Exception as e:
+            self.stats["errors"] += 1
+            log.error(f"LLM generation failed: {str(e)}")
             
-        except Exception as e:
-            self._stats["errors"] += 1
-            log.error(f"LLM generation failed: {str(e)}", exc_info=True)
-            raise LLMError(f"Generation failed: {str(e)}")
-    
-    def _generate_cache_key(self, request: LLMRequest) -> str:
-        """Generuje klucz cache dla requestu"""
-        # Używamy hash promptu i parametrów
-        key_string = f"{request.prompt}_{request.model}_{request.temperature}_{request.max_tokens}"
-        
-        # Dodaj parametry dodatkowe
-        for key, value in sorted(request.extra_params.items()):
-            key_string += f"_{key}_{value}"
-        
-        return f"llm_{hashlib.md5(key_string.encode()).hexdigest()}"
-    
-    async def generate_streaming(self, prompt: str, **kwargs):
-        """
-        Generuje odpowiedź w trybie streaming.
-        Not implemented - Cohere SDK nie wspiera async streaming.
-        """
-        raise NotImplementedError("Streaming not implemented with current Cohere SDK")
-    
-    async def embed_text(self, text: str) -> List[float]:
-        """
-        Tworzy embedding dla tekstu za pomocą Cohere.
-        Alternatywa dla EmbeddingService jeśli chcemy tylko Cohere.
-        """
-        try:
-            response = self.client.embed(
-                texts=[text],
-                model=settings.COHERE_EMBED_MODEL.value,
-                input_type="search_document"
-            )
-            return response.embeddings[0]
-        except Exception as e:
-            raise EmbeddingError(f"Cohere embedding failed: {str(e)}")
-    
-    async def get_available_models(self) -> List[Dict[str, Any]]:
-        """Zwraca listę dostępnych modeli Cohere"""
-        # Cohere nie ma endpointu do listowania modeli,
-        # więc zwracamy hardcoded listę
-        models = [
-            {
-                "id": "command-r",
-                "name": "Command R",
-                "provider": "Cohere",
-                "max_tokens": 128000,
-                "context_length": 128000,
-                "supports_chat": True,
-                "supports_embeddings": False
-            },
-            {
-                "id": "command-r-plus",
-                "name": "Command R+",
-                "provider": "Cohere",
-                "max_tokens": 128000,
-                "context_length": 128000,
-                "supports_chat": True,
-                "supports_embeddings": False
-            },
-            {
-                "id": "command",
-                "name": "Command",
-                "provider": "Cohere",
-                "max_tokens": 4096,
-                "context_length": 4096,
-                "supports_chat": True,
-                "supports_embeddings": False
-            },
-            {
-                "id": "embed-multilingual-v3.0",
-                "name": "Embed Multilingual v3",
-                "provider": "Cohere",
-                "max_tokens": 512,
-                "context_length": 512,
-                "supports_chat": False,
-                "supports_embeddings": True
+            # Fallback do mock odpowiedzi
+            response_text = self._mock_response(prompt)
+            
+            result = {
+                "text": response_text,
+                "tokens_used": {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0},
+                "model": model,
+                "processing_time": (datetime.now() - start_time).total_seconds(),
+                "success": False,
+                "error": str(e)
             }
-        ]
-        
-        return models
+            
+            return result
     
-    async def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> Dict[str, Any]:
         """Zwraca statystyki użycia LLM"""
         return {
-            "requests_sent": self._stats["requests_sent"],
-            "tokens_used": self._stats["tokens_used"],
-            "cache_hits": self._stats["cache_hits"],
-            "cache_misses": self._stats["cache_misses"],
-            "errors": self._stats["errors"],
-            "cache_hit_rate": (
-                self._stats["cache_hits"] / (self._stats["cache_hits"] + self._stats["cache_misses"])
-                if (self._stats["cache_hits"] + self._stats["cache_misses"]) > 0 else 0
-            )
+            **self.stats,
+            "cache_size": len(self.cache),
+            "cache_ttl": self.cache_ttl
         }
     
-    async def health_check(self) -> Dict[str, Any]:
-        """Sprawdza zdrowie serwisu LLM"""
-        try:
-            # Testowe zapytanie
-            test_response = await self.generate(
-                prompt="Respond with only: OK",
-                model="command",
-                max_tokens=5,
-                temperature=0.1,
-                use_cache=False
-            )
-            
-            return {
-                "status": "healthy",
-                "provider": "Cohere",
-                "model": settings.COHERE_CHAT_MODEL.value,
-                "test_successful": test_response.text.strip() == "OK",
-                "api_key_configured": bool(settings.COHERE_API_KEY)
-            }
-            
-        except Exception as e:
-            return {
-                "status": "unhealthy",
-                "error": str(e),
-                "provider": "Cohere",
-                "api_key_configured": bool(settings.COHERE_API_KEY)
-            }
-    
-    async def clear_cache(self) -> bool:
-        """Czyści cache LLM"""
-        try:
-            await self.cache.clear()
-            log.info("LLM cache cleared")
-            return True
-        except Exception as e:
-            log.error(f"Failed to clear LLM cache: {str(e)}")
-            return False
+    def clear_cache(self):
+        """Czyści cache"""
+        self.cache.clear()
+        log.info("LLM cache cleared")
 
 
-# ============================================
-# 🛡️ RATE LIMITER
-# ============================================
-
-class RateLimiter:
-    """Prosty rate limiter dla Cohere API"""
-    
-    def __init__(self, requests_per_minute: int = 60):
-        self.requests_per_minute = requests_per_minute
-        self.request_times = []
-    
-    async def check_limit(self):
-        """Sprawdza czy nie przekroczono limitu"""
-        from datetime import datetime, timedelta
-        
-        now = datetime.now()
-        one_minute_ago = now - timedelta(minutes=1)
-        
-        # Oczyść stare requesty
-        self.request_times = [t for t in self.request_times if t > one_minute_ago]
-        
-        # Sprawdź limit
-        if len(self.request_times) >= self.requests_per_minute:
-            wait_time = (self.request_times[0] + timedelta(minutes=1) - now).total_seconds()
-            raise RateLimitExceeded(
-                detail=f"Rate limit exceeded. Try again in {wait_time:.1f} seconds."
-            )
-        
-        # Dodaj nowy request
-        self.request_times.append(now)
-    
-    async def get_remaining_requests(self) -> int:
-        """Zwraca pozostałą liczbę requestów w oknie czasowym"""
-        from datetime import datetime, timedelta
-        
-        now = datetime.now()
-        one_minute_ago = now - timedelta(minutes=1)
-        
-        recent_requests = [t for t in self.request_times if t > one_minute_ago]
-        return max(0, self.requests_per_minute - len(recent_requests))
-
-
-# ============================================
-# 🧪 MOCK CLIENT (dla developmentu)
-# ============================================
-
-class MockCohereClient:
-    """Mock klienta Cohere dla developmentu bez API key"""
-    
-    def chat(self, **kwargs):
-        """Mock odpowiedzi chat"""
-        class MockResponse:
-            def __init__(self):
-                self.text = """To jest mockowana odpowiedź BMW Assistant. 
-                
-Jako asystent BMW, mogę pomóc Ci z informacjami o:
-- Modelach BMW (serie 1-8, X, i, M)
-- Specyfikacjach technicznych
-- Wyposażeniu i pakietach
-- Cenach i promocjach
-- Test drive i dealershipach
-
-W prawdziwej aplikacji ta odpowiedź byłaby generowana przez Cohere API z użyciem RAG."""
-                
-                class Meta:
-                    class Tokens:
-                        input_tokens = 150
-                        output_tokens = 200
-                
-                self.meta = Meta()
-                self.finish_reason = "complete"
-        
-        return MockResponse()
-    
-    def embed(self, **kwargs):
-        """Mock odpowiedzi embed"""
-        class MockEmbedResponse:
-            def __init__(self):
-                self.embeddings = [[0.1] * 384]  # Mock embedding
-        
-        return MockEmbedResponse()
-
-
-# ============================================
-# 🔌 FACTORY FUNCTION
-# ============================================
-
-_llm_service_instance = None
-
-async def get_llm_service() -> LLMService:
-    """
-    Factory function dla dependency injection.
-    
-    Usage:
-        @app.get("/generate")
-        async def generate(llm_service: LLMService = Depends(get_llm_service)):
-            ...
-    """
-    global _llm_service_instance
-    
-    if _llm_service_instance is None:
-        _llm_service_instance = LLMService()
-        log.info("LLMService initialized")
-    
-    return _llm_service_instance
+# Singleton instance
+llm_service = LLMService()

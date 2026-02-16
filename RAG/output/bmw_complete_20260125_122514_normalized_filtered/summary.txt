@@ -1,0 +1,36 @@
+=== PODSUMOWANIE NORMALIZACJI Z FILTROWANIEM ===
+Data: 2026-01-25 15:10:35
+Folder źródłowy: bmw_complete_20260125_122514
+
+📊 STATYSTYKI FILTROWANIA:
+   Załadowano: 100 stron
+   Odrzucono: 42 stron
+   Zachowano: 58 stron (58.0%)
+
+📄 ZNORMALIZOWANE DANE:
+   Stron ogółem: 29
+   Stron z modelami: 20
+   Innych stron: 9
+   Średnio znaków/stronę: 9126
+
+🚗 WYKRYTE MODELE:
+   X3: 12 stron
+   i4: 11 stron
+   X1: 5 stron
+   X5: 5 stron
+   iX: 3 stron
+   M5: 2 stron
+   M3: 1 stron
+   7: 1 stron
+
+💰 STATYSTYKI CEN:
+   Znalezionych cen: 29
+   Średnia cena: 268 397 zł
+   Zakres: 122 295 zł - 535 000 zł
+
+⚠️  ODRZUCONE TYPY STRON:
+   • Lorem Ipsum / placeholder
+   • Menu / nawigacja
+   • Za krótkie (<300 znaków) bez wartościowych info
+   • Tylko lista modeli bez kontekstu
+   • Strony regulaminu / polityki prywatności

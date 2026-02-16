@@ -1,7 +1,7 @@
 """
-Główny plik aplikacji BMW Assistant - ZK Motors Edition.
-Z pełną integracją RAG, PromptService i pamięcią konwersacji.
+BMW Assistant - Production Version with Improved RAG and Intent Detection
 """
+
 import json
 import time
 from datetime import datetime
@@ -17,48 +17,45 @@ from pydantic import BaseModel, Field, validator
 import uvicorn
 
 from app.core.config import settings, validate_configuration
-from app.core.exceptions import BMWAssistantException
 from app.utils.logger import setup_logger, log
-from app.services.rag_service import RAGService, get_rag_service
 from app.services.llm_service import LLMService, get_llm_service
 from app.services.prompt_service import PromptService, get_prompt_service
+from app.services.rag_service import get_rag_service, RAGService
 from app.services.cache import init_cache
 
 # ============================================
-# 🎯 INITIALIZATION
+# INITIALIZATION
 # ============================================
 
 logger = setup_logger(__name__)
 security = HTTPBearer(auto_error=False)
 
-# Ścieżki do plików
 BASE_DIR = Path(__file__).parent.absolute()
 TEMPLATES_DIR = BASE_DIR / "templates"
 STATIC_DIR = BASE_DIR / "static"
 
-# Prosta pamięć konwersacji (w pamięci RAM)
 conversation_memory: Dict[str, List[Dict]] = {}
-MAX_HISTORY = 10
+MAX_HISTORY = 5
 
 # ============================================
-# 📦 MODELS
+# MODELS
 # ============================================
 
 class ChatRequest(BaseModel):
     """Request model dla endpointu chat"""
     message: str = Field(..., min_length=1, max_length=1000)
-    session_id: Optional[str] = Field(default="default", description="ID sesji dla pamięci konwersacji")
+    session_id: Optional[str] = Field(default="default", description="ID sesji")
     stream: bool = Field(default=False, description="Czy streamować odpowiedź")
     temperature: float = Field(
         default=0.7,
         ge=0.0, 
         le=1.0,
-        description="Kreatywność odpowiedzi (0.0 - faktualna, 1.0 - kreatywna)"
+        description="Kreatywność odpowiedzi"
     )
     language: str = Field(
         default="pl",
         pattern="^(pl|en|de)$",
-        description="Język odpowiedzi (pl, en, de)"
+        description="Język odpowiedzi"
     )
     
     @validator('message')
@@ -67,7 +64,6 @@ class ChatRequest(BaseModel):
             raise ValueError('Wiadomość nie może być pusta')
         return v.strip()
 
-
 class ChatResponse(BaseModel):
     """Response model dla endpointu chat"""
     answer: str
@@ -75,8 +71,8 @@ class ChatResponse(BaseModel):
     session_id: str = Field(..., description="ID sesji")
     history_length: int = Field(..., description="Długość historii konwersacji")
     processing_time: float = Field(..., description="Czas przetwarzania w sekundach")
-    sources: list[Dict[str, Any]] = Field(
-        default=[],
+    sources: List[Dict[str, Any]] = Field(
+        default_factory=list,
         description="Źródła użyte do wygenerowania odpowiedzi"
     )
     model_used: str = Field(default="", description="Model użyty do generacji")
@@ -85,9 +81,16 @@ class ChatResponse(BaseModel):
         default=None,
         ge=0.0,
         le=1.0,
-        description="Pewność odpowiedzi (średnie podobieństwo dokumentów)"
+        description="Pewność odpowiedzi"
     )
-
+    rag_info: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Informacje o RAG"
+    )
+    data_quality: Optional[str] = Field(
+        default=None,
+        description="Jakość danych: high/medium/low"
+    )
 
 class HealthResponse(BaseModel):
     """Model odpowiedzi health check"""
@@ -97,7 +100,7 @@ class HealthResponse(BaseModel):
     environment: str
     services: Dict[str, str]
     memory: Dict[str, Any]
-
+    rag_stats: Optional[Dict[str, Any]] = None
 
 class ResetResponse(BaseModel):
     """Model odpowiedzi reset"""
@@ -106,7 +109,6 @@ class ResetResponse(BaseModel):
     session_id: str
     history_length: int
 
-
 class HistoryResponse(BaseModel):
     """Model odpowiedzi historii"""
     session_id: str
@@ -114,9 +116,8 @@ class HistoryResponse(BaseModel):
     total_messages: int
     limit: int
 
-
 # ============================================
-# 🧠 FUNKCJE PAMIĘCI KONWERSACJI
+# HELPER FUNCTIONS
 # ============================================
 
 def get_conversation_history(session_id: str) -> List[Dict[str, Any]]:
@@ -124,7 +125,6 @@ def get_conversation_history(session_id: str) -> List[Dict[str, Any]]:
     if session_id not in conversation_memory:
         conversation_memory[session_id] = []
     return conversation_memory[session_id]
-
 
 def add_to_history(session_id: str, role: str, message: str):
     """Dodaje wiadomość do historii"""
@@ -135,24 +135,55 @@ def add_to_history(session_id: str, role: str, message: str):
         "timestamp": datetime.now().isoformat()
     })
     
-    # Ogranicz historię do MAX_HISTORY
     if len(history) > MAX_HISTORY:
         conversation_memory[session_id] = history[-MAX_HISTORY:]
 
-
 def format_history_for_prompt(history: List[Dict]) -> List[Dict[str, str]]:
-    """Formatuje historię na format dla PromptService"""
+    """Formatuje historię na format dla promptu"""
     formatted = []
-    for msg in history[-6:]:  # Ostatnie 6 wiadomości
+    for msg in history[-4:]:
         formatted.append({
             "role": msg["role"],
             "content": msg["message"]
         })
     return formatted
 
+async def log_interaction(
+    user_message: str,
+    assistant_response: str,
+    session_id: str,
+    sources_count: int,
+    tokens_used: Dict[str, int],
+    processing_time: float,
+    confidence: Optional[float],
+    rag_used: bool = False,
+    rag_has_data: bool = False,
+    rag_tech_data: bool = False,
+    intent: str = "general"
+):
+    """Loguje interakcję w tle"""
+    try:
+        log_entry = {
+            "timestamp": datetime.utcnow().isoformat(),
+            "session_id": session_id,
+            "user_message_preview": user_message[:100],
+            "assistant_response_preview": assistant_response[:100],
+            "sources_count": sources_count,
+            "processing_time": round(processing_time, 2),
+            "confidence": round(confidence, 2) if confidence else None,
+            "rag_used": rag_used,
+            "rag_has_data": rag_has_data,
+            "rag_tech_data": rag_tech_data,
+            "intent": intent
+        }
+        
+        logger.info(f"Interaction logged", extra=log_entry)
+        
+    except Exception as e:
+        logger.error(f"Failed to log interaction: {str(e)}")
 
 # ============================================
-# 🚀 FASTAPI APPLICATION
+# FASTAPI APPLICATION
 # ============================================
 
 app = FastAPI(
@@ -164,75 +195,41 @@ app = FastAPI(
     openapi_url="/openapi.json" if not settings.IS_PRODUCTION else None,
 )
 
-# ============================================
-# 📁 STATIC FILES & TEMPLATES
-# ============================================
-
-# Static files
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
-# ============================================
-# 🔧 MIDDLEWARE
-# ============================================
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS_STR,
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
     start_time = time.time()
     response = await call_next(request)
-    process_time = time.time() - start_time
-    response.headers["X-Process-Time"] = str(process_time)
+    response.headers["X-Process-Time"] = str(time.time() - start_time)
     return response
 
 # ============================================
-# 🏠 BASIC ENDPOINTS
+# BASIC ENDPOINTS
 # ============================================
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    """Strona główna z czatem"""
     chat_html_path = TEMPLATES_DIR / "chat.html"
     
     if not chat_html_path.exists():
-        # Fallback jeśli nie ma chat.html
         return HTMLResponse(f"""
         <!DOCTYPE html>
         <html>
-        <head>
-            <title>{settings.APP_NAME}</title>
-            <style>
-                body {{ font-family: Arial, sans-serif; margin: 40px; }}
-                h1 {{ color: #0066b3; }}
-                .info {{ background: #f0f8ff; padding: 20px; border-radius: 8px; }}
-            </style>
-        </head>
+        <head><title>Error - File Not Found</title></head>
         <body>
-            <h1>🚗 {settings.APP_NAME} v{settings.APP_VERSION}</h1>
-            
-            <div class="info">
-                <h3>Asystent klienta ZK Motors</h3>
-                <p>Oficjalny asystent dealera BMW i MINI zintegrowany z RAG i Cohere LLM.</p>
-                <p><strong>Pamięć konwersacji:</strong> Ostatnie {MAX_HISTORY} wiadomości</p>
-            </div>
-            
-            <h2>🔧 Endpointy API</h2>
-            <ul>
-                <li><code>POST /chat</code> - Główny endpoint chat</li>
-                <li><code>POST /chat/reset</code> - Reset historii</li>
-                <li><code>GET /chat/history</code> - Pobierz historię</li>
-                <li><code>GET /health</code> - Status serwisu</li>
-                <li><code>GET /models</code> - Lista modeli</li>
-            </ul>
-            
-            <p><a href="/docs">📚 Dokumentacja API (Swagger)</a></p>
+            <h1>Error: chat.html not found</h1>
+            <p>Expected path: {chat_html_path}</p>
         </body>
         </html>
         """)
@@ -241,9 +238,28 @@ async def root():
         with open(chat_html_path, 'r', encoding='utf-8') as f:
             html_content = f.read()
         
+        logger.info(f"Loaded chat.html from {chat_html_path}")
+        
+        js_config = f"""
+        <script>
+            window.API_BASE_URL = window.location.origin;
+            window.API_ENDPOINTS = {{
+                chat: '/chat',
+                health: '/health',
+                ping: '/ping',
+                reset: '/chat/reset',
+                status: '/api/status',
+                rag_info: '/rag/info'
+            }};
+            console.log('API Base URL:', window.API_BASE_URL);
+        </script>
+        """
+        
+        html_content = html_content.replace('</head>', js_config + '</head>')
         return HTMLResponse(content=html_content)
         
     except Exception as e:
+        logger.error(f"Error loading chat.html: {str(e)}")
         return HTMLResponse(f"""
         <!DOCTYPE html>
         <html>
@@ -255,32 +271,56 @@ async def root():
         </html>
         """)
 
+@app.get("/ping")
+async def ping():
+    return {"status": "online", "timestamp": datetime.utcnow().isoformat()}
+
+@app.get("/api/status")
+async def api_status(rag_service: RAGService = Depends(get_rag_service)):
+    rag_stats = await rag_service.get_stats()
+    
+    return {
+        "online": True,
+        "service": settings.APP_NAME,
+        "version": settings.APP_VERSION,
+        "rag_status": rag_stats.get("status", "unknown"),
+        "llm_ready": True,
+        "timestamp": datetime.utcnow().isoformat(),
+        "rag_stats": {
+            "documents": rag_stats.get("documents_in_store", 0),
+            "queries_processed": rag_stats.get("queries_processed", 0),
+            "confidence_threshold": rag_stats.get("min_confidence_threshold", 0.6)
+        }
+    }
+
+@app.get("/health/quick")
+async def quick_health_check():
+    try:
+        memory_stats = {
+            "active_sessions": len(conversation_memory),
+            "total_messages": sum(len(h) for h in conversation_memory.values()),
+            "max_history": MAX_HISTORY
+        }
+        
+        return {
+            "status": "healthy",
+            "service": settings.APP_NAME,
+            "version": settings.APP_VERSION,
+            "timestamp": datetime.utcnow().isoformat(),
+            "memory": memory_stats,
+            "quick_check": True
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e), "quick_check": True}
 
 @app.get("/health", response_model=HealthResponse)
 async def health_check(
     rag_service: RAGService = Depends(get_rag_service),
     llm_service: LLMService = Depends(get_llm_service)
 ):
-    """Health check - sprawdza status wszystkich komponentów"""
     try:
-        # Sprawdź RAG
         rag_health = await rag_service.health_check()
-        
-        # Sprawdź LLM
-        llm_health = await llm_service.health_check()
-        
-        services_status = {
-            "rag_system": rag_health.get("status", "unknown"),
-            "llm_service": llm_health.get("status", "unknown"),
-            "api": "healthy",
-            "cache": "connected" if settings.REDIS_URL else "in_memory",
-            "memory": "enabled"
-        }
-        
-        overall_status = "healthy" if all(
-            s == "healthy" or s == "connected" or s == "operational"
-            for s in services_status.values()
-        ) else "degraded"
+        rag_stats = await rag_service.get_stats()
         
         memory_stats = {
             "active_sessions": len(conversation_memory),
@@ -289,12 +329,18 @@ async def health_check(
         }
         
         return HealthResponse(
-            status=overall_status,
+            status=rag_health.get("status", "unknown"),
             timestamp=datetime.utcnow().isoformat(),
             version=settings.APP_VERSION,
             environment=settings.ENVIRONMENT,
-            services=services_status,
-            memory=memory_stats
+            services={
+                "rag": rag_health.get("status", "unknown"),
+                "llm": "operational",
+                "embedding": rag_health.get("embedding_service", "unknown"),
+                "vector_store": rag_health.get("vector_store", "unknown")
+            },
+            memory=memory_stats,
+            rag_stats=rag_stats
         )
         
     except Exception as e:
@@ -305,13 +351,36 @@ async def health_check(
             version=settings.APP_VERSION,
             environment=settings.ENVIRONMENT,
             services={"error": str(e)},
-            memory={"error": "memory check failed"}
+            memory={"error": "memory check failed"},
+            rag_stats=None
         )
 
+@app.get("/rag/info")
+async def get_rag_info(rag_service: RAGService = Depends(get_rag_service)):
+    try:
+        health = await rag_service.health_check()
+        stats = await rag_service.get_stats()
+        
+        return {
+            "healthy": health.get("status") == "healthy",
+            "vector_store": health.get("vector_store", "unknown"),
+            "documents": stats.get("documents_in_store", 0),
+            "queries_processed": stats.get("queries_processed", 0),
+            "cache_hit_rate": stats.get("cache_hit_rate", 0),
+            "intent_skipped": stats.get("intent_skipped", 0),
+            "low_confidence_skipped": stats.get("low_confidence_skipped", 0),
+            "confidence_threshold": stats.get("min_confidence_threshold", 0.6),
+            "details": stats
+        }
+    except Exception as e:
+        return {
+            "healthy": False,
+            "error": str(e),
+            "details": "RAG service error"
+        }
 
 @app.get("/models")
 async def list_models():
-    """Lista dostępnych modeli LLM"""
     models = [
         {
             "id": "command-r",
@@ -319,7 +388,7 @@ async def list_models():
             "provider": "Cohere",
             "max_tokens": 128000,
             "context_length": 128000,
-            "description": "Flagaowy model do konwersacji"
+            "description": "Flagowy model do konwersacji"
         },
         {
             "id": "command-r-plus", 
@@ -328,27 +397,18 @@ async def list_models():
             "max_tokens": 128000,
             "context_length": 128000,
             "description": "Zaawansowany model z lepszym rozumieniem"
-        },
-        {
-            "id": "command",
-            "name": "Command",
-            "provider": "Cohere",
-            "max_tokens": 4096,
-            "context_length": 4096,
-            "description": "Model zoptymalizowany pod wykonywanie poleceń"
         }
     ]
     
     return {
         "models": models,
         "default_model": settings.COHERE_CHAT_MODEL,
-        "embedding_model": settings.COHERE_EMBED_MODEL,
         "memory_enabled": True,
         "max_history": MAX_HISTORY
     }
 
 # ============================================
-# 💬 CHAT ENDPOINT (GŁÓWNY)
+# CHAT ENDPOINT - UPDATED WITH NEW RAG & PROMPT SERVICE
 # ============================================
 
 @app.post("/chat", response_model=ChatResponse)
@@ -360,115 +420,217 @@ async def chat(
     prompt_service: PromptService = Depends(get_prompt_service)
 ):
     """
-    Główny endpoint chat z pamięcią konwersacji.
-    
-    Proces:
-    1. Pobierz historię konwersacji
-    2. Pobierz kontekst z RAG na podstawie pytania
-    3. Zbuduj prompt z kontekstem i historią
-    4. Wygeneruj odpowiedź za pomocą Cohere LLM
-    5. Zapisz w pamięci i zwróć odpowiedź
+    Główny endpoint chat z nowym RAG i PromptService
     """
     start_time = time.time()
     
     try:
         session_id = request.session_id
-        logger.info(f"Chat request from session {session_id}: {request.message[:50]}...")
+        user_message = request.message
+        
+        logger.info(f"Chat request: {user_message[:50]}... | {{'name': 'app.main'}}")
         
         # 1. Pobierz historię konwersacji
         history = get_conversation_history(session_id)
         conversation_history = format_history_for_prompt(history)
+        is_first_message = len(history) == 0
         
-        # 2. Wyszukaj kontekst w RAG
-        logger.debug("🔍 Retrieving context from RAG...")
-        context_result = await rag_service.retrieve(
-            query=request.message,
-            top_k=settings.TOP_K_DOCUMENTS,
-            similarity_threshold=settings.SIMILARITY_THRESHOLD
+        # 2. Użyj nowego RAGService z filtrowaniem intencji - POPRAWIONE: użyj retrieve zamiast retrieve_simple
+        rag_results = await rag_service.retrieve_with_intent_check(
+            query=user_message,
+            top_k=3,
+            confidence_threshold=0.6
         )
         
-        if not context_result.documents:
-            logger.warning(f"No relevant documents found for: {request.message}")
+        logger.info(f"RAG results: has_data={rag_results.get('has_data')}, skip_rag={rag_results.get('skip_rag')}, below_threshold={rag_results.get('below_threshold')}, confidence={rag_results.get('confidence', 0.0):.2f}")
         
-        # 3. Przygotuj prompt
-        logger.debug("📝 Building prompt with history...")
-        prompt = prompt_service.build_chat_prompt(
-            user_message=request.message,
-            context_documents=context_result.documents,
+        # 3. Zbuduj prompt z nowym PromptService
+        prompt_data = prompt_service.build_chat_prompt(
+            user_message=user_message,
+            rag_results=rag_results,
             conversation_history=conversation_history,
-            language=request.language,
-            temperature=request.temperature,
-            user_id=session_id
+            session_id=session_id,
+            language=request.language
         )
         
-        # 4. Generuj odpowiedź za pomocą LLM
-        logger.debug(f"🧠 Generating response with {settings.COHERE_CHAT_MODEL}...")
+        # 4. Generuj odpowiedź
+        response_text = ""
+        tokens_used = None
+        model_used = ""
         
-        if request.stream:
-            # Streaming not implemented
-            raise HTTPException(
-                status_code=status.HTTP_501_NOT_IMPLEMENTED,
-                detail="Streaming not available in current version"
+        # Scenariusz A: Bezpośrednia odpowiedź (przywitania)
+        if not prompt_data["use_llm"]:
+            response_text = prompt_data["direct_response"]
+            llm_success = True
+            model_used = "greeting"
+            logger.info(f"Using direct greeting response (skip_rag={rag_results.get('skip_rag')})")
+        
+        # Scenariusz B: Generuj przez LLM
+        else:
+            try:
+                llm_result = await llm_service.generate(
+                    prompt=prompt_data["prompt"],
+                    model=settings.COHERE_CHAT_MODEL,
+                    temperature=request.temperature,
+                    max_tokens=400
+                )
+                
+                # Wyodrębnij tekst odpowiedzi
+                if hasattr(llm_result, 'text'):
+                    response_text = llm_result.text
+                    llm_success = True
+                elif isinstance(llm_result, dict) and 'text' in llm_result:
+                    response_text = llm_result['text']
+                    llm_success = True
+                elif isinstance(llm_result, dict) and 'generations' in llm_result:
+                    response_text = llm_result['generations'][0]['text']
+                    llm_success = True
+                else:
+                    llm_success = False
+                
+                # Pobierz użyte tokeny
+                if hasattr(llm_result, 'tokens_used'):
+                    tokens_used = llm_result.tokens_used
+                elif isinstance(llm_result, dict) and 'tokens_used' in llm_result:
+                    tokens_used = llm_result['tokens_used']
+                    
+                model_used = settings.COHERE_CHAT_MODEL
+                    
+            except Exception as llm_error:
+                logger.error(f"LLM error: {str(llm_error)}")
+                llm_success = False
+        
+        # 5. Jeśli LLM zawiódł, użyj fallback
+        if not llm_success or not response_text.strip():
+            logger.warning("LLM failed, using fallback")
+            response_text = prompt_service.build_fallback_response(
+                intent=rag_results.get('intent', 'general'),
+                detected_models=rag_results.get('detected_models', []),
+                confidence=rag_results.get('confidence', 0.0),
+                is_technical=rag_results.get('tech', False)
+            )
+            model_used = "fallback"
+        elif prompt_data["use_llm"]:
+            # Czyść odpowiedź z formatowania LLM
+            response_text = prompt_service.clean_response(
+                response=response_text,
+                session_id=session_id,
+                rag_used=prompt_data.get("rag_used", False),
+                rag_has_data=rag_results.get('has_data', False),
+                confidence=rag_results.get('confidence', 0.0),
+                intent=rag_results.get('intent', 'general')
             )
         
-        llm_response = await llm_service.generate(
-            prompt=prompt,
-            model=settings.COHERE_CHAT_MODEL,
-            temperature=request.temperature,
-            max_tokens=settings.MAX_TOKENS
-        )
+        # 6. Dodaj do historii
+        add_to_history(session_id, "user", user_message)
+        add_to_history(session_id, "assistant", response_text)
         
-        # 5. Przygotuj odpowiedź
+        # 7. Przygotuj odpowiedź API
         processing_time = time.time() - start_time
         
-        # 6. Dodaj do historii
-        add_to_history(session_id, "user", request.message)
-        add_to_history(session_id, "assistant", llm_response.text)
+        # Przygotuj źródła
+        sources = []
+        if rag_results.get('has_data') and rag_results.get('sources'):
+            for i, source in enumerate(rag_results['sources'][:2], 1):
+                sources.append({
+                    'id': i,
+                    'title': source.get('title', 'Źródło')[:80],
+                    'content_preview': source.get('content', '')[:150] + ('...' if len(source.get('content', '')) > 150 else ''),
+                    'similarity': round(source.get('score', 0), 3),
+                    'url': source.get('url', ''),
+                    'source': source.get('source', 'unknown')
+                })
+        
+        # Określ jakość danych
+        if rag_results.get('tech', False):
+            data_quality = "high"
+        elif rag_results.get('has_data', False):
+            data_quality = "medium"
+        else:
+            data_quality = "low"
+        
+        # Aktualizuj quality w zależności od confidence
+        confidence = rag_results.get('confidence', 0.0)
+        if confidence < 0.4:
+            data_quality = "low"
+        elif confidence < 0.7:
+            data_quality = "medium"
+        else:
+            data_quality = "high"
         
         response = ChatResponse(
-            answer=llm_response.text,
+            answer=response_text,
             session_id=session_id,
             history_length=len(get_conversation_history(session_id)),
             processing_time=processing_time,
-            sources=context_result.to_api_response().get("sources", []),
-            model_used=settings.COHERE_CHAT_MODEL,
-            tokens_used=llm_response.tokens_used,
-            confidence=context_result.average_similarity
+            sources=sources,
+            model_used=model_used,
+            tokens_used=tokens_used,
+            confidence=confidence,
+            rag_info={
+                "has_data": rag_results.get('has_data', False),
+                "has_technical_data": rag_results.get('tech', False),
+                "confidence": confidence,
+                "intent": rag_results.get('intent', 'general'),
+                "skip_rag": rag_results.get('skip_rag', False),
+                "below_threshold": rag_results.get('below_threshold', False)
+            },
+            data_quality=data_quality
         )
         
-        # 7. Logowanie w tle (opcjonalne)
+        # 8. Loguj w tle
         background_tasks.add_task(
             log_interaction,
-            user_message=request.message,
-            assistant_response=llm_response.text,
+            user_message=user_message,
+            assistant_response=response_text,
             session_id=session_id,
-            sources_count=len(response.sources),
-            tokens_used=response.tokens_used,
+            sources_count=len(sources),
+            tokens_used=tokens_used,
             processing_time=processing_time,
-            confidence=response.confidence
+            confidence=confidence,
+            rag_used=prompt_data.get("rag_used", False),
+            rag_has_data=rag_results.get('has_data', False),
+            rag_tech_data=rag_results.get('tech', False),
+            intent=rag_results.get('intent', 'general')
         )
         
-        logger.info(f"✅ Response generated in {processing_time:.2f}s for session {session_id}", extra={
-            "tokens": response.tokens_used,
-            "sources": len(response.sources),
-            "history_length": response.history_length
+        logger.info(f"Response in {processing_time:.2f}s, quality: {data_quality}", extra={
+            'name': 'app.main',
+            'extra': {
+                'rag_data': rag_results.get('has_data', False),
+                'sources': len(sources)
+            }
         })
         
         return response
         
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"❌ Chat endpoint error: {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal server error: {str(e)}"
+        logger.error(f"Chat error: {str(e)}", exc_info=True)
+        
+        # Ostateczny fallback
+        fallback_response = """Przepraszam, wystąpił błąd systemu. 
+Jestem Leo, ekspertem BMW w ZK Motors. 
+Proszę spróbować ponownie lub skontaktować się bezpośrednio z naszym salonem."""
+        
+        return ChatResponse(
+            answer=fallback_response,
+            success=False,
+            session_id=request.session_id,
+            history_length=len(get_conversation_history(request.session_id)),
+            processing_time=time.time() - start_time,
+            sources=[],
+            model_used="fallback",
+            confidence=0.0,
+            rag_info={"error": str(e)},
+            data_quality="error"
         )
-
 
 @app.post("/chat/stream")
 async def chat_stream(request: ChatRequest):
-    """Placeholder dla streaming - nie zaimplementowane"""
     async def event_generator():
-        yield f"data: {json.dumps({'error': 'Streaming not implemented in current version'})}\n\n"
+        yield f"data: {json.dumps({'error': 'Streaming not implemented'})}\n\n"
         yield "data: [DONE]\n\n"
     
     return StreamingResponse(
@@ -477,10 +639,8 @@ async def chat_stream(request: ChatRequest):
         headers={"Cache-Control": "no-cache"}
     )
 
-
 @app.post("/chat/reset", response_model=ResetResponse)
 async def reset_chat(session_id: str = "default"):
-    """Resetuje historię konwersacji dla danej sesji"""
     if session_id in conversation_memory:
         conversation_memory[session_id] = []
         logger.info(f"Reset conversation history for session: {session_id}")
@@ -492,10 +652,8 @@ async def reset_chat(session_id: str = "default"):
         history_length=len(get_conversation_history(session_id))
     )
 
-
 @app.get("/chat/history", response_model=HistoryResponse)
 async def get_history(session_id: str = "default", limit: int = 10):
-    """Pobiera historię konwersacji"""
     history = get_conversation_history(session_id)
     
     return HistoryResponse(
@@ -506,38 +664,60 @@ async def get_history(session_id: str = "default", limit: int = 10):
     )
 
 # ============================================
-# 🔍 DEBUG ENDPOINTS (tylko development)
+# DEBUG ENDPOINTS
 # ============================================
 
-@app.get("/debug/rag")
-async def debug_rag(
-    query: str,
-    top_k: int = settings.TOP_K_DOCUMENTS,
+@app.get("/test/rag")
+async def test_rag(
+    query: str = "BMW X5 moc silnik",
     rag_service: RAGService = Depends(get_rag_service)
 ):
-    """Debug endpoint do testowania RAG (tylko development)"""
+    """Testowy endpoint do sprawdzenia działania RAG"""
     if settings.IS_PRODUCTION:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Debug endpoints disabled in production"
         )
     
-    result = await rag_service.retrieve(query=query, top_k=top_k)
+    result = await rag_service.retrieve_with_intent_check(query=query, top_k=3)
     
     return {
         "query": query,
-        "result": result.to_api_response(),
-        "documents_count": len(result.documents),
-        "average_similarity": result.average_similarity
+        "has_data": result['has_data'],
+        "skip_rag": result.get('skip_rag', False),
+        "below_threshold": result.get('below_threshold', False),
+        "confidence": result['confidence'],
+        "intent": result.get('intent', 'general'),
+        "tech": result.get('tech', False),
+        "documents_count": len(result.get('documents', [])),
+        "sources_count": len(result.get('sources', []))
     }
 
+@app.get("/debug/rag")
+async def debug_rag(
+    query: str,
+    top_k: int = 3,
+    rag_service: RAGService = Depends(get_rag_service)
+):
+    if settings.IS_PRODUCTION:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Debug endpoints disabled in production"
+        )
+    
+    result = await rag_service.retrieve_with_intent_check(query=query, top_k=top_k)
+    
+    return {
+        "query": query,
+        "result": result
+    }
 
 @app.get("/debug/stats")
 async def debug_stats(
     rag_service: RAGService = Depends(get_rag_service),
-    llm_service: LLMService = Depends(get_llm_service)
+    llm_service: LLMService = Depends(get_llm_service),
+    prompt_service: PromptService = Depends(get_prompt_service)
 ):
-    """Statystyki serwisów (tylko development)"""
     if settings.IS_PRODUCTION:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -557,84 +737,62 @@ async def debug_stats(
         "rag_service": rag_stats,
         "llm_service": llm_stats,
         "memory": memory_stats,
+        "prompt_service": {
+            "response_history_size": len(prompt_service.response_history),
+            "max_history": prompt_service.max_history
+        },
         "timestamp": datetime.utcnow().isoformat()
     }
 
 # ============================================
-# 🛠️ UTILITY FUNCTIONS
-# ============================================
-
-async def log_interaction(
-    user_message: str,
-    assistant_response: str,
-    session_id: str,
-    sources_count: int,
-    tokens_used: Dict[str, int],
-    processing_time: float,
-    confidence: Optional[float]
-):
-    """Loguje interakcję w tle"""
-    try:
-        log_entry = {
-            "timestamp": datetime.utcnow().isoformat(),
-            "session_id": session_id,
-            "user_message_preview": user_message[:100],
-            "assistant_response_preview": assistant_response[:100],
-            "sources_count": sources_count,
-            "tokens_used": tokens_used,
-            "processing_time": processing_time,
-            "confidence": confidence,
-            "environment": settings.ENVIRONMENT
-        }
-        
-        logger.info(f"Interaction logged", extra=log_entry)
-        
-    except Exception as e:
-        logger.error(f"Failed to log interaction: {str(e)}")
-
-# ============================================
-# ⚡ APPLICATION EVENTS
+# APPLICATION EVENTS
 # ============================================
 
 @app.on_event("startup")
 async def startup_event():
-    """Uruchamiane przy starcie aplikacji"""
     try:
-        # Walidacja konfiguracji
         validate_configuration()
-        
-        # Inicjalizacja cache
         await init_cache()
         
-        # Informacje o starcie
-        logger.info(f"🚀 {settings.APP_NAME} v{settings.APP_VERSION} starting up...")
-        logger.info(f"🌍 Environment: {settings.ENVIRONMENT}")
-        logger.info(f"🧠 LLM Model: {settings.COHERE_CHAT_MODEL}")
-        logger.info(f"🔍 RAG: {settings.TOP_K_DOCUMENTS} docs, threshold: {settings.SIMILARITY_THRESHOLD}")
-        logger.info(f"💾 Memory: Enabled (last {MAX_HISTORY} messages per session)")
-        logger.info("✅ Application started successfully")
+        # Inicjalizuj serwisy
+        rag_service = await get_rag_service()
+        rag_stats = await rag_service.get_stats()
+        
+        logger.info(f"{settings.APP_NAME} v{settings.APP_VERSION} starting up...")
+        logger.info(f"Environment: {settings.ENVIRONMENT}")
+        logger.info(f"LLM Model: {settings.COHERE_CHAT_MODEL}")
+        logger.info(f"RAG Documents: {rag_stats.get('documents_in_store', 0)}")
+        logger.info(f"RAG Confidence Threshold: {rag_stats.get('min_confidence_threshold', 0.6)}")
+        logger.info(f"Memory: {MAX_HISTORY} messages per session")
+        logger.info(f"API: http://{settings.HOST}:{settings.PORT}")
+        logger.info(f"Chat: http://{settings.HOST}:{settings.PORT}/")
+        
+        chat_html_path = TEMPLATES_DIR / "chat.html"
+        if chat_html_path.exists():
+            logger.info(f"HTML Interface: chat.html found")
+        else:
+            logger.warning(f"HTML Interface: chat.html NOT FOUND")
+        
+        logger.info("Application started successfully")
         
         if settings.IS_DEVELOPMENT:
-            logger.warning("⚡ Running in DEVELOPMENT mode")
+            logger.warning("Running in DEVELOPMENT mode")
         
     except Exception as e:
-        logger.critical(f"❌ Startup failed: {str(e)}", exc_info=True)
+        logger.critical(f"Startup failed: {str(e)}", exc_info=True)
         raise
-
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    """Uruchamiane przy zamykaniu aplikacji"""
-    logger.info("🛑 Shutting down application...")
-    logger.info(f"📊 Memory stats: {len(conversation_memory)} sessions, {sum(len(h) for h in conversation_memory.values())} total messages")
+    logger.info("Shutting down application...")
+    logger.info(f"Memory stats: {len(conversation_memory)} sessions, {sum(len(h) for h in conversation_memory.values())} total messages")
 
 # ============================================
-# 🚨 ERROR HANDLERS
+# ERROR HANDLERS
 # ============================================
 
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
-    """Handler dla HTTPException"""
     logger.warning(
         f"HTTP {exc.status_code}: {exc.detail}",
         extra={"path": request.url.path, "method": request.method}
@@ -645,10 +803,8 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         content={"detail": exc.detail},
     )
 
-
 @app.exception_handler(Exception)
 async def generic_exception_handler(request: Request, exc: Exception):
-    """Handler dla nieprzewidzianych wyjątków"""
     logger.critical(
         f"Unhandled exception: {str(exc)}",
         extra={"path": request.url.path, "method": request.method},
@@ -665,11 +821,10 @@ async def generic_exception_handler(request: Request, exc: Exception):
     )
 
 # ============================================
-# 🎯 MAIN ENTRY POINT
+# MAIN ENTRY POINT
 # ============================================
 
 def main():
-    """Główna funkcja uruchamiająca aplikację"""
     import sys
     
     try:
@@ -685,21 +840,20 @@ def main():
         
         if settings.IS_DEVELOPMENT:
             print(f"\n{'='*60}")
-            print(f"🚗 {settings.APP_NAME} v{settings.APP_VERSION}")
-            print(f"🌍 Environment: {settings.ENVIRONMENT}")
-            print(f"🔗 Czat: http://{settings.HOST}:{settings.PORT}/")
-            print(f"📚 Docs: http://{settings.HOST}:{settings.PORT}/docs")
-            print(f"🧠 Model: {settings.COHERE_CHAT_MODEL}")
-            print(f"💾 Memory: {MAX_HISTORY} messages per session")
-            print(f"🔗 API: http://{settings.HOST}:{settings.PORT}/chat")
+            print(f"{settings.APP_NAME} v{settings.APP_VERSION}")
+            print(f"Environment: {settings.ENVIRONMENT}")
+            print(f"Chat: http://{settings.HOST}:{settings.PORT}/")
+            print(f"Model: {settings.COHERE_CHAT_MODEL}")
+            print(f"Memory: {MAX_HISTORY} messages per session")
+            print(f"Test RAG: http://{settings.HOST}:{settings.PORT}/test/rag?query=BMW+X5")
+            print(f"Health: http://{settings.HOST}:{settings.PORT}/health")
             print(f"{'='*60}\n")
         
         uvicorn.run(**config)
         
     except Exception as e:
-        print(f"❌ Failed to start: {e}", file=sys.stderr)
+        print(f"Failed to start: {e}", file=sys.stderr)
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()

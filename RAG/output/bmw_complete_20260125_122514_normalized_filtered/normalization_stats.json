@@ -1,0 +1,33 @@
+{
+  "total_pages": 29,
+  "model_pages": 20,
+  "other_pages": 9,
+  "total_characters": 264658,
+  "avg_characters_per_page": 9126.137931034482,
+  "models_found": {
+    "X3": 12,
+    "i4": 11,
+    "X1": 5,
+    "X5": 5,
+    "iX": 3,
+    "M5": 2,
+    "M3": 1,
+    "7": 1
+  },
+  "normalized_at": "2026-01-25T15:10:35.885249",
+  "price_stats": {
+    "total_found": 29,
+    "min": 122295.0,
+    "max": 535000.0,
+    "avg": 268397.4137931034,
+    "min_formatted": "122 295 zł",
+    "max_formatted": "535 000 zł",
+    "avg_formatted": "268 397 zł"
+  },
+  "filtering_stats": {
+    "total_loaded": 100,
+    "filtered_out": 42,
+    "kept": 58,
+    "kept_percentage": 57.99999999999999
+  }
+}

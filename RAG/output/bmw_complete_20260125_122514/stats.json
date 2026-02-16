@@ -1,0 +1,52 @@
+{
+  "total_pages": 50,
+  "model_pages": 40,
+  "other_pages": 10,
+  "visited_urls": 58,
+  "total_words": 64793,
+  "avg_words_per_page": 1295.86,
+  "categories": {
+    "models": 40,
+    "electric": 26,
+    "configurator": 11,
+    "offers": 15,
+    "service": 26,
+    "other": 7
+  },
+  "models_found": {
+    "X3": 16,
+    "i4": 12,
+    "X1": 9,
+    "X5": 6,
+    "iX": 5,
+    "M5": 4,
+    "M3": 3
+  },
+  "models_from_url": [],
+  "specs_stats": {
+    "power_hp": {
+      "count": 18,
+      "avg": 279.6666666666667,
+      "min": 100,
+      "max": 701
+    },
+    "power_kw": {
+      "count": 10,
+      "avg": 214.1,
+      "min": 100,
+      "max": 405
+    }
+  },
+  "prices_stats": {
+    "total_found": 29,
+    "unique_prices": 15,
+    "pages_with_prices": 11,
+    "min": 122295.0,
+    "max": 535000.0,
+    "avg": 268397.4137931034,
+    "avg_formatted": "268 397 zł",
+    "sources_count": 11
+  },
+  "output_dir": "C:\\Users\\hellb\\Documents\\Chatbot_BMW\\RAG\\output\\bmw_complete_20260125_122514",
+  "scraped_at": "2026-01-25T12:46:22.744863"
+}

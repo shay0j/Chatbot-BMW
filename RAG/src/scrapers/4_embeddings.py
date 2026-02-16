@@ -1,308 +1,531 @@
-from sentence_transformers import SentenceTransformer
-import numpy as np
+import chromadb
+from chromadb.config import Settings
+from chromadb.utils import embedding_functions
 import json
-import pickle
 from pathlib import Path
 from datetime import datetime
-import logging
 from tqdm import tqdm
+import sys
+import hashlib
+import shutil
+import time
 
-class EmbeddingGenerator:
-    """Generuje embeddingi dla dokumentów"""
+class BMREmbeddingGenerator:
+    """Generator embeddingów zoptymalizowany dla danych BMW z integracją ChromaDB - ROBUST VERSION"""
     
-    def __init__(self, model_name='paraphrase-multilingual-mpnet-base-v2'):
+    def __init__(self, use_cohere: bool = False, cohere_api_key: str = None):
         """
-        Inicjalizuje model do embeddingów.
-        Dobre modele dla polskiego:
-        - 'paraphrase-multilingual-mpnet-base-v2' (najlepszy dla PL)
-        - 'all-MiniLM-L6-v2' (szybszy, mniejszy)
-        - 'intfloat/multilingual-e5-large' (bardzo dobry ale duży)
+        Inicjalizuje generator embeddingów
+        
+        Args:
+            use_cohere: Czy używać Cohere API (lepsze, ale płatne)
+            cohere_api_key: Klucz API Cohere (jeśli use_cohere=True)
         """
-        print(f"🔄 Ładuję model: {model_name}")
-        self.model = SentenceTransformer(model_name)
-        print(f"✅ Model załadowany!")
+        self.use_cohere = use_cohere
+        
+        if use_cohere and cohere_api_key:
+            print("🔑 Używam Cohere Embedding API")
+            try:
+                self.embedding_fn = embedding_functions.CohereEmbeddingFunction(
+                    api_key=cohere_api_key,
+                    model_name="embed-multilingual-v3.0"
+                )
+            except Exception as e:
+                print(f"⚠️  Błąd Cohere: {e}, używam domyślnych embeddingów")
+                self.use_cohere = False
+                self.embedding_fn = embedding_functions.DefaultEmbeddingFunction()
+        else:
+            print("🤖 Używam domyślnych embeddingów ChromaDB")
+            self.embedding_fn = embedding_functions.DefaultEmbeddingFunction()
     
-    def generate_embeddings(self, chunks, batch_size=32):
-        """Generuje embeddingi dla listy chunk-ów"""
+    def load_chunks(self, data_folder: Path) -> list:
+        """Wczytuje chunk-i z folderu RAG"""
+        # Szukaj najpierw all_chunks.jsonl
+        files_to_try = [
+            data_folder / "all_chunks.jsonl",
+            data_folder / "model_chunks.jsonl",
+            data_folder / "other_chunks.jsonl"
+        ]
+        
+        for file_path in files_to_try:
+            if file_path.exists():
+                print(f"📖 Wczytuję: {file_path.name}")
+                return self._load_jsonl(file_path)
+        
+        # Jeśli nie znaleziono, szukaj dowolnego .jsonl
+        jsonl_files = list(data_folder.glob("*.jsonl"))
+        if jsonl_files:
+            print(f"📖 Wczytuję: {jsonl_files[0].name}")
+            return self._load_jsonl(jsonl_files[0])
+        
+        return []
+    
+    def _load_jsonl(self, file_path: Path) -> list:
+        """Wczytuje plik JSONL"""
+        chunks = []
+        error_count = 0
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+            for line_num, line in tqdm(enumerate(lines, 1), desc="Wczytywanie chunków", total=len(lines)):
+                try:
+                    chunk = json.loads(line)
+                    # Walidacja chunka
+                    if self._validate_chunk(chunk):
+                        chunks.append(chunk)
+                except json.JSONDecodeError as e:
+                    error_count += 1
+                    if error_count <= 5:  # Pokaż tylko pierwsze 5 błędów
+                        print(f"⚠️  Błąd w linii {line_num}: {e}")
+        
+        if error_count > 0:
+            print(f"⚠️  Łącznie błędów: {error_count}")
+        
+        print(f"✅ Wczytano {len(chunks)} poprawnych chunków")
+        return chunks
+    
+    def _validate_chunk(self, chunk: dict) -> bool:
+        """Waliduje pojedynczy chunek"""
+        required_fields = ['id', 'text', 'metadata']
+        
+        # Sprawdź wymagane pola
+        for field in required_fields:
+            if field not in chunk:
+                return False
+        
+        # Sprawdź czy tekst nie jest pusty
+        if not chunk['text'] or len(chunk['text'].strip()) < 30:
+            return False
+        
+        # Sprawdź czy nie ma placeholderów
+        text_lower = chunk['text'].lower()
+        bad_phrases = ['lorem ipsum', 'skip to main content', 'dummy text', 'placeholder']
+        if any(phrase in text_lower for phrase in bad_phrases):
+            return False
+        
+        return True
+    
+    def _prepare_metadata_for_chromadb(self, metadata: dict) -> dict:
+        """
+        Przygotowuje metadata dla ChromaDB - konwertuje listy na stringi
+        
+        ChromaDB akceptuje tylko: str, int, float, bool
+        NIE akceptuje: list, dict, None
+        """
+        cleaned_metadata = {}
+        
+        for key, value in metadata.items():
+            if value is None:
+                # Pomijaj None
+                continue
+            elif isinstance(value, list):
+                # Listy konwertuj na string (join przecinkami)
+                if value:
+                    # Usuń duplikaty i posortuj dla spójności
+                    unique_values = []
+                    for item in value:
+                        if item not in unique_values and item is not None:
+                            unique_values.append(str(item))
+                    cleaned_metadata[key] = ', '.join(unique_values)
+                else:
+                    # Puste listy -> pusty string
+                    cleaned_metadata[key] = ""
+            elif isinstance(value, dict):
+                # Słowniki konwertuj na JSON string
+                try:
+                    cleaned_metadata[key] = json.dumps(value, ensure_ascii=False)
+                except:
+                    cleaned_metadata[key] = str(value)
+            elif isinstance(value, (str, int, float, bool)):
+                # Typy akceptowane przez ChromaDB
+                cleaned_metadata[key] = value
+            else:
+                # Wszystko inne konwertuj na string
+                cleaned_metadata[key] = str(value)
+        
+        return cleaned_metadata
+    
+    def create_chromadb_collection(self, collection_name: str = "bmw_docs", 
+                                   persist_directory: Path = None) -> chromadb.Collection:
+        """
+        Tworzy lub łączy się z kolekcją w ChromaDB
+        
+        Args:
+            collection_name: Nazwa kolekcji
+            persist_directory: Ścieżka do zapisu bazy (None = pamięć)
+        """
+        if persist_directory:
+            print(f"💾 Używam trwałej bazy w: {persist_directory}")
+            
+            # Jeśli folder istnieje, zapytaj czy usunąć
+            if persist_directory.exists():
+                print("⚠️  Znaleziono istniejącą bazę...")
+                response = input("🧹 Czy chcesz usunąć starą bazę? (t/n): ")
+                if response.lower() == 't':
+                    try:
+                        shutil.rmtree(persist_directory)
+                        print("🗑️  Usunięto starą bazę")
+                        time.sleep(1)  # Daj czas na usunięcie
+                    except Exception as e:
+                        print(f"⚠️  Nie udało się usunąć: {e}")
+            
+            # Utwórz folder
+            persist_directory.mkdir(exist_ok=True)
+            client = chromadb.PersistentClient(path=str(persist_directory))
+        else:
+            print("⚡ Używam bazy w pamięci")
+            client = chromadb.Client(Settings())
+        
+        # Sprawdź czy kolekcja istnieje
+        try:
+            existing_collections = client.list_collections()
+        except Exception as e:
+            print(f"⚠️  Błąd przy pobieraniu kolekcji: {e}")
+            print("🆕 Tworzę nową kolekcję...")
+            return client.create_collection(
+                name=collection_name,
+                embedding_function=self.embedding_fn,
+                metadata={"hnsw:space": "cosine"}
+            )
+        
+        if collection_name in [c.name for c in existing_collections]:
+            print(f"📂 Łączę się z istniejącą kolekcją: {collection_name}")
+            collection = client.get_collection(name=collection_name)
+            
+            # Zapytaj użytkownika co zrobić
+            if collection.count() > 0:
+                print(f"⚠️  Kolekcja ma już {collection.count()} dokumentów")
+                response = input("🧹 Czy chcesz usunąć istniejące dane? (t/n): ")
+                if response.lower() == 't':
+                    client.delete_collection(name=collection_name)
+                    print("🗑️  Usunięto istniejącą kolekcję")
+                    # Stwórz nową
+                    collection = client.create_collection(
+                        name=collection_name,
+                        embedding_function=self.embedding_fn,
+                        metadata={"hnsw:space": "cosine"}
+                    )
+                else:
+                    print("📝 Dodam nowe dokumenty do istniejącej kolekcji")
+        else:
+            # Stwórz nową kolekcję
+            print(f"🆕 Tworzę nową kolekcję: {collection_name}")
+            collection = client.create_collection(
+                name=collection_name,
+                embedding_function=self.embedding_fn,
+                metadata={"hnsw:space": "cosine"}
+            )
+        
+        return collection
+    
+    def add_to_chromadb(self, chunks: list, collection: chromadb.Collection, 
+                        batch_size: int = 50) -> None:
+        """Dodaje chunk-i do ChromaDB z poprawionymi metadanymi"""
         if not chunks:
-            print("❌ Brak danych do embeddingów")
-            return []
+            print("❌ Brak chunków do dodania")
+            return
         
-        print(f"🔢 Generuję embeddingi dla {len(chunks)} chunk-ów...")
+        print(f"📤 Dodaję {len(chunks)} chunków do ChromaDB...")
         
-        # Ekstraktuj teksty
-        texts = [chunk['text'] for chunk in chunks]
+        # Przygotuj dane
+        ids = []
+        documents = []
+        metadatas = []
         
-        # Generuj embeddingi batchami
-        embeddings = []
-        for i in tqdm(range(0, len(texts), batch_size), desc="Generowanie embeddingów"):
-            batch = texts[i:i + batch_size]
-            batch_embeddings = self.model.encode(batch, show_progress_bar=False)
-            embeddings.extend(batch_embeddings)
+        for chunk in tqdm(chunks, desc="Przygotowanie danych"):
+            # Unikalne ID (hash tekstu + oryginalne ID)
+            text_hash = hashlib.md5(chunk['text'].encode()).hexdigest()[:8]
+            unique_id = f"{chunk['id']}_{text_hash}"
+            
+            # Przygotuj metadata DLA CHROMADB
+            metadata = chunk['metadata'].copy()
+            metadata['source_file'] = chunk.get('source_file', 'unknown')
+            metadata['added_at'] = datetime.now().isoformat()
+            
+            # OCZYŚĆ METADATA DLA CHROMADB
+            cleaned_metadata = self._prepare_metadata_for_chromadb(metadata)
+            
+            ids.append(unique_id)
+            documents.append(chunk['text'])
+            metadatas.append(cleaned_metadata)
         
-        # Konwertuj do numpy array
-        embeddings = np.array(embeddings)
+        print(f"✅ Przygotowano {len(ids)} dokumentów do dodania")
         
-        print(f"✅ Wygenerowano {len(embeddings)} embeddingów")
-        print(f"   Wymiary: {embeddings.shape}")
+        # Dodaj partiami (mniejszy batch_size dla bezpieczeństwa)
+        successful_docs = 0
+        failed_docs = 0
         
-        return embeddings
+        for i in tqdm(range(0, len(chunks), batch_size), desc="Ładowanie do ChromaDB"):
+            batch_ids = ids[i:i+batch_size]
+            batch_docs = documents[i:i+batch_size]
+            batch_metas = metadatas[i:i+batch_size]
+            
+            try:
+                collection.add(
+                    ids=batch_ids,
+                    documents=batch_docs,
+                    metadatas=batch_metas
+                )
+                successful_docs += len(batch_ids)
+            except Exception as e:
+                print(f"⚠️  Błąd przy ładowaniu batch-a {i//batch_size}: {e}")
+                print("   Próbuję dodać pojedynczo...")
+                
+                # Spróbuj dodać pojedynczo
+                for j in range(len(batch_ids)):
+                    try:
+                        collection.add(
+                            ids=[batch_ids[j]],
+                            documents=[batch_docs[j]],
+                            metadatas=[batch_metas[j]]
+                        )
+                        successful_docs += 1
+                    except Exception as e2:
+                        failed_docs += 1
+                        if failed_docs <= 5:  # Pokaż tylko 5 pierwszych błędów
+                            print(f"❌ Nie udało się dodać dokumentu {batch_ids[j]}: {e2}")
+        
+        print(f"✅ Dodano {successful_docs} dokumentów do kolekcji")
+        if failed_docs > 0:
+            print(f"⚠️  Nie udało się dodać {failed_docs} dokumentów")
+        
+        # Pokaż statystyki zamiast próbki metadanych
+        if successful_docs > 0:
+            self._show_collection_stats(collection)
     
-    def save_embeddings(self, chunks, embeddings, output_path):
-        """Zapisuje embeddingi i metadane"""
-        output_path = Path(output_path)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
+    def _show_collection_stats(self, collection):
+        """Pokazuje statystyki kolekcji"""
+        print(f"\n📊 STATYSTYKI KOLEKCJI:")
+        print(f"   Nazwa: {collection.name}")
+        print(f"   Dokumenty: {collection.count()}")
         
-        # 1. Zapisuj w formacie FAISS-friendly
-        data_to_save = {
-            'chunks': chunks,
-            'embeddings': embeddings,
-            'metadata': {
-                'total_chunks': len(chunks),
-                'embedding_dim': embeddings.shape[1] if len(embeddings) > 0 else 0,
-                'model_name': str(self.model),
-                'created_at': datetime.now().isoformat()
-            }
-        }
+        # Spróbuj pobrać przykładowe dane
+        try:
+            # Pobierz pierwsze 5 dokumentów
+            results = collection.get(limit=min(5, collection.count()))
+            
+            if results['metadatas'] and len(results['metadatas']) > 0:
+                print(f"   Przykładowe pola metadata:")
+                # Weź pierwszy dokument
+                first_doc_meta = results['metadatas'][0]
+                for key in list(first_doc_meta.keys())[:5]:  # Pokaż pierwsze 5 kluczy
+                    print(f"     - {key}")
+            else:
+                print("   Nie udało się pobrać metadanych")
+                
+        except Exception as e:
+            print(f"   Błąd przy pobieraniu statystyk: {e}")
+    
+    def test_retrieval(self, collection: chromadb.Collection, test_queries: list = None):
+        """Testuje retrieval z przykładowymi pytaniami o BMW"""
+        if not test_queries:
+            test_queries = [
+                "Ile kosztuje BMW X3?",
+                "Jakie są opcje finansowania BMW?",
+                "Gdzie mogę zrobić test drive BMW?",
+                "Jakie modele BMW są elektryczne?",
+                "Jaka jest moc silnika BMW X5?",
+            ]
         
-        # 2. Zapis jako pickle
-        pickle_file = output_path.with_suffix('.pkl')
-        with open(pickle_file, 'wb') as f:
-            pickle.dump(data_to_save, f)
+        print(f"\n🔍 TEST RETRIEVAL - {len(test_queries)} pytań")
+        print("=" * 80)
         
-        # 3. Zapis metadanych jako JSON
-        metadata_file = output_path.with_suffix('.metadata.json')
-        metadata = {
-            'total_chunks': len(chunks),
-            'embedding_dim': embeddings.shape[1] if len(embeddings) > 0 else 0,
-            'model': str(self.model),
-            'created_at': datetime.now().isoformat(),
-            'chunks_info': []
-        }
+        results_summary = []
         
-        for i, chunk in enumerate(chunks[:50]):  # Zapisz info o pierwszych 50 chunkach
-            metadata['chunks_info'].append({
-                'id': chunk.get('id', f'chunk_{i}'),
-                'title': chunk['metadata'].get('title', '')[:100],
-                'models': chunk['metadata'].get('models', []),
-                'has_prices': bool(chunk['metadata'].get('prices')),
-                'has_specs': bool(chunk['metadata'].get('engine_specs')),
-                'text_preview': chunk['text'][:200] + '...' if len(chunk['text']) > 200 else chunk['text']
-            })
+        for query in test_queries:
+            print(f"\n❓ PYTANIE: {query}")
+            
+            try:
+                results = collection.query(
+                    query_texts=[query],
+                    n_results=3,
+                    include=["documents", "metadatas", "distances"]
+                )
+                
+                if results['documents'] and results['documents'][0]:
+                    # Znaleziono wyniki
+                    for i, (doc, meta, distance) in enumerate(zip(
+                        results['documents'][0], 
+                        results['metadatas'][0], 
+                        results['distances'][0]
+                    )):
+                        print(f"   {i+1}. (dystans: {distance:.3f})")
+                        # Modele są teraz stringiem, nie listą
+                        models_str = meta.get('models', '')
+                        print(f"      Modele: {models_str}")
+                        print(f"      Priorytet: {meta.get('retrieval_priority', 1)}")
+                        print(f"      Fragment: {doc[:100]}...")
+                    
+                    results_summary.append((query, "✅ TRAFNE"))
+                else:
+                    print("   ❌ BRAK WYNIKÓW")
+                    results_summary.append((query, "❌ BRAK"))
+                    
+            except Exception as e:
+                print(f"   ❌ BŁĄD: {e}")
+                results_summary.append((query, "❌ BŁĄD"))
         
-        with open(metadata_file, 'w', encoding='utf-8') as f:
-            json.dump(metadata, f, ensure_ascii=False, indent=2)
+        # Podsumowanie testów
+        print(f"\n📊 PODSUMOWANIE TESTOW:")
+        print("=" * 80)
         
-        # 4. Zapis do prostego formatu dla analizy
-        simple_file = output_path.with_suffix('.simple.jsonl')
-        with open(simple_file, 'w', encoding='utf-8') as f:
-            for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
-                simple_data = {
-                    'id': chunk.get('id', f'chunk_{i}'),
-                    'text': chunk['text'],
-                    'metadata': chunk['metadata'],
-                    'embedding': embedding.tolist()  # Konwertuj numpy do listy
+        for query, result in results_summary:
+            print(f"{result} - {query}")
+        
+        trafne_count = sum(1 for _, result in results_summary if "✅" in result)
+        print(f"\n🎯 Skuteczność: {trafne_count}/{len(test_queries)} ({trafne_count/len(test_queries)*100:.1f}%)")
+    
+    def save_config(self, collection: chromadb.Collection, output_path: Path):
+        """Zapisuje konfigurację bazy danych"""
+        try:
+            config = {
+                'created_at': datetime.now().isoformat(),
+                'collection_name': collection.name,
+                'collection_count': collection.count(),
+                'embedding_function': 'Cohere' if self.use_cohere else 'Default',
+                'metadata': collection.metadata,
+                'settings': {
+                    'hnsw:space': 'cosine',
+                    'allow_reset': True
                 }
-                json.dump(simple_data, f, ensure_ascii=False)
-                f.write('\n')
-        
-        print(f"💾 Zapisano embeddingi:")
-        print(f"   📦 Pickle: {pickle_file} ({pickle_file.stat().st_size / 1024 / 1024:.2f} MB)")
-        print(f"   📄 Metadata: {metadata_file}")
-        print(f"   📊 Simple format: {simple_file}")
-        
-        return data_to_save
+            }
+            
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(config, f, ensure_ascii=False, indent=2)
+            
+            print(f"💾 Zapisano konfigurację: {output_path}")
+        except Exception as e:
+            print(f"⚠️  Nie udało się zapisać konfiguracji: {e}")
 
-def find_rag_data():
+
+def find_latest_rag_data():
     """Znajduje najnowsze dane RAG"""
     output_base = Path(r"C:\Users\hellb\Documents\Chatbot_BMW\RAG\output")
     
-    # Szukaj folderów z "rag_ready"
+    # Szukaj folderów z "rag_ready_final" (najnowsze) lub "rag_ready"
+    final_folders = [f for f in output_base.iterdir() 
+                    if f.is_dir() and "rag_ready_final" in f.name]
+    
+    if final_folders:
+        latest = sorted(final_folders)[-1]
+        print(f"📁 Znaleziono FINALNE dane RAG: {latest.name}")
+        return latest
+    
+    # Jeśli nie ma final, szukaj innych
     rag_folders = [f for f in output_base.iterdir() 
                   if f.is_dir() and "rag_ready" in f.name]
     
     if not rag_folders:
         print("❌ Nie znaleziono danych RAG!")
-        print("   Najpierw uruchom 3_chunker.py")
+        print("   Najpierw uruchom 3_chunker_final.py")
         return None
     
-    latest_rag = sorted(rag_folders)[-1]
-    print(f"📁 Znaleziono dane RAG: {latest_rag.name}")
-    
-    # Sprawdź jakie pliki są dostępne
-    jsonl_files = list(latest_rag.glob("*.jsonl"))
-    if not jsonl_files:
-        print(f"❌ Brak plików .jsonl w {latest_rag}")
-        return None
-    
-    return latest_rag, jsonl_files
+    latest = sorted(rag_folders)[-1]
+    print(f"📁 Znaleziono dane RAG: {latest.name}")
+    return latest
 
-def load_chunks(data_folder):
-    """Wczytuje chunk-i z folderu"""
-    # Spróbuj wczytać wszystkie chunk-i
-    all_chunks_file = data_folder / "all_chunks.jsonl"
-    if all_chunks_file.exists():
-        print(f"📖 Wczytuję: {all_chunks_file.name}")
-        return load_chunks_from_file(all_chunks_file)
-    
-    # Jeśli nie ma all_chunks, spróbuj model_chunks
-    model_chunks_file = data_folder / "model_chunks.jsonl"
-    if model_chunks_file.exists():
-        print(f"📖 Wczytuję: {model_chunks_file.name}")
-        return load_chunks_from_file(model_chunks_file)
-    
-    # W przeciwnym razie weź pierwszy plik .jsonl
-    jsonl_files = list(data_folder.glob("*.jsonl"))
-    if jsonl_files:
-        print(f"📖 Wczytuję: {jsonl_files[0].name}")
-        return load_chunks_from_file(jsonl_files[0])
-    
-    return []
 
-def load_chunks_from_file(file_path):
-    """Wczytuje chunk-i z pliku JSONL"""
-    chunks = []
-    with open(file_path, 'r', encoding='utf-8') as f:
-        for line in f:
-            try:
-                chunk = json.loads(line)
-                chunks.append(chunk)
-            except json.JSONDecodeError as e:
-                print(f"⚠️ Błąd parsowania linii: {e}")
-                continue
+def main():
+    """Główna funkcja"""
+    print("=" * 70)
+    print("🧠 EMBEDDINGI & CHROMADB - BMW CHATBOT (ROBUST VERSION)")
+    print("=" * 70)
     
-    print(f"   Wczytano {len(chunks)} chunk-ów")
-    return chunks
-
-def create_embeddings():
-    """Główna funkcja tworzenia embeddingów"""
-    # Znajdź dane
-    result = find_rag_data()
-    if not result:
-        return
-    
-    data_folder, jsonl_files = result
-    
-    # Wybierz plik do przetworzenia
-    print(f"\n📚 Dostępne pliki w {data_folder.name}:")
-    for i, file in enumerate(jsonl_files, 1):
-        size_kb = file.stat().st_size / 1024
-        print(f"   {i}. {file.name} ({size_kb:.1f} KB)")
-    
-    choice = input(f"\n🎯 Wybierz plik (1-{len(jsonl_files)}) lub Enter dla 'all_chunks.jsonl': ")
-    
-    if choice.strip() == '':
-        # Domyślnie all_chunks.jsonl
-        chosen_file = data_folder / "all_chunks.jsonl"
-        if not chosen_file.exists():
-            chosen_file = jsonl_files[0]
-    else:
-        try:
-            idx = int(choice) - 1
-            if 0 <= idx < len(jsonl_files):
-                chosen_file = jsonl_files[idx]
-            else:
-                print("❌ Nieprawidłowy wybór")
-                return
-        except ValueError:
-            print("❌ Nieprawidłowy wybór")
-            return
-    
-    # Wczytaj chunk-i
-    print(f"\n📖 Wczytuję: {chosen_file.name}")
-    chunks = load_chunks_from_file(chosen_file)
-    
-    if not chunks:
-        print("❌ Brak danych do przetworzenia")
-        return
-    
-    # Wybierz model
-    print(f"\n🤖 Dostępne modele embeddingów:")
-    print("   1. paraphrase-multilingual-mpnet-base-v2 (najlepszy dla PL, 768d)")
-    print("   2. all-MiniLM-L6-v2 (szybszy, 384d)")
-    print("   3. intfloat/multilingual-e5-base (dobry kompromis, 768d)")
-    
-    model_choice = input("🎯 Wybierz model (1-3) lub Enter dla domyślnego (1): ")
-    
-    model_map = {
-        '1': 'paraphrase-multilingual-mpnet-base-v2',
-        '2': 'all-MiniLM-L6-v2',
-        '3': 'intfloat/multilingual-e5-base'
-    }
-    
-    model_name = model_map.get(model_choice.strip() or '1', 'paraphrase-multilingual-mpnet-base-v2')
-    
-    # Generuj embeddingi
-    print(f"\n🚀 Rozpoczynam generowanie embeddingów z modelem: {model_name}")
-    
-    # Sprawdź czy zainstalowany sentence-transformers
     try:
-        from sentence_transformers import SentenceTransformer
-    except ImportError:
-        print("❌ Brak sentence-transformers!")
-        print("   Zainstaluj: pip install sentence-transformers")
-        return
-    
-    generator = EmbeddingGenerator(model_name=model_name)
-    
-    # Generuj embeddingi
-    embeddings = generator.generate_embeddings(chunks)
-    
-    if len(embeddings) == 0:
-        print("❌ Nie udało się wygenerować embeddingów")
-        return
-    
-    # Zapisz embeddingi
-    print(f"\n💾 Zapisuję embeddingi...")
-    output_name = f"embeddings_{model_name.replace('/', '_').replace('-', '_')}"
-    output_path = data_folder / output_name
-    
-    saved_data = generator.save_embeddings(chunks, embeddings, output_path)
-    
-    # Podsumowanie
-    print(f"\n✅ PODSUMOWANIE:")
-    print(f"   📊 Chunk-i: {len(chunks)}")
-    print(f"   🔢 Embeddingi: {len(embeddings)}")
-    print(f"   📐 Wymiar: {embeddings.shape[1]}")
-    print(f"   🗂️  Zapisano w: {data_folder}")
-    
-    # Testuj podobieństwo
-    if len(chunks) >= 2:
-        print(f"\n🧪 Test podobieństwa między pierwszymi dwoma chunk-ami:")
-        similarity = np.dot(embeddings[0], embeddings[1]) / (
-            np.linalg.norm(embeddings[0]) * np.linalg.norm(embeddings[1])
-        )
-        print(f"   Podobieństwo: {similarity:.3f}")
+        # 1. Znajdź dane
+        data_folder = find_latest_rag_data()
+        if not data_folder:
+            return
         
-        # Jeśli similarity jest bardzo niskie, chunk-i są różne tematycznie
-        if similarity < 0.3:
-            print("   ℹ️  Niskie podobieństwo - chunk-i dotyczą różnych tematów")
-        elif similarity > 0.7:
-            print("   ℹ️  Wysokie podobieństwo - chunk-i dotyczą podobnych tematów")
-    
-    return saved_data
+        print(f"\n📊 Analizuję folder: {data_folder}")
+        
+        # 2. Wybierz tryb embeddingów
+        print("\n🤖 WYBIERZ TRYB EMBEDDINGÓW:")
+        print("   1. Domyślne embeddingi ChromaDB (bezpłatne, szybkie)")
+        print("   2. Cohere API (płatne, najlepsza jakość)")
+        
+        choice = input("   Wybierz (1-2) [domyślnie 1]: ").strip() or "1"
+        
+        if choice == "2":
+            cohere_key = input("   Podaj klucz API Cohere: ").strip()
+            if not cohere_key:
+                print("   ⚠️  Brak klucza, używam domyślnych embeddingów")
+                generator = BMREmbeddingGenerator(use_cohere=False)
+            else:
+                generator = BMREmbeddingGenerator(use_cohere=True, cohere_api_key=cohere_key)
+        else:
+            generator = BMREmbeddingGenerator(use_cohere=False)
+        
+        # 3. Wczytaj chunki
+        print(f"\n📖 Wczytuję chunk-i z {data_folder.name}...")
+        chunks = generator.load_chunks(data_folder)
+        
+        if not chunks:
+            print("❌ Nie wczytano żadnych chunków!")
+            return
+        
+        print(f"✅ Wczytano {len(chunks)} wysokiej jakości chunków")
+        
+        # 4. Stwórz/połącz z ChromaDB
+        print(f"\n💾 KONFIGURACJA CHROMADB:")
+        print("   1. Baza trwała (zapis na dysk)")
+        print("   2. Baza w pamięci (tylko do testów)")
+        
+        db_choice = input("   Wybierz (1-2) [domyślnie 1]: ").strip() or "1"
+        
+        if db_choice == "1":
+            # Użyj nowej nazwy folderu, żeby uniknąć problemów
+            persist_dir = Path(r"C:\Users\hellb\Documents\Chatbot_BMW\RAG\chroma_db_working")
+            collection = generator.create_chromadb_collection(
+                collection_name="bmw_docs",
+                persist_directory=persist_dir
+            )
+        else:
+            collection = generator.create_chromadb_collection(
+                collection_name="bmw_docs_test",
+                persist_directory=None
+            )
+        
+        # 5. Dodaj chunki do bazy
+        print(f"\n📤 Dodaję {len(chunks)} chunków do ChromaDB...")
+        generator.add_to_chromadb(chunks, collection)
+        
+        # 6. Test retrieval
+        print(f"\n🔍 Rozpoczynam testy retrieval...")
+        generator.test_retrieval(collection)
+        
+        # 7. Zapisz konfigurację
+        config_path = data_folder / "chromadb_config.json"
+        generator.save_config(collection, config_path)
+        
+        # 8. Instrukcje dalsze
+        print(f"\n🎉 SUKCES! Baza danych gotowa.")
+        print(f"📁 Dane RAG: {data_folder}")
+        print(f"💾 Baza ChromaDB: {persist_dir if db_choice == '1' else 'pamięć'}")
+        print(f"📄 Konfiguracja: {config_path}")
+        
+        print(f"\n🚀 Następne kroki:")
+        print("   1. Zaktualizuj ścieżkę w rag_test_chromadb.py:")
+        print(f"      chroma_path = Path(r\"{persist_dir if db_choice == '1' else 'ChromaDB in memory'}\")")
+        print(f"      collection_name='bmw_docs'")
+        print("   2. Uruchom testy:")
+        print("      python rag_test_chromadb.py")
+        
+        return collection
+        
+    except Exception as e:
+        print(f"\n❌ Wystąpił krytyczny błąd: {e}")
+        import traceback
+        traceback.print_exc()
+        return None
+
 
 if __name__ == "__main__":
-    print("=" * 60)
-    print("🧠 GENEROWANIE EMBEDDINGÓW - BMW CHATBOT")
-    print("=" * 60)
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n\n⏹️  Przerwano przez użytkownika.")
     
-    # Sprawdź czy są dane RAG
-    result = find_rag_data()
-    if not result:
-        exit()
-    
-    # Zapytaj czy generować embeddingi
-    print("\n" + "="*60)
-    create_emb = input("🧠 Czy chcesz wygenerować embeddingi? (t/n): ")
-    
-    if create_emb.lower() == 't':
-        print("\n🚀 Rozpoczynam generowanie embeddingów...")
-        saved_data = create_embeddings()
-        
-        if saved_data:
-            print(f"\n🎉 Embeddingi gotowe!")
-            print(f"   Następny krok: stworzenie wektorowej bazy danych (FAISS/Chroma)")
-            print(f"   Uruchom 5_vector_db.py aby kontynuować.")
-    else:
-        print("❌ Anulowano generowanie embeddingów.")
+    print("\n" + "="*70)
+    print("🧠 Embedding generator zakończył pracę")
+    print("="*70)

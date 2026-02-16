@@ -1,0 +1,42 @@
+{
+  "total_chunks": 45,
+  "size_distribution": {
+    "tiny": 0,
+    "small": 0,
+    "medium": 45,
+    "large": 0,
+    "huge": 0
+  },
+  "thematic_distribution": {
+    "spec_chunks": 12,
+    "model_chunks": 45,
+    "price_chunks": 45
+  },
+  "quality_metrics": {
+    "bad_starts": 0,
+    "bad_starts_percentage": 0.0,
+    "bad_phrase_chunks": 0,
+    "very_large_chunks": 0,
+    "duplicate_chunks": 0,
+    "unique_chunks": 45,
+    "unique_percentage": 100.0
+  },
+  "size_stats": {
+    "avg_chars": 335.24444444444447,
+    "min_chars": 238,
+    "max_chars": 399,
+    "median_chars": 348
+  },
+  "priority_distribution": {
+    "1": 0,
+    "2": 0,
+    "3": 33,
+    "4": 0,
+    "5": 12
+  },
+  "saved_at": "2026-01-25T15:10:54.730832",
+  "chunker_settings": {
+    "chunk_size": 500,
+    "chunk_overlap": 100
+  }
+}
