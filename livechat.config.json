@@ -1,5 +1,24 @@
 {
     "id": "zLukgwvDg",
     "name": "Chatbot ZK Motors",
-    "product": "livechat"
+    "product": "livechat",
+    "blocks": {
+        "authorization": {
+            "clientId": "908e396b58e65c7e79285a92f37951a5",
+            "type": "server_side_app",
+            "redirectUri": "http://localhost"
+        },
+        "repository": {
+            "provider": "github",
+            "name": "shay0j/Chatbot-BMW",
+            "branch": "main"
+        },
+        "widgets": {
+            "8ytm1-Qlr1": {
+                "url": "https://livechat-contact-form.netlify.app/",
+                "placement": "plugin",
+                "initialState": ""
+            }
+        }
+    }
 }
