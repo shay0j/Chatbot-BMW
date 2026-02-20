@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot LiveChat - Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .card { background-color: #f4f4f4; border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .button { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        .button.start { background-color: #24a148; color: white; }
+        .button.stop { background-color: #da1e28; color: white; }
+        .status { padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .status.running { background-color: #d4edda; color: #155724; }
+        .status.stopped { background-color: #f8d7da; color: #721c24; }
+        pre { background-color: #333; color: #fff; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🤖 Panel sterowania botem</h1>
+    
+    <div class="card">
+        <h2>Status bota</h2>
+        <div id="status" class="status">🔄 Sprawdzanie...</div>
+        <div>
+            <button id="startBtn" class="button start">▶️ Uruchom bota</button>
+            <button id="stopBtn" class="button stop" disabled>⏹️ Zatrzymaj bota</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Informacje</h2>
+        <p><strong>Bot Agent ID:</strong> <span id="botAgentId">-</span></p>
+        <p><strong>Token:</strong> <span id="tokenInfo">ważny</span></p>
+    </div>
+
+    <div class="card">
+        <h2>Logi</h2>
+        <pre id="logs">Brak aktywności...</pre>
+    </div>
+
+    <script>
+        // Funkcja do aktualizacji statusu
+        async function updateStatus() {
+            try {
+                const response = await fetch('/api/bot/status');
+                const data = await response.json();
+                
+                const statusDiv = document.getElementById('status');
+                const startBtn = document.getElementById('startBtn');
+                const stopBtn = document.getElementById('stopBtn');
+                const botAgentIdSpan = document.getElementById('botAgentId');
+                
+                if (data.running) {
+                    statusDiv.className = 'status running';
+                    statusDiv.innerHTML = '✅ Bot uruchomiony';
+                    startBtn.disabled = true;
+                    stopBtn.disabled = false;
+                } else {
+                    statusDiv.className = 'status stopped';
+                    statusDiv.innerHTML = '⏸️ Bot zatrzymany';
+                    startBtn.disabled = false;
+                    stopBtn.disabled = true;
+                }
+                
+                botAgentIdSpan.textContent = data.botAgentId || 'nie utworzony';
+                document.getElementById('tokenInfo').textContent = data.authenticated ? '✅ ważny' : '❌ nieważny';
+                
+            } catch (error) {
+                console.error('Błąd pobierania statusu:', error);
+            }
+        }
+
+        // Funkcja do logowania
+        function addLog(message) {
+            const logs = document.getElementById('logs');
+            logs.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}\n` + logs.innerHTML;
+        }
+
+        // Uruchom bota
+        document.getElementById('startBtn').addEventListener('click', async () => {
+            try {
+                addLog('🔄 Uruchamianie bota...');
+                const response = await fetch('/api/bot/start', { method: 'POST' });
+                const data = await response.json();
+                
+                if (data.success) {
+                    addLog('✅ Bot uruchomiony pomyślnie');
+                    addLog(`📋 Agent ID: ${data.details?.botAgentId || 'utworzony'}`);
+                } else {
+                    addLog(`❌ Błąd: ${data.error}`);
+                }
+                
+                updateStatus();
+            } catch (error) {
+                addLog(`❌ Błąd: ${error.message}`);
+            }
+        });
+
+        // Zatrzymaj bota
+        document.getElementById('stopBtn').addEventListener('click', async () => {
+            try {
+                addLog('🔄 Zatrzymywanie bota...');
+                const response = await fetch('/api/bot/stop', { method: 'POST' });
+                const data = await response.json();
+                
+                if (data.success) {
+                    addLog('✅ Bot zatrzymany');
+                } else {
+                    addLog(`❌ Błąd: ${data.error}`);
+                }
+                
+                updateStatus();
+            } catch (error) {
+                addLog(`❌ Błąd: ${error.message}`);
+            }
+        });
+
+        // Aktualizuj status co 5 sekund
+        updateStatus();
+        setInterval(updateStatus, 5000);
+    </script>
+</body>
+</html>

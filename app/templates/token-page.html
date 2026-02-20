@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Token Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #0f62fe;
+            padding-bottom: 10px;
+        }
+        .info {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+        .token {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .scope {
+            background-color: #e8f0fe;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .copy-btn {
+            background-color: #0f62fe;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .copy-btn:hover {
+            background-color: #0353e9;
+        }
+        .error {
+            color: #da1e28;
+            background-color: #fff5f5;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #da1e28;
+        }
+    </style>
+    <script>
+        function getHashParam(key) {
+            var params = location.hash.substring(1).split("&");
+            for (var i = 0; i < params.length; i++) {
+                var pair = params[i].split("=");
+                if (pair[0] === key) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return null;
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Token skopiowany do schowka!');
+            }, function() {
+                alert('Nie udało się skopiować tokena');
+            });
+        }
+
+        window.onload = function() {
+            var accessToken = getHashParam("access_token");
+            var scope = getHashParam("scope");
+            var expiresIn = getHashParam("expires_in");
+            var tokenType = getHashParam("token_type");
+            
+            var content = document.getElementById("content");
+            
+            if (accessToken) {
+                var expiresText = expiresIn ? (parseInt(expiresIn) / 3600) + " godzin" : "nieznany";
+                
+                content.innerHTML = `
+                    <div class="info">
+                        <p><strong>Pełny URL:</strong><br> <code>${location.href}</code></p>
+                    </div>
+                    
+                    <h2>Token:</h2>
+                    <div class="token" id="token">${accessToken}</div>
+                    <button class="copy-btn" onclick="copyToClipboard('${accessToken}')">📋 Skopiuj token</button>
+                    
+                    <h2>Szczegóły:</h2>
+                    <p><strong>Typ tokena:</strong> ${tokenType || 'Bearer'}</p>
+                    <p><strong>Czas wygaśnięcia:</strong> ${expiresText}</p>
+                    
+                    <h2>Scope (uprawnienia):</h2>
+                    <div class="scope">${scope || 'brak danych'}</div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="error">
+                        <h2>❌ Nie znaleziono tokena w URL</h2>
+                        <p>URL który otworzyłeś: <code>${location.href}</code></p>
+                        <p>Token powinien być w hash URL po <code>#access_token=</code></p>
+                        <p>Przykład poprawnego URL:<br>
+                        <code>http://localhost:8000/token-page#access_token=eu-west3:token&expires_in=28800&scope=...&token_type=Bearer</code></p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>🔑 Token z Implicit Grant</h1>
+        <div id="content">
+            <p>Ładowanie...</p>
+        </div>
+        <p style="margin-top: 20px; color: #666; font-size: 12px;">
+            Skopiuj token i wklej go w pliku <code>main.py</code> w metodzie <code>get_valid_token()</code>
+        </p>
+    </div>
+</body>
+</html>

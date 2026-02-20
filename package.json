@@ -1,5 +1,30 @@
 {
   "dependencies": {
-    "firebase": "^10.5.0"
-  }
+    "axios": "^1.13.5",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "firebase": "^10.5.0",
+    "node-fetch": "^3.3.2",
+    "ws": "^8.19.0"
+  },
+  "name": "chatbot_bmw",
+  "version": "1.0.0",
+  "description": "PROJECT DROPKICK\r ================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shay0j/Chatbot-BMW.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/shay0j/Chatbot-BMW/issues"
+  },
+  "homepage": "https://github.com/shay0j/Chatbot-BMW#readme"
 }
