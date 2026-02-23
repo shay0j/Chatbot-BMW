@@ -1,4 +1,4 @@
-# main.py - KOMPLETNY BOT Z INTEGRACJĄ LIVECHAT (wersja webhook + Web API)
+# main.py - KOMPLETNY BOT Z INTEGRACJĄ LIVECHAT (wersja zgodna z supportem)
 import os
 import asyncio
 import time
@@ -87,7 +87,7 @@ class LiveChatAuth:
     
     async def get_valid_token(self) -> str:
         """Zwraca token od supportu (tymczasowo)"""
-        print("🔑 Używam nowego tokena z webhooks.configuration:rw")
+        print("🔑 Używam nowego tokena")
         return "eu-west3:LgrMu1VqLmix-r-7AE8HTyXyYoM"
     
     def is_authenticated(self) -> bool:
@@ -159,7 +159,7 @@ class LiveChatAPIClient:
             raise
     
     async def create_bot(self, name: str) -> Tuple[str, str]:
-        """Tworzy bota i zwraca (id, secret)"""
+        """Tworzy bota (zgodnie z dokumentacją)"""
         print(f"\n🤖 Próba utworzenia bota z nazwą: {name}")
         
         data = {
@@ -191,7 +191,7 @@ class LiveChatAPIClient:
             raise
 
     async def issue_bot_token(self, bot_id: str, bot_secret: str) -> str:
-        """Generuje token dla bota"""
+        """Generuje token dla bota (zgodnie z dokumentacją)"""
         print(f"\n🔑 Generowanie tokena dla bota: {bot_id}")
         
         client_id = auth_client.client_id
@@ -381,7 +381,7 @@ class LiveChatBotIntegration:
             return
         
         try:
-            # 1. Utwórz bota (jeśli nie istnieje)
+            # 1. Utwórz bota (zgodnie z dokumentacją)
             self.bot_agent_id, self.bot_secret = await api_client.create_bot(name="ChatbotBMW")
             
             # 2. Wygeneruj token dla bota
