@@ -5,38 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bot LiveChat - Panel</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
-        .card { background-color: #f4f4f4; border-radius: 8px; padding: 20px; margin: 20px 0; }
-        .button { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            max-width: 900px; 
+            margin: 30px auto; 
+            padding: 20px; 
+            background-color: #f5f5f5;
+        }
+        h1 { color: #333; border-bottom: 2px solid #24a148; padding-bottom: 10px; }
+        .card { 
+            background-color: white; 
+            border-radius: 10px; 
+            padding: 25px; 
+            margin: 20px 0; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .card h2 { margin-top: 0; color: #444; }
+        .button { 
+            padding: 12px 24px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+        .button:hover { opacity: 0.9; transform: translateY(-1px); }
+        .button:disabled { 
+            opacity: 0.5; 
+            cursor: not-allowed; 
+            transform: none;
+        }
         .button.start { background-color: #24a148; color: white; }
         .button.stop { background-color: #da1e28; color: white; }
-        .status { padding: 10px; border-radius: 4px; margin: 10px 0; }
-        .status.running { background-color: #d4edda; color: #155724; }
-        .status.stopped { background-color: #f8d7da; color: #721c24; }
-        pre { background-color: #333; color: #fff; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        .button.check { background-color: #007bff; color: white; }
+        .status { 
+            padding: 15px; 
+            border-radius: 6px; 
+            margin: 15px 0; 
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .status.running { background-color: #d4edda; color: #155724; border-left: 4px solid #24a148; }
+        .status.stopped { background-color: #f8d7da; color: #721c24; border-left: 4px solid #da1e28; }
+        .status.warning { background-color: #fff3cd; color: #856404; border-left: 4px solid #ffc107; }
+        pre { 
+            background-color: #1e1e1e; 
+            color: #d4d4d4; 
+            padding: 15px; 
+            border-radius: 6px; 
+            overflow-x: auto; 
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .info-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #24a148;
+        }
+        .info-item strong {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .info-item span {
+            font-size: 16px;
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+        .badge.success { background-color: #24a148; color: white; }
+        .badge.error { background-color: #da1e28; color: white; }
+        .badge.warning { background-color: #ffc107; color: #333; }
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
-    <h1>🤖 Panel sterowania botem</h1>
+    <h1>🤖 Bot LiveChat - Panel sterowania</h1>
     
     <div class="card">
-        <h2>Status bota</h2>
-        <div id="status" class="status">🔄 Sprawdzanie...</div>
-        <div>
+        <h2>📊 Status bota</h2>
+        <div id="status" class="status">🔄 Sprawdzanie statusu...</div>
+        
+        <div style="margin: 20px 0;">
             <button id="startBtn" class="button start">▶️ Uruchom bota</button>
             <button id="stopBtn" class="button stop" disabled>⏹️ Zatrzymaj bota</button>
+            <button id="checkTokenBtn" class="button check">🔑 Sprawdź token</button>
         </div>
     </div>
 
     <div class="card">
-        <h2>Informacje</h2>
-        <p><strong>Bot Agent ID:</strong> <span id="botAgentId">-</span></p>
-        <p><strong>Token:</strong> <span id="tokenInfo">ważny</span></p>
+        <h2>ℹ️ Informacje</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <strong>Bot Agent ID</strong>
+                <span id="botAgentId">-</span>
+            </div>
+            <div class="info-item">
+                <strong>Grupa docelowa</strong>
+                <span id="targetGroupId">-</span>
+            </div>
+            <div class="info-item">
+                <strong>Status połączenia</strong>
+                <span id="connectionStatus">-</span>
+            </div>
+        </div>
+        
+        <div style="margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 6px;">
+            <strong>🔑 Token OAuth:</strong> 
+            <span id="tokenStatus">Sprawdzanie...</span>
+            <div id="tokenDetails" style="font-size: 13px; color: #666; margin-top: 8px;"></div>
+        </div>
     </div>
 
     <div class="card">
-        <h2>Logi</h2>
-        <pre id="logs">Brak aktywności...</pre>
+        <h2>📝 Logi zdarzeń</h2>
+        <pre id="logs">Brak aktywności... (oczekiwanie na zdarzenia)</pre>
+        <div style="margin-top: 10px; text-align: right;">
+            <button id="clearLogsBtn" class="button" style="background-color: #6c757d; color: white; padding: 8px 16px;">🗑️ Wyczyść logi</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🔧 Szybkie akcje</h2>
+        <p style="color: #666; margin-bottom: 15px;">Przydatne linki i akcje:</p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="/token-page" target="_blank" class="button" style="background-color: #6f42c1; color: white; text-decoration: none; display: inline-block;">🔑 Strona tokena</a>
+            <a href="/docs" target="_blank" class="button" style="background-color: #17a2b8; color: white; text-decoration: none; display: inline-block;">📚 API Docs</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        Bot LiveChat | Monitorowany na żywo
     </div>
 
     <script>
@@ -49,49 +175,97 @@
                 const statusDiv = document.getElementById('status');
                 const startBtn = document.getElementById('startBtn');
                 const stopBtn = document.getElementById('stopBtn');
-                const botAgentIdSpan = document.getElementById('botAgentId');
                 
+                // Aktualizacja statusu bota
                 if (data.running) {
                     statusDiv.className = 'status running';
-                    statusDiv.innerHTML = '✅ Bot uruchomiony';
+                    statusDiv.innerHTML = '✅ <strong>Bot uruchomiony</strong> i gotowy do pracy';
                     startBtn.disabled = true;
                     stopBtn.disabled = false;
                 } else {
                     statusDiv.className = 'status stopped';
-                    statusDiv.innerHTML = '⏸️ Bot zatrzymany';
+                    statusDiv.innerHTML = '⏸️ <strong>Bot zatrzymany</strong> - kliknij "Uruchom bota" aby rozpocząć';
                     startBtn.disabled = false;
                     stopBtn.disabled = true;
                 }
                 
-                botAgentIdSpan.textContent = data.botAgentId || 'nie utworzony';
-                document.getElementById('tokenInfo').textContent = data.authenticated ? '✅ ważny' : '❌ nieważny';
+                // Aktualizacja informacji
+                document.getElementById('botAgentId').textContent = data.bot_agent_id || '❌ nie utworzony';
+                document.getElementById('targetGroupId').textContent = data.target_group_id || '0';
+                
+                const connectionSpan = document.getElementById('connectionStatus');
+                if (data.connected) {
+                    connectionSpan.innerHTML = '<span class="badge success">✅ Połączono</span>';
+                } else {
+                    connectionSpan.innerHTML = '<span class="badge error">❌ Brak połączenia</span>';
+                }
                 
             } catch (error) {
                 console.error('Błąd pobierania statusu:', error);
+                document.getElementById('status').innerHTML = '❌ Błąd połączenia z serwerem';
+            }
+        }
+
+        // Funkcja do sprawdzania tokena
+        async function checkToken() {
+            try {
+                document.getElementById('tokenStatus').innerHTML = '🔄 Sprawdzanie...';
+                document.getElementById('tokenDetails').innerHTML = '';
+                
+                const response = await fetch('/api/auth/check');
+                const data = await response.json();
+                
+                if (data.valid) {
+                    document.getElementById('tokenStatus').innerHTML = '<span class="badge success">✅ Token ważny</span>';
+                    document.getElementById('tokenDetails').innerHTML = data.message || 'Token działa poprawnie';
+                    addLog(`✅ Token OAuth: ${data.message}`);
+                } else {
+                    document.getElementById('tokenStatus').innerHTML = '<span class="badge error">❌ Token nieważny</span>';
+                    document.getElementById('tokenDetails').innerHTML = data.message || 'Token wymaga odświeżenia';
+                    addLog(`❌ Problem z tokenem: ${data.message}`);
+                }
+                
+            } catch (error) {
+                document.getElementById('tokenStatus').innerHTML = '<span class="badge error">❌ Błąd sprawdzania</span>';
+                document.getElementById('tokenDetails').innerHTML = error.message;
             }
         }
 
         // Funkcja do logowania
         function addLog(message) {
             const logs = document.getElementById('logs');
-            logs.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}\n` + logs.innerHTML;
+            const timestamp = new Date().toLocaleTimeString('pl-PL', { hour12: false });
+            logs.innerHTML = `[${timestamp}] ${message}\n` + logs.innerHTML;
+            
+            // Ogranicz liczbę logów
+            const lines = logs.innerHTML.split('\n');
+            if (lines.length > 50) {
+                logs.innerHTML = lines.slice(0, 50).join('\n');
+            }
         }
+
+        // Wyczyść logi
+        document.getElementById('clearLogsBtn').addEventListener('click', () => {
+            document.getElementById('logs').innerHTML = 'Logi wyczyszczone...';
+            addLog('🗑️ Logi zostały wyczyszczone');
+        });
 
         // Uruchom bota
         document.getElementById('startBtn').addEventListener('click', async () => {
             try {
-                addLog('🔄 Uruchamianie bota...');
+                addLog('🔄 Próba uruchomienia bota...');
                 const response = await fetch('/api/bot/start', { method: 'POST' });
                 const data = await response.json();
                 
                 if (data.success) {
                     addLog('✅ Bot uruchomiony pomyślnie');
-                    addLog(`📋 Agent ID: ${data.details?.botAgentId || 'utworzony'}`);
+                    addLog(`📋 Bot Agent ID: ${data.details?.bot_agent_id || 'sprawdź w panelu'}`);
                 } else {
-                    addLog(`❌ Błąd: ${data.error}`);
+                    addLog(`❌ Błąd uruchamiania: ${data.error || 'Nieznany błąd'}`);
                 }
                 
                 updateStatus();
+                setTimeout(checkToken, 1000); // Sprawdź token po chwili
             } catch (error) {
                 addLog(`❌ Błąd: ${error.message}`);
             }
@@ -107,7 +281,7 @@
                 if (data.success) {
                     addLog('✅ Bot zatrzymany');
                 } else {
-                    addLog(`❌ Błąd: ${data.error}`);
+                    addLog(`❌ Błąd zatrzymywania: ${data.error || 'Nieznany błąd'}`);
                 }
                 
                 updateStatus();
@@ -116,9 +290,34 @@
             }
         });
 
-        // Aktualizuj status co 5 sekund
+        // Sprawdź token
+        document.getElementById('checkTokenBtn').addEventListener('click', () => {
+            checkToken();
+        });
+
+        // Nasłuchuj na webhooki (dla testów)
+        if (typeof EventSource !== 'undefined') {
+            // Możesz dodać SSE jeśli chcesz
+        }
+
+        // Symulacja webhooka dla testów (opcjonalnie)
+        window.mockWebhook = function() {
+            addLog('📨 [TEST] Symulacja odebrania webhooka');
+        };
+
+        // Inicjalizacja
         updateStatus();
+        checkToken();
+        
+        // Odświeżaj status co 5 sekund
         setInterval(updateStatus, 5000);
+        
+        // Odświeżaj token co 30 sekund
+        setInterval(checkToken, 30000);
+
+        // Dodaj powitanie
+        addLog('🚀 Panel bota załadowany');
+        addLog('📊 Monitorowanie aktywności...');
     </script>
 </body>
 </html>
