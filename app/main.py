@@ -18,436 +18,58 @@ import secrets
 import traceback
 
 # ============================================
-# IMPORT RAG Z TWOJEGO PLIKU
+# IMPORT NOWEGO RAG SERVICE
 # ============================================
 
-RAG_FILE_PATH = Path(r"C:\Users\hellb\Documents\Chatbot_BMW\RAG\src\scrapers\6_rag_test.py")
-
-def import_rag_module():
-    """Dynamicznie importuje moduł RAG"""
-    try:
-        if not RAG_FILE_PATH.exists():
-            raise FileNotFoundError(f"Nie znaleziono pliku RAG: {RAG_FILE_PATH}")
-        
-        rag_dir = RAG_FILE_PATH.parent
-        if str(rag_dir) not in sys.path:
-            sys.path.insert(0, str(rag_dir))
-        
-        import importlib.util
-        
-        module_name = "rag_module_6_test"
-        spec = importlib.util.spec_from_file_location(
-            module_name, 
-            str(RAG_FILE_PATH)
-        )
-        
-        if spec is None:
-            raise ImportError(f"Nie można utworzyć specyfikacji dla {RAG_FILE_PATH}")
-        
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[module_name] = module
-        spec.loader.exec_module(module)
-        
-        print(f"✅ Załadowano moduł RAG: {module_name}")
-        
-        if not hasattr(module, 'RAGSystem'):
-            raise AttributeError("Brak klasy RAGSystem w module")
-        
-        if not hasattr(module, 'find_latest_vector_db'):
-            raise AttributeError("Brak funkcji find_latest_vector_db w module")
-        
-        return module
-        
-    except Exception as e:
-        print(f"❌ Błąd ładowania modułu RAG: {e}")
-        raise
+# Dodaj ścieżkę do app w sys.path jeśli potrzebne
+current_dir = Path(__file__).parent.absolute()
+if str(current_dir) not in sys.path:
+    sys.path.insert(0, str(current_dir))
 
 try:
-    rag_module = import_rag_module()
-    RAGSystem = rag_module.RAGSystem
-    find_latest_vector_db = rag_module.find_latest_vector_db
+    from app.services.rag_service import get_rag_service as get_rag_service_new
+    from app.services.rag_service import RAGService
     RAG_AVAILABLE = True
-    print("✅ RAG system gotowy do użycia")
+    print("✅ Nowy RAG service załadowany")
 except Exception as e:
-    print(f"⚠️ Ostrzeżenie: Could not import RAG module: {e}")
-    print("Aplikacja będzie działać bez RAG")
+    print(f"⚠️ Ostrzeżenie: Could not import new RAG module: {e}")
     RAG_AVAILABLE = False
     
-    class RAGSystem:
-        def __init__(self, vector_db_path=None):
-            self.vector_db_path = vector_db_path
-            print(f"Używam dummy RAGSystem")
-        
-        def query(self, query, k=3, use_model_filter=False, use_priority=True):
-            print(f"Dummy RAG query: '{query[:50]}...'")
-            return []
-        
-        def get_database_info(self):
+    # Dummy RAG dla fallback
+    class RAGService:
+        async def retrieve_with_intent_check(self, query, top_k=3, confidence_threshold=0.5):
             return {
-                'total_chunks': 0,
-                'total_vectors': 0,
-                'model_name': 'dummy (no RAG)',
-                'embedding_dim': 0,
-                'index_type': 'none',
-                'loaded_at': 'never'
+                "has_data": False,
+                "skip_rag": False,
+                "below_threshold": True,
+                "confidence": 0.0,
+                "intent": "general",
+                "detected_models": [],
+                "tech": False,
+                "documents": [],
+                "sources": []
             }
+        async def health_check(self):
+            return {"status": "unavailable", "is_dummy": True}
+        async def get_stats(self):
+            return {"total_chunks": 0, "is_dummy": True}
     
-    def find_latest_vector_db():
-        print("Dummy find_latest_vector_db: zwracam None")
-        return None
+    async def get_rag_service_new():
+        return RAGService()
 
 # ============================================
-# RAG SERVICE SINGLETON
+# RAG SERVICE SINGLETON (dla kompatybilności)
 # ============================================
 
 _rag_service_instance = None
 
-def get_rag_service():
-    """Zwraca singleton RAG service"""
+async def get_rag_service():
+    """Zwraca singleton RAG service (nowa wersja)"""
     global _rag_service_instance
     if _rag_service_instance is None:
-        print("Tworzę singleton RAG service...")
-        _rag_service_instance = SimpleRAGService()
+        print("Tworzę singleton RAG service (nowy)...")
+        _rag_service_instance = await get_rag_service_new()
     return _rag_service_instance
-
-# ============================================
-# POPRAWIONY RAG SERVICE Z TWOJEGO PLIKU
-# ============================================
-
-class SimpleRAGService:
-    """Adapter dla RAG-a z zaawansowaną walidacją danych"""
-    
-    def __init__(self):
-        print(f"Inicjalizacja SimpleRAGService...")
-        
-        if not RAG_AVAILABLE:
-            print("RAG nie dostępny - tworzę dummy service")
-            self._create_dummy_service()
-            return
-        
-        try:
-            db_file = find_latest_vector_db()
-            if not db_file:
-                print("Nie znaleziono bazy RAG - tworzę dummy service")
-                self._create_dummy_service()
-                return
-            
-            print(f"Ładowanie bazy RAG z: {db_file}")
-            self.rag = RAGSystem(vector_db_path=db_file)
-            self.db_info = self.rag.get_database_info()
-            print(f"RAG załadowany: {self.db_info.get('total_chunks', 0)} fragmentów")
-            
-        except Exception as e:
-            print(f"Błąd inicjalizacji RAG: {e}")
-            print("Tworzę dummy service jako fallback")
-            self._create_dummy_service()
-    
-    def _create_dummy_service(self):
-        """Tworzy dummy service gdy RAG nie jest dostępny"""
-        self.rag = RAGSystem() if RAG_AVAILABLE else RAGSystem(None)
-        self.db_info = {
-            'total_chunks': 0,
-            'total_vectors': 0,
-            'model_name': 'dummy (RAG niedostępny)',
-            'embedding_dim': 0,
-            'index_type': 'none',
-            'loaded_at': datetime.now().isoformat()
-        }
-        print("Dummy RAG service utworzony")
-    
-    async def retrieve(self, query: str, top_k: int = 3, similarity_threshold: float = 0.7) -> Any:
-        """
-        Wyszukuje dokumenty w RAG z zaawansowaną walidacją
-        """
-        print(f"RAG retrieve: '{query[:50]}...' (top_k={top_k})")
-        
-        # Wykryj modele BMW w zapytaniu
-        bmw_models = ['i3', 'i4', 'i5', 'i7', 'i8', 'ix', 'x1', 'x2', 'x3', 'x4', 'x5', 
-                     'x6', 'x7', 'xm', '2 series', '3 series', '4 series', '5 series',
-                     '7 series', '8 series', 'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
-                     'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8']
-        
-        query_lower = query.lower()
-        detected_models_in_query = []
-        
-        for model in bmw_models:
-            if model in query_lower:
-                detected_models_in_query.append(model.upper())
-        
-        use_filter = len(detected_models_in_query) > 0
-        
-        if detected_models_in_query:
-            print(f"   Wykryto modele: {detected_models_in_query}, filtrowanie: {use_filter}")
-        
-        try:
-            # Pierwsze wyszukiwanie z filtrem jeśli wykryto modele
-            if use_filter:
-                results = self.rag.query(
-                    query, 
-                    k=top_k * 2,  # Więcej wyników do filtrowania
-                    use_model_filter=True,
-                    use_priority=True
-                )
-                print(f"   Znaleziono {len(results)} wyników z filtrem modelu")
-            else:
-                results = self.rag.query(
-                    query, 
-                    k=top_k,
-                    use_model_filter=False,
-                    use_priority=True
-                )
-                print(f"   Znaleziono {len(results)} wyników bez filtra")
-            
-            # Fallback: jeśli z filtrem nie ma wyników, spróbuj bez filtra
-            if use_filter and len(results) < 2:
-                print("   Mało wyników z filtrem, próbuję bez filtra...")
-                fallback_results = self.rag.query(
-                    query, 
-                    k=top_k,
-                    use_model_filter=False,
-                    use_priority=True
-                )
-                # Dodaj fallback wyniki, ale zachowaj priorytet
-                for result in fallback_results:
-                    if result not in results:
-                        results.append(result)
-                results = results[:top_k * 2]
-                print(f"   Po fallback: {len(results)} wyników")
-            
-            if not results:
-                print("   Brak wyników - zwracam pustą odpowiedź")
-                return self._create_empty_result()
-            
-            # WALIDUJ i sortuj wyniki
-            validated_docs = []
-            for result in results:
-                doc_text = result.get('text', '')
-                metadata = result.get('metadata', {})
-                similarity = result.get('similarity_score', 0.0)
-                
-                # Walidacja jakości danych
-                validation_result = self._validate_document_advanced(doc_text, metadata, query_lower)
-                
-                if validation_result['is_valid'] or similarity > 0.6:
-                    doc = {
-                        'content': doc_text,
-                        'metadata': metadata,
-                        'similarity': similarity,
-                        'relevance_score': self._calculate_relevance_score(
-                            result.get('relevance_score', similarity),
-                            validation_result,
-                            detected_models_in_query,
-                            metadata.get('models', [])
-                        ),
-                        'validated': validation_result['is_valid'],
-                        'warnings': validation_result['warnings'],
-                        'quality_score': validation_result['quality_score']
-                    }
-                    validated_docs.append(doc)
-            
-            # Sortuj po relevance_score
-            validated_docs.sort(key=lambda x: x['relevance_score'], reverse=True)
-            validated_docs = validated_docs[:top_k]  # Weź najlepsze top_k
-            
-            # Oblicz średnie podobieństwo tylko dla zwalidowanych
-            valid_similarities = [d['similarity'] for d in validated_docs if d.get('validated', False)]
-            avg_similarity = sum(valid_similarities) / len(valid_similarities) if valid_similarities else 0.0
-            
-            class ResultWrapper:
-                def __init__(self, docs, avg_sim, detected_models):
-                    self.documents = docs
-                    self.average_similarity = avg_sim
-                    self.detected_models = detected_models
-                    self.has_valid_data = len([d for d in docs if d.get('validated', False)]) > 0
-                    self.total_warnings = sum(len(d.get('warnings', [])) for d in docs)
-                    self.quality_scores = [d.get('quality_score', 0.0) for d in docs]
-                
-                def to_api_response(self):
-                    sources = []
-                    for i, doc in enumerate(self.documents):
-                        metadata = doc['metadata']
-                        content = doc['content']
-                        source_info = {
-                            'id': i + 1,
-                            'title': metadata.get('title', 'Brak tytułu')[:100],
-                            'content': content[:300] + ('...' if len(content) > 300 else ''),
-                            'similarity': round(doc['similarity'], 3),
-                            'relevance': round(doc.get('relevance_score', doc['similarity']), 3),
-                            'quality': round(doc.get('quality_score', 0.0), 3),
-                            'url': metadata.get('source_url', ''),
-                            'models': metadata.get('models', []),
-                            'validated': doc.get('validated', False),
-                            'warnings': doc.get('warnings', []),
-                            'has_technical_data': self._has_technical_data(content)
-                        }
-                        sources.append(source_info)
-                    
-                    return {"sources": sources}
-                
-                def _has_technical_data(self, text):
-                    """Sprawdza czy tekst zawiera dane techniczne"""
-                    tech_keywords = ['km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'bieg', 'napęd', 'pojemność']
-                    text_lower = text.lower()
-                    return any(keyword in text_lower for keyword in tech_keywords)
-            
-            return ResultWrapper(validated_docs, avg_similarity, detected_models_in_query)
-            
-        except Exception as e:
-            print(f"Błąd RAG retrieve: {e}")
-            return self._create_empty_result()
-    
-    def _validate_document_advanced(self, text: str, metadata: Dict, query: str) -> Dict[str, Any]:
-        """
-        Zaawansowana walidacja dokumentu
-        """
-        text_lower = text.lower()
-        query_lower = query.lower()
-        
-        # Sprawdź czy dokument jest aktualny
-        year = metadata.get('year', '')
-        is_recent = False
-        try:
-            if year and year.isdigit():
-                year_int = int(year)
-                is_recent = year_int >= 2020
-        except:
-            pass
-        
-        # Sprawdź czy zawiera dane techniczne
-        has_technical_data = any(keyword in text_lower for keyword in [
-            'km', 'km/h', '0-100', 'silnik', 'moc', 'skrzynia', 'bieg', 
-            'napęd', 'pojemność', 'przyspieszenie', 'moment', 'v-max'
-        ])
-        
-        # Sprawdź czy pasuje do zapytania
-        query_words = set(query_lower.split())
-        text_words = set(text_lower.split())
-        matching_words = len(query_words.intersection(text_words))
-        query_match_ratio = matching_words / max(len(query_words), 1)
-        
-        # Sprawdź ostrzeżenia
-        warnings = []
-        warning_patterns = [
-            (r'6[\s\-]*biegow', 'Przestarzała skrzynia biegów'),
-            (r'190\s*km', 'Nierealistyczna moc'),
-            (r'stary', 'Stare dane'),
-            (r'201[0-5]', 'Przestarzały rok'),
-        ]
-        
-        for pattern, warning_msg in warning_patterns:
-            if re.search(pattern, text_lower):
-                warnings.append(warning_msg)
-        
-        # Oblicz jakość dokumentu (0.0 - 1.0)
-        quality_score = 0.5  # Bazowy
-        
-        if is_recent:
-            quality_score += 0.2
-        if has_technical_data:
-            quality_score += 0.2
-        if query_match_ratio > 0.3:
-            quality_score += 0.1
-        if len(warnings) == 0:
-            quality_score += 0.1
-        if 'specyfikacja' in text_lower or 'dane techniczne' in text_lower:
-            quality_score += 0.1
-        
-        # Normalizuj do 0.0-1.0
-        quality_score = min(1.0, max(0.0, quality_score))
-        
-        is_valid = quality_score >= 0.6 and has_technical_data
-        
-        return {
-            'is_valid': is_valid,
-            'quality_score': quality_score,
-            'is_recent': is_recent,
-            'has_technical_data': has_technical_data,
-            'query_match_ratio': query_match_ratio,
-            'warnings': warnings
-        }
-    
-    def _calculate_relevance_score(self, base_score: float, validation_result: Dict, 
-                                 query_models: List[str], doc_models: List[str]) -> float:
-        """Oblicza wynik relewancji z uwzględnieniem wielu czynników"""
-        relevance = base_score
-        
-        # Bonus za zgodność modeli
-        if query_models and doc_models:
-            matching_models = set(m.upper() for m in query_models) & set(m.upper() for m in doc_models)
-            if matching_models:
-                relevance += 0.2
-        
-        # Bonus za jakość
-        relevance += validation_result['quality_score'] * 0.1
-        
-        # Bonus za aktualność
-        if validation_result['is_recent']:
-            relevance += 0.1
-        
-        # Bonus za dane techniczne
-        if validation_result['has_technical_data']:
-            relevance += 0.15
-        
-        # Kara za ostrzeżenia
-        relevance -= len(validation_result['warnings']) * 0.05
-        
-        return max(0.0, min(1.0, relevance))
-    
-    def _create_empty_result(self):
-        """Tworzy pusty wynik"""
-        class EmptyResult:
-            def __init__(self):
-                self.documents = []
-                self.average_similarity = 0.0
-                self.detected_models = []
-                self.has_valid_data = False
-                self.total_warnings = 0
-            
-            def to_api_response(self):
-                return {"sources": []}
-        
-        return EmptyResult()
-    
-    async def health_check(self) -> Dict[str, Any]:
-        """Health check dla RAG"""
-        try:
-            if not RAG_AVAILABLE:
-                return {
-                    "status": "unavailable", 
-                    "error": "RAG system not imported",
-                    "is_dummy": True
-                }
-            
-            # Sprawdź czy możemy wykonać testowe zapytanie
-            test_result = self.rag.query("BMW X5", k=1, use_model_filter=True)
-            test_ok = len(test_result) > 0
-            
-            return {
-                "status": "healthy" if test_ok else "degraded",
-                "chunks": self.db_info.get('total_chunks', 0),
-                "vectors": self.db_info.get('total_vectors', 0),
-                "embedding_model": self.db_info.get('model_name', 'unknown'),
-                "test_query_ok": test_ok,
-                "is_dummy": self.db_info.get('model_name', '').startswith('dummy')
-            }
-        except Exception as e:
-            return {
-                "status": "unhealthy", 
-                "error": str(e),
-                "is_dummy": True
-            }
-    
-    async def get_stats(self) -> Dict[str, Any]:
-        """Statystyki RAG"""
-        return {
-            "total_chunks": self.db_info.get('total_chunks', 0),
-            "total_vectors": self.db_info.get('total_vectors', 0),
-            "embedding_dim": self.db_info.get('embedding_dim', 0),
-            "model_name": self.db_info.get('model_name', 'unknown'),
-            "index_type": self.db_info.get('index_type', 'unknown'),
-            "loaded_at": self.db_info.get('loaded_at', 'unknown'),
-            "is_dummy": "dummy" in str(self.db_info.get('model_name', '')).lower()
-        }
 
 # ============================================
 # KONFIGURACJA I ZALADOWANIE ZMIENNYCH ŚRODOWISKOWYCH
@@ -768,9 +390,11 @@ class LiveChatAPIClient:
                     response_data = response.json()
                     event_id = response_data.get("event_id", "unknown")
                     logger.info(f"✅ Wiadomość wysłana! Event ID: {event_id}")
+                    print(f"✅ Sukces! Event ID: {event_id}")
                     return {"success": True, "event_id": event_id}
                 except:
                     logger.info(f"✅ Wiadomość wysłana!")
+                    print(f"✅ Sukces!")
                     return {"success": True}
             else:
                 try:
@@ -841,16 +465,176 @@ class LiveChatAPIClient:
 api_client = LiveChatAPIClient()
 
 # ============================================
-# ZAAWANSOWANA KLASA BOTA Z RAG
+# GLM SERVICE
+# ============================================
+
+class GLMService:
+    """Serwis do obsługi GLM-4.7 API od Z.ai"""
+    
+    def __init__(self, api_key: str = None, model: str = None, base_url: str = None):
+        self.api_key = api_key or os.getenv("GLM_API_KEY")
+        self.model = model or os.getenv("GLM_MODEL", "glm-4.7-flash")
+        self.base_url = base_url or os.getenv("GLM_BASE_URL", "https://open.bigmodel.cn/api/paas/v4")
+        
+        if not self.api_key:
+            logger.warning("GLM_API_KEY nie znaleziony - użyj ustaw go w .env")
+    
+    async def generate(
+        self,
+        prompt: str,
+        system_prompt: Optional[str] = None,
+        temperature: float = 0.7,
+        max_tokens: int = 2000,
+        top_p: float = 0.9,
+        stop: Optional[List[str]] = None
+    ) -> Dict[str, Any]:
+        """
+        Generuje odpowiedź z GLM
+        """
+        if not self.api_key:
+            return {"success": False, "text": "Przepraszam, nie mogę teraz odpowiedzieć (brak API)."}
+        
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+        
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "top_p": top_p,
+            "stream": False
+        }
+        
+        if stop:
+            payload["stop"] = stop
+        
+        try:
+            logger.info(f"GLM request: {prompt[:50]}...")
+            start_time = datetime.now()
+            
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                response = await client.post(
+                    f"{self.base_url}/chat/completions",
+                    headers=headers,
+                    json=payload
+                )
+                
+                elapsed = (datetime.now() - start_time).total_seconds()
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+                    
+                    # Logowanie zużycia tokenów
+                    usage = data.get("usage", {})
+                    logger.info(f"✅ GLM response in {elapsed:.2f}s, tokens: {usage.get('total_tokens', '?')}")
+                    
+                    return {
+                        "success": True,
+                        "text": content,
+                        "usage": usage,
+                        "model": data.get("model", self.model),
+                        "elapsed": elapsed
+                    }
+                else:
+                    error_text = await response.aread()
+                    logger.error(f"❌ GLM error {response.status_code}: {error_text}")
+                    return {
+                        "success": False,
+                        "text": "Przepraszam, wystąpił błąd podczas generowania odpowiedzi.",
+                        "error": f"HTTP {response.status_code}: {error_text}"
+                    }
+                    
+        except Exception as e:
+            logger.error(f"❌ GLM exception: {e}")
+            return {
+                "success": False,
+                "text": "Przepraszam, nie mogę teraz odpowiedzieć (błąd połączenia).",
+                "error": str(e)
+            }
+    
+    async def health_check(self) -> Dict[str, Any]:
+        """Sprawdza czy GLM API działa"""
+        if not self.api_key:
+            return {"status": "unavailable", "error": "No API key"}
+        
+        try:
+            # Proste testowe zapytanie
+            result = await self.generate(
+                prompt="Odpowiedz jednym słowem: 2+2=?",
+                max_tokens=10,
+                temperature=0.1
+            )
+            
+            return {
+                "status": "healthy" if result.get("success") else "degraded",
+                "model": self.model,
+                "api_key_present": True,
+                "test_response": result.get("text", "")[:50]
+            }
+        except Exception as e:
+            return {
+                "status": "unhealthy",
+                "error": str(e),
+                "model": self.model
+            }
+    
+    async def get_stats(self) -> Dict[str, Any]:
+        """Statystyki serwisu"""
+        return {
+            "model": self.model,
+            "base_url": self.base_url,
+            "api_key_present": bool(self.api_key)
+        }
+
+# Singleton dla GLM
+_glm_service_instance = None
+
+def get_glm_service():
+    """Zwraca singleton GLM service"""
+    global _glm_service_instance
+    if _glm_service_instance is None:
+        _glm_service_instance = GLMService()
+    return _glm_service_instance
+
+# ============================================
+# ZAAWANSOWANA KLASA BOTA Z RAG (NOWY) I GLM
 # ============================================
 
 class YourBot:
     
     def __init__(self):
-        logger.info("Inicjalizacja bota z RAG...")
+        logger.info("Inicjalizacja bota z nowym RAG i GLM...")
         self.conversation_state = {}
-        self.rag_service = get_rag_service()
-        logger.info("Bot gotowy")
+        self.rag_service = None
+        self.glm_service = get_glm_service()
+        
+        # Inicjalizuj RAG asynchronicznie
+        asyncio.create_task(self._init_rag())
+        
+        logger.info("✅ Bot z GLM gotowy")
+    
+    async def _init_rag(self):
+        """Inicjalizuje RAG service"""
+        try:
+            self.rag_service = await get_rag_service()
+            health = await self.rag_service.health_check()
+            stats = await self.rag_service.get_stats()
+            
+            if health.get("status") == "healthy":
+                logger.info(f"✅ Nowy RAG service zainicjalizowany: {stats.get('total_chunks', 0)} dokumentów")
+            else:
+                logger.warning(f"⚠️ Nowy RAG service w stanie: {health.get('status')}")
+        except Exception as e:
+            logger.error(f"❌ Nowy RAG init failed: {e}")
     
     async def process_message(self, text: str, chat_id: str = None) -> tuple[str, bool]:
         text_lower = text.lower().strip()
@@ -873,100 +657,194 @@ class YourBot:
         if any(keyword in text_lower for keyword in handoff_keywords):
             return "Łączę z konsultantem...", True
         
-        # Wykryj typ pytania
-        question_type = "general"
-        if any(word in text_lower for word in ['specyfikacj', 'dane', 'parametr', 'silnik', 'moc', 'km']):
-            question_type = "specyfikacje"
-        elif any(word in text_lower for word in ['różni', 'różnica', 'porównaj', 'vs', 'contra']):
-            question_type = "porownanie"
-        elif any(word in text_lower for word in ['rodzin', 'dzieci', 'osób', 'przestrzeń']):
-            question_type = "rodzinny"
-        elif any(word in text_lower for word in ['sport', 'szybk', 'mocny', 'm pakiet']):
-            question_type = "sportowy"
-        elif any(word in text_lower for word in ['elektryczn', 'ev', 'elektryk', 'hybryd']):
-            question_type = "elektryczny"
-        elif any(word in text_lower for word in ['cen', 'koszt', 'drogi', 'wyposażenie']):
-            question_type = "cena"
+        # Użyj nowego RAG jeśli dostępny
+        rag_results = {
+            "has_data": False,
+            "skip_rag": False,
+            "below_threshold": False,
+            "confidence": 0.0,
+            "intent": "general",
+            "detected_models": [],
+            "tech": False,
+            "documents": [],
+            "sources": []
+        }
         
-        # Wykryj modele BMW
-        bmw_models = ['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'xm',
-                     'i3', 'i4', 'i5', 'i7', 'i8', 'ix',
-                     'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
-                     'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8']
-        
-        detected_models = []
-        for model in bmw_models:
-            if model in text_lower:
-                model_upper = model.upper()
-                if 'SERIA' in model_upper:
-                    model_upper = model_upper.replace('SERIA', 'Seria')
-                detected_models.append(model_upper)
-        
-        # Użyj RAG dla pytań wymagających wiedzy
-        rag_result = None
-        rag_data = ""
-        sources_count = 0
-        
-        # Zapytaj RAG jeśli to potrzebne
-        if question_type in ["specyfikacje", "porownanie", "elektryczny", "sportowy"] or detected_models:
-            print(f"\n🔍 Używam RAG dla pytania typu: {question_type}")
-            rag_result = await self.rag_service.retrieve(
-                query=text,
-                top_k=2,
-                similarity_threshold=0.5
-            )
-            
-            if hasattr(rag_result, 'documents') and rag_result.documents:
-                valid_docs = [d for d in rag_result.documents if d.get('validated', False)]
-                sources_count = len(valid_docs)
+        if self.rag_service:
+            try:
+                rag_results = await self.rag_service.retrieve_with_intent_check(
+                    query=text,
+                    top_k=3,
+                    confidence_threshold=0.5
+                )
                 
-                if valid_docs:
-                    # Przygotuj kontekst z RAG
-                    context_parts = []
-                    for i, doc in enumerate(valid_docs[:2], 1):
-                        content = doc['content'][:200] + "..." if len(doc['content']) > 200 else doc['content']
-                        metadata = doc.get('metadata', {})
-                        source = metadata.get('title', 'Źródło')[:50]
-                        context_parts.append(f"Źródło {i} ({source}): {content}")
-                    
-                    rag_data = "\n\n".join(context_parts)
-                    print(f"✅ Znaleziono {sources_count} źródeł w RAG")
+                if rag_results.get("has_data"):
+                    print(f"✅ Nowy RAG znalazł dane, confidence: {rag_results.get('confidence', 0):.2f}")
+                elif rag_results.get("skip_rag"):
+                    print(f"⏭️ Nowy RAG pomija (intent: {rag_results.get('intent', 'unknown')})")
+                else:
+                    print(f"ℹ️ Nowy RAG: {rag_results.get('documents_retrieved', 0)} dokumentów, conf: {rag_results.get('confidence', 0):.2f}")
+            except Exception as e:
+                logger.error(f"Nowy RAG error: {e}")
         
-        # Generuj odpowiedź na podstawie typu pytania i RAG
-        if question_type == "specyfikacje" and rag_data:
-            response = f"Na podstawie dostępnych danych:\n\n{rag_data}\n\nCzy chcesz poznać więcej szczegółów?"
-        elif question_type == "porownanie" and rag_data:
-            response = f"Porównanie modeli BMW:\n\n{rag_data}\n\nKtóry z tych modeli Cię interesuje?"
-        elif detected_models and rag_data:
-            model_str = ', '.join(detected_models)
-            response = f"Oto informacje o {model_str}:\n\n{rag_data}"
-        elif any(word in text_lower for word in ['cześć', 'witaj', 'hej', 'dzień dobry']):
-            response = "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
-        elif any(word in text_lower for word in ['dziękuję', 'dzięki', 'thx']):
-            response = "Proszę bardzo! Czy mogę pomóc w czymś jeszcze?"
-        elif any(word in text_lower for word in ['godziny', 'otwarcia', 'czynne']):
-            response = "Jesteśmy czynni od poniedziałku do piątku w godzinach 9:00-17:00. Zapraszamy do salonu ZK Motors!"
-        elif any(word in text_lower for word in ['adres', 'gdzie', 'siedziba']):
-            response = "Nasza siedziba znajduje się przy ul. Przykładowej 123 w Warszawie. Serdecznie zapraszamy!"
-        elif 'bmw' in text_lower and not rag_data:
-            response = "BMW oferuje wiele modeli dopasowanych do różnych potrzeb. Który segment Cię interesuje? SUV-y, sedany, czy może sportowe auta?"
+        # Przygotuj kontekst z RAG
+        rag_context = ""
+        sources = []
+        
+        if rag_results.get("has_data") and rag_results.get("documents"):
+            valid_docs = rag_results.get("documents", [])
+            
+            if valid_docs:
+                context_parts = []
+                for i, doc in enumerate(valid_docs[:3], 1):
+                    content = doc.get('content', '')[:500] + "..." if len(doc.get('content', '')) > 500 else doc.get('content', '')
+                    metadata = doc.get('metadata', {})
+                    source = metadata.get('title', 'Źródło')[:50]
+                    context_parts.append(f"[{i}] Z {source}:\n{content}")
+                    
+                    # Zapisz źródła dla odpowiedzi
+                    sources.append({
+                        "title": metadata.get('title', 'Źródło')[:100],
+                        "content": content[:200] + "..." if len(content) > 200 else content,
+                        "relevance": doc.get('score', 0.0)
+                    })
+                
+                rag_context = "\n\n".join(context_parts)
+        
+        # Wykryj typ pytania (jeśli RAG nie podał intent)
+        question_type = rag_results.get('intent', 'general')
+        if question_type == 'general':
+            if any(word in text_lower for word in ['specyfikacj', 'dane', 'parametr', 'silnik', 'moc', 'km']):
+                question_type = "specyfikacje"
+            elif any(word in text_lower for word in ['różni', 'różnica', 'porównaj', 'vs', 'contra']):
+                question_type = "porownanie"
+            elif any(word in text_lower for word in ['rodzin', 'dzieci', 'osób', 'przestrzeń']):
+                question_type = "rodzinny"
+            elif any(word in text_lower for word in ['sport', 'szybk', 'mocny', 'm pakiet']):
+                question_type = "sportowy"
+            elif any(word in text_lower for word in ['elektryczn', 'ev', 'elektryk', 'hybryd']):
+                question_type = "elektryczny"
+            elif any(word in text_lower for word in ['cen', 'koszt', 'drogi', 'wyposażenie']):
+                question_type = "cena"
+        
+        # Wykryj modele BMW (jeśli RAG nie podał)
+        detected_models = rag_results.get('detected_models', [])
+        if not detected_models:
+            bmw_models = ['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'xm',
+                         'i3', 'i4', 'i5', 'i7', 'i8', 'ix',
+                         'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
+                         'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8']
+            
+            for model in bmw_models:
+                if model in text_lower:
+                    model_upper = model.upper()
+                    if 'SERIA' in model_upper:
+                        model_upper = model_upper.replace('SERIA', 'Seria')
+                    detected_models.append(model_upper)
+        
+        # System prompt dla GLM
+        system_prompt = """Jesteś Leo - ekspertem BMW w ZK Motors, oficjalnym dealerze BMW i MINI.
+
+ZASADY:
+1. Odpowiadaj KONKRETNIE i RZETELNIE - maksymalnie 5-6 zdań
+2. Używaj DANYCH Z KONTEKSTU - nie wymyślaj informacji
+3. Bądź profesjonalny i pomocny
+4. Jeśli brakuje danych w kontekście - powiedz to i zaproś do salonu
+5. Zawsze kończ zachętą do kontaktu z ZK Motors
+6. Używaj polskiego języka, bądź uprzejmy
+7. Jesteś przedstawicielem ZK Motors - oficjalnego dealera BMW"""
+
+        # Kontekst z RAG
+        context_section = "BRAK DANYCH W BAZIE"
+        if rag_context:
+            context_section = f"DANE Z BAZY WIEDZY BMW:\n{rag_context}"
+        
+        # Historia (ostatnie 2 wiadomości)
+        history_section = ""
+        if chat_id and len(state.get("context", [])) > 0:
+            recent = state["context"][-2:]
+            history_lines = []
+            for entry in recent:
+                role = "Klient" if entry.get("role") == "user" else "Ty"
+                history_lines.append(f"{role}: {entry.get('content', '')}")
+            if history_lines:
+                history_section = "OSTATNIA ROZMOWA:\n" + "\n".join(history_lines)
+        
+        # Informacje o wykrytych modelach
+        models_info = ""
+        if detected_models:
+            models_info = f"Wykryte modele w pytaniu: {', '.join(detected_models)}"
+        
+        # Zbuduj prompt
+        user_prompt = f"""PYTANIE KLIENTA: {text}
+
+{models_info}
+
+{context_section}
+
+{history_section}
+
+ODPOWIEDŹ (po polsku, 5-6 zdań):"""
+        
+        # Wywołaj GLM
+        glm_result = await self.glm_service.generate(
+            prompt=user_prompt,
+            system_prompt=system_prompt,
+            temperature=0.7,
+            max_tokens=1000
+        )
+        
+        if glm_result.get("success"):
+            response = glm_result.get("text", "")
+            print(f"✅ GLM wygenerował odpowiedź")
         else:
-            state["failed_attempts"] = state.get("failed_attempts", 0) + 1
-            
-            if state["failed_attempts"] >= 3:
-                return "Przepraszam, nie mogę pomóc. Łączę z konsultantem.", True
-            
-            if detected_models:
-                response = f"Przepraszam, nie znalazłem wystarczających informacji o {', '.join(detected_models)}. Czy możesz sprecyzować pytanie?"
-            else:
-                response = "Przepraszam, nie zrozumiałem. Czy możesz powiedzieć inaczej?"
+            print(f"⚠️ GLM błąd, używam fallback: {glm_result.get('error')}")
+            # Fallback do reguł
+            response = self._fallback_response(text_lower, question_type, detected_models, rag_context, state)
         
         # Zapisz kontekst
         if chat_id:
+            state["context"].append({"role": "user", "content": text, "timestamp": datetime.now().isoformat()})
+            state["context"].append({"role": "assistant", "content": response, "timestamp": datetime.now().isoformat()})
+            # Ogranicz kontekst do 5 ostatnich wiadomości
+            if len(state["context"]) > 10:
+                state["context"] = state["context"][-10:]
             state["last_topic"] = question_type
             state["failed_attempts"] = 0
         
         return response, False
+    
+    def _fallback_response(self, text_lower: str, question_type: str, detected_models: List[str], 
+                          rag_context: str, state: Dict) -> str:
+        """Fallback odpowiedzi gdy GLM nie działa"""
+        
+        if question_type == "specyfikacje" and rag_context:
+            return f"Na podstawie dostępnych danych:\n\n{rag_context[:300]}...\n\nCzy chcesz poznać więcej szczegółów? Zapraszamy do salonu ZK Motors!"
+        elif question_type == "porownanie" and rag_context:
+            return f"Porównanie modeli BMW:\n\n{rag_context[:300]}...\n\nKtóry z tych modeli Cię interesuje? Możesz umówić się na jazdę testową w ZK Motors."
+        elif detected_models and rag_context:
+            model_str = ', '.join(detected_models)
+            return f"Oto informacje o {model_str}:\n\n{rag_context[:300]}...\n\nWięcej szczegółów w salonie ZK Motors!"
+        elif any(word in text_lower for word in ['cześć', 'witaj', 'hej', 'dzień dobry']):
+            return "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
+        elif any(word in text_lower for word in ['dziękuję', 'dzięki', 'thx']):
+            return "Proszę bardzo! Czy mogę pomóc w czymś jeszcze? Zapraszam do kontaktu."
+        elif any(word in text_lower for word in ['godziny', 'otwarcia', 'czynne']):
+            return "Jesteśmy czynni od poniedziałku do piątku w godzinach 9:00-17.00, a w soboty 9:00-14:00. Zapraszamy do salonu ZK Motors!"
+        elif any(word in text_lower for word in ['adres', 'gdzie', 'siedziba']):
+            return "Nasza siedziba znajduje się przy ul. Przykładowej 123 w Warszawie. Serdecznie zapraszamy do salonu!"
+        elif 'bmw' in text_lower and not rag_context:
+            return "BMW oferuje wiele modeli dopasowanych do różnych potrzeb. Który segment Cię interesuje? SUV-y (X1, X3, X5), sedany (Seria 3, 5), czy może sportowe auta (M2, M4)? Zapraszam do salonu!"
+        else:
+            state["failed_attempts"] = state.get("failed_attempts", 0) + 1
+            
+            if state["failed_attempts"] >= 3:
+                return "Przepraszam, nie mogę pomóc. Łączę z konsultantem."
+            
+            if detected_models:
+                return f"Przepraszam, nie znalazłem wystarczających informacji o {', '.join(detected_models)}. Czy możesz sprecyzować pytanie? A może chcesz umówić się na jazdę próbną w ZK Motors?"
+            else:
+                return "Przepraszam, nie zrozumiałem. Czy możesz powiedzieć inaczej?"
 
 class LiveChatBotIntegration:
     
@@ -1093,7 +971,7 @@ class LiveChatBotIntegration:
             
             await asyncio.sleep(1)
             
-            print(f"\n🤖 Przetwarzanie wiadomości z RAG...")
+            print(f"\n🤖 Przetwarzanie wiadomości z nowym RAG i GLM...")
             response, should_transfer = await self.bot.process_message(text, chat_id)
             print(f"💬 Odpowiedź: {response}")
             print(f"🔄 Transfer: {should_transfer}")
@@ -1506,48 +1384,102 @@ async def get_bot_routing_status(bot_id: str):
         return {"error": str(e)}
 
 # ============================================
-# RAG ENDPOINTS
+# RAG ENDPOINTS (NOWY RAG)
 # ============================================
 
 @app.get("/rag/info")
 async def get_rag_info():
     """Informacje o RAG"""
     try:
-        rag_service = get_rag_service()
+        rag_service = await get_rag_service()
         health = await rag_service.health_check()
         stats = await rag_service.get_stats()
         
         return {
             "healthy": health.get("status") == "healthy" and not stats.get("is_dummy", False),
-            "chunks": stats.get("total_chunks", 0),
-            "vectors": stats.get('total_vectors', 0),
-            "embedding_model": stats.get('model_name', "unknown"),
+            "documents": stats.get("documents_in_store", 0),
+            "queries_processed": stats.get("queries_processed", 0),
+            "cache_hit_rate": stats.get("cache_hit_rate", 0),
+            "intent_skipped": stats.get("intent_skipped", 0),
+            "confidence_threshold": stats.get("min_confidence_threshold", 0.5),
             "status": health.get("status", "unknown"),
-            "is_dummy": stats.get("is_dummy", False),
-            "available": RAG_AVAILABLE,
-            "details": stats
+            "available": RAG_AVAILABLE
         }
     except Exception as e:
         return {
             "healthy": False,
             "error": str(e),
-            "available": RAG_AVAILABLE,
-            "is_dummy": True
+            "available": RAG_AVAILABLE
         }
 
 @app.get("/rag/test")
 async def test_rag(query: str = "BMW X5 dane techniczne"):
     """Test RAG z podanym zapytaniem"""
     try:
-        rag_service = get_rag_service()
-        result = await rag_service.retrieve(query=query, top_k=2)
+        rag_service = await get_rag_service()
+        result = await rag_service.retrieve_with_intent_check(
+            query=query,
+            top_k=3,
+            confidence_threshold=0.5
+        )
         
         return {
             "query": query,
-            "result": result.to_api_response() if hasattr(result, 'to_api_response') else {"sources": []},
-            "documents_count": len(result.documents) if hasattr(result, 'documents') else 0,
-            "has_valid_data": result.has_valid_data if hasattr(result, 'has_valid_data') else False,
-            "detected_models": result.detected_models if hasattr(result, 'detected_models') else []
+            "has_data": result.get("has_data", False),
+            "skip_rag": result.get("skip_rag", False),
+            "confidence": result.get("confidence", 0.0),
+            "intent": result.get("intent", "general"),
+            "detected_models": result.get("detected_models", []),
+            "documents_count": len(result.get("documents", [])),
+            "sources_count": len(result.get("sources", [])),
+            "processing_time": result.get("processing_time", 0)
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+# ============================================
+# GLM ENDPOINTS
+# ============================================
+
+@app.get("/glm/info")
+async def get_glm_info():
+    """Informacje o GLM"""
+    try:
+        glm_service = get_glm_service()
+        health = await glm_service.health_check()
+        stats = await glm_service.get_stats()
+        
+        return {
+            "available": stats.get("api_key_present", False),
+            "model": stats.get("model", "unknown"),
+            "status": health.get("status", "unknown"),
+            "test_response": health.get("test_response", ""),
+            "details": stats
+        }
+    except Exception as e:
+        return {
+            "available": False,
+            "error": str(e)
+        }
+
+@app.post("/glm/test")
+async def test_glm(query: str = "Powiedz coś o BMW X5"):
+    """Test GLM z podanym zapytaniem"""
+    try:
+        glm_service = get_glm_service()
+        
+        result = await glm_service.generate(
+            prompt=query,
+            system_prompt="Jesteś ekspertem BMW. Odpowiadaj krótko i konkretnie.",
+            max_tokens=500
+        )
+        
+        return {
+            "query": query,
+            "success": result.get("success", False),
+            "response": result.get("text", ""),
+            "usage": result.get("usage", {}),
+            "elapsed": result.get("elapsed", 0)
         }
     except Exception as e:
         return {"error": str(e)}
@@ -1555,7 +1487,7 @@ async def test_rag(query: str = "BMW X5 dane techniczne"):
 @app.on_event("startup")
 async def startup():
     print("\n" + "="*60)
-    print("🚀 SERWER BOTA LIVECHAT Z RAG")
+    print("🚀 SERWER BOTA LIVECHAT Z NOWYM RAG I GLM")
     print("="*60)
     print("📊 Panel: http://localhost:8000/panel")
     print("📥 Webhook: http://localhost:8000/webhook")
@@ -1571,18 +1503,32 @@ async def startup():
     print("🔍 Sprawdź status routingu bota (GET): http://localhost:8000/api/bot/routing-status/ID_BOTA")
     print("📚 RAG info: http://localhost:8000/rag/info")
     print("🧪 Test RAG: http://localhost:8000/rag/test?query=BMW X5")
+    print("🤖 GLM info: http://localhost:8000/glm/info")
+    print("🧪 Test GLM (POST): http://localhost:8000/glm/test?query=BMW X5")
     print("="*60)
     
-    # Sprawdź RAG
-    rag_service = get_rag_service()
-    rag_health = await rag_service.health_check()
-    rag_stats = await rag_service.get_stats()
+    # Sprawdź nowy RAG
+    try:
+        rag_service = await get_rag_service()
+        rag_health = await rag_service.health_check()
+        rag_stats = await rag_service.get_stats()
+        
+        if rag_health.get("status") == "healthy":
+            print(f"✅ Nowy RAG: {rag_stats.get('documents_in_store', 0)} dokumentów")
+        else:
+            print(f"⚠️ Nowy RAG: {rag_health.get('status', 'unknown')}")
+    except Exception as e:
+        print(f"⚠️ Nowy RAG: nie udało się zainicjalizować ({e})")
     
-    if rag_stats.get("is_dummy", False):
-        print("⚠️ RAG: DUMMY MODE (baza niezaładowana)")
+    # Sprawdź GLM
+    glm_service = get_glm_service()
+    glm_health = await glm_service.health_check()
+    glm_stats = await glm_service.get_stats()
+    
+    if glm_stats.get("api_key_present", False):
+        print(f"✅ GLM: {glm_stats.get('model', 'unknown')} (API działa)")
     else:
-        print(f"✅ RAG: {rag_stats.get('total_chunks', 0)} fragmentów")
-        print(f"✅ RAG model: {rag_stats.get('model_name', 'unknown')}")
+        print("⚠️ GLM: BRAK KLUCZA API - dodaj GLM_API_KEY do .env")
     
     config = load_bot_config()
     if config.get("bot_id"):
@@ -1627,7 +1573,7 @@ async def shutdown():
     print("👋 Serwer zatrzymany")
 
 async def main():
-    logger.info("🚀 Uruchamianie bota z RAG...")
+    logger.info("🚀 Uruchamianie bota z nowym RAG i GLM...")
     
     integration = LiveChatBotIntegration(YourBot())
     
