@@ -1,4 +1,4 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 import json
 import pandas as pd
 from pathlib import Path
@@ -456,7 +456,7 @@ class RAGPreprocessor:
         # Wzbogać o specyfikacje
         specs = item.get('specifications', {})
         if specs:
-            # Modele
+            # Modele z specifications
             if 'model_info' in specs:
                 models = specs['model_info'].get('models', [])
                 if models:
@@ -492,6 +492,10 @@ class RAGPreprocessor:
             # Dodatkowe flagi
             metadata['has_engine_specs'] = 'engine' in specs and bool(specs['engine'])
             metadata['has_prices'] = 'prices' in specs and bool(specs['prices'])
+        
+        # DODANE: Jeśli nie ma models z specifications, weź z detected_models
+        if item.get('detected_models') and not metadata.get('models'):
+            metadata['models'] = item.get('detected_models', [])
         
         return metadata
     

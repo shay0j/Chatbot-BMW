@@ -1,0 +1,208 @@
+{
+  "data_generacji": "2026-03-03T14:23:55.543622",
+  "chroma_path": "C:\\Users\\hellb\\Documents\\Chatbot_BMW\\RAG\\chroma_db_working",
+  "collection": "bmw_docs",
+  "statystyki": {
+    "liczba_testów": 15,
+    "udane": 9,
+    "współczynnik_sukcesu": 60.0
+  },
+  "wyniki": [
+    {
+      "test": 1,
+      "zapytanie": "Ile kosztuje BMW X3?",
+      "opis": "Cena konkretnego modelu",
+      "oczekiwane_modele": [
+        "X3"
+      ],
+      "zwrócone_modele": [
+        "X3"
+      ],
+      "trafność": "✅ TRAFNE",
+      "liczba_wyników": 3,
+      "dystans": 0.27803003787994385
+    },
+    {
+      "test": 2,
+      "zapytanie": "Jaka jest moc silnika BMW X5?",
+      "opis": "Specyfikacje techniczne",
+      "oczekiwane_modele": [
+        "X5"
+      ],
+      "zwrócone_modele": [],
+      "trafność": "❌ NIETRAFNE",
+      "liczba_wyników": 0,
+      "dystans": null
+    },
+    {
+      "test": 3,
+      "zapytanie": "Jakie są opcje leasingu dla i4?",
+      "opis": "Finansowanie",
+      "oczekiwane_modele": [
+        "i4"
+      ],
+      "zwrócone_modele": [
+        "i4"
+      ],
+      "trafność": "✅ TRAFNE",
+      "liczba_wyników": 3,
+      "dystans": 0.4160498380661011
+    },
+    {
+      "test": 4,
+      "zapytanie": "Gdzie mogę zrobić jazdę próbną X1?",
+      "opis": "Test drive",
+      "oczekiwane_modele": [
+        "X1"
+      ],
+      "zwrócone_modele": [],
+      "trafność": "❌ NIETRAFNE",
+      "liczba_wyników": 0,
+      "dystans": null
+    },
+    {
+      "test": 5,
+      "zapytanie": "Jakie modele BMW są elektryczne?",
+      "opis": "Modele elektryczne",
+      "oczekiwane_modele": [],
+      "zwrócone_modele": [
+        "M3, iX, X3, i4",
+        "X1, X3, X5"
+      ],
+      "trafność": "✅ ZWRÓCONO",
+      "liczba_wyników": 3,
+      "dystans": 0.2571701407432556
+    },
+    {
+      "test": 6,
+      "zapytanie": "Ile wynosi rata miesięczna za X3?",
+      "opis": "Finansowanie miesięczne",
+      "oczekiwane_modele": [
+        "X3"
+      ],
+      "zwrócone_modele": [
+        "X3"
+      ],
+      "trafność": "✅ TRAFNE",
+      "liczba_wyników": 3,
+      "dystans": 0.46972888708114624
+    },
+    {
+      "test": 7,
+      "zapytanie": "Jaki jest zasięg BMW iX3?",
+      "opis": "Zasięg elektryczny",
+      "oczekiwane_modele": [
+        "iX3",
+        "X3"
+      ],
+      "zwrócone_modele": [
+        "X3"
+      ],
+      "trafność": "✅ TRAFNE",
+      "liczba_wyników": 3,
+      "dystans": 0.3416224718093872
+    },
+    {
+      "test": 8,
+      "zapytanie": "Czy BMW X5 ma pakiet M Sport?",
+      "opis": "Opcje wyposażenia",
+      "oczekiwane_modele": [
+        "X5"
+      ],
+      "zwrócone_modele": [],
+      "trafność": "❌ NIETRAFNE",
+      "liczba_wyników": 0,
+      "dystans": null
+    },
+    {
+      "test": 9,
+      "zapytanie": "Jakie kolory są dostępne dla Serii 3?",
+      "opis": "Personalizacja",
+      "oczekiwane_modele": [
+        "Serii 3"
+      ],
+      "zwrócone_modele": [],
+      "trafność": "❌ NIETRAFNE",
+      "liczba_wyników": 0,
+      "dystans": null
+    },
+    {
+      "test": 10,
+      "zapytanie": "Jaka jest gwarancja na nowe BMW?",
+      "opis": "Gwarancja",
+      "oczekiwane_modele": [],
+      "zwrócone_modele": [
+        "i4",
+        "M5, X3"
+      ],
+      "trafność": "✅ ZWRÓCONO",
+      "liczba_wyników": 3,
+      "dystans": 0.2638113498687744
+    },
+    {
+      "test": 11,
+      "zapytanie": "Ile kosztuje serwis BMW X5?",
+      "opis": "Koszty serwisowe",
+      "oczekiwane_modele": [
+        "X5"
+      ],
+      "zwrócone_modele": [],
+      "trafność": "❌ NIETRAFNE",
+      "liczba_wyników": 0,
+      "dystans": null
+    },
+    {
+      "test": 12,
+      "zapytanie": "Czy BMW ma program lojalnościowy?",
+      "opis": "Programy klienta",
+      "oczekiwane_modele": [],
+      "zwrócone_modele": [
+        "i4",
+        "iX, i4, X5, M3, X1, X3, M5"
+      ],
+      "trafność": "✅ ZWRÓCONO",
+      "liczba_wyników": 3,
+      "dystans": 0.317504346370697
+    },
+    {
+      "test": 13,
+      "zapytanie": "Jakie akcesoria mogę dokupić do X3?",
+      "opis": "Akcesoria",
+      "oczekiwane_modele": [
+        "X3"
+      ],
+      "zwrócone_modele": [
+        "X3"
+      ],
+      "trafność": "✅ TRAFNE",
+      "liczba_wyników": 3,
+      "dystans": 0.518502950668335
+    },
+    {
+      "test": 14,
+      "zapytanie": "Jaka jest pojemność bagażnika X1?",
+      "opis": "Specyfikacje praktyczne",
+      "oczekiwane_modele": [
+        "X1"
+      ],
+      "zwrócone_modele": [],
+      "trafność": "❌ NIETRAFNE",
+      "liczba_wyników": 0,
+      "dystans": null
+    },
+    {
+      "test": 15,
+      "zapytanie": "Czy BMW X3 jest dostępne jako hybrid?",
+      "opis": "Warianty napędu",
+      "oczekiwane_modele": [
+        "X3"
+      ],
+      "zwrócone_modele": [
+        "X3"
+      ],
+      "trafność": "✅ TRAFNE",
+      "liczba_wyników": 3,
+      "dystans": 0.3495357632637024
+    }
+  ]
+}
