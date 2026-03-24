@@ -150,16 +150,10 @@ async def send_crisp_message(website_id: str, session_id: str, text: str) -> Dic
         async with httpx.AsyncClient() as client:
             response = await client.post(url, headers=headers, json=payload)
             
-            # Pełne logowanie odpowiedzi
             print(f"📊 Crisp response status: {response.status_code}")
             
-            if response.status_code == 200:
-                print(f"✅ Crisp: wiadomość wysłana pomyślnie (status 200)")
-                try:
-                    response_data = response.json()
-                    print(f"📦 Crisp response data: {json.dumps(response_data)[:200]}")
-                except:
-                    print(f"📄 Crisp response text: {response.text[:200]}")
+            if response.status_code == 200 or response.status_code == 202:
+                print(f"✅ Crisp: wiadomość wysłana pomyślnie (status {response.status_code})")
                 return {"success": True}
             else:
                 print(f"❌ Crisp błąd {response.status_code}: {response.text[:200]}")
@@ -180,9 +174,14 @@ class CohereService:
         self.model = os.getenv("COHERE_MODEL", "command-a-03-2025")
         
         if self.api_key:
-            # Używamy ClientV2 dla Chat API
-            self.client = cohere.ClientV2(self.api_key)
-            print(f"✅ Cohere zainicjalizowany (model: {self.model}, API v2)")
+            try:
+                # Próba z ClientV2
+                self.client = cohere.ClientV2(self.api_key)
+                print(f"✅ Cohere zainicjalizowany (model: {self.model}, API v2)")
+            except AttributeError:
+                # Fallback do starszego Client
+                self.client = cohere.Client(self.api_key, v2=True)
+                print(f"✅ Cohere zainicjalizowany (model: {self.model}, Client v2 fallback)")
         else:
             self.client = None
             print("⚠️ COHERE_API_KEY brak - używam fallback")
@@ -200,23 +199,19 @@ class CohereService:
             return {"success": False, "text": "Brak API"}
 
         try:
-            # Przygotuj wiadomości w formacie Chat API
             messages = []
             
-            # Dodaj system prompt jeśli istnieje
             if system_prompt:
                 messages.append({
                     "role": "system",
                     "content": system_prompt
                 })
             
-            # Dodaj wiadomość użytkownika
             messages.append({
                 "role": "user",
                 "content": prompt
             })
 
-            # Wywołanie Cohere Chat API (przez thread pool)
             response = await asyncio.to_thread(
                 self.client.chat,
                 model=self.model,
@@ -225,13 +220,10 @@ class CohereService:
                 max_tokens=max_tokens
             )
 
-            # Sprawdź odpowiedź
             if response and hasattr(response, 'message'):
-                # Nowy format odpowiedzi - message.content to lista
                 if hasattr(response.message, 'content') and len(response.message.content) > 0:
                     text = response.message.content[0].text
                 else:
-                    # Fallback do starego formatu
                     text = str(response.message)
                 
                 return {
@@ -247,7 +239,7 @@ class CohereService:
             return {"success": False, "text": f"Błąd Cohere: {str(e)}"}
 
 # ============================================
-# GŁÓWNA KLASA BOTA (z RAG i Cohere)
+# GŁÓWNA KLASA BOTA (z RAG i Cohere - LENIWA INICJALIZACJA)
 # ============================================
 
 class CrispBot:
@@ -256,25 +248,26 @@ class CrispBot:
         self.conversation_state = {}
         self.rag_service = None
         self.cohere = CohereService()
+        self._rag_initialized = False
+        logger.info("✅ Bot gotowy (RAG z leniwą inicjalizacją)")
 
-        # Inicjalizuj RAG asynchronicznie
-        asyncio.create_task(self._init_rag())
-
-        logger.info("✅ Bot gotowy")
-
-    async def _init_rag(self):
-        """Inicjalizuje RAG service"""
-        try:
-            self.rag_service = await get_rag_service()
-            health = await self.rag_service.health_check()
-            stats = await self.rag_service.get_stats()
-
-            if health.get("status") == "healthy":
-                logger.info(f"✅ RAG zainicjalizowany: {stats.get('total_chunks', 0)} dokumentów")
-            else:
-                logger.warning(f"⚠️ RAG w stanie: {health.get('status')}")
-        except Exception as e:
-            logger.error(f"❌ RAG init failed: {e}")
+    async def _ensure_rag(self):
+        """Zapewnia że RAG jest zainicjalizowany (lazy loading)"""
+        if self.rag_service is None:
+            logger.info("🔄 Leniwa inicjalizacja RAG...")
+            try:
+                self.rag_service = await get_rag_service()
+                health = await self.rag_service.health_check()
+                stats = await self.rag_service.get_stats()
+                
+                if health.get("status") == "healthy":
+                    logger.info(f"✅ RAG zainicjalizowany: {stats.get('documents_in_store', 0)} dokumentów")
+                else:
+                    logger.warning(f"⚠️ RAG w stanie: {health.get('status')}")
+            except Exception as e:
+                logger.error(f"❌ RAG init failed: {e}")
+                self.rag_service = None
+        return self.rag_service
 
     async def process_message(self, text: str, session_id: str) -> tuple[str, bool]:
         """Przetwarza wiadomość z użyciem RAG i Cohere"""
@@ -295,6 +288,9 @@ class CrispBot:
         if any(keyword in text_lower for keyword in handoff_keywords):
             return "Łączę z konsultantem...", True
 
+        # === UPEWNIJ SIĘ ŻE RAG JEST ZAINICJALIZOWANY ===
+        await self._ensure_rag()
+        
         # === RAG ===
         rag_results = {
             "has_data": False,
@@ -313,6 +309,8 @@ class CrispBot:
                     top_k=3,
                     confidence_threshold=0.5
                 )
+                if rag_results.get("has_data"):
+                    logger.info(f"📚 RAG zwrócił {len(rag_results.get('documents', []))} dokumentów")
             except Exception as e:
                 logger.error(f"RAG error: {e}")
 
@@ -324,9 +322,10 @@ class CrispBot:
             for doc in docs:
                 content = doc.get('content', '')[:500]
                 metadata = doc.get('metadata', {})
-                source = metadata.get('title', 'Źródło')[:50]
+                source = metadata.get('title', metadata.get('source_file', 'Źródło'))[:50]
                 context_parts.append(f"Z {source}:\n{content}")
             rag_context = "\n\n".join(context_parts)
+            logger.info(f"📚 Kontekst RAG: {len(rag_context)} znaków")
 
         # Wykryj modele BMW (jeśli RAG nie podał)
         detected_models = rag_results.get('detected_models', [])
@@ -357,7 +356,7 @@ ZASADY:
         # Historia rozmowy
         history = ""
         if len(state.get("context", [])) > 0:
-            recent = state["context"][-4:]  # ostatnie 2 wymiany
+            recent = state["context"][-4:]
             history = "HISTORIA:\n" + "\n".join([
                 f"{'Klient' if i%2==0 else 'Ty'}: {msg['content']}"
                 for i, msg in enumerate(recent)
@@ -384,7 +383,6 @@ ODPOWIEDŹ (po polsku, 5-6 zdań):"""
             print(f"✅ Cohere wygenerował odpowiedź")
         else:
             print(f"⚠️ Cohere błąd, używam fallback: {cohere_result.get('text')}")
-            # Fallback
             response = self._fallback_response(text_lower, detected_models, rag_context, state)
 
         # Zapisz kontekst
@@ -402,13 +400,13 @@ ODPOWIEDŹ (po polsku, 5-6 zdań):"""
         if any(word in text_lower for word in ['cześć', 'witaj', 'hej']):
             return "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
         elif any(word in text_lower for word in ['dziękuję', 'dzięki']):
-            return "Proszę bardzo! Czy mogę pomóc w czymś jeszcze?"
+            return "Proszę bardzo! Czy mogę pomóc w czymś jeszcze? Zapraszam do kontaktu."
         elif any(word in text_lower for word in ['godziny', 'otwarcia']):
-            return "Jesteśmy czynni pon-pt 9:00-17:00, sob 9:00-14:00. Zapraszamy!"
+            return "Jesteśmy czynni pon-pt 9:00-17:00, sob 9:00-14:00. Zapraszamy do salonu ZK Motors!"
         elif any(word in text_lower for word in ['adres', 'gdzie']):
-            return "Nasza siedziba: ul. Przykładowa 123, Warszawa. Zapraszamy!"
+            return "Nasza siedziba: ul. Przykładowa 123, Warszawa. Serdecznie zapraszamy do salonu ZK Motors!"
         elif detected_models and rag_context:
-            return f"Oto informacje o {', '.join(detected_models)}:\n{rag_context[:200]}...\n\nWięcej w salonie ZK Motors!"
+            return f"Oto informacje o {', '.join(detected_models)}:\n{rag_context[:300]}...\n\nWięcej szczegółów w salonie ZK Motors!"
         else:
             state["failed_attempts"] = state.get("failed_attempts", 0) + 1
             if state["failed_attempts"] >= 3:
@@ -465,14 +463,13 @@ async def panel():
     <div class="status good">✅ Bot aktywny</div>
     <h3>🌍 URL webhooka (wklej to w marketplace):</h3>
     <div class="url" id="url"></div>
-    <p><strong>WAŻNE:</strong> Użyj tego URL w marketplace → Settings → Events → Production</p>
+    <p><strong>WAŻNE:</strong> Użyj tego URL w marketplace → Settings → Events → Development</p>
     <h3>📋 Instrukcja:</h3>
     <ol>
         <li>Wejdź na <a href="https://marketplace.crisp.chat" target="_blank">Marketplace</a></li>
         <li>Twój plugin → Settings → Events</li>
-        <li>Wklej URL powyżej w "Production"</li>
+        <li>Wklej URL powyżej w "Development"</li>
         <li>Zaznacz event <code>message:send</code></li>
-        <li>Skopiuj "signing secret" do .env</li>
     </ol>
     <h3>🔍 Status:</h3>
     <ul>
@@ -493,7 +490,6 @@ async def panel():
         document.getElementById('cohere-status').innerText = d.available ? '✅' : '❌ brak klucza';
     });
 
-    // Odświeżaj logi co 2 sekundy
     setInterval(() => {
         fetch('/logs').then(r=>r.text()).then(logs => {
             document.getElementById('logs').innerText = logs || 'Brak logów';
@@ -522,8 +518,10 @@ async def catch_all_webhooks(request: Request):
         path = request.url.path
         query = str(request.url.query)
 
-        log_msg = f"\n{'='*60}\n📨 CRISP WEBHOOK at {datetime.now().strftime('%H:%M:%S')}\n📌 Ścieżka: {path}\n🔍 Query: {query}"
-        print(log_msg)
+        print(f"\n{'='*60}")
+        print(f"📨 CRISP WEBHOOK at {datetime.now().strftime('%H:%M:%S')}")
+        print(f"📌 Ścieżka: {path}")
+        print(f"🔍 Query: {query}")
         add_log(f"Webhook na {path}")
 
         if request.method == "GET":
