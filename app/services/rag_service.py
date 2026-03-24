@@ -3,71 +3,86 @@ Serwis RAG (Retrieval-Augmented Generation) dla BMW Assistant.
 Łączy ChromaDB z Cohere embeddings i dostarcza kontekst dla LLM.
 """
 import asyncio
+import os
 from typing import List, Dict, Any, Optional, Tuple
-from datetime import datetime
+from datetime import datetime, timedelta
 import hashlib
 import json
-from pathlib import Path
 import re
-from datetime import timedelta 
+from pathlib import Path
 
 import chromadb
 from chromadb.config import Settings
 from chromadb.utils import embedding_functions
 import numpy as np
 
-from app.core.config import settings
+from dotenv import load_dotenv
 
 # ============================================
-# SIMPLE LOGGER (fallback)
+# LOAD ENVIRONMENT VARIABLES
 # ============================================
 
-try:
-    from app.utils.logger import log, PerformanceLogger
-except ImportError:
-    # Simple fallback logger
-    import sys
-    from datetime import datetime
-    from contextlib import contextmanager
-    import time
-    
-    class SimpleLogger:
-        def __init__(self, name: str = "rag_service"):
-            self.name = name
-        
-        def _log(self, level: str, message: str):
-            timestamp = datetime.now().strftime("%H:%M:%S")
-            print(f"{timestamp} - {self.name} - {level} - {message}", file=sys.stdout)
-        
-        def debug(self, message: str):
-            self._log("DEBUG", message)
-        
-        def info(self, message: str):
-            self._log("INFO", message)
-        
-        def warning(self, message: str):
-            self._log("WARNING", message)
-        
-        def error(self, message: str):
-            self._log("ERROR", message)
-    
-    log = SimpleLogger()
-    
-    class PerformanceLogger:
-        @staticmethod
-        def measure(name: str):
-            @contextmanager
-            def timer():
-                start_time = time.time()
-                try:
-                    yield
-                finally:
-                    elapsed = time.time() - start_time
-                    log.info(f"⏱️  {name}: {elapsed:.3f}s")
-            return timer()
+load_dotenv()
 
 # ============================================
-# CACHE SERVICE (simplified)
+# SIMPLE CONFIG (zamiast from app.core.config)
+# ============================================
+
+class Settings:
+    """Konfiguracja dla RAG service"""
+    
+    # ChromaDB
+    CHROMA_COLLECTION_NAME = os.getenv("CHROMA_COLLECTION_NAME", "bmw_docs")
+    CHROMA_DB_PATH = os.getenv("CHROMA_DB_PATH", "./chroma_db")
+    
+    # Cohere
+    COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+    COHERE_EMBED_MODEL = os.getenv("COHERE_EMBED_MODEL", "embed-multilingual-v3.0")
+    
+    # RAG thresholds
+    SIMILARITY_THRESHOLD = float(os.getenv("SIMILARITY_THRESHOLD", "0.5"))
+    TOP_K_DOCUMENTS = int(os.getenv("TOP_K_DOCUMENTS", "3"))
+    
+    # Paths
+    @property
+    def CHROMA_DB_PATH_OBJ(self) -> Path:
+        return Path(self.CHROMA_DB_PATH).absolute()
+
+settings = Settings()
+
+# ============================================
+# SIMPLE LOGGER
+# ============================================
+
+class SimpleLogger:
+    """Prosty logger dla RAG service"""
+    
+    def __init__(self, name: str = "rag_service"):
+        self.name = name
+    
+    def _log(self, level: str, message: str):
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        print(f"{timestamp} - {self.name} - {level} - {message}")
+    
+    def debug(self, message: str):
+        self._log("DEBUG", message)
+    
+    def info(self, message: str):
+        self._log("INFO", message)
+    
+    def warning(self, message: str):
+        self._log("WARNING", message)
+    
+    def error(self, message: str):
+        self._log("ERROR", message)
+    
+    def critical(self, message: str):
+        self._log("CRITICAL", message)
+
+log = SimpleLogger()
+
+# ============================================
+# SIMPLE CACHE SERVICE
 # ============================================
 
 class SimpleCacheService:
@@ -76,6 +91,7 @@ class SimpleCacheService:
     def __init__(self, namespace: str = "default"):
         self.namespace = namespace
         self.cache = {}
+        self.default_ttl = 300  # 5 minut
     
     async def get(self, key: str):
         """Pobiera wartość z cache"""
@@ -88,8 +104,10 @@ class SimpleCacheService:
                 del self.cache[full_key]
         return None
     
-    async def set(self, key: str, value, ttl: int = 300):
+    async def set(self, key: str, value, ttl: int = None):
         """Ustawia wartość w cache"""
+        if ttl is None:
+            ttl = self.default_ttl
         full_key = f"{self.namespace}_{key}"
         self.cache[full_key] = {
             'value': value,
@@ -101,6 +119,10 @@ class SimpleCacheService:
         full_key = f"{self.namespace}_{key}"
         if full_key in self.cache:
             del self.cache[full_key]
+    
+    async def clear(self):
+        """Czyści cały cache"""
+        self.cache.clear()
 
 
 # ============================================
@@ -261,6 +283,14 @@ class VectorStoreService:
             
             if not persist_path.exists():
                 log.error(f"ChromaDB path does not exist: {persist_path}")
+                log.info(f"Creating directory: {persist_path}")
+                persist_path.mkdir(parents=True, exist_ok=True)
+                log.info(f"Directory created. You need to populate the database.")
+                return False
+            
+            # Sprawdź klucz Cohere
+            if not settings.COHERE_API_KEY:
+                log.error("COHERE_API_KEY not found in environment variables")
                 return False
             
             # Inicjalizuj klienta
@@ -288,8 +318,11 @@ class VectorStoreService:
             except Exception as e:
                 log.error(f"Failed to get collection '{self.collection_name}': {str(e)}")
                 # Sprawdź dostępne kolekcje
-                collections = self.client.list_collections()
-                log.info(f"Available collections: {[c.name for c in collections]}")
+                try:
+                    collections = self.client.list_collections()
+                    log.info(f"Available collections: {[c.name for c in collections]}")
+                except:
+                    log.info("No collections available")
                 return False
                 
         except Exception as e:
@@ -329,14 +362,13 @@ class VectorStoreService:
                     distance = results["distances"][0][i] if results.get("distances") else 0.0
                     
                     # ChromaDB używa dystansów: mniejsze = lepiej
-                    if distance >= min_score:
-                        doc_data = {
-                            "content": doc_text,
-                            "metadata": metadata,
-                            "id": results["ids"][0][i] if results.get("ids") else f"doc_{i}"
-                        }
-                        documents.append(doc_data)
-                        distances.append(float(distance))
+                    doc_data = {
+                        "content": doc_text,
+                        "metadata": metadata,
+                        "id": results["ids"][0][i] if results.get("ids") else f"doc_{i}"
+                    }
+                    documents.append(doc_data)
+                    distances.append(float(distance))
             
             log.debug(f"Found {len(documents)} documents for query: '{query_text[:50]}...'")
             return documents, distances
@@ -371,10 +403,10 @@ class RAGService:
         self.cache = SimpleCacheService(namespace="rag")
         self.intent_detector = IntentDetector()
         
-        # Konfiguracja Z CONFIGU
-        self.min_confidence = getattr(settings, 'SIMILARITY_THRESHOLD', 0.5)
+        # Konfiguracja
+        self.min_confidence = settings.SIMILARITY_THRESHOLD
         self.max_distance = 1.0 - self.min_confidence
-        self.top_k_default = getattr(settings, 'TOP_K_DOCUMENTS', 3)
+        self.top_k_default = settings.TOP_K_DOCUMENTS
         
         # Statystyki
         self._stats = {
@@ -726,7 +758,7 @@ class RAGService:
 
 
 # ============================================
-# DI - DEPENDENCY INJECTION
+# DEPENDENCY INJECTION
 # ============================================
 
 _rag_service_instance = None

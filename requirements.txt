@@ -13,6 +13,7 @@ cohere==4.51
 chromadb==0.4.24
 langchain==0.1.20
 langchain-community==0.0.38
+langchain-text-splitters==0.0.1  # DODANE!
 openai==1.25.1
 tiktoken==0.7.0
 sentence-transformers==2.7.0

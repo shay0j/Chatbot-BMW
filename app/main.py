@@ -1,859 +1,683 @@
-"""
-BMW Assistant - Production Version with Improved RAG and Intent Detection
-"""
-
+import os
+import asyncio
 import json
-import time
+import base64
+import hmac
+import hashlib
+import secrets
+import traceback
+import sys
+from typing import Optional, Dict, Any, List, Tuple
 from datetime import datetime
-from typing import Optional, Dict, Any, List
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks, Request, status
+import httpx
+import cohere
+from loguru import logger
+from dotenv import load_dotenv
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import JSONResponse, RedirectResponse, HTMLResponse
+from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, StreamingResponse, HTMLResponse
-from fastapi.security import HTTPBearer
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, validator
-import uvicorn
-
-from app.core.config import settings, validate_configuration
-from app.utils.logger import setup_logger, log
-from app.services.llm_service import LLMService, get_llm_service
-from app.services.prompt_service import PromptService, get_prompt_service
-from app.services.rag_service import get_rag_service, RAGService
-from app.services.cache import init_cache
+from starlette.middleware.sessions import SessionMiddleware
 
 # ============================================
-# INITIALIZATION
+# IMPORT NOWEGO RAG SERVICE
 # ============================================
 
-logger = setup_logger(__name__)
-security = HTTPBearer(auto_error=False)
+current_dir = Path(__file__).parent.absolute()
+if str(current_dir) not in sys.path:
+    sys.path.insert(0, str(current_dir))
 
-BASE_DIR = Path(__file__).parent.absolute()
-TEMPLATES_DIR = BASE_DIR / "templates"
-STATIC_DIR = BASE_DIR / "static"
+try:
+    from app.services.rag_service import get_rag_service as get_rag_service_new
+    from app.services.rag_service import RAGService
+    RAG_AVAILABLE = True
+    print("✅ Nowy RAG service załadowany")
+except Exception as e:
+    print(f"⚠️ Ostrzeżenie: Could not import new RAG module: {e}")
+    RAG_AVAILABLE = False
 
-conversation_memory: Dict[str, List[Dict]] = {}
-MAX_HISTORY = 5
+    # Dummy RAG dla fallback
+    class RAGService:
+        async def retrieve_with_intent_check(self, query, top_k=3, confidence_threshold=0.5):
+            return {
+                "has_data": False,
+                "skip_rag": False,
+                "below_threshold": True,
+                "confidence": 0.0,
+                "intent": "general",
+                "detected_models": [],
+                "tech": False,
+                "documents": [],
+                "sources": []
+            }
+        async def health_check(self):
+            return {"status": "unavailable", "is_dummy": True}
+        async def get_stats(self):
+            return {"total_chunks": 0, "is_dummy": True}
 
-# ============================================
-# MODELS
-# ============================================
-
-class ChatRequest(BaseModel):
-    """Request model dla endpointu chat"""
-    message: str = Field(..., min_length=1, max_length=1000)
-    session_id: Optional[str] = Field(default="default", description="ID sesji")
-    stream: bool = Field(default=False, description="Czy streamować odpowiedź")
-    temperature: float = Field(
-        default=0.7,
-        ge=0.0, 
-        le=1.0,
-        description="Kreatywność odpowiedzi"
-    )
-    language: str = Field(
-        default="pl",
-        pattern="^(pl|en|de)$",
-        description="Język odpowiedzi"
-    )
-    
-    @validator('message')
-    def message_not_empty(cls, v):
-        if not v.strip():
-            raise ValueError('Wiadomość nie może być pusta')
-        return v.strip()
-
-class ChatResponse(BaseModel):
-    """Response model dla endpointu chat"""
-    answer: str
-    success: bool = Field(default=True, description="Czy odpowiedź się udała")
-    session_id: str = Field(..., description="ID sesji")
-    history_length: int = Field(..., description="Długość historii konwersacji")
-    processing_time: float = Field(..., description="Czas przetwarzania w sekundach")
-    sources: List[Dict[str, Any]] = Field(
-        default_factory=list,
-        description="Źródła użyte do wygenerowania odpowiedzi"
-    )
-    model_used: str = Field(default="", description="Model użyty do generacji")
-    tokens_used: Optional[Dict[str, int]] = Field(default=None, description="Użyte tokeny")
-    confidence: Optional[float] = Field(
-        default=None,
-        ge=0.0,
-        le=1.0,
-        description="Pewność odpowiedzi"
-    )
-    rag_info: Optional[Dict[str, Any]] = Field(
-        default=None,
-        description="Informacje o RAG"
-    )
-    data_quality: Optional[str] = Field(
-        default=None,
-        description="Jakość danych: high/medium/low"
-    )
-
-class HealthResponse(BaseModel):
-    """Model odpowiedzi health check"""
-    status: str
-    timestamp: str
-    version: str
-    environment: str
-    services: Dict[str, str]
-    memory: Dict[str, Any]
-    rag_stats: Optional[Dict[str, Any]] = None
-
-class ResetResponse(BaseModel):
-    """Model odpowiedzi reset"""
-    success: bool
-    message: str
-    session_id: str
-    history_length: int
-
-class HistoryResponse(BaseModel):
-    """Model odpowiedzi historii"""
-    session_id: str
-    history: List[Dict[str, Any]]
-    total_messages: int
-    limit: int
+    async def get_rag_service_new():
+        return RAGService()
 
 # ============================================
-# HELPER FUNCTIONS
+# RAG SERVICE SINGLETON
 # ============================================
 
-def get_conversation_history(session_id: str) -> List[Dict[str, Any]]:
-    """Pobiera historię konwersacji dla sesji"""
-    if session_id not in conversation_memory:
-        conversation_memory[session_id] = []
-    return conversation_memory[session_id]
+_rag_service_instance = None
 
-def add_to_history(session_id: str, role: str, message: str):
-    """Dodaje wiadomość do historii"""
-    history = get_conversation_history(session_id)
-    history.append({
-        "role": role,
-        "message": message,
-        "timestamp": datetime.now().isoformat()
-    })
-    
-    if len(history) > MAX_HISTORY:
-        conversation_memory[session_id] = history[-MAX_HISTORY:]
+async def get_rag_service():
+    """Zwraca singleton RAG service"""
+    global _rag_service_instance
+    if _rag_service_instance is None:
+        print("Tworzę singleton RAG service...")
+        _rag_service_instance = await get_rag_service_new()
+    return _rag_service_instance
 
-def format_history_for_prompt(history: List[Dict]) -> List[Dict[str, str]]:
-    """Formatuje historię na format dla promptu"""
-    formatted = []
-    for msg in history[-4:]:
-        formatted.append({
-            "role": msg["role"],
-            "content": msg["message"]
-        })
-    return formatted
+# ============================================
+# KONFIGURACJA
+# ============================================
+load_dotenv()
 
-async def log_interaction(
-    user_message: str,
-    assistant_response: str,
-    session_id: str,
-    sources_count: int,
-    tokens_used: Dict[str, int],
-    processing_time: float,
-    confidence: Optional[float],
-    rag_used: bool = False,
-    rag_has_data: bool = False,
-    rag_tech_data: bool = False,
-    intent: str = "general"
-):
-    """Loguje interakcję w tle"""
+print("\n" + "="*60)
+print("🔍 DEBUG - Environment variables:")
+print(f"CRISP_IDENTIFIER: {os.getenv('CRISP_IDENTIFIER')}")
+print(f"CRISP_KEY: {os.getenv('CRISP_KEY')[:5] if os.getenv('CRISP_KEY') else 'None'}...")
+print(f"CRISP_WEBHOOK_SECRET: {os.getenv('CRISP_WEBHOOK_SECRET')[:5] if os.getenv('CRISP_WEBHOOK_SECRET') else 'None'}...")
+print(f"COHERE_API_KEY: {os.getenv('COHERE_API_KEY')[:5] if os.getenv('COHERE_API_KEY') else 'None'}...")
+print(f"COHERE_MODEL: {os.getenv('COHERE_MODEL', 'command-a-03-2025')}")
+print("="*60 + "\n")
+
+# ============================================
+# CRISP KONFIGURACJA
+# ============================================
+CRISP_IDENTIFIER = os.getenv("CRISP_IDENTIFIER")
+CRISP_KEY = os.getenv("CRISP_KEY")
+CRISP_WEBHOOK_SECRET = os.getenv("CRISP_WEBHOOK_SECRET")
+
+if not CRISP_IDENTIFIER or not CRISP_KEY:
+    logger.error("❌ CRISP_IDENTIFIER lub CRISP_KEY nie znalezione w .env - bot nie zadziała!")
+    exit(1)
+
+BASE_URL = os.getenv("BASE_URL", "https://crinklier-ruddily-leonore.ngrok-free.dev")
+
+# ============================================
+# FUNKCJE POMOCNICZE CRISP
+# ============================================
+
+def verify_crisp_signature(payload: bytes, signature: str, timestamp: str, secret: str) -> bool:
+    """Weryfikuje sygnaturę webhooka z Crisp"""
+    if not secret or not signature:
+        return False
+
     try:
-        log_entry = {
-            "timestamp": datetime.utcnow().isoformat(),
-            "session_id": session_id,
-            "user_message_preview": user_message[:100],
-            "assistant_response_preview": assistant_response[:100],
-            "sources_count": sources_count,
-            "processing_time": round(processing_time, 2),
-            "confidence": round(confidence, 2) if confidence else None,
-            "rag_used": rag_used,
-            "rag_has_data": rag_has_data,
-            "rag_tech_data": rag_tech_data,
-            "intent": intent
-        }
-        
-        logger.info(f"Interaction logged", extra=log_entry)
-        
+        message = timestamp.encode('utf-8') + payload
+        expected_signature = hmac.new(
+            key=secret.encode('utf-8'),
+            msg=message,
+            digestmod=hashlib.sha256
+        ).hexdigest()
+
+        return hmac.compare_digest(expected_signature, signature)
     except Exception as e:
-        logger.error(f"Failed to log interaction: {str(e)}")
+        print(f"❌ Błąd weryfikacji sygnatury: {e}")
+        return False
 
-# ============================================
-# FASTAPI APPLICATION
-# ============================================
-
-app = FastAPI(
-    title=settings.APP_NAME,
-    description="Asystent klienta ZK Motors z RAG i Cohere LLM. Oficjalny dealer BMW i MINI.",
-    version=settings.APP_VERSION,
-    docs_url="/docs" if not settings.IS_PRODUCTION else None,
-    redoc_url="/redoc" if not settings.IS_PRODUCTION else None,
-    openapi_url="/openapi.json" if not settings.IS_PRODUCTION else None,
-)
-
-if STATIC_DIR.exists():
-    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["*"],
-    expose_headers=["*"]
-)
-
-@app.middleware("http")
-async def add_process_time_header(request: Request, call_next):
-    start_time = time.time()
-    response = await call_next(request)
-    response.headers["X-Process-Time"] = str(time.time() - start_time)
-    return response
-
-# ============================================
-# BASIC ENDPOINTS
-# ============================================
-
-@app.get("/", response_class=HTMLResponse)
-async def root():
-    chat_html_path = TEMPLATES_DIR / "chat.html"
-    
-    if not chat_html_path.exists():
-        return HTMLResponse(f"""
-        <!DOCTYPE html>
-        <html>
-        <head><title>Error - File Not Found</title></head>
-        <body>
-            <h1>Error: chat.html not found</h1>
-            <p>Expected path: {chat_html_path}</p>
-        </body>
-        </html>
-        """)
-    
+async def send_crisp_message(website_id: str, session_id: str, text: str) -> Dict[str, Any]:
+    """Wysyła wiadomość przez API Crisp z pełnym logowaniem"""
     try:
-        with open(chat_html_path, 'r', encoding='utf-8') as f:
-            html_content = f.read()
-        
-        logger.info(f"Loaded chat.html from {chat_html_path}")
-        
-        js_config = f"""
-        <script>
-            window.API_BASE_URL = window.location.origin;
-            window.API_ENDPOINTS = {{
-                chat: '/chat',
-                health: '/health',
-                ping: '/ping',
-                reset: '/chat/reset',
-                status: '/api/status',
-                rag_info: '/rag/info'
-            }};
-            console.log('API Base URL:', window.API_BASE_URL);
-        </script>
-        """
-        
-        html_content = html_content.replace('</head>', js_config + '</head>')
-        return HTMLResponse(content=html_content)
-        
+        auth_str = f"{CRISP_IDENTIFIER}:{CRISP_KEY}"
+        auth_b64 = base64.b64encode(auth_str.encode()).decode()
+
+        headers = {
+            "Authorization": f"Basic {auth_b64}",
+            "Content-Type": "application/json",
+            "X-Crisp-Tier": "plugin",
+            "ngrok-skip-browser-warning": "true"
+        }
+
+        payload = {
+            "type": "text",
+            "from": "operator",
+            "origin": "chat",
+            "content": text
+        }
+
+        url = f"https://api.crisp.chat/v1/website/{website_id}/conversation/{session_id}/message"
+
+        print(f"📤 Crisp wysyłanie do {session_id[:8]}...: {text[:50]}...")
+
+        async with httpx.AsyncClient() as client:
+            response = await client.post(url, headers=headers, json=payload)
+            
+            print(f"📊 Crisp response status: {response.status_code}")
+            
+            if response.status_code == 200 or response.status_code == 202:
+                print(f"✅ Crisp: wiadomość wysłana pomyślnie (status {response.status_code})")
+                return {"success": True}
+            else:
+                print(f"❌ Crisp błąd {response.status_code}: {response.text[:200]}")
+                return {"success": False, "error": response.text}
+
     except Exception as e:
-        logger.error(f"Error loading chat.html: {str(e)}")
-        return HTMLResponse(f"""
-        <!DOCTYPE html>
-        <html>
-        <head><title>Error</title></head>
-        <body>
-            <h1>Error loading chat interface</h1>
-            <pre>{str(e)}</pre>
-        </body>
-        </html>
-        """)
+        print(f"❌ Crisp wyjątek przy wysyłaniu: {e}")
+        traceback.print_exc()
+        return {"success": False, "error": str(e)}
 
-@app.get("/ping")
-async def ping():
-    return {"status": "online", "timestamp": datetime.utcnow().isoformat()}
+# ============================================
+# COHERE SERVICE (Chat API)
+# ============================================
 
-@app.get("/api/status")
-async def api_status(rag_service: RAGService = Depends(get_rag_service)):
-    rag_stats = await rag_service.get_stats()
-    
-    return {
-        "online": True,
-        "service": settings.APP_NAME,
-        "version": settings.APP_VERSION,
-        "rag_status": rag_stats.get("status", "unknown"),
-        "llm_ready": True,
-        "timestamp": datetime.utcnow().isoformat(),
-        "rag_stats": {
-            "documents": rag_stats.get("documents_in_store", 0),
-            "queries_processed": rag_stats.get("queries_processed", 0),
-            "confidence_threshold": rag_stats.get("min_confidence_threshold", 0.6)
-        }
-    }
-
-@app.get("/health/quick")
-async def quick_health_check():
-    try:
-        memory_stats = {
-            "active_sessions": len(conversation_memory),
-            "total_messages": sum(len(h) for h in conversation_memory.values()),
-            "max_history": MAX_HISTORY
-        }
+class CohereService:
+    def __init__(self):
+        self.api_key = os.getenv("COHERE_API_KEY")
+        self.model = os.getenv("COHERE_MODEL", "command-a-03-2025")
         
-        return {
-            "status": "healthy",
-            "service": settings.APP_NAME,
-            "version": settings.APP_VERSION,
-            "timestamp": datetime.utcnow().isoformat(),
-            "memory": memory_stats,
-            "quick_check": True
-        }
-    except Exception as e:
-        return {"status": "error", "error": str(e), "quick_check": True}
+        if self.api_key:
+            try:
+                # Próba z ClientV2
+                self.client = cohere.ClientV2(self.api_key)
+                print(f"✅ Cohere zainicjalizowany (model: {self.model}, API v2)")
+            except AttributeError:
+                # Fallback do starszego Client
+                self.client = cohere.Client(self.api_key, v2=True)
+                print(f"✅ Cohere zainicjalizowany (model: {self.model}, Client v2 fallback)")
+        else:
+            self.client = None
+            print("⚠️ COHERE_API_KEY brak - używam fallback")
 
-@app.get("/health", response_model=HealthResponse)
-async def health_check(
-    rag_service: RAGService = Depends(get_rag_service),
-    llm_service: LLMService = Depends(get_llm_service)
-):
-    try:
-        rag_health = await rag_service.health_check()
-        rag_stats = await rag_service.get_stats()
+    async def generate(
+        self,
+        prompt: str,
+        system_prompt: Optional[str] = None,
+        temperature: float = 0.7,
+        max_tokens: int = 1000
+    ) -> Dict[str, Any]:
+        """Generuje odpowiedź używając Cohere Chat API"""
         
-        memory_stats = {
-            "active_sessions": len(conversation_memory),
-            "total_messages": sum(len(h) for h in conversation_memory.values()),
-            "max_history": MAX_HISTORY
+        if not self.client or not self.api_key:
+            return {"success": False, "text": "Brak API"}
+
+        try:
+            messages = []
+            
+            if system_prompt:
+                messages.append({
+                    "role": "system",
+                    "content": system_prompt
+                })
+            
+            messages.append({
+                "role": "user",
+                "content": prompt
+            })
+
+            response = await asyncio.to_thread(
+                self.client.chat,
+                model=self.model,
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens
+            )
+
+            if response and hasattr(response, 'message'):
+                if hasattr(response.message, 'content') and len(response.message.content) > 0:
+                    text = response.message.content[0].text
+                else:
+                    text = str(response.message)
+                
+                return {
+                    "success": True,
+                    "text": text,
+                    "model": self.model
+                }
+            else:
+                return {"success": False, "text": "Brak odpowiedzi od Cohere"}
+
+        except Exception as e:
+            logger.error(f"Cohere error: {e}")
+            return {"success": False, "text": f"Błąd Cohere: {str(e)}"}
+
+# ============================================
+# GŁÓWNA KLASA BOTA (z RAG i Cohere - LENIWA INICJALIZACJA)
+# ============================================
+
+class CrispBot:
+    def __init__(self):
+        logger.info("Inicjalizacja bota Crisp z RAG i Cohere...")
+        self.conversation_state = {}
+        self.rag_service = None
+        self.cohere = CohereService()
+        self._rag_initialized = False
+        logger.info("✅ Bot gotowy (RAG z leniwą inicjalizacją)")
+
+    async def _ensure_rag(self):
+        """Zapewnia że RAG jest zainicjalizowany (lazy loading)"""
+        if self.rag_service is None:
+            logger.info("🔄 Leniwa inicjalizacja RAG...")
+            try:
+                self.rag_service = await get_rag_service()
+                health = await self.rag_service.health_check()
+                stats = await self.rag_service.get_stats()
+                
+                if health.get("status") == "healthy":
+                    logger.info(f"✅ RAG zainicjalizowany: {stats.get('documents_in_store', 0)} dokumentów")
+                else:
+                    logger.warning(f"⚠️ RAG w stanie: {health.get('status')}")
+            except Exception as e:
+                logger.error(f"❌ RAG init failed: {e}")
+                self.rag_service = None
+        return self.rag_service
+
+    async def process_message(self, text: str, session_id: str) -> tuple[str, bool]:
+        """Przetwarza wiadomość z użyciem RAG i Cohere"""
+        text_lower = text.lower().strip()
+
+        # Inicjalizuj stan
+        if session_id not in self.conversation_state:
+            self.conversation_state[session_id] = {
+                "failed_attempts": 0,
+                "last_topic": None,
+                "context": []
+            }
+
+        state = self.conversation_state[session_id]
+
+        # Sprawdź czy to prośba o konsultanta
+        handoff_keywords = ['konsultant', 'człowiek', 'agent', 'handoff', 'konsultanta', 'człowiekiem']
+        if any(keyword in text_lower for keyword in handoff_keywords):
+            return "Łączę z konsultantem...", True
+
+        # === UPEWNIJ SIĘ ŻE RAG JEST ZAINICJALIZOWANY ===
+        await self._ensure_rag()
+        
+        # === RAG ===
+        rag_results = {
+            "has_data": False,
+            "skip_rag": False,
+            "confidence": 0.0,
+            "intent": "general",
+            "detected_models": [],
+            "documents": [],
+            "sources": []
         }
-        
-        return HealthResponse(
-            status=rag_health.get("status", "unknown"),
-            timestamp=datetime.utcnow().isoformat(),
-            version=settings.APP_VERSION,
-            environment=settings.ENVIRONMENT,
-            services={
-                "rag": rag_health.get("status", "unknown"),
-                "llm": "operational",
-                "embedding": rag_health.get("embedding_service", "unknown"),
-                "vector_store": rag_health.get("vector_store", "unknown")
-            },
-            memory=memory_stats,
-            rag_stats=rag_stats
+
+        if self.rag_service:
+            try:
+                rag_results = await self.rag_service.retrieve_with_intent_check(
+                    query=text,
+                    top_k=3,
+                    confidence_threshold=0.5
+                )
+                if rag_results.get("has_data"):
+                    logger.info(f"📚 RAG zwrócił {len(rag_results.get('documents', []))} dokumentów")
+            except Exception as e:
+                logger.error(f"RAG error: {e}")
+
+        # Przygotuj kontekst z RAG
+        rag_context = ""
+        if rag_results.get("has_data") and rag_results.get("documents"):
+            docs = rag_results.get("documents", [])[:3]
+            context_parts = []
+            for doc in docs:
+                content = doc.get('content', '')[:500]
+                metadata = doc.get('metadata', {})
+                source = metadata.get('title', metadata.get('source_file', 'Źródło'))[:50]
+                context_parts.append(f"Z {source}:\n{content}")
+            rag_context = "\n\n".join(context_parts)
+            logger.info(f"📚 Kontekst RAG: {len(rag_context)} znaków")
+
+        # Wykryj modele BMW (jeśli RAG nie podał)
+        detected_models = rag_results.get('detected_models', [])
+        if not detected_models:
+            bmw_models = ['x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'xm',
+                         'i3', 'i4', 'i5', 'i7', 'i8', 'ix',
+                         'm2', 'm3', 'm4', 'm5', 'm8', 'z4',
+                         'seria 2', 'seria 3', 'seria 4', 'seria 5', 'seria 7', 'seria 8']
+
+            for model in bmw_models:
+                if model in text_lower:
+                    detected_models.append(model.upper())
+
+        # System prompt dla Cohere
+        system_prompt = """Jesteś Leo - ekspertem BMW w ZK Motors, oficjalnym dealerze BMW i MINI.
+
+ZASADY:
+1. Odpowiadaj KONKRETNIE i RZETELNIE - maksymalnie 5-6 zdań
+2. Używaj DANYCH Z KONTEKSTU - nie wymyślaj informacji
+3. Jeśli brakuje danych - powiedz to i zaproś do salonu
+4. Używaj polskiego języka
+5. Jesteś przedstawicielem ZK Motors"""
+
+        # Zbuduj prompt
+        models_info = f"Wykryte modele: {', '.join(detected_models)}" if detected_models else ""
+        context_section = f"DANE Z BAZY:\n{rag_context}" if rag_context else "BRAK DANYCH W BAZIE"
+
+        # Historia rozmowy
+        history = ""
+        if len(state.get("context", [])) > 0:
+            recent = state["context"][-4:]
+            history = "HISTORIA:\n" + "\n".join([
+                f"{'Klient' if i%2==0 else 'Ty'}: {msg['content']}"
+                for i, msg in enumerate(recent)
+            ])
+
+        user_prompt = f"""PYTANIE: {text}
+
+{models_info}
+
+{context_section}
+
+{history}
+
+ODPOWIEDŹ (po polsku, 5-6 zdań):"""
+
+        # Wywołaj Cohere
+        cohere_result = await self.cohere.generate(
+            prompt=user_prompt,
+            system_prompt=system_prompt
         )
-        
+
+        if cohere_result.get("success"):
+            response = cohere_result.get("text", "")
+            print(f"✅ Cohere wygenerował odpowiedź")
+        else:
+            print(f"⚠️ Cohere błąd, używam fallback: {cohere_result.get('text')}")
+            response = self._fallback_response(text_lower, detected_models, rag_context, state)
+
+        # Zapisz kontekst
+        state["context"].append({"role": "user", "content": text})
+        state["context"].append({"role": "assistant", "content": response})
+        if len(state["context"]) > 10:
+            state["context"] = state["context"][-10:]
+
+        return response, False
+
+    def _fallback_response(self, text_lower: str, detected_models: List[str],
+                          rag_context: str, state: Dict) -> str:
+        """Fallback gdy Cohere nie działa"""
+
+        if any(word in text_lower for word in ['cześć', 'witaj', 'hej']):
+            return "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
+        elif any(word in text_lower for word in ['dziękuję', 'dzięki']):
+            return "Proszę bardzo! Czy mogę pomóc w czymś jeszcze? Zapraszam do kontaktu."
+        elif any(word in text_lower for word in ['godziny', 'otwarcia']):
+            return "Jesteśmy czynni pon-pt 9:00-17:00, sob 9:00-14:00. Zapraszamy do salonu ZK Motors!"
+        elif any(word in text_lower for word in ['adres', 'gdzie']):
+            return "Nasza siedziba: ul. Przykładowa 123, Warszawa. Serdecznie zapraszamy do salonu ZK Motors!"
+        elif detected_models and rag_context:
+            return f"Oto informacje o {', '.join(detected_models)}:\n{rag_context[:300]}...\n\nWięcej szczegółów w salonie ZK Motors!"
+        else:
+            state["failed_attempts"] = state.get("failed_attempts", 0) + 1
+            if state["failed_attempts"] >= 3:
+                return "Przepraszam, nie mogę pomóc. Łączę z konsultantem."
+            return "Przepraszam, nie zrozumiałem. Czy możesz powiedzieć inaczej?"
+
+# ============================================
+# FASTAPI SERVER
+# ============================================
+
+app = FastAPI(title="Crisp Bot z RAG i Cohere")
+
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(SessionMiddleware, secret_key=os.getenv("SECRET_KEY", secrets.token_urlsafe(32)))
+
+bot = CrispBot()
+
+# Bufor na logi
+_logs = []
+_MAX_LOGS = 50
+
+def add_log(message: str):
+    """Dodaje log do wewnętrznego bufora"""
+    global _logs
+    timestamp = datetime.now().strftime('%H:%M:%S')
+    _logs.append(f"[{timestamp}] {message}")
+    if len(_logs) > _MAX_LOGS:
+        _logs = _logs[-_MAX_LOGS:]
+
+# ============================================
+# ENDPOINTY
+# ============================================
+
+@app.get("/")
+async def home():
+    return RedirectResponse(url="/panel")
+
+@app.get("/panel", response_class=HTMLResponse)
+async def panel():
+    html = """<!DOCTYPE html>
+<html>
+<head><title>Crisp Bot Panel</title>
+<style>
+    body { font-family: Arial; margin: 40px; background: #f5f5f5; }
+    .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; }
+    .url { background: #f0f0f0; padding: 10px; font-family: monospace; border-radius: 5px; }
+    .status { padding: 10px; border-radius: 5px; margin: 10px 0; }
+    .good { background: #d4edda; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>🤖 Crisp Bot z RAG i Cohere</h1>
+    <div class="status good">✅ Bot aktywny</div>
+    <h3>🌍 URL webhooka (wklej to w marketplace):</h3>
+    <div class="url" id="url"></div>
+    <p><strong>WAŻNE:</strong> Użyj tego URL w marketplace → Settings → Events → Development</p>
+    <h3>📋 Instrukcja:</h3>
+    <ol>
+        <li>Wejdź na <a href="https://marketplace.crisp.chat" target="_blank">Marketplace</a></li>
+        <li>Twój plugin → Settings → Events</li>
+        <li>Wklej URL powyżej w "Development"</li>
+        <li>Zaznacz event <code>message:send</code></li>
+    </ol>
+    <h3>🔍 Status:</h3>
+    <ul>
+        <li>RAG: <span id="rag-status"></span></li>
+        <li>Cohere: <span id="cohere-status"></span></li>
+    </ul>
+    <h3>📊 Ostatnie logi:</h3>
+    <pre id="logs" style="background:#f0f0f0; padding:10px; max-height:200px; overflow:auto;">Brak</pre>
+</div>
+<script>
+    document.getElementById('url').innerText = window.location.origin + '/crisp/webhook';
+
+    fetch('/rag/info').then(r=>r.json()).then(d=>{
+        document.getElementById('rag-status').innerText = d.healthy ? '✅' : '⚠️ ' + d.status;
+    });
+
+    fetch('/cohere/info').then(r=>r.json()).then(d=>{
+        document.getElementById('cohere-status').innerText = d.available ? '✅' : '❌ brak klucza';
+    });
+
+    setInterval(() => {
+        fetch('/logs').then(r=>r.text()).then(logs => {
+            document.getElementById('logs').innerText = logs || 'Brak logów';
+        });
+    }, 2000);
+</script>
+</body>
+</html>"""
+    return HTMLResponse(content=html)
+
+# ============================================
+# GŁÓWNY ENDPOINT WEBHOOKA
+# ============================================
+
+@app.api_route("/crisp", methods=["POST", "GET"])
+@app.api_route("/crisp/webhook", methods=["POST", "GET"])
+@app.api_route("/webhook", methods=["POST", "GET"])
+@app.api_route("/", methods=["POST"])
+async def catch_all_webhooks(request: Request):
+    """
+    Uniwersalny endpoint łapiący wszystkie webhooki Crisp
+    """
+    try:
+        body = await request.body()
+        headers = dict(request.headers)
+        path = request.url.path
+        query = str(request.url.query)
+
+        print(f"\n{'='*60}")
+        print(f"📨 CRISP WEBHOOK at {datetime.now().strftime('%H:%M:%S')}")
+        print(f"📌 Ścieżka: {path}")
+        print(f"🔍 Query: {query}")
+        add_log(f"Webhook na {path}")
+
+        if request.method == "GET":
+            add_log("GET request - OK")
+            return JSONResponse({"status": "webhook endpoint active"}, status_code=200)
+
+        if not body:
+            add_log("Brak body - ignoruję")
+            return JSONResponse({"status": "no body"}, status_code=200)
+
+        # Weryfikacja sygnatury
+        if CRISP_WEBHOOK_SECRET:
+            sig = headers.get("x-crisp-signature")
+            ts = headers.get("x-crisp-request-timestamp")
+
+            if sig and ts:
+                if not verify_crisp_signature(body, sig, ts, CRISP_WEBHOOK_SECRET):
+                    add_log("❌ Nieprawidłowa sygnatura!")
+                    return JSONResponse({"status": "invalid signature"}, status_code=403)
+                add_log("✅ Sygnatura poprawna")
+            else:
+                add_log("⚠️ Brak nagłówków sygnatury")
+
+        # Parsuj JSON
+        try:
+            data = json.loads(body)
+            event = data.get('event', 'unknown')
+            add_log(f"Event: {event}")
+            print(f"📦 Event: {event}")
+        except json.JSONDecodeError as e:
+            add_log(f"❌ Błąd parsowania JSON: {e}")
+            return JSONResponse({"status": "invalid json"}, status_code=400)
+
+        if event != 'message:send':
+            add_log(f"⏭️ Pomijam event: {event}")
+            return JSONResponse({"status": "ignored"}, status_code=200)
+
+        msg_data = data.get('data', {})
+        if msg_data.get('from') != 'user':
+            sender = msg_data.get('from')
+            add_log(f"⏭️ Pomijam wiadomość od: {sender}")
+            return JSONResponse({"status": "ignored"}, status_code=200)
+
+        website_id = data.get('website_id')
+        session_id = msg_data.get('session_id')
+        message = msg_data.get('content', '')
+
+        add_log(f"Wiadomość: {message[:50]}...")
+        print(f"💬 Wiadomość: {message[:200]}")
+
+        # Przetwarzanie przez bota
+        response, transfer = await bot.process_message(message, session_id)
+
+        print(f"🤖 Odpowiedź: {response[:100]}...")
+        add_log(f"Odpowiedź: {response[:50]}...")
+
+        if response:
+            result = await send_crisp_message(website_id, session_id, response)
+            if result.get("success"):
+                add_log("✅ Odpowiedź wysłana")
+            else:
+                add_log(f"❌ Błąd wysyłania: {result.get('error')}")
+
+        if transfer:
+            await send_crisp_message(website_id, session_id, "🔄 Łączę z konsultantem...")
+            add_log("🔄 Transfer do konsultanta")
+
+        add_log("✅ Webhook przetworzony")
+        return JSONResponse({"status": "ok"}, status_code=200)
+
     except Exception as e:
-        logger.error(f"Health check failed: {str(e)}")
-        return HealthResponse(
-            status="degraded",
-            timestamp=datetime.utcnow().isoformat(),
-            version=settings.APP_VERSION,
-            environment=settings.ENVIRONMENT,
-            services={"error": str(e)},
-            memory={"error": "memory check failed"},
-            rag_stats=None
-        )
+        error_msg = f"❌ BŁĄD: {e}"
+        print(error_msg)
+        add_log(f"❌ BŁĄD: {str(e)[:50]}...")
+        traceback.print_exc()
+        return JSONResponse({"error": str(e)}, status_code=500)
+
+# ============================================
+# ENDPOINTY DIAGNOSTYCZNE
+# ============================================
+
+@app.get("/logs")
+async def get_logs():
+    """Zwraca ostatnie logi"""
+    return "\n".join(_logs)
 
 @app.get("/rag/info")
-async def get_rag_info(rag_service: RAGService = Depends(get_rag_service)):
+async def rag_info():
+    """Informacje o RAG"""
     try:
-        health = await rag_service.health_check()
-        stats = await rag_service.get_stats()
-        
+        rag = await get_rag_service()
+        health = await rag.health_check()
+        stats = await rag.get_stats()
         return {
             "healthy": health.get("status") == "healthy",
-            "vector_store": health.get("vector_store", "unknown"),
+            "status": health.get("status"),
             "documents": stats.get("documents_in_store", 0),
-            "queries_processed": stats.get("queries_processed", 0),
-            "cache_hit_rate": stats.get("cache_hit_rate", 0),
-            "intent_skipped": stats.get("intent_skipped", 0),
-            "low_confidence_skipped": stats.get("low_confidence_skipped", 0),
-            "confidence_threshold": stats.get("min_confidence_threshold", 0.6),
-            "details": stats
+            "available": RAG_AVAILABLE
         }
     except Exception as e:
-        return {
-            "healthy": False,
-            "error": str(e),
-            "details": "RAG service error"
-        }
+        return {"healthy": False, "available": RAG_AVAILABLE, "error": str(e)}
 
-@app.get("/models")
-async def list_models():
-    models = [
-        {
-            "id": "command-r",
-            "name": "Command R",
-            "provider": "Cohere",
-            "max_tokens": 128000,
-            "context_length": 128000,
-            "description": "Flagowy model do konwersacji"
-        },
-        {
-            "id": "command-r-plus", 
-            "name": "Command R+",
-            "provider": "Cohere",
-            "max_tokens": 128000,
-            "context_length": 128000,
-            "description": "Zaawansowany model z lepszym rozumieniem"
-        }
-    ]
-    
+@app.get("/cohere/info")
+async def cohere_info():
+    """Informacje o Cohere"""
     return {
-        "models": models,
-        "default_model": settings.COHERE_CHAT_MODEL,
-        "memory_enabled": True,
-        "max_history": MAX_HISTORY
+        "available": bool(os.getenv("COHERE_API_KEY")),
+        "model": os.getenv("COHERE_MODEL", "command-a-03-2025"),
+        "api_key_set": bool(os.getenv("COHERE_API_KEY"))
     }
 
-# ============================================
-# CHAT ENDPOINT - UPDATED WITH NEW RAG & PROMPT SERVICE
-# ============================================
-
-@app.post("/chat", response_model=ChatResponse)
-async def chat(
-    request: ChatRequest,
-    background_tasks: BackgroundTasks,
-    rag_service: RAGService = Depends(get_rag_service),
-    llm_service: LLMService = Depends(get_llm_service),
-    prompt_service: PromptService = Depends(get_prompt_service)
-):
-    """
-    Główny endpoint chat z nowym RAG i PromptService
-    """
-    start_time = time.time()
-    
-    try:
-        session_id = request.session_id
-        user_message = request.message
-        
-        logger.info(f"Chat request: {user_message[:50]}... | {{'name': 'app.main'}}")
-        
-        # 1. Pobierz historię konwersacji
-        history = get_conversation_history(session_id)
-        conversation_history = format_history_for_prompt(history)
-        is_first_message = len(history) == 0
-        
-        # 2. Użyj nowego RAGService z filtrowaniem intencji - POPRAWIONE: użyj retrieve zamiast retrieve_simple
-        rag_results = await rag_service.retrieve_with_intent_check(
-            query=user_message,
-            top_k=3,
-            confidence_threshold=0.6
-        )
-        
-        logger.info(f"RAG results: has_data={rag_results.get('has_data')}, skip_rag={rag_results.get('skip_rag')}, below_threshold={rag_results.get('below_threshold')}, confidence={rag_results.get('confidence', 0.0):.2f}")
-        
-        # 3. Zbuduj prompt z nowym PromptService
-        prompt_data = prompt_service.build_chat_prompt(
-            user_message=user_message,
-            rag_results=rag_results,
-            conversation_history=conversation_history,
-            session_id=session_id,
-            language=request.language
-        )
-        
-        # 4. Generuj odpowiedź
-        response_text = ""
-        tokens_used = None
-        model_used = ""
-        
-        # Scenariusz A: Bezpośrednia odpowiedź (przywitania)
-        if not prompt_data["use_llm"]:
-            response_text = prompt_data["direct_response"]
-            llm_success = True
-            model_used = "greeting"
-            logger.info(f"Using direct greeting response (skip_rag={rag_results.get('skip_rag')})")
-        
-        # Scenariusz B: Generuj przez LLM
-        else:
-            try:
-                llm_result = await llm_service.generate(
-                    prompt=prompt_data["prompt"],
-                    model=settings.COHERE_CHAT_MODEL,
-                    temperature=request.temperature,
-                    max_tokens=400
-                )
-                
-                # Wyodrębnij tekst odpowiedzi
-                if hasattr(llm_result, 'text'):
-                    response_text = llm_result.text
-                    llm_success = True
-                elif isinstance(llm_result, dict) and 'text' in llm_result:
-                    response_text = llm_result['text']
-                    llm_success = True
-                elif isinstance(llm_result, dict) and 'generations' in llm_result:
-                    response_text = llm_result['generations'][0]['text']
-                    llm_success = True
-                else:
-                    llm_success = False
-                
-                # Pobierz użyte tokeny
-                if hasattr(llm_result, 'tokens_used'):
-                    tokens_used = llm_result.tokens_used
-                elif isinstance(llm_result, dict) and 'tokens_used' in llm_result:
-                    tokens_used = llm_result['tokens_used']
-                    
-                model_used = settings.COHERE_CHAT_MODEL
-                    
-            except Exception as llm_error:
-                logger.error(f"LLM error: {str(llm_error)}")
-                llm_success = False
-        
-        # 5. Jeśli LLM zawiódł, użyj fallback
-        if not llm_success or not response_text.strip():
-            logger.warning("LLM failed, using fallback")
-            response_text = prompt_service.build_fallback_response(
-                intent=rag_results.get('intent', 'general'),
-                detected_models=rag_results.get('detected_models', []),
-                confidence=rag_results.get('confidence', 0.0),
-                is_technical=rag_results.get('tech', False)
-            )
-            model_used = "fallback"
-        elif prompt_data["use_llm"]:
-            # Czyść odpowiedź z formatowania LLM
-            response_text = prompt_service.clean_response(
-                response=response_text,
-                session_id=session_id,
-                rag_used=prompt_data.get("rag_used", False),
-                rag_has_data=rag_results.get('has_data', False),
-                confidence=rag_results.get('confidence', 0.0),
-                intent=rag_results.get('intent', 'general')
-            )
-        
-        # 6. Dodaj do historii
-        add_to_history(session_id, "user", user_message)
-        add_to_history(session_id, "assistant", response_text)
-        
-        # 7. Przygotuj odpowiedź API
-        processing_time = time.time() - start_time
-        
-        # Przygotuj źródła
-        sources = []
-        if rag_results.get('has_data') and rag_results.get('sources'):
-            for i, source in enumerate(rag_results['sources'][:2], 1):
-                sources.append({
-                    'id': i,
-                    'title': source.get('title', 'Źródło')[:80],
-                    'content_preview': source.get('content', '')[:150] + ('...' if len(source.get('content', '')) > 150 else ''),
-                    'similarity': round(source.get('score', 0), 3),
-                    'url': source.get('url', ''),
-                    'source': source.get('source', 'unknown')
-                })
-        
-        # Określ jakość danych
-        if rag_results.get('tech', False):
-            data_quality = "high"
-        elif rag_results.get('has_data', False):
-            data_quality = "medium"
-        else:
-            data_quality = "low"
-        
-        # Aktualizuj quality w zależności od confidence
-        confidence = rag_results.get('confidence', 0.0)
-        if confidence < 0.4:
-            data_quality = "low"
-        elif confidence < 0.7:
-            data_quality = "medium"
-        else:
-            data_quality = "high"
-        
-        response = ChatResponse(
-            answer=response_text,
-            session_id=session_id,
-            history_length=len(get_conversation_history(session_id)),
-            processing_time=processing_time,
-            sources=sources,
-            model_used=model_used,
-            tokens_used=tokens_used,
-            confidence=confidence,
-            rag_info={
-                "has_data": rag_results.get('has_data', False),
-                "has_technical_data": rag_results.get('tech', False),
-                "confidence": confidence,
-                "intent": rag_results.get('intent', 'general'),
-                "skip_rag": rag_results.get('skip_rag', False),
-                "below_threshold": rag_results.get('below_threshold', False)
-            },
-            data_quality=data_quality
-        )
-        
-        # 8. Loguj w tle
-        background_tasks.add_task(
-            log_interaction,
-            user_message=user_message,
-            assistant_response=response_text,
-            session_id=session_id,
-            sources_count=len(sources),
-            tokens_used=tokens_used,
-            processing_time=processing_time,
-            confidence=confidence,
-            rag_used=prompt_data.get("rag_used", False),
-            rag_has_data=rag_results.get('has_data', False),
-            rag_tech_data=rag_results.get('tech', False),
-            intent=rag_results.get('intent', 'general')
-        )
-        
-        logger.info(f"Response in {processing_time:.2f}s, quality: {data_quality}", extra={
-            'name': 'app.main',
-            'extra': {
-                'rag_data': rag_results.get('has_data', False),
-                'sources': len(sources)
-            }
-        })
-        
-        return response
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Chat error: {str(e)}", exc_info=True)
-        
-        # Ostateczny fallback
-        fallback_response = """Przepraszam, wystąpił błąd systemu. 
-Jestem Leo, ekspertem BMW w ZK Motors. 
-Proszę spróbować ponownie lub skontaktować się bezpośrednio z naszym salonem."""
-        
-        return ChatResponse(
-            answer=fallback_response,
-            success=False,
-            session_id=request.session_id,
-            history_length=len(get_conversation_history(request.session_id)),
-            processing_time=time.time() - start_time,
-            sources=[],
-            model_used="fallback",
-            confidence=0.0,
-            rag_info={"error": str(e)},
-            data_quality="error"
-        )
-
-@app.post("/chat/stream")
-async def chat_stream(request: ChatRequest):
-    async def event_generator():
-        yield f"data: {json.dumps({'error': 'Streaming not implemented'})}\n\n"
-        yield "data: [DONE]\n\n"
-    
-    return StreamingResponse(
-        event_generator(),
-        media_type="text/event-stream",
-        headers={"Cache-Control": "no-cache"}
-    )
-
-@app.post("/chat/reset", response_model=ResetResponse)
-async def reset_chat(session_id: str = "default"):
-    if session_id in conversation_memory:
-        conversation_memory[session_id] = []
-        logger.info(f"Reset conversation history for session: {session_id}")
-    
-    return ResetResponse(
-        success=True,
-        message=f"Session {session_id} reset successfully",
-        session_id=session_id,
-        history_length=len(get_conversation_history(session_id))
-    )
-
-@app.get("/chat/history", response_model=HistoryResponse)
-async def get_history(session_id: str = "default", limit: int = 10):
-    history = get_conversation_history(session_id)
-    
-    return HistoryResponse(
-        session_id=session_id,
-        history=history[-limit:],
-        total_messages=len(history),
-        limit=limit
-    )
-
-# ============================================
-# DEBUG ENDPOINTS
-# ============================================
-
-@app.get("/test/rag")
-async def test_rag(
-    query: str = "BMW X5 moc silnik",
-    rag_service: RAGService = Depends(get_rag_service)
-):
-    """Testowy endpoint do sprawdzenia działania RAG"""
-    if settings.IS_PRODUCTION:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Debug endpoints disabled in production"
-        )
-    
-    result = await rag_service.retrieve_with_intent_check(query=query, top_k=3)
-    
+@app.get("/crisp/test")
+async def crisp_test():
+    """Test konfiguracji Crisp"""
     return {
-        "query": query,
-        "has_data": result['has_data'],
-        "skip_rag": result.get('skip_rag', False),
-        "below_threshold": result.get('below_threshold', False),
-        "confidence": result['confidence'],
-        "intent": result.get('intent', 'general'),
-        "tech": result.get('tech', False),
-        "documents_count": len(result.get('documents', [])),
-        "sources_count": len(result.get('sources', []))
+        "configured": True,
+        "identifier": CRISP_IDENTIFIER[:5] + "..." if CRISP_IDENTIFIER else None,
+        "webhook_secret": bool(CRISP_WEBHOOK_SECRET),
+        "webhook_url": f"{BASE_URL}/crisp/webhook",
+        "instruction": "Użyj /crisp/webhook w marketplace"
     }
 
-@app.get("/debug/rag")
-async def debug_rag(
-    query: str,
-    top_k: int = 3,
-    rag_service: RAGService = Depends(get_rag_service)
-):
-    if settings.IS_PRODUCTION:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Debug endpoints disabled in production"
-        )
-    
-    result = await rag_service.retrieve_with_intent_check(query=query, top_k=top_k)
-    
-    return {
-        "query": query,
-        "result": result
-    }
-
-@app.get("/debug/stats")
-async def debug_stats(
-    rag_service: RAGService = Depends(get_rag_service),
-    llm_service: LLMService = Depends(get_llm_service),
-    prompt_service: PromptService = Depends(get_prompt_service)
-):
-    if settings.IS_PRODUCTION:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Debug endpoints disabled in production"
-        )
-    
-    rag_stats = await rag_service.get_stats()
-    llm_stats = await llm_service.get_stats()
-    
-    memory_stats = {
-        "active_sessions": len(conversation_memory),
-        "total_messages": sum(len(h) for h in conversation_memory.values()),
-        "sessions": list(conversation_memory.keys())[:5]
-    }
-    
-    return {
-        "rag_service": rag_stats,
-        "llm_service": llm_stats,
-        "memory": memory_stats,
-        "prompt_service": {
-            "response_history_size": len(prompt_service.response_history),
-            "max_history": prompt_service.max_history
-        },
-        "timestamp": datetime.utcnow().isoformat()
-    }
+@app.get("/health")
+async def health():
+    return {"status": "ok", "time": datetime.now().isoformat()}
 
 # ============================================
-# APPLICATION EVENTS
+# STARTUP
 # ============================================
 
 @app.on_event("startup")
-async def startup_event():
-    try:
-        validate_configuration()
-        await init_cache()
-        
-        # Inicjalizuj serwisy
-        rag_service = await get_rag_service()
-        rag_stats = await rag_service.get_stats()
-        
-        logger.info(f"{settings.APP_NAME} v{settings.APP_VERSION} starting up...")
-        logger.info(f"Environment: {settings.ENVIRONMENT}")
-        logger.info(f"LLM Model: {settings.COHERE_CHAT_MODEL}")
-        logger.info(f"RAG Documents: {rag_stats.get('documents_in_store', 0)}")
-        logger.info(f"RAG Confidence Threshold: {rag_stats.get('min_confidence_threshold', 0.6)}")
-        logger.info(f"Memory: {MAX_HISTORY} messages per session")
-        logger.info(f"API: http://{settings.HOST}:{settings.PORT}")
-        logger.info(f"Chat: http://{settings.HOST}:{settings.PORT}/")
-        
-        chat_html_path = TEMPLATES_DIR / "chat.html"
-        if chat_html_path.exists():
-            logger.info(f"HTML Interface: chat.html found")
-        else:
-            logger.warning(f"HTML Interface: chat.html NOT FOUND")
-        
-        logger.info("Application started successfully")
-        
-        if settings.IS_DEVELOPMENT:
-            logger.warning("Running in DEVELOPMENT mode")
-        
-    except Exception as e:
-        logger.critical(f"Startup failed: {str(e)}", exc_info=True)
-        raise
+async def startup():
+    print("\n" + "="*60)
+    print("🚀 CRISP BOT Z RAG I COHERE")
+    print("="*60)
+    print(f"📊 Panel: http://localhost:8000/panel")
+    print(f"🌍 Webhook: {BASE_URL}/crisp/webhook")
+    print(f"🔍 Test: {BASE_URL}/crisp/test")
+    print("="*60)
 
-@app.on_event("shutdown")
-async def shutdown_event():
-    logger.info("Shutting down application...")
-    logger.info(f"Memory stats: {len(conversation_memory)} sessions, {sum(len(h) for h in conversation_memory.values())} total messages")
+    if RAG_AVAILABLE:
+        print("✅ RAG dostępny")
+    else:
+        print("⚠️ RAG niedostępny - używa dummy")
+
+    if os.getenv("COHERE_API_KEY"):
+        print("✅ Cohere skonfigurowany")
+    else:
+        print("⚠️ Cohere brak - fallback responses")
+
+    print("="*60 + "\n")
 
 # ============================================
-# ERROR HANDLERS
+# MAIN
 # ============================================
-
-@app.exception_handler(HTTPException)
-async def http_exception_handler(request: Request, exc: HTTPException):
-    logger.warning(
-        f"HTTP {exc.status_code}: {exc.detail}",
-        extra={"path": request.url.path, "method": request.method}
-    )
-    
-    return JSONResponse(
-        status_code=exc.status_code,
-        content={"detail": exc.detail},
-    )
-
-@app.exception_handler(Exception)
-async def generic_exception_handler(request: Request, exc: Exception):
-    logger.critical(
-        f"Unhandled exception: {str(exc)}",
-        extra={"path": request.url.path, "method": request.method},
-        exc_info=True
-    )
-    
-    detail = "Internal server error"
-    if settings.IS_DEVELOPMENT:
-        detail = f"{exc.__class__.__name__}: {str(exc)}"
-    
-    return JSONResponse(
-        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"detail": detail},
-    )
-
-# ============================================
-# MAIN ENTRY POINT
-# ============================================
-
-def main():
-    import sys
-    
-    try:
-        validate_configuration()
-        
-        config = {
-            "app": "app.main:app",
-            "host": settings.HOST,
-            "port": settings.PORT,
-            "reload": settings.RELOAD,
-            "log_level": settings.LOG_LEVEL.lower(),
-        }
-        
-        if settings.IS_DEVELOPMENT:
-            print(f"\n{'='*60}")
-            print(f"{settings.APP_NAME} v{settings.APP_VERSION}")
-            print(f"Environment: {settings.ENVIRONMENT}")
-            print(f"Chat: http://{settings.HOST}:{settings.PORT}/")
-            print(f"Model: {settings.COHERE_CHAT_MODEL}")
-            print(f"Memory: {MAX_HISTORY} messages per session")
-            print(f"Test RAG: http://{settings.HOST}:{settings.PORT}/test/rag?query=BMW+X5")
-            print(f"Health: http://{settings.HOST}:{settings.PORT}/health")
-            print(f"{'='*60}\n")
-        
-        uvicorn.run(**config)
-        
-    except Exception as e:
-        print(f"Failed to start: {e}", file=sys.stderr)
-        sys.exit(1)
 
 if __name__ == "__main__":
-    main()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
