@@ -273,13 +273,108 @@ class CrispBot:
         """Przetwarza wiadomość z użyciem RAG i Cohere"""
         text_lower = text.lower().strip()
 
-        # Inicjalizuj stan
+        # === SPRAWDZENIE CZY PYTANIE DOTYCZY BMW / MINI / ZK MOTORS ===
+        tematy_dozwolone = [
+            'bmw', 'mini', 'zk motors', 'zk', 'motors', 'salon', 'serwis', 'dealer', 
+            'leasing', 'kredyt', 'jazda próbna', 'test drive', 'gwarancja', 'naprawa', 
+            'części', 'akcesoria', 'silnik', 'moc', 'spalanie', 'cena', 'oferta', 
+            'promocja', 'finansowanie', 'model', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 
+            'x7', 'xm', 'i3', 'i4', 'i5', 'i7', 'i8', 'ix', 'm2', 'm3', 'm4', 'm5', 
+            'm8', 'z4', 'seria', 'hybryda', 'elektryk', 'diesel', 'benzyma', 'automat'
+        ]
+        
+        # Zabronione marki (szczegółowa lista)
+        inne_marki = [
+            'audi', 'mercedes', 'mercedes benz', 'mercedes-benz', 'volkswagen', 'vw', 
+            'skoda', 'toyota', 'honda', 'hyundai', 'kia', 'ford', 'opel', 'renault', 
+            'peugeot', 'citroen', 'dacia', 'volvo', 'porsche', 'ferrari', 'lamborghini', 
+            'mclaren', 'bugatti', 'tesla', 'rivian', 'lucid', 'polestar', 'cupra', 'seat', 
+            'alfa romeo', 'fiat', 'jaguar', 'land rover', 'mazda', 'mitsubishi', 'nissan', 
+            'subaru', 'suzuki', 'chevrolet', 'cadillac', 'chrysler', 'dodge', 'jeep', 
+            'ram', 'bentley', 'rolls royce', 'aston martin', 'maserati'
+        ]
+        
+        # Warianty z apostrofem i bez
+        inne_marki_warianty = []
+        for marka in inne_marki:
+            inne_marki_warianty.append(marka)
+            if ' ' in marka:
+                inne_marki_warianty.append(marka.replace(' ', ''))
+            if '-' in marka:
+                inne_marki_warianty.append(marka.replace('-', ' '))
+                inne_marki_warianty.append(marka.replace('-', ''))
+        
+        # === WYKRYWANIE OFF-TOPU I ŻARTÓW ===
+        offtop_keywords = [
+            'żart', 'humor', 'śmieszny', 'baba', 'polityk', 'kawał', 'anegdot', 
+            'smieszny', 'zabawny', 'śmiech', 'haha', 'hehe', 'lol', 'xd', 'hahaha', 
+            'hehehe', 'pogoda', 'film', 'muzyka', 'sport', 'piłka', 'mecz', 'aktor', 
+            'serial', 'jedzenie', 'przepis', 'gotowanie', 'wakacje', 'urlop', 'podróż', 
+            'zwierzę', 'kot', 'pies', 'gra', 'komputer', 'telefon', 'samsung', 'iphone', 
+            'xiaomi', 'polityka', 'rząd', 'prezydent', 'wybory', 'covid', 'koronawirus'
+        ]
+        zapytania_offtopic = [
+            'opowiedz żart', 'powiedz coś śmiesznego', 'jakiś kawał', 'rozśmiesz mnie', 
+            'masz żart', 'jaki jest twój ulubiony żart', 'coś zabawnego', 'opowiedz coś', 
+            'pogadajmy', 'porozmawiajmy', 'rozmawiajmy', 'co słychać', 'jak się masz', 
+            'co robisz', 'gdzie mieszkasz', 'opowiedz o sobie', 'kim jesteś', 'co lubisz'
+        ]
+
+        # Sprawdź czy pytanie zawiera jakąś zabronioną markę
+        text_lower_no_spaces = text_lower.replace(' ', '').replace('-', '')
+        contains_forbidden = False
+        forbidden_mark_found = None
+        
+        for marka in inne_marki_warianty:
+            if marka in text_lower or marka.replace(' ', '') in text_lower_no_spaces:
+                contains_forbidden = True
+                forbidden_mark_found = marka
+                break
+        
+        # Sprawdź czy pytanie zawiera jakąś dozwoloną tematykę
+        contains_allowed = any(temat in text_lower for temat in tematy_dozwolone)
+        
+        # Sprawdź czy to off-top lub żart
+        is_offtopic = any(keyword in text_lower for keyword in offtop_keywords) or any(phrase in text_lower for phrase in zapytania_offtopic)
+
+        # === MOCNA BLOKADA INNYCH MAREK ===
+        if contains_forbidden:
+            logger.info(f"🚫 Zablokowano pytanie o markę: {forbidden_mark_found}")
+            return f"Przepraszam, jestem ekspertem tylko w zakresie samochodów BMW oraz MINI. Nie udzielam informacji o marce {forbidden_mark_found.upper()}. Jeśli masz pytanie dotyczące BMW, MINI lub usług salonu ZK Motors, chętnie pomogę! 😊", False
+
+        # === BLOKADA OFF-TOPU I ŻARTÓW ===
+        if is_offtopic and not contains_allowed:
+            return "😊 Rozumiem, że masz ochotę na luźną rozmowę, ale ja jestem tu po to, żeby pomagać w sprawach BMW, MINI i ZK Motors! 🚗\n\nJeśli masz pytanie o któryś z naszych modeli, usługi salonu, serwis, leasing lub jazdę próbną – śmiało pytaj! Służę pomocą.", False
+
+        # === BLOKADA PYTAŃ NIEZWIĄZANYCH ===
+        if not contains_allowed and not any(word in text_lower for word in ['cześć', 'witaj', 'hej', 'dzień dobry']):
+            return "Przepraszam, pomagam tylko w sprawach związanych z samochodami BMW, MINI oraz usługami salonu ZK Motors. Jeśli masz pytanie dotyczące tych tematów, śmiało pytaj! 😊", False
+
+        # === NOWA WIADOMOŚĆ POWITALNA DLA PIERWSZEJ WIADOMOŚCI ===
         if session_id not in self.conversation_state:
             self.conversation_state[session_id] = {
                 "failed_attempts": 0,
                 "last_topic": None,
                 "context": []
             }
+            
+            powitalna = (
+                "👋 Witaj w ZK Motors! 🚗\n\n"
+                "Jestem Leo, Twój wirtualny doradca BMW i MINI. "
+                "Specjalizuję się w doborze idealnego modelu do Twoich potrzeb, "
+                "a także w usługach salonu i serwisu ZK Motors.\n\n"
+                "Chętnie pomogę Ci wybrać auto, porównać modele, "
+                "odpowiem na pytania o osiągi, cenę lub umówię Cię na jazdę próbną. "
+                "Masz jakieś pytanie? Śmiało pytaj! 💪"
+            )
+            
+            self.conversation_state[session_id]["context"].append({
+                "role": "assistant", 
+                "content": powitalna,
+                "timestamp": datetime.now().isoformat()
+            })
+            
+            return powitalna, False
 
         state = self.conversation_state[session_id]
 
@@ -339,15 +434,38 @@ class CrispBot:
                 if model in text_lower:
                     detected_models.append(model.upper())
 
-        # System prompt dla Cohere
-        system_prompt = """Jesteś Leo - ekspertem BMW w ZK Motors, oficjalnym dealerze BMW i MINI.
+        # System prompt dla Cohere – ABSOLUTNY ZAKAZ INNYCH MAREK
+        system_prompt = """Jesteś Leo - ekspertem BMW i MINI w ZK Motors, oficjalnym dealerze tych marek.
 
-ZASADY:
-1. Odpowiadaj KONKRETNIE i RZETELNIE - maksymalnie 5-6 zdań
-2. Używaj DANYCH Z KONTEKSTU - nie wymyślaj informacji
+⚠️ ABSOLUTNY ZAKAZ ⚠️
+NIE WOLNO CI odpowiadać na pytania o JAKĄKOLWIEK inną markę samochodów. To jest NARUSZENIE TWOJEJ ROLI.
+
+ZAKAZANE MARKI (NIE WOLNO O NICH MÓWIĆ):
+Audi, Mercedes, Volkswagen, Skoda, Toyota, Honda, Hyundai, Kia, Ford, Opel, Renault, Peugeot, Citroen, Dacia, Volvo, Porsche, Ferrari, Lamborghini, McLaren, Bugatti, Tesla, Jaguar, Land Rover, Mazda, Nissan, Subaru, Suzuki, Chevrolet, Jeep, Bentley, Rolls Royce i WSZELKIE INNE.
+
+Jeśli klient pyta o którąkolwiek z tych marek:
+- NIE porównuj jej z BMW
+- NIE udzielaj żadnych informacji o tej marce
+- NIE komentuj jej
+- ODPOWIEDZ: "Przepraszam, jestem ekspertem tylko w zakresie BMW i MINI. Jeśli masz pytanie o te marki, chętnie pomogę."
+
+DODATKOWE ZAKAZY:
+- NIE opowiadaj żartów, anegdot, historyjek
+- NIE rozmawiaj o pogodzie, filmach, muzyce, sporcie, polityce
+- NIE angażuj się w small talk
+- NIE odpowiadaj na pytania niezwiązane z motoryzacją
+
+DOZWOLONY ZAKRES (TYLKO TO):
+- samochody marki BMW
+- samochody marki MINI
+- usługi salonu ZK Motors (sprzedaż, serwis, leasing, jazdy próbne, części)
+
+ZASADY ODPOWIADANIA:
+1. Odpowiadaj KONKRETNIE - maksymalnie 5-6 zdań
+2. Używaj DANYCH Z KONTEKSTU
 3. Jeśli brakuje danych - powiedz to i zaproś do salonu
 4. Używaj polskiego języka
-5. Jesteś przedstawicielem ZK Motors"""
+5. BĄDZ STANOWCZY w trzymaniu się swojej roli"""
 
         # Zbuduj prompt
         models_info = f"Wykryte modele: {', '.join(detected_models)}" if detected_models else ""
@@ -355,12 +473,14 @@ ZASADY:
 
         # Historia rozmowy
         history = ""
-        if len(state.get("context", [])) > 0:
-            recent = state["context"][-4:]
-            history = "HISTORIA:\n" + "\n".join([
-                f"{'Klient' if i%2==0 else 'Ty'}: {msg['content']}"
-                for i, msg in enumerate(recent)
-            ])
+        if len(state.get("context", [])) > 1:
+            context_messages = state["context"][1:] if state["context"][0].get("role") == "assistant" else state["context"]
+            recent = context_messages[-4:] if len(context_messages) > 4 else context_messages
+            if recent:
+                history = "HISTORIA:\n" + "\n".join([
+                    f"{'Klient' if msg['role'] == 'user' else 'Ty'}: {msg['content']}"
+                    for msg in recent
+                ])
 
         user_prompt = f"""PYTANIE: {text}
 
@@ -370,12 +490,14 @@ ZASADY:
 
 {history}
 
-ODPOWIEDŹ (po polsku, 5-6 zdań):"""
+ODPOWIEDŹ (po polsku, 5-6 zdań, TYLKO na temat BMW/MINI/ZK Motors):"""
 
         # Wywołaj Cohere
         cohere_result = await self.cohere.generate(
             prompt=user_prompt,
-            system_prompt=system_prompt
+            system_prompt=system_prompt,
+            temperature=0.7,
+            max_tokens=1000
         )
 
         if cohere_result.get("success"):
@@ -396,22 +518,45 @@ ODPOWIEDŹ (po polsku, 5-6 zdań):"""
     def _fallback_response(self, text_lower: str, detected_models: List[str],
                           rag_context: str, state: Dict) -> str:
         """Fallback gdy Cohere nie działa"""
+        
+        # Sprawdzenie innych marek
+        inne_marki = [
+            'audi', 'mercedes', 'volkswagen', 'skoda', 'toyota', 'honda', 
+            'hyundai', 'kia', 'ford', 'opel', 'renault', 'peugeot', 'citroen',
+            'dacia', 'volvo', 'porsche', 'ferrari', 'lamborghini', 'tesla',
+            'jaguar', 'land rover', 'mazda', 'nissan', 'subaru', 'suzuki'
+        ]
+        
+        for marka in inne_marki:
+            if marka in text_lower:
+                return f"Przepraszam, jestem ekspertem tylko w zakresie samochodów BMW oraz MINI. Jeśli masz pytanie dotyczące którejś z tych marek, chętnie pomogę! 😊"
+        
+        # Sprawdzenie off-topu
+        offtop_phrases = ['żart', 'humor', 'pogoda', 'film', 'muzyka', 'sport', 
+                          'jedzenie', 'gra', 'telefon', 'polityka', 'co słychać', 
+                          'jak się masz', 'opowiedz coś', 'porozmawiajmy']
+        if any(phrase in text_lower for phrase in offtop_phrases):
+            return "😊 Rozumiem, że masz ochotę na luźną rozmowę, ale ja jestem tu po to, żeby pomagać w sprawach BMW, MINI i ZK Motors! 🚗\n\nJeśli masz pytanie o któryś z naszych modeli, usługi salonu, serwis, leasing lub jazdę próbną – śmiało pytaj! Służę pomocą."
+        
+        # Tematy niezwiązane z motoryzacją
+        if not any(word in text_lower for word in ['bmw', 'mini', 'samochód', 'auto', 'silnik', 'cena', 'leasing', 'serwis', 'salon', 'zk']):
+            return "Przepraszam, pomagam tylko w sprawach związanych z samochodami BMW, MINI oraz usługami salonu ZK Motors. Jeśli masz pytanie dotyczące tych tematów, śmiało pytaj! 😊"
 
         if any(word in text_lower for word in ['cześć', 'witaj', 'hej']):
-            return "Cześć! Jestem Leo, ekspertem BMW w ZK Motors. W czym mogę pomóc?"
+            return "Witaj w ZK Motors! 👋 Jestem Leo, Twój wirtualny doradca BMW i MINI. Chętnie pomogę dobrać model do Twoich potrzeb – pytaj śmiało!"
         elif any(word in text_lower for word in ['dziękuję', 'dzięki']):
             return "Proszę bardzo! Czy mogę pomóc w czymś jeszcze? Zapraszam do kontaktu."
         elif any(word in text_lower for word in ['godziny', 'otwarcia']):
-            return "Jesteśmy czynni pon-pt 9:00-17:00, sob 9:00-14:00. Zapraszamy do salonu ZK Motors!"
+            return "Jesteśmy czynni pon-pt 9:00-18:00, sob 9:00-15:00. Zapraszamy do salonu ZK Motors!"
         elif any(word in text_lower for word in ['adres', 'gdzie']):
-            return "Nasza siedziba: ul. Przykładowa 123, Warszawa. Serdecznie zapraszamy do salonu ZK Motors!"
+            return "Posiadamy salony w Kielcach przy ul. Wystawowej 2, w Radomiu przy ul. Warszawskiej 234 oraz w Krasnych pod Rzeszowem przy ul. Krasne 9a. Serdecznie zapraszamy do salonu ZK Motors!"
         elif detected_models and rag_context:
             return f"Oto informacje o {', '.join(detected_models)}:\n{rag_context[:300]}...\n\nWięcej szczegółów w salonie ZK Motors!"
         else:
             state["failed_attempts"] = state.get("failed_attempts", 0) + 1
             if state["failed_attempts"] >= 3:
                 return "Przepraszam, nie mogę pomóc. Łączę z konsultantem."
-            return "Przepraszam, nie zrozumiałem. Czy możesz powiedzieć inaczej?"
+            return "Przepraszam, nie zrozumiałem. Czy możesz doprecyzować?"
 
 # ============================================
 # FASTAPI SERVER

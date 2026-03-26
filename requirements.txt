@@ -13,8 +13,7 @@ cohere==4.51
 chromadb==0.4.24
 langchain==0.1.20
 langchain-community==0.0.38
-langchain-text-splitters==0.0.1  # DODANE!
-openai==1.25.1
+langchain-text-splitters==0.0.1 
 tiktoken==0.7.0
 sentence-transformers==2.7.0
 faiss-cpu>=1.8.0
@@ -23,8 +22,6 @@ torch==2.2.1
 tokenizers==0.19.1
 
 # Vector Search & Embeddings
-hnswlib==0.7.0
-annoy==1.17.3
 
 # Data Processing
 pandas==2.2.2
@@ -50,7 +47,7 @@ fastapi-limiter==0.1.6
 # Utilities
 python-dotenv==1.0.1
 python-multipart==0.0.9
-httpx==0.27.0
+httpx>=0.23
 tenacity==8.2.3
 tqdm==4.66.2
 joblib==1.3.2
@@ -61,13 +58,13 @@ pytz==2024.1
 
 # Development
 black==24.3.0
-pytest==8.1.1
+pytest>=7.0,<8.0
 pytest-asyncio==0.23.5
 pytest-playwright==0.4.3
 pytest-cov==4.1.0
 ipython==8.23.0
 jupyter==1.0.0
-pytest-httpx==0.27.0
+pytest-httpx>=0.21,<0.28
 pytest-testdox==3.1.0
 autopep8==2.0.4
 mypy==1.9.0
@@ -77,7 +74,6 @@ pre-commit==3.7.0
 sqlalchemy==2.0.29
 alembic==1.13.1
 duckdb==0.10.0
-pysqlite3==0.5.3
 redis==5.0.6
 aioredis==2.0.1
 psycopg2-binary==2.9.9
@@ -97,8 +93,8 @@ colorama==0.4.6
 structlog==24.1.0
 prometheus-client==0.20.0
 opentelemetry-api==1.24.0
-opentelemetry-sdk==1.24.0
-opentelemetry-instrumentation-fastapi==0.43b0
+opentelemetry-sdk>=1.20,<1.25
+opentelemetry-instrumentation-fastapi>=0.40b0
 
 # Security
 cryptography==42.0.5
