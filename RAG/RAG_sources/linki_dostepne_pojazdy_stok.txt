@@ -1,0 +1,13 @@
+# DOSTÊPNE POJAZDY W ZK MOTORS - STOK / STOCK
+
+Nowe samochody BMW:
+https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bmarka_id%5D=1&PojazdSearch%5Brodzaj_id%5D=1&PojazdSearch%5Bstatus_id%5D=1
+
+Nowe motocykle BMW:
+https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Brodzaj_id%5D=2&PojazdSearch%5Bstatus_id%5D=1
+
+U¿ywane motocykle BMW:
+https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bstatus_id%5D=3
+
+U¿ywane BMW (ogólnie):
+https://najlepszeoferty.bmw.pl/uzywane/
