@@ -374,14 +374,22 @@ class CrispBot:
         return self.rag_service
 
     def _get_conversation_context(self, state: Dict, last_n: int = 3) -> str:
-        """Pobiera ostatnie N wymian konwersacji dla kontekstu"""
+        """Pobiera ostatnie N wymian konwersacji dla kontekstu.
+        
+        OPTYMALIZACJA: Używa TYLKO wiadomości użytkownika aby zapobiec
+        efektowi 'snowball' — gdzie odpowiedzi bota (np. o leasingu) 
+        wracają do RAG i powodują więcej wyników o leasingu.
+        """
         if not state.get("context"):
             return ""
         
+        # ZMIANA: Tylko wiadomości użytkownika trafiają do kontekstu RAG
+        user_messages = [msg for msg in state["context"] if msg["role"] == "user"]
+        recent_user = user_messages[-last_n:] if len(user_messages) > last_n else user_messages
+        
         context_parts = []
-        for msg in state["context"][-last_n*2:]:
-            role = "Klient" if msg["role"] == "user" else "Leo"
-            context_parts.append(f"{role}: {msg['content'][:200]}")
+        for msg in recent_user:
+            context_parts.append(f"Klient wcześniej pytał: {msg['content'][:200]}")
         
         return "\n".join(context_parts)
 
@@ -399,8 +407,9 @@ class CrispBot:
         if 'motocykl' in text_lower or 'motor' in text_lower:
             return "motorcycle"
         
-        # MINI - odsyła do salonu
-        if 'mini' in text_lower:
+        # MINI - odsyła do salonu (ROZSZERZONE o nazwy modeli MINI)
+        mini_models = ['countryman', 'clubman', 'cooper', 'paceman', 'one', 'cabrio', 'john cooper']
+        if 'mini' in text_lower or any(m in text_lower for m in mini_models):
             return "mini"
         
         # Akcesoria
@@ -468,26 +477,50 @@ class CrispBot:
         return False
 
     def _check_hallucination(self, response: str, rag_has_data: bool) -> bool:
-        """Sprawdza czy odpowiedź zawiera potencjalne halucynacje"""
+        """Sprawdza czy odpowiedź zawiera potencjalne halucynacje.
+        
+        OPTYMALIZACJA: Rozszerzono sprawdzanie poza same ceny —
+        teraz łapie też wymyślone dane techniczne.
+        """
+        response_lower = response.lower()
+        
         if not rag_has_data:
             # Jeśli RAG nie miał danych, a odpowiedź zawiera konkretne informacje - to halucynacja
             suspicious_phrases = [
                 'cena', 'zł', 'leasing', 'rabat', 'promocja', 'kosztuje', 'startuje od',
                 'standardowa cena', 'zazwyczaj', 'przykładowo', 'wynosi', 'zapłacisz'
             ]
-            if any(phrase in response.lower() for phrase in suspicious_phrases):
+            if any(phrase in response_lower for phrase in suspicious_phrases):
                 print(f"⚠️ WYKRYTO HALUCYNACJĘ: odpowiedź zawiera liczby/ceny bez źródła")
                 return True
+        
+        # Ogólne sprawdzenie: podejrzane zwroty sugerujące wymyślanie
+        fabrication_indicators = [
+            'standardowa cena', 'zazwyczaj kosztuje', 'przykładowo',
+            'z reguły', 'typowo', 'szacunkowo', 'orientacyjnie',
+            'w przybliżeniu wynosi'
+        ]
+        if any(phrase in response_lower for phrase in fabrication_indicators):
+            print(f"⚠️ WYKRYTO HALUCYNACJĘ: zwroty sugerujące wymyślanie danych")
+            return True
+        
         return False
 
     async def _get_rag_response(self, text: str, intent: str, context: str = "") -> str:
-        """Pobiera odpowiedź z RAG i Cohere z zabezpieczeniem przed halucynacjami"""
+        """Pobiera odpowiedź z RAG i Cohere z zabezpieczeniem przed halucynacjami.
+        
+        OPTYMALIZACJA:
+        - Kontekst rozmowy używa tylko wiadomości użytkownika (nie bota)
+        - System prompt wymusza język polski i strukturę odpowiedzi
+        - Dodano fallback z szerszym wyszukiwaniem gdy pierwsze nie da wyników
+        - Lepsza integracja z detected_models z RAG
+        """
         try:
             # Wzmocnij zapytanie o kontekst intencji
             enhanced_query = text
             intent_keywords = {
                 "general": "BMW samochód model",
-                "sales": "sprzedaż cena leasing rabat",
+                "sales": "sprzedaż cena leasing oferta",
                 "service": "serwis naprawa godziny",
                 "contact": "kontakt salon telefon adres",
             }
@@ -495,60 +528,82 @@ class CrispBot:
             if intent in intent_keywords:
                 enhanced_query = f"{text} {intent_keywords[intent]}"
             
-            # Dodaj kontekst rozmowy
+            # Dodaj kontekst rozmowy (TYLKO wiadomości użytkownika!)
             if context:
                 enhanced_query = f"Kontekst rozmowy:\n{context}\n\nAktualne pytanie: {enhanced_query}"
             
-            rag_results = await self.rag_service.retrieve_with_intent_check(query=enhanced_query, top_k=4)
+            rag_results = await self.rag_service.retrieve_with_intent_check(query=enhanced_query, top_k=5)
             rag_has_data = rag_results.get("has_data") and rag_results.get("documents")
             
+            # OPTYMALIZACJA: Fallback — jeśli pierwsze wyszukiwanie nie dało wyników,
+            # spróbuj z samym tekstem (bez intent keywords)
+            if not rag_has_data:
+                print(f"🔄 Pierwsze wyszukiwanie puste, próbuję szersze...")
+                rag_results = await self.rag_service.retrieve_with_intent_check(query=text, top_k=5)
+                rag_has_data = rag_results.get("has_data") and rag_results.get("documents")
+            
             if rag_has_data:
+                detected_models = rag_results.get("detected_models", [])
+                confidence = rag_results.get("confidence", 0)
+                
                 context_parts = []
                 for doc in rag_results.get("documents", [])[:4]:
                     content = doc.get('content', '')
                     metadata = doc.get('metadata', {})
-                    source = metadata.get('filename', 'dokument')
-                    context_parts.append(f"Źródło: {source}\n{content}")
+                    source = metadata.get('title', metadata.get('filename', 'dokument'))
+                    category = metadata.get('category', 'general')
+                    context_parts.append(f"[{category.upper()}] Źródło: {source}\n{content}")
                 
                 rag_context = "\n\n---\n\n".join(context_parts)
                 
-                # System prompt z zabezpieczeniem przed halucynacjami
-                system_prompt = f"""Jesteś Leo, pomocnym doradcą BMW w ZK Motors.
+                # Opis intencji klienta
+                intent_desc = {
+                    "general": "ogólne pytanie o BMW",
+                    "sales": "pytanie o sprzedaż/cenę/leasing",
+                    "service": "pytanie o serwis",
+                    "contact": "pytanie o kontakt/lokalizację",
+                    "salon_hours": "pytanie o godziny otwarcia",
+                }.get(intent, "ogólne pytanie")
+                
+                models_str = ", ".join(detected_models) if detected_models else "nie wykryto"
+                
+                # NOWY system prompt — ustrukturyzowany, z wymuszeniem języka polskiego
+                system_prompt = f"""Jesteś Leo — ekspert BMW w salonie ZK Motors (Kielce, Radom, Rzeszów).
 
-🚨 ZASADY ANTY-HALUCYNACYJNE 🚨:
-- Jeśli informacja JEST w dostarczonym kontekście RAG - możesz jej użyć
-- Jeśli informacji NIE MA w kontekście RAG - NIE wymyślaj, powiedz że nie masz tych informacji
-- NIE podawaj konkretnych cen, dat, godzin, rabatów, jeśli nie ma ich w kontekście
-- NIE używaj zwrotów "standardowa cena", "zazwyczaj", "przykładowo" - to oznaka wymyślania
+ZASADY ODPOWIEDZI:
+1. ZAWSZE odpowiadaj po POLSKU, nawet jeśli pytanie jest w innym języku
+2. Odpowiadaj WYŁĄCZNIE na podstawie danych z sekcji DANE Z BAZY WIEDZY
+3. Jeśli danych BRAK w bazie — powiedz szczerze i odsyłaj do salonu ZK Motors
+4. NIE wymyślaj żadnych liczb (cen, mocy, momentu obrotowego, przyspieszenia)
+5. NIE używaj zwrotów: "zazwyczaj", "przykładowo", "z reguły", "standardowo"
+6. PRIORYTET: dane ze źródeł [MODEL_SPECS] > [LEASING] > [LINKS]
 
-CO MOŻESZ ROBIĆ:
-- Używać linków z kontekstu
-- Opowiadać o ogólnych cechach modeli (silnik, moc) - jeśli są w kontekście
-- Odsyłać do salonu lub strony BMW gdy nie masz danych
+FORMAT:
+- Zacznij od modelu/tematu (bez powitania)
+- Podaj KONKRETNE dane z bazy (moc, moment, cena) jeśli są dostępne
+- Zakończ zaproszeniem do salonu ZK Motors lub jazdą próbną
+- Maksymalnie 3-5 zdań
 
-DLA MINI:
-- Zawsze odsyłaj do salonu (nie masz danych o MINI)
+WYKRYTE MODELE BMW: {models_str}
+INTENCJA KLIENTA: {intent_desc}
 
 INFORMACJE O SERWISIE (zawsze dostępne):
 - Godziny: {SALON_HOURS}
-- Serwis przyjmuje auta po stłuczkach
-
-ODPOWIEDŹ (bez powitania, zwięźle):"""
+- Serwis przyjmuje auta po stłuczkach"""
                 
-                user_prompt = f"""Korzystając TYLKO z poniższych informacji, odpowiedz na pytanie użytkownika.
-
-INFORMACJE Z SYSTEMU:
+                user_prompt = f"""DANE Z BAZY WIEDZY (użyj TYLKO tych danych):
 {rag_context}
 
-PYTANIE UŻYTKOWNIKA: {text}
+---
+PYTANIE KLIENTA: {text}
 
-ODPOWIEDŹ (tylko na podstawie powyższych informacji):"""
+ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
                 
                 cohere_result = await self.cohere.generate(
                     prompt=user_prompt,
                     system_prompt=system_prompt,
-                    temperature=0.5,
-                    max_tokens=400
+                    temperature=0.4,  # ZMIANA: z 0.5 na 0.4 — mniej kreatywności
+                    max_tokens=500    # ZMIANA: z 400 na 500 — więcej miejsca na dane
                 )
                 
                 if cohere_result.get("success"):

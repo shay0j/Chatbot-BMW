@@ -371,12 +371,42 @@ class RAGService:
         if intent["skip_rag"]:
             return {"has_data": False, "skip_rag": True, "documents": [], "sources": []}
         
-        results = await self.vector_store.search(query, top_k)
+        # OPTYMALIZACJA: Wzmocnienie zapytania o nazwy modeli BMW
+        search_query = query
+        detected_models = intent["detected_models"]
+        if detected_models:
+            models_str = " ".join(detected_models)
+            search_query = f"BMW {models_str} specyfikacja dane techniczne moc silnik {query}"
+            log.info(f"🔍 Wzmocnione zapytanie: {search_query[:80]}...")
+        
+        # Pobierz więcej wyników do filtrowania (top_k+2)
+        results = await self.vector_store.search(search_query, top_k + 2)
         self._stats["retrieved"] += len(results)
         
+        # OPTYMALIZACJA: Filtrowanie i re-ranking wyników
         documents = []
         sources = []
+        
         for doc, score in results:
+            # Odrzuć wyniki poniżej progu
+            if score < 0.3:
+                continue
+            
+            doc_category = doc["metadata"].get("category", "general")
+            
+            # Jeśli pytanie o konkretny model - karwuj wyniki z kategorii leasing/links
+            # chyba że pytanie dotyczy leasingu
+            if detected_models and "leasing" not in query.lower():
+                if doc_category == "leasing":
+                    score *= 0.6  # karwuj leasing gdy pytanie o model
+                elif doc_category == "links":
+                    score *= 0.5  # karwuj linki gdy pytanie o model
+                elif doc_category == "model_specs":
+                    # Bonus za model_specs gdy pytanie o model
+                    doc_model = doc["metadata"].get("model", "").upper()
+                    if doc_model and any(m in doc_model for m in detected_models):
+                        score *= 1.3  # bonus za dopasowanie modelu
+            
             documents.append({
                 "content": doc["content"],
                 "metadata": doc["metadata"],
@@ -388,12 +418,18 @@ class RAGService:
                 "score": score
             })
         
+        # Re-sort po skorygowanych wynikach i ogranicz do top_k
+        documents.sort(key=lambda d: d["score"], reverse=True)
+        sources.sort(key=lambda s: s["score"], reverse=True)
+        documents = documents[:top_k]
+        sources = sources[:top_k]
+        
         return {
             "has_data": len(documents) > 0,
             "skip_rag": False,
             "confidence": documents[0]["score"] if documents else 0,
             "intent": intent["primary_intent"],
-            "detected_models": intent["detected_models"],
+            "detected_models": detected_models,
             "tech": intent["is_technical"],
             "documents": documents,
             "sources": sources,
@@ -447,20 +483,31 @@ async def initialize_vector_store_from_directory(
     log.info(f"📁 Katalog: {directory}")
     log.info(f"📄 Znaleziono: {len(txt_files)} plików TXT, {len(csv_files)} plików CSV")
     
-    # === 1. ŁADOWANIE PLIKÓW TXT (z obsługą różnych kodowań) ===
+    # Import klasyfikatora TXT i transformera CSV
+    try:
+        from app.services.csv_transformer import classify_txt_file, group_and_build_model_documents
+    except ImportError:
+        # Fallback jeśli importuje się bezpośrednio
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+        from app.services.csv_transformer import classify_txt_file, group_and_build_model_documents
+    
+    # === 1. ŁADOWANIE PLIKÓW TXT (zmniejszone chunki z overlapem) ===
+    CHUNK_SIZE = 800   # ZMIANA: z 1500 na 800 dla lepszej precyzji
+    CHUNK_OVERLAP = 200  # NOWE: overlap zapobiega ucięciu kontekstu
+    
     for txt_file in txt_files:
         try:
-            # Użyj funkcji z fallback encoding
             content = read_file_with_fallback(txt_file)
+            category = classify_txt_file(txt_file.name)
             
-            # Podziel na mniejsze kawałki jeśli za długie (maks 1500 znaków)
+            # Podziel na mniejsze kawałki z overlapem
             chunks = []
-            if len(content) > 1500:
-                # Podziel na akapity
+            if len(content) > CHUNK_SIZE:
                 paragraphs = content.split('\n\n')
                 current_chunk = ""
                 for para in paragraphs:
-                    if len(current_chunk) + len(para) < 1500:
+                    if len(current_chunk) + len(para) < CHUNK_SIZE:
                         current_chunk += para + "\n\n"
                     else:
                         if current_chunk:
@@ -468,28 +515,37 @@ async def initialize_vector_store_from_directory(
                         current_chunk = para + "\n\n"
                 if current_chunk:
                     chunks.append(current_chunk.strip())
+                
+                # Dodaj overlap między chunkami
+                if len(chunks) > 1 and CHUNK_OVERLAP > 0:
+                    overlapped_chunks = [chunks[0]]
+                    for i in range(1, len(chunks)):
+                        # Dodaj koniec poprzedniego chunka na początek
+                        prev_tail = chunks[i-1][-CHUNK_OVERLAP:] if len(chunks[i-1]) > CHUNK_OVERLAP else chunks[i-1]
+                        overlapped_chunks.append(prev_tail + "\n" + chunks[i])
+                    chunks = overlapped_chunks
             else:
                 chunks = [content]
             
             for i, chunk in enumerate(chunks):
-                if chunk.strip():  # Tylko niepuste fragmenty
+                if chunk.strip():
                     texts.append(chunk)
                     metadatas.append({
                         "source": str(txt_file),
                         "type": "txt",
+                        "category": category,  # NOWE: kategoria treści
                         "filename": txt_file.name,
                         "chunk": i,
                         "title": txt_file.stem.replace("_", " ").replace("-", " ").title()
                     })
-            log.info(f"  ✅ {txt_file.name} - {len(chunks)} fragmentów")
+            log.info(f"  ✅ {txt_file.name} - {len(chunks)} fragmentów (kategoria: {category})")
         except Exception as e:
             log.error(f"  ❌ Błąd czytania {txt_file.name}: {e}")
     
-    # === 2. ŁADOWANIE PLIKÓW CSV ===
+    # === 2. ŁADOWANIE PLIKÓW CSV (z transformacją na czytelny tekst) ===
     for csv_file in csv_files:
         try:
             import pandas as pd
-            # Spróbuj różnych kodowań dla CSV
             df = None
             for encoding in ['utf-8', 'windows-1250', 'latin1']:
                 try:
@@ -501,28 +557,20 @@ async def initialize_vector_store_from_directory(
             if df is None:
                 log.error(f"  ❌ Nie udało się odczytać {csv_file.name}")
                 continue
-                
-            log.info(f"  ✅ {csv_file.name} - {len(df)} wierszy (CSV)")
             
-            for idx, row in df.iterrows():
-                content_parts = []
-                metadata = {
-                    "source": str(csv_file),
-                    "type": "csv",
-                    "filename": csv_file.name,
-                    "row_id": idx
-                }
-                
-                for col in df.columns:
-                    value = row[col]
-                    if pd.notna(value) and str(value).strip():
-                        content_parts.append(f"{col}: {value}")
-                        if col.lower() in ["model", "series", "type", "category", "title"]:
-                            metadata[col.lower()] = str(value)
-                
-                if content_parts:
-                    texts.append("\n".join(content_parts))
-                    metadatas.append(metadata)
+            log.info(f"  📊 {csv_file.name} - {len(df)} wierszy (CSV)")
+            
+            # OPTYMALIZACJA: Używamy transformera CSV zamiast surowych kolumn
+            # Grupujemy warianty modeli i tworzymy czytelne po polsku opisy
+            model_docs = group_and_build_model_documents(df)
+            
+            for doc in model_docs:
+                texts.append(doc["text"])
+                doc["metadata"]["source"] = str(csv_file)
+                metadatas.append(doc["metadata"])
+            
+            log.info(f"  ✅ {csv_file.name} → {len(model_docs)} dokumentów modeli (zamiast {len(df)} surowych wierszy)")
+            
         except Exception as e:
             log.error(f"  ❌ Błąd czytania {csv_file.name}: {e}")
     
