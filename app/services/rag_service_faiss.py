@@ -388,24 +388,33 @@ class RAGService:
         sources = []
         
         for doc, score in results:
-            # Odrzuć wyniki poniżej progu
-            if score < 0.3:
+            doc_category = doc["metadata"].get("category", "general")
+            original_score = score
+            
+            # ISSUE #7: Odrzuć wyniki poniżej progu (podwyższony z 0.3 do 0.45)
+            if score < 0.45:
+                log.debug(f"  ❌ Odrzucono (score={score:.3f} < 0.45): {doc['metadata'].get('title', 'unknown')[:40]}")
                 continue
             
-            doc_category = doc["metadata"].get("category", "general")
-            
-            # Jeśli pytanie o konkretny model - karwuj wyniki z kategorii leasing/links
-            # chyba że pytanie dotyczy leasingu
+            # ISSUE #7: Filtrowanie kategorii
+            # Jeśli pytanie o konkretny model - mocno karwuj leasing/links
             if detected_models and "leasing" not in query.lower():
                 if doc_category == "leasing":
-                    score *= 0.6  # karwuj leasing gdy pytanie o model
+                    score *= 0.3  # ZMIANA: z 0.6 na 0.3 — mocniejsza kara na leasing
                 elif doc_category == "links":
-                    score *= 0.5  # karwuj linki gdy pytanie o model
+                    score *= 0.4  # ZMIANA: z 0.5 na 0.4
                 elif doc_category == "model_specs":
                     # Bonus za model_specs gdy pytanie o model
                     doc_model = doc["metadata"].get("model", "").upper()
                     if doc_model and any(m in doc_model for m in detected_models):
                         score *= 1.3  # bonus za dopasowanie modelu
+            
+            # Jeśli pytanie NIE o leasing i NIE o modele — karwuj leasing też
+            if not detected_models and "leasing" not in query.lower():
+                if doc_category == "leasing":
+                    score *= 0.5  # karwuj leasing na ogólnych pytaniach
+            
+            log.debug(f"  📄 {doc_category}: score={original_score:.3f}→{score:.3f} | {doc['metadata'].get('title', 'unknown')[:40]}")
             
             documents.append({
                 "content": doc["content"],
@@ -424,10 +433,16 @@ class RAGService:
         documents = documents[:top_k]
         sources = sources[:top_k]
         
+        # ISSUE #7: Jeśli najlepszy wynik jest słaby — traktuj jako "brak danych"
+        best_score = documents[0]["score"] if documents else 0
+        has_data = len(documents) > 0 and best_score >= 0.45
+        
+        log.info(f"📊 RETRIEVAL: {len(documents)} wyników | best_score={best_score:.3f} | has_data={has_data}")
+        
         return {
-            "has_data": len(documents) > 0,
+            "has_data": has_data,
             "skip_rag": False,
-            "confidence": documents[0]["score"] if documents else 0,
+            "confidence": best_score,
             "intent": intent["primary_intent"],
             "detected_models": detected_models,
             "tech": intent["is_technical"],

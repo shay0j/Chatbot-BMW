@@ -106,17 +106,30 @@ BASE_URL = os.getenv("BASE_URL", "https://crinklier-ruddily-leonore.ngrok-free.d
 # Deduplikacja wiadomości
 _last_processed = {}
 
+# Async lock per session — zapobiega podwójnym odpowiedziom (Issue #1)
+_session_locks: Dict[str, asyncio.Lock] = {}
+
+# Konkurencyjne marki — bot NIGDY nie powinien o nich mówić (Issue #4)
+COMPETITOR_BRANDS = [
+    'mercedes', 'audi', 'alfa romeo', 'toyota', 'honda', 'volkswagen',
+    'porsche', 'lexus', 'volvo', 'tesla', 'hyundai', 'kia', 'ford',
+    'opel', 'renault', 'peugeot', 'citroen', 'skoda', 'seat', 'fiat',
+    'jaguar', 'land rover', 'mazda', 'subaru', 'nissan', 'chevrolet',
+    'jeep', 'dodge', 'mitsubishi', 'suzuki', 'dacia', 'cupra',
+]
+
 def is_duplicate(session_id: str, message: str, timestamp: int) -> bool:
     """Sprawdza czy wiadomość była już przetwarzana"""
     key = f"{session_id}:{message}"
     if key in _last_processed:
         last_time = _last_processed[key]
-        if timestamp - last_time < 2000:
+        if timestamp - last_time < 5000:  # ZMIANA: z 2000ms na 5000ms
+            logger.debug(f"[{session_id[:8]}] DUPLIKAT wykryty (delta={timestamp - last_time}ms)")
             return True
     _last_processed[key] = timestamp
     if len(_last_processed) > 100:
         for k in list(_last_processed.keys()):
-            if _last_processed[k] < timestamp - 10000:
+            if _last_processed[k] < timestamp - 30000:
                 del _last_processed[k]
     return False
 
@@ -359,6 +372,26 @@ class CrispBot:
         self.cohere = CohereService()
         logger.info("✅ Bot gotowy")
 
+    def _clean_response(self, response: str) -> str:
+        """Post-processing odpowiedzi — usuwa CJK chars, naprawia formatowanie.
+        
+        Issue #2: Cohere command-r7b czasem wstawia chińskie znaki.
+        """
+        # Usuń chińskie/japońskie/koreańskie znaki
+        response = re.sub(r'[\u4e00-\u9fff\u3400-\u4dbf\u3000-\u303f\uf900-\ufaff]', '', response)
+        # Usuń podwójne spacje po usunięciu znaków
+        response = re.sub(r'  +', ' ', response)
+        # Usuń puste linie nadmiarowe
+        response = re.sub(r'\n{3,}', '\n\n', response)
+        return response.strip()
+
+    def _mentions_competitor(self, text_lower: str) -> bool:
+        """Sprawdza czy wiadomość wspomina konkurencyjne marki.
+        
+        Issue #4: Bot NIGDY nie powinien dyskutować o innych markach.
+        """
+        return any(brand in text_lower for brand in COMPETITOR_BRANDS)
+
     async def _ensure_rag(self):
         if self.rag_service is None:
             try:
@@ -447,31 +480,58 @@ class CrispBot:
         return "general"
 
     def _is_offtopic(self, text_lower: str) -> bool:
-        """Sprawdza czy pytanie jest off-top"""
+        """Sprawdza czy pytanie jest off-topic.
         
-        moto_keywords = ['bmw', 'samochód', 'auto', 'silnik', 'skrzynia', 'napęd', 'koła', 
-                        'opony', 'hamulce', 'zawieszenie', 'serwis', 'napraw', 'salon', 'sprzedaż',
-                        'motocykl', 'motor', 'części', 'akcesoria', 'katalog', 'konfigurator',
-                        'sedan', 'coupe', 'kabriolet', 'hatchback', 'kombi', 'touring', 'suv', 'suva',
-                        'leasing', 'kredyt', 'rabat', 'promocja', 'cena', 'model', 'modele',
-                        'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'm2', 'm3', 'm4', 'm5', 'm8',
-                        'i3', 'i4', 'i5', 'i7', 'i8', 'ix', 'z4', 'seria']
+        Issue #5: ODWRÓCONA LOGIKA — zamiast sprawdzać 'czy to off-topic?',
+        sprawdzamy 'czy to jest związane z BMW/motoryzacją/salonem?'.
+        Jeśli NIE jest — to jest off-topic.
+        """
+        # Krok 1: Sprawdź czy zawiera słowa kluczowe BMW/motoryzacja
+        moto_keywords = [
+            'bmw', 'samochód', 'auto', 'silnik', 'skrzynia', 'napęd', 'koła', 
+            'opony', 'hamulce', 'zawieszenie', 'serwis', 'napraw', 'salon', 'sprzedaż',
+            'motocykl', 'motor', 'części', 'akcesoria', 'katalog', 'konfigurator',
+            'sedan', 'coupe', 'kabriolet', 'hatchback', 'kombi', 'touring', 'suv',
+            'leasing', 'kredyt', 'rabat', 'promocja', 'cena', 'model', 'modele',
+            'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'm2', 'm3', 'm4', 'm5', 'm8',
+            'i3', 'i4', 'i5', 'i7', 'i8', 'ix', 'z4', 'seria', 'xm',
+            'jazda próbna', 'test drive', 'godziny', 'otwar',
+            'kontakt', 'telefon', 'adres', 'gdzie',
+            'kupic', 'kupić', 'zakup', 'oferta', 'ofert',
+            'car', 'vehicle', 'engine', 'drive', 'price', 'buy',
+            'stłuczk', 'wypadek', 'collision', 'repair',
+            'trade', 'wycen', 'premium selection',
+        ]
         
         has_moto_context = any(kw in text_lower for kw in moto_keywords)
         
         if has_moto_context:
             return False
         
-        # Off-top kategorie
+        # Krok 2: Sprawdź czy to powitanie (nie off-topic)
+        greetings = ['cześć', 'hej', 'witam', 'dzień dobry', 'siema', 'hello', 'hi', 'hey', 'halo']
+        if text_lower.strip() in greetings:
+            return False
+        
+        # Krok 3: Jeśli jest krótkie i nie zawiera BMW keywordów — off-topic
+        # Np: "git pull origin main", "Paweł Piwpwarczyk", "Roman Banasik"
+        if len(text_lower.split()) <= 5 and not has_moto_context:
+            logger.info(f"OFF-TOPIC: krótka wiadomość bez moto kontekstu: '{text_lower[:50]}'")
+            return True
+        
+        # Krok 4: Sprawdź znane kategorie off-topic
         offtop_categories = {
             'humor': ['żart', 'humor', 'dowcip', 'kawał', 'śmieszny'],
             'polityka': ['polityk', 'polityka', 'rząd', 'prezydent', 'premier', 'poseł', 'wybory'],
             'sport': ['sport', 'piłka', 'mecz', 'liga', 'siatkówka', 'koszykówka'],
             'jedzenie': ['jedzenie', 'obiad', 'kolacja', 'przepis', 'pizza', 'burger'],
+            'tech': ['git ', 'npm ', 'code', 'python', 'javascript', 'docker'],
+            'personal': ['właściciel', 'owner', 'kto jest', 'who is'],
         }
         
-        for keywords in offtop_categories.values():
+        for cat, keywords in offtop_categories.items():
             if any(kw in text_lower for kw in keywords):
+                logger.info(f"OFF-TOPIC: kategoria '{cat}' wykryta w: '{text_lower[:50]}'")
                 return True
         
         return False
@@ -538,13 +598,15 @@ class CrispBot:
             # OPTYMALIZACJA: Fallback — jeśli pierwsze wyszukiwanie nie dało wyników,
             # spróbuj z samym tekstem (bez intent keywords)
             if not rag_has_data:
-                print(f"🔄 Pierwsze wyszukiwanie puste, próbuję szersze...")
+                logger.info(f"RAG: pierwsze wyszukiwanie puste, próbuję szersze...")
                 rag_results = await self.rag_service.retrieve_with_intent_check(query=text, top_k=5)
                 rag_has_data = rag_results.get("has_data") and rag_results.get("documents")
             
             if rag_has_data:
                 detected_models = rag_results.get("detected_models", [])
                 confidence = rag_results.get("confidence", 0)
+                n_docs = len(rag_results.get("documents", []))
+                logger.info(f"RAG: has_data={rag_has_data} | confidence={confidence:.3f} | docs={n_docs} | models={detected_models}")
                 
                 context_parts = []
                 for doc in rag_results.get("documents", [])[:4]:
@@ -567,7 +629,7 @@ class CrispBot:
                 
                 models_str = ", ".join(detected_models) if detected_models else "nie wykryto"
                 
-                # NOWY system prompt — ustrukturyzowany, z wymuszeniem języka polskiego
+                # System prompt z blokadą konkurencji i kontaktami
                 system_prompt = f"""Jesteś Leo — ekspert BMW w salonie ZK Motors (Kielce, Radom, Rzeszów).
 
 ZASADY ODPOWIEDZI:
@@ -577,15 +639,24 @@ ZASADY ODPOWIEDZI:
 4. NIE wymyślaj żadnych liczb (cen, mocy, momentu obrotowego, przyspieszenia)
 5. NIE używaj zwrotów: "zazwyczaj", "przykładowo", "z reguły", "standardowo"
 6. PRIORYTET: dane ze źródeł [MODEL_SPECS] > [LEASING] > [LINKS]
+7. NIGDY nie wspominaj o konkurencyjnych markach (Mercedes, Audi, Toyota itp.)
+8. Jeśli klient pyta o porównanie z inną marką — grzecznie odmów i skup się na zaletach BMW
+9. NIE odpowiadaj na pytania niezwiązane z BMW/salonem (np. kto jest właścicielem, osobiste pytania)
 
 FORMAT:
 - Zacznij od modelu/tematu (bez powitania)
 - Podaj KONKRETNE dane z bazy (moc, moment, cena) jeśli są dostępne
 - Zakończ zaproszeniem do salonu ZK Motors lub jazdą próbną
 - Maksymalnie 3-5 zdań
+- Wysyłaj JEDNĄ spójną odpowiedź (nie mieszaj wielu tematów)
 
 WYKRYTE MODELE BMW: {models_str}
 INTENCJA KLIENTA: {intent_desc}
+
+KONTAKT DO SALONÓW ZK MOTORS (podawaj gdy klient pyta o kontakt/serwis):
+- Kielce: ul. Wystawowa 2, tel +48 734 188 400 (serwis: +48 734 188 420)
+- Radom: ul. Warszawska 234, tel +48 734 188 500
+- Rzeszów: ul. Krasne 9a, tel +48 734 132 100 (serwis: +48 734 132 120)
 
 INFORMACJE O SERWISIE (zawsze dostępne):
 - Godziny: {SALON_HOURS}
@@ -642,15 +713,17 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
         # Wykryj intencję
         intent = self._detect_intent(text_lower)
         
-        print(f"📝 INTENT: {intent}")
-        print(f"📝 IS_FIRST: {is_first_message}")
+        logger.info(f"[{session_id[:8]}] INTENT={intent} | is_first={is_first_message} | msg='{text[:50]}'")
         
-        # === SPECJALNE PRZYPADKI ===
-        
-        # Godzina
-        if intent == "time":
-            aktualna_godzina = datetime.now().strftime('%H:%M')
-            response = f"🕐 Aktualna godzina to {aktualna_godzina}. Czy mogę pomóc w sprawie BMW lub usług ZK Motors? 😊"
+        # === KONKURENCJA — Issue #4 ===
+        # NIGDY nie dyskutuj o innych markach
+        if self._mentions_competitor(text_lower):
+            logger.info(f"[{session_id[:8]}] COMPETITOR wykryty — blokuję")
+            response = """Specjalizuję się wyłącznie w ofercie BMW i ZK Motors. 😊
+
+Nie mogę porównywać z innymi markami, ale chętnie opowiem Ci o zaletach naszych modeli BMW!
+
+Który model BMW Cię interesuje? Mamy w ofercie SUV-y (X1-X7), sedany (seria 3, 5, 7), sportowe (M3, M4, M5) i elektryczne (i4, i5, i7, iX). 🚗"""
             state["context"].append({"role": "user", "content": text})
             state["context"].append({"role": "assistant", "content": response})
             if is_first_message and not state["greeting_sent"]:
@@ -658,9 +731,12 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
                 return get_greeting() + "\n\n" + response, False
             return response, False
         
-        # Motocykle
-        if intent == "motorcycle":
-            response = get_motorcycle_response()
+        # === SPECJALNE PRZYPADKI ===
+        
+        # Godzina
+        if intent == "time":
+            aktualna_godzina = datetime.now().strftime('%H:%M')
+            response = f"🕐 Aktualna godzina to {aktualna_godzina}. Czy mogę pomóc w sprawie BMW lub usług ZK Motors? 😊"
             state["context"].append({"role": "user", "content": text})
             state["context"].append({"role": "assistant", "content": response})
             if is_first_message and not state["greeting_sent"]:
@@ -728,9 +804,10 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
                 return get_greeting() + "\n\n" + response, True
             return response, True
         
-        # Off-top
+        # Off-topic (Issue #5 — wzmocniona detekcja)
         if self._is_offtopic(text_lower):
-            response = "😊 Jestem tu po to, żeby pomagać w sprawach BMW i ZK Motors! 🚗\n\nJeśli masz pytanie o modele, serwis, leasing lub jazdę próbną – śmiało pytaj!"
+            logger.info(f"[{session_id[:8]}] OFF-TOPIC wykryty")
+            response = "😊 Jestem tu po to, żeby pomagać w sprawach BMW i ZK Motors! 🚗\n\nMogę pomóc z:\n- Informacjami o modelach BMW\n- Serwisem i naprawami\n- Ofertami i finansowaniem\n- Jazdą próbną\n\nW czym mogę pomóc? 😊"
             state["context"].append({"role": "user", "content": text})
             state["context"].append({"role": "assistant", "content": response})
             if is_first_message and not state["greeting_sent"]:
@@ -738,7 +815,7 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
                 return get_greeting() + "\n\n" + response, False
             return response, False
         
-        # === RESZTA - UŻYWA RAG ===
+        # === RESZTA — UŻYWA RAG ===
         
         await self._ensure_rag()
         
@@ -747,7 +824,24 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
         else:
             response = self._fallback_response(text, intent)
         
-        # Usuń ewentualne powitania
+        # === POST-PROCESSING ===
+        
+        # Issue #2: Usuń CJK znaki (chińskie/japońskie)
+        response = self._clean_response(response)
+        
+        # Issue #4: Jeśli odpowiedź LLM mimo wszystko wspomina konkurencję — wyczyść
+        response_lower_check = response.lower()
+        for brand in COMPETITOR_BRANDS:
+            if brand in response_lower_check:
+                logger.warning(f"[{session_id[:8]}] LLM wspomniał konkurenta '{brand}' — blokuję odpowiedź")
+                response = self._fallback_response(text, intent)
+                break
+        
+        # Issue #6: Dodaj kontakty do serwisowych odpowiedzi
+        if intent == "service" and "tel" not in response.lower():
+            response += f"\n\nKontakt do serwisów ZK Motors:\n- Kielce: ul. Wystawowa 2, tel +48 734 188 420\n- Radom: ul. Warszawska 234, tel +48 734 188 500\n- Rzeszów: ul. Krasne 9a, tel +48 734 132 120\n\nGodziny: {SALON_HOURS}"
+        
+        # Usuń ewentualne powitania (LLM czasem dodaje "Witaj" mimo instrukcji)
         greeting_phrases = ["witaj", "cześć", "hej", "dzień dobry", "witam", "jestem leo"]
         for phrase in greeting_phrases:
             if response.lower().strip().startswith(phrase):
@@ -757,6 +851,8 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
                 else:
                     response = response.replace(phrase, "", 1).strip()
                 break
+        
+        logger.info(f"[{session_id[:8]}] RESPONSE: len={len(response)} | intent={intent}")
         
         # Zapisz kontekst
         state["context"].append({"role": "user", "content": text})
@@ -962,28 +1058,62 @@ async def crisp_webhook(request: Request):
         session_id = msg_data.get('session_id')
         message = msg_data.get('content', '')
         
+        logger.info(f"[{session_id[:8]}] WEBHOOK | msg='{message[:60]}' | event={event}")
+        
         if is_duplicate(session_id, message, timestamp):
             add_log(f"⏭️ Duplikat: {message[:30]}...")
+            logger.info(f"[{session_id[:8]}] DUPLIKAT — pominięto")
             return JSONResponse({"status": "duplicate ignored"}, status_code=200)
 
         add_log(f"Wiadomość: {message[:50]}...")
-        print(f"💬 {message[:200]}")
 
-        response, transfer = await bot.process_message(message, session_id)
+        # ASYNC LOCK — zapobiega podwójnym odpowiedziom (Issue #1)
+        # Jeśli ten sam session_id wysyła 2 wiadomości jednocześnie,
+        # druga czeka aż pierwsza się skończy
+        lock = _session_locks.setdefault(session_id, asyncio.Lock())
+        async with lock:
+            logger.info(f"[{session_id[:8]}] LOCK acquired — przetwarzam...")
+            response, transfer = await bot.process_message(message, session_id)
 
-        if response:
-            print(f"📤 ODPOWIEDŹ: {response[:150]}...")
-            await send_crisp_message(website_id, session_id, response)
-            add_log("✅ Odpowiedź wysłana")
+            if response:
+                # Podziel długie odpowiedzi na części (max 1500 znaków)
+                # Crisp może źle obsługiwać bardzo długie wiadomości
+                if len(response) > 1500:
+                    parts = []
+                    current = ""
+                    for paragraph in response.split('\n\n'):
+                        if len(current) + len(paragraph) < 1500:
+                            current += paragraph + '\n\n'
+                        else:
+                            if current:
+                                parts.append(current.strip())
+                            current = paragraph + '\n\n'
+                    if current:
+                        parts.append(current.strip())
+                    
+                    logger.info(f"[{session_id[:8]}] SPLIT: {len(response)} znaków → {len(parts)} części")
+                    for i, part in enumerate(parts):
+                        await send_crisp_message(website_id, session_id, part)
+                        if i < len(parts) - 1:
+                            await asyncio.sleep(0.5)  # mały delay między częściami
+                else:
+                    logger.info(f"[{session_id[:8]}] WYSYŁAM: {len(response)} znaków")
+                    await send_crisp_message(website_id, session_id, response)
+                
+                add_log("✅ Odpowiedź wysłana")
 
-        if transfer:
-            await send_crisp_message(website_id, session_id, "🔄 Łączę z konsultantem...")
+            if transfer:
+                await send_crisp_message(website_id, session_id, "🔄 Łączę z konsultantem...")
+
+        # Cleanup starych locków
+        if len(_session_locks) > 200:
+            _session_locks.clear()
 
         return JSONResponse({"status": "ok"}, status_code=200)
 
     except Exception as e:
         add_log(f"❌ BŁĄD: {str(e)[:50]}")
-        traceback.print_exc()
+        logger.error(f"WEBHOOK ERROR: {e}", exc_info=True)
         return JSONResponse({"error": str(e)}, status_code=500)
 
 # ============================================
