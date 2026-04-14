@@ -1,0 +1,75 @@
+UZUPELNIENIE DANYCH O MODELACH BMW
+(modele nieuwzglednione w pliku CSV)
+
+=== BMW SERIA 1 (F40) ===
+Typ nadwozia: hatchback, 5 drzwi
+Silniki benzynowe: 118i (136 KM), 120i (178 KM)
+Silniki diesel: 118d (150 KM), 120d (190 KM)
+Skrzynia biegow: automatyczna 7-biegowa (DCT) lub 8-biegowa
+Naped: przedni (sDrive) lub 4x4 (xDrive)
+Cena: od 150 000 PLN
+Segment: kompaktowy hatchback premium
+
+=== BMW SERIA 2 GRAN COUPE (F44) ===
+Typ nadwozia: sedan (4-drzwiowe coupe), 4 drzwi
+Silniki benzynowe: 218i (136 KM), 220i (178 KM)
+Silniki diesel: 218d (150 KM), 220d (190 KM)
+Skrzynia biegow: automatyczna 7-biegowa (DCT) lub 8-biegowa
+Naped: przedni (sDrive) lub 4x4 (xDrive)
+Cena: od 170 000 PLN
+
+=== BMW SERIA 2 COUPE (G42) ===
+Typ nadwozia: coupe, 2 drzwi
+Silniki benzynowe: 220i (184 KM), 230i (245 KM), M240i (374 KM)
+Silniki diesel: 220d (190 KM)
+Skrzynia biegow: automatyczna 8-biegowa
+Naped: tylny (sDrive) lub 4x4 (xDrive)
+Cena: od 200 000 PLN
+
+=== BMW SERIA 4 COUPE (G22) ===
+Typ nadwozia: coupe, 2 drzwi
+Silniki benzynowe: 420i (184 KM), 430i (245 KM)
+Silniki diesel: 420d (190 KM)
+Skrzynia biegow: automatyczna 8-biegowa
+Naped: tylny (sDrive) lub 4x4 (xDrive)
+Cena: od 250 000 PLN
+
+=== BMW SERIA 4 GRAN COUPE (G26) ===
+Typ nadwozia: 4-drzwiowe coupe (liftback), 5 drzwi (4 drzwi boczne + klapa bagaznika otwierana z szyba)
+WAZNE: Seria 4 Gran Coupe ma 5 drzwi (4 boczne + klapa bagaznika), NIE 3 drzwi i NIE 4 drzwi.
+Silniki benzynowe: 420i (184 KM), 430i (245 KM)
+Silniki diesel: 420d (190 KM), 430d (286 KM)
+Skrzynia biegow: automatyczna 8-biegowa
+Naped: tylny (sDrive) lub 4x4 (xDrive)
+Przyspieszenie 0-100 km/h: od 5.9s (430i) do 7.5s (420d)
+Wymiary: ok. 4783 x 1852 x 1442 mm
+Bagaznik: 470 litrow
+Miejsca: 5
+Cena: od 260 000 PLN
+
+=== BMW SERIA 4 CABRIO (G23) ===
+Typ nadwozia: kabriolet, 2 drzwi (skladany dach twardy)
+Silniki benzynowe: 420i (184 KM), 430i (245 KM)
+Skrzynia biegow: automatyczna 8-biegowa
+Cena: od 280 000 PLN
+
+=== BMW i4 (G26e) ===
+Typ nadwozia: 4-drzwiowe Gran Coupe elektryczne, 5 drzwi
+Silniki: eDrive35 (286 KM), eDrive40 (340 KM), M50 (544 KM)
+Zasieg: do 590 km (WLTP)
+Bateria: 83.9 kWh
+Przyspieszenie 0-100 km/h: od 3.9s (M50) do 6.0s (eDrive35)
+Cena: od 250 000 PLN
+
+=== BMW M2 (G87) ===
+Typ nadwozia: coupe, 2 drzwi
+Silnik: 3.0L R6 twin-turbo (460 KM, 550 Nm)
+Skrzynia biegow: manualna 6-biegowa lub automatyczna 8-biegowa
+Naped: tylny
+Przyspieszenie 0-100 km/h: 4.1s (automat)
+Cena: od 350 000 PLN
+
+=== INFORMACJA O LICZBIE DRZWI MODELI BMW ===
+2 drzwi: Seria 2 Coupe, Seria 4 Coupe, Seria 4 Cabrio, Seria 8 Coupe, Z4, M2, M4
+4 drzwi (sedan): Seria 2 Gran Coupe, Seria 3, Seria 5, Seria 7, M3, M5
+5 drzwi (hatchback/liftback/kombi): Seria 1, Seria 4 Gran Coupe, i4, Seria 3 Touring, Seria 5 Touring, X1, X2, X3, X4, X5, X6, X7, iX, iX1, iX2, iX3

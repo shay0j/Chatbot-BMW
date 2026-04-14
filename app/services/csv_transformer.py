@@ -322,6 +322,7 @@ TXT_CATEGORY_MAP = {
     "premium_selection": "sales",
     "sedan": "model_specs",
     "modele_bmw": "model_specs",
+    "modele_uzupelnienie": "model_specs",
     "silniki_bmw": "model_specs",
     "wyposazenie": "model_specs",
 }

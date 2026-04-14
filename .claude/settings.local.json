@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk -F',' 'NR>1 && $4 ~ /150000|120000|100000|80000|Od [0-9]/ {print $3, $4}' /c/Users/Hp/Chatbot-BMW/RAG/RAG_sources/BMW_models.csv)",
+      "Bash(awk -F',' 'NR>1 {print $8, $9}' /c/Users/Hp/Chatbot-BMW/RAG/RAG_sources/BMW_models.csv)",
+      "Bash(grep -i \"seria 4\\\\|series 4\\\\|4 gran\\\\|gran coupe\" /c/Users/Hp/Chatbot-BMW/data/knowledge_base/*.txt /c/Users/Hp/Chatbot-BMW/RAG/RAG_sources/*.txt)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('app/main.py', encoding='utf-8'\\).read\\(\\)\\); print\\('main.py: OK'\\)\")",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('app/services/csv_transformer.py', encoding='utf-8'\\).read\\(\\)\\); print\\('csv_transformer.py: OK'\\)\")",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('app/services/rag_service_faiss.py', encoding='utf-8'\\).read\\(\\)\\); print\\('rag_service_faiss.py: OK'\\)\")",
+      "Bash(pip show:*)"
+    ]
+  }
+}

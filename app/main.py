@@ -342,6 +342,28 @@ https://www.bmw.pl/pl/Shop-Online/bmw-oferty.html#bmw-m
 
 Zapraszamy do konfiguracji! 🚗"""
 
+def get_trade_in_response() -> str:
+    """Odpowiedź na pytania o trade-in / odkup / wymianę samochodu"""
+    return """🔄 **Wymiana samochodu na BMW (Trade-in / Odkup):**
+
+Możesz oddać swój obecny samochód (dowolnej marki!) w rozliczeniu przy zakupie nowego BMW.
+
+**Korzyści:**
+- Konkurencyjna wycena pojazdu
+- Uproszczone formalności i dokumentacja
+- Bezpłatne oględziny pojazdu w salonie
+- Wartość auta odliczana od ceny nowego BMW
+
+**Wymagane dokumenty:** dowód rejestracyjny, dokumentacja serwisowa (pomocna)
+
+**Wycena online:**
+https://www.bmw.pl/pl/odkup/
+
+Zapraszamy też do salonu ZK Motors po dokładną wycenę:
+- Kielce: tel +48 734 188 400
+- Radom: tel +48 734 188 500
+- Rzeszów: tel +48 734 132 100"""
+
 def get_available_models_response() -> str:
     """Odpowiedź na pytania o dostępne modele"""
     return """🚗 **Sprawdź dostępne pojazdy w ZK Motors:**
@@ -374,11 +396,31 @@ class CrispBot:
 
     def _clean_response(self, response: str) -> str:
         """Post-processing odpowiedzi — usuwa CJK chars, naprawia formatowanie.
-        
-        Issue #2: Cohere command-r7b czasem wstawia chińskie znaki.
+
+        Issue #2/#5: Cohere command-r7b czasem wstawia chińskie/japońskie/koreańskie znaki.
+        Rozszerzony zakres Unicode obejmuje wszystkie bloki CJK + fullwidth forms.
         """
-        # Usuń chińskie/japońskie/koreańskie znaki
-        response = re.sub(r'[\u4e00-\u9fff\u3400-\u4dbf\u3000-\u303f\uf900-\ufaff]', '', response)
+        # Usuń WSZYSTKIE znaki CJK — pełny zakres Unicode bloków
+        response = re.sub(
+            r'['
+            r'\u2e80-\u2eff'   # CJK Radicals Supplement
+            r'\u3000-\u303f'   # CJK Symbols and Punctuation
+            r'\u3040-\u309f'   # Hiragana
+            r'\u30a0-\u30ff'   # Katakana
+            r'\u3100-\u312f'   # Bopomofo
+            r'\u3130-\u318f'   # Hangul Compatibility Jamo
+            r'\u31a0-\u31bf'   # Bopomofo Extended
+            r'\u31f0-\u31ff'   # Katakana Phonetic Extensions
+            r'\u3200-\u32ff'   # Enclosed CJK Letters
+            r'\u3400-\u4dbf'   # CJK Unified Ideographs Extension A
+            r'\u4e00-\u9fff'   # CJK Unified Ideographs (main block)
+            r'\ua960-\ua97f'   # Hangul Jamo Extended-A
+            r'\uac00-\ud7af'   # Hangul Syllables
+            r'\uf900-\ufaff'   # CJK Compatibility Ideographs
+            r'\ufe30-\ufe4f'   # CJK Compatibility Forms
+            r'\uff00-\uffef'   # Halfwidth and Fullwidth Forms
+            r']', '', response
+        )
         # Usuń podwójne spacje po usunięciu znaków
         response = re.sub(r'  +', ' ', response)
         # Usuń puste linie nadmiarowe
@@ -436,8 +478,8 @@ class CrispBot:
         if any(keyword in text_lower for keyword in ['konsultant', 'człowiek', 'agent', 'handoff']):
             return "handoff"
         
-        # Motocykle
-        if 'motocykl' in text_lower or 'motor' in text_lower:
+        # Motocykle / skutery
+        if any(kw in text_lower for kw in ['motocykl', 'motor', 'skuter', 'scooter']):
             return "motorcycle"
         
         # MINI - odsyła do salonu (ROZSZERZONE o nazwy modeli MINI)
@@ -457,9 +499,33 @@ class CrispBot:
         if any(phrase in text_lower for phrase in ['konfigurator', 'skonfiguruj', 'złóż', 'konfiguracja']):
             return "configurator"
         
-        # Dostępne modele
-        if any(phrase in text_lower for phrase in ['dostępne modele', 'jakie modele', 'modele bmw', 'co macie', 'jakie samochody', 'jakie auta', 'nowe samochody', 'dostępne pojazdy']):
+        # Dostępne modele / stok / co jest w ofercie
+        # ALE: jeśli klient podaje budżet/cenę — to pytanie o konkretne modele,
+        # nie o ogólny stok. Wtedy niech RAG obsłuży.
+        has_budget = bool(re.search(r'\d{2,3}\s*0{3}|tys|zł|pln|budżet|budzet', text_lower))
+        if not has_budget and any(phrase in text_lower for phrase in [
+            'dostępne modele', 'jakie modele', 'modele bmw', 'co macie',
+            'jakie samochody', 'jakie auta', 'nowe samochody', 'dostępne pojazdy',
+            'samochody na sprzedaż', 'auta na sprzedaż', 'auta do sprzedania',
+            'samochody do sprzedania', 'link do samochodów', 'link do aut',
+            'zobaczyć samochody', 'zobaczyć auta', 'zobaczyć ofertę',
+            'oferta samochodów', 'oferta aut', 'stok', 'stock', 'magazyn',
+            'od ręki', 'od reki', 'na stanie', 'w sprzedaży', 'w ofercie',
+            'dostępne auta', 'dostępne samochody', 'co jest dostępne',
+            'available cars', 'cars for sale', 'see all cars',
+        ]):
             return "available_models"
+
+        # Trade-in / odkup / wymiana samochodu
+        if any(phrase in text_lower for phrase in [
+            'trade-in', 'trade in', 'odkup', 'wymiana samochodu',
+            'oddać samochód', 'oddac samochod', 'rozliczenie',
+            'wycena samochodu', 'wycena auta', 'sprzedać swój',
+            'sprzedac swoj', 'zostawić auto', 'zostawic auto',
+            'wymienić auto', 'wymienic auto', 'zamienić auto',
+            'zamienic auto', 'w rozliczeniu',
+        ]):
+            return "trade_in"
         
         # Serwis
         if any(word in text_lower for word in ['serwis', 'napraw', 'stłuczk', 'przywieź', 'naprawiacie', 'przegląd']):
@@ -536,14 +602,14 @@ class CrispBot:
         
         return False
 
-    def _check_hallucination(self, response: str, rag_has_data: bool) -> bool:
+    def _check_hallucination(self, response: str, rag_has_data: bool, user_message: str = "") -> bool:
         """Sprawdza czy odpowiedź zawiera potencjalne halucynacje.
-        
+
         OPTYMALIZACJA: Rozszerzono sprawdzanie poza same ceny —
-        teraz łapie też wymyślone dane techniczne.
+        teraz łapie też wymyślone dane techniczne i naruszenia budżetu.
         """
         response_lower = response.lower()
-        
+
         if not rag_has_data:
             # Jeśli RAG nie miał danych, a odpowiedź zawiera konkretne informacje - to halucynacja
             suspicious_phrases = [
@@ -553,7 +619,7 @@ class CrispBot:
             if any(phrase in response_lower for phrase in suspicious_phrases):
                 print(f"⚠️ WYKRYTO HALUCYNACJĘ: odpowiedź zawiera liczby/ceny bez źródła")
                 return True
-        
+
         # Ogólne sprawdzenie: podejrzane zwroty sugerujące wymyślanie
         fabrication_indicators = [
             'standardowa cena', 'zazwyczaj kosztuje', 'przykładowo',
@@ -563,7 +629,28 @@ class CrispBot:
         if any(phrase in response_lower for phrase in fabrication_indicators):
             print(f"⚠️ WYKRYTO HALUCYNACJĘ: zwroty sugerujące wymyślanie danych")
             return True
-        
+
+        # Sprawdzenie naruszenia budżetu: jeśli użytkownik podał budżet,
+        # a odpowiedź zawiera ceny wyższe — to halucynacja/zła odpowiedź
+        if user_message:
+            budget_match = re.search(r'do\s+([\d\s.,]+)\s*(zł|pln|złotych|tys)', user_message.lower())
+            if budget_match:
+                try:
+                    budget_str = budget_match.group(1).replace(' ', '').replace('.', '').replace(',', '')
+                    budget = int(budget_str)
+                    # Szukaj cen w odpowiedzi
+                    price_matches = re.findall(r'([\d\s.,]+)\s*(zł|pln|złotych)', response_lower)
+                    for price_str, _ in price_matches:
+                        try:
+                            price = int(price_str.replace(' ', '').replace('.', '').replace(',', ''))
+                            if price > budget * 1.1:  # 10% tolerancja
+                                print(f"⚠️ WYKRYTO NARUSZENIE BUDŻETU: cena {price} > budżet {budget}")
+                                return True
+                        except (ValueError, TypeError):
+                            continue
+                except (ValueError, TypeError):
+                    pass
+
         return False
 
     async def _get_rag_response(self, text: str, intent: str, context: str = "") -> str:
@@ -642,6 +729,8 @@ ZASADY ODPOWIEDZI:
 7. NIGDY nie wspominaj o konkurencyjnych markach (Mercedes, Audi, Toyota itp.)
 8. Jeśli klient pyta o porównanie z inną marką — grzecznie odmów i skup się na zaletach BMW
 9. NIE odpowiadaj na pytania niezwiązane z BMW/salonem (np. kto jest właścicielem, osobiste pytania)
+10. BUDŻET KLIENTA: Jeśli klient podaje budżet (np. "do 150 000 PLN"), sprawdź CENY w danych z bazy. Jeśli ŻADEN model w danych nie mieści się w budżecie — powiedz to WPROST i zaproponuj: (a) używane BMW w programie BMW Premium Selection, (b) kontakt z salonem ZK Motors po aktualne promocje. NIGDY nie proponuj modelu, którego cena przekracza podany budżet.
+11. LINKI DO STOKU: Gdy klient pyta o dostępne samochody, zawsze podaj link do aktualnego stoku: https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bmarka_id%5D=1&PojazdSearch%5Brodzaj_id%5D=1&PojazdSearch%5Bstatus_id%5D=1
 
 FORMAT:
 - Zacznij od modelu/tematu (bez powitania)
@@ -680,7 +769,11 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
                 if cohere_result.get("success"):
                     response = cohere_result.get("text", "")
                     # Sprawdź czy nie halucynuje
-                    if self._check_hallucination(response, rag_has_data):
+                    if self._check_hallucination(response, rag_has_data, text):
+                        # Jeśli to kwestia budżetu — daj specjalną odpowiedź
+                        budget_match = re.search(r'do\s+([\d\s.,]+)\s*(zł|pln|złotych|tys)', text.lower())
+                        if budget_match:
+                            return self._budget_fallback_response(text)
                         return self._fallback_response(text, intent)
                     return response
             
@@ -744,6 +837,30 @@ Który model BMW Cię interesuje? Mamy w ofercie SUV-y (X1-X7), sedany (seria 3,
                 return get_greeting() + "\n\n" + response, False
             return response, False
         
+        # Motocykle / skutery — hardcoded, nie idzie do RAG
+        if intent == "motorcycle":
+            # Skutery — jednoznaczna odpowiedź
+            if any(kw in text_lower for kw in ['skuter', 'scooter']):
+                response = """W ofercie ZK Motors nie ma skuterów. Salon oferuje nowe i używane motocykle BMW.
+
+Jeśli interesują Cię motocykle BMW, sprawdź naszą ofertę:
+
+🆕 Nowe motocykle BMW:
+https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Brodzaj_id%5D=2&PojazdSearch%5Bstatus_id%5D=1
+
+🔄 Używane motocykle BMW:
+https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bstatus_id%5D=3
+
+Zapraszam do kontaktu z salonem ZK Motors po więcej informacji!"""
+            else:
+                response = get_motorcycle_response()
+            state["context"].append({"role": "user", "content": text})
+            state["context"].append({"role": "assistant", "content": response})
+            if is_first_message and not state["greeting_sent"]:
+                state["greeting_sent"] = True
+                return get_greeting() + "\n\n" + response, False
+            return response, False
+
         # MINI - odsyła do salonu
         if intent == "mini":
             response = get_mini_response()
@@ -794,6 +911,16 @@ Który model BMW Cię interesuje? Mamy w ofercie SUV-y (X1-X7), sedany (seria 3,
                 return get_greeting() + "\n\n" + response, False
             return response, False
         
+        # Trade-in / odkup
+        if intent == "trade_in":
+            response = get_trade_in_response()
+            state["context"].append({"role": "user", "content": text})
+            state["context"].append({"role": "assistant", "content": response})
+            if is_first_message and not state["greeting_sent"]:
+                state["greeting_sent"] = True
+                return get_greeting() + "\n\n" + response, False
+            return response, False
+
         # Handoff
         if intent == "handoff":
             response = "Łączę z konsultantem..."
@@ -840,6 +967,13 @@ Który model BMW Cię interesuje? Mamy w ofercie SUV-y (X1-X7), sedany (seria 3,
         # Issue #6: Dodaj kontakty do serwisowych odpowiedzi
         if intent == "service" and "tel" not in response.lower():
             response += f"\n\nKontakt do serwisów ZK Motors:\n- Kielce: ul. Wystawowa 2, tel +48 734 188 420\n- Radom: ul. Warszawska 234, tel +48 734 188 500\n- Rzeszów: ul. Krasne 9a, tel +48 734 132 120\n\nGodziny: {SALON_HOURS}"
+
+        # Bug #6: Jeśli odpowiedź mówi o dostępnych/aktualnych samochodach ale nie ma linku do stoku
+        stock_keywords = ['dostępn', 'od ręki', 'od reki', 'na stanie', 'w ofercie', 'aktualn', 'w salonie możesz zobaczyć', 'sprawdź']
+        has_stock_link = 'stok.zkmotors.pl' in response or 'najlepszeoferty.bmw.pl' in response
+        if any(kw in response.lower() for kw in stock_keywords) and not has_stock_link:
+            if any(kw in text_lower for kw in ['dostępn', 'od ręki', 'od reki', 'na stanie', 'w ofercie', 'co macie', 'jaki', 'zobaczyć', 'where', 'link']):
+                response += "\n\nSprawdź aktualny stok: https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bmarka_id%5D=1&PojazdSearch%5Brodzaj_id%5D=1&PojazdSearch%5Bstatus_id%5D=1"
         
         # Usuń ewentualne powitania (LLM czasem dodaje "Witaj" mimo instrukcji)
         greeting_phrases = ["witaj", "cześć", "hej", "dzień dobry", "witam", "jestem leo"]
@@ -866,6 +1000,23 @@ Który model BMW Cię interesuje? Mamy w ofercie SUV-y (X1-X7), sedany (seria 3,
             return get_greeting() + "\n\n" + response, False
         
         return response, False
+
+    def _budget_fallback_response(self, text: str) -> str:
+        """Fallback gdy klient podaje budżet, ale żaden nowy model się nie mieści."""
+        return f"""W aktualnej ofercie nowych samochodów BMW może nie być modelu w podanym budżecie.
+
+Proponuję rozważyć:
+
+🔄 **Używane BMW (Premium Selection)** — certyfikowane auta z gwarancją:
+https://najlepszeoferty.bmw.pl/uzywane/
+
+🚗 **Aktualny stok nowych samochodów** — ceny mogą się różnić w zależności od promocji:
+https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bmarka_id%5D=1&PojazdSearch%5Brodzaj_id%5D=1&PojazdSearch%5Bstatus_id%5D=1
+
+Zapraszam też do salonu ZK Motors — nasi doradcy pomogą znaleźć najlepszą opcję w Twoim budżecie!
+- Kielce: tel +48 734 188 400
+- Radom: tel +48 734 188 500
+- Rzeszów: tel +48 734 132 100"""
 
     def _fallback_response(self, text: str, intent: str) -> str:
         """Fallback gdy RAG nie działa - odsyła do salonu"""
@@ -894,7 +1045,11 @@ Który model BMW Cię interesuje? Mamy w ofercie SUV-y (X1-X7), sedany (seria 3,
         # Dostępne modele
         if intent == "available_models":
             return get_available_models_response()
-        
+
+        # Trade-in / odkup
+        if intent == "trade_in" or any(word in text_lower for word in ['trade-in', 'odkup', 'wymiana', 'rozliczeni']):
+            return get_trade_in_response()
+
         # Serwis
         if intent == "service" or any(word in text_lower for word in ['serwis', 'napraw', 'stłuczk']):
             return f"""Tak, prowadzimy serwis BMW w ZK Motors.
