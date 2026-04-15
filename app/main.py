@@ -123,7 +123,7 @@ def is_duplicate(session_id: str, message: str, timestamp: int) -> bool:
     key = f"{session_id}:{message}"
     if key in _last_processed:
         last_time = _last_processed[key]
-        if timestamp - last_time < 5000:  # ZMIANA: z 2000ms na 5000ms
+        if timestamp - last_time < 30000:  # ZMIANA: z 5000ms na 30000ms
             logger.debug(f"[{session_id[:8]}] DUPLIKAT wykryty (delta={timestamp - last_time}ms)")
             return True
     _last_processed[key] = timestamp
@@ -567,6 +567,7 @@ class CrispBot:
             'car', 'vehicle', 'engine', 'drive', 'price', 'buy',
             'stłuczk', 'wypadek', 'collision', 'repair',
             'trade', 'wycen', 'premium selection',
+            'elektrycz', 'hybryd', 'ev', 'bateri', 'zasięg', 'ładowan',
         ]
         
         has_moto_context = any(kw in text_lower for kw in moto_keywords)
@@ -738,6 +739,8 @@ FORMAT:
 - Zakończ zaproszeniem do salonu ZK Motors lub jazdą próbną
 - Maksymalnie 3-5 zdań
 - Wysyłaj JEDNĄ spójną odpowiedź (nie mieszaj wielu tematów)
+- NIE cytuj i NIE powtarzaj pytania użytkownika na początku odpowiedzi.
+- Unikaj pisania WIELKIMI LITERAMI (caps lock) słów potwierdzających/zaprzeczających (np. TAK, NIE).
 
 WYKRYTE MODELE BMW: {models_str}
 INTENCJA KLIENTA: {intent_desc}
@@ -910,16 +913,6 @@ Zapraszam do kontaktu z salonem ZK Motors po więcej informacji!"""
                 state["greeting_sent"] = True
                 return get_greeting() + "\n\n" + response, False
             return response, False
-        
-        # Trade-in / odkup
-        if intent == "trade_in":
-            response = get_trade_in_response()
-            state["context"].append({"role": "user", "content": text})
-            state["context"].append({"role": "assistant", "content": response})
-            if is_first_message and not state["greeting_sent"]:
-                state["greeting_sent"] = True
-                return get_greeting() + "\n\n" + response, False
-            return response, False
 
         # Handoff
         if intent == "handoff":
@@ -974,6 +967,10 @@ Zapraszam do kontaktu z salonem ZK Motors po więcej informacji!"""
         if any(kw in response.lower() for kw in stock_keywords) and not has_stock_link:
             if any(kw in text_lower for kw in ['dostępn', 'od ręki', 'od reki', 'na stanie', 'w ofercie', 'co macie', 'jaki', 'zobaczyć', 'where', 'link']):
                 response += "\n\nSprawdź aktualny stok: https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bmarka_id%5D=1&PojazdSearch%5Brodzaj_id%5D=1&PojazdSearch%5Bstatus_id%5D=1"
+
+        # Trade-in post-processing (Bug #2)
+        if intent == "trade_in" and "bmw.pl/pl/odkup" not in response.lower():
+            response += "\n\nWycena online: https://www.bmw.pl/pl/odkup/"
         
         # Usuń ewentualne powitania (LLM czasem dodaje "Witaj" mimo instrukcji)
         greeting_phrases = ["witaj", "cześć", "hej", "dzień dobry", "witam", "jestem leo"]
