@@ -1,0 +1,105 @@
+KONTAKT – DZIA£ SPRZEDA¯Y BMW ZK MOTORS
+
+Poni¿ej znajduje siê uporz¹dkowana lista pracowników wed³ug obszaru odpowiedzialnoœci.  
+Czatbot powinien zwracaæ WSZYSTKIE osoby z danej kategorii przy zapytaniach o konkretny typ sprzeda¿y.
+
+----------------------------------------
+SAMOCHODY NOWE (BMW)
+----------------------------------------
+Bartosz ¯elichowski  
+Doradca ds. Sprzeda¿y Samochodów Nowych  
+Tel: +48 734 188 419  
+Email: bartosz.zelichowski@bmw-zkmotors.pl  
+
+£ukasz Kowalczyk  
+Doradca ds. Sprzeda¿y Samochodów Nowych  
+Tel: +48 734 188 413  
+Email: lukasz.kowalczyk@bmw-zkmotors.pl  
+
+----------------------------------------
+BMW M (SPORTOWE MODELE)
+----------------------------------------
+Jakub Duda  
+Doradca ds. Sprzeda¿y Samochodów BMW M  
+Tel: +48 734 188 414  
+Email: jakub.duda@bmw-zkmotors.pl  
+
+----------------------------------------
+SAMOCHODY U¯YWANE
+----------------------------------------
+Karol Kowalczyk  
+Doradca ds. Sprzeda¿y Samochodów U¿ywanych  
+Tel: +48 734 188 415  
+Email: karol.kowalczyk@bmw-zkmotors.pl  
+
+Piotr Sularz  
+M³odszy Doradca ds. Sprzeda¿y Samochodów U¿ywanych  
+Tel: +48 734 188 461  
+Email: piotr.sularz@bmw-zkmotors.pl  
+
+Jakub Cieœlikiewicz  
+M³odszy Doradca ds. Sprzeda¿y Samochodów U¿ywanych  
+Tel: +48 734 188 447  
+Email: jakub.cieslikiewicz@bmw-zkmotors.pl  
+
+----------------------------------------
+ZAKUP / ODKUP SAMOCHODÓW
+----------------------------------------
+Krzysztof Wilkosz  
+Specjalista ds. Zakupu Samochodów U¿ywanych  
+Tel: +48 734 188 486  
+Email: krzysztof.wilkosz@bmw-zkmotors.pl  
+
+----------------------------------------
+SPRZEDA¯ FLOTOWA (B2B)
+----------------------------------------
+£ukasz ¯¹decki  
+Zastêpca Dyrektora ds. Sprzeda¿y Flotowej  
+Tel: +48 734 188 484  
+Email: lukasz.zadecki@bmw-zkmotors.pl  
+
+Roman Banasik  
+Doradca ds. Sprzeda¿y Flotowej  
+Tel: +48 734 188 485  
+Email: roman.banasik@bmw-zkmotors.pl  
+
+----------------------------------------
+MINI
+----------------------------------------
+Pawe³ Piwowarczyk  
+MINI Manager  
+Tel: +48 734 188 412  
+Email: pawel.piwowarczyk@mini-zkmotors.pl  
+
+----------------------------------------
+MOTOCYKLE (BMW MOTORRAD)
+----------------------------------------
+Marta Magielska  
+Doradca ds. Sprzeda¿y Motocykli  
+Tel: +48 734 188 489  
+Email: marta.magielska@bmw-zkmotors.pl  
+
+Adam Obara  
+Doradca ds. Sprzeda¿y Motocykli  
+Tel: +48 734 188 416  
+Email: adam.obara@bmw-zkmotors.pl  
+
+----------------------------------------
+ADMINISTRACJA SPRZEDA¯Y
+----------------------------------------
+Krzysztof Wypych  
+Kierownik Dzia³u Administracji Sprzeda¿y  
+Tel: +48 734 188 417  
+Email: krzysztof.wypych@bmw-zkmotors.pl  
+
+----------------------------------------
+ZASADY DLA CZATBOTA (RAG)
+----------------------------------------
+- zapytanie o „samochody nowe” › zwróæ wszystkich doradców z sekcji SAMOCHODY NOWE  
+- zapytanie o „BMW M” › zwróæ doradcê z sekcji BMW M  
+- zapytanie o „samochody u¿ywane” › zwróæ wszystkich z sekcji SAMOCHODY U¯YWANE  
+- zapytanie o „odkup / sprzeda¿ auta” › zwróæ osobê z sekcji ZAKUP / ODKUP  
+- zapytanie o „flotê / leasing dla firm” › zwróæ sekcjê SPRZEDA¯ FLOTOWA  
+- zapytanie o „MINI” › zwróæ MINI Managera  
+- zapytanie o „motocykle” › zwróæ wszystkie osoby z BMW MOTORRAD  
+- zapytanie ogólne › mo¿na zwróciæ odpowiedni¹ sekcjê + ewentualnie administracjê sprzeda¿y  
