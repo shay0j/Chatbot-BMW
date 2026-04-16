@@ -1,0 +1,32 @@
+SAMOCHODY DO JAZD PRÓBNYCH (DEMO)
+
+Poni¿ej znajduje siê lista modeli BMW dostêpnych do jazd testowych.  
+Dostêpnoœæ mo¿e siê ró¿niæ w zale¿noœci od dnia i ob³o¿enia – zalecana jest wczeœniejsza rezerwacja.
+
+DOSTÊPNE MODELE  
+- BMW Serii 1 (s1)  
+- BMW M235  
+- BMW Serii 7 (s7)  
+- BMW iX2  
+- BMW iX3  
+- BMW X6  
+- BMW M5  
+
+INFORMACJE DLA KLIENTA  
+- jazda próbna umo¿liwia zapoznanie siê z osi¹gami, komfortem i technologi¹ pojazdu  
+- dostêpne s¹ ró¿ne wersje silnikowe i wyposa¿eniowe (w zale¿noœci od modelu)  
+- jazda odbywa siê z doradc¹ 
+
+REZERWACJA  
+- zalecana wczeœniejsza rezerwacja terminu - nie jest konieczna, ale warto jej dokonaæ by mieæ pewnoœæ, ¿e samochód bêdzie dostêpny 
+- mo¿liwoœæ umówienia jazdy przez doradcê handlowego lub telefonicznie  
+
+WYMAGANIA  
+- wa¿ne prawo jazdy  
+
+WSKAZÓWKI DLA CZATBOTA (RAG)  
+- jeœli klient pyta „jakie auta s¹ dostêpne do jazdy próbnej” › wypisz wszystkie modele  
+- jeœli klient pyta o konkretny model › potwierdŸ dostêpnoœæ i zaproponuj rezerwacjê  
+- jeœli klient chce siê umówiæ › skieruj do kontaktu z salonem  
+- zawsze sugeruj wczeœniejsze umówienie terminu  
+- jazda próbna mo¿e byæ umówiona jedynie online lub telefonicznie, nigdy nie sugeruj ¿e ty mo¿esz umówiæ jazdê
