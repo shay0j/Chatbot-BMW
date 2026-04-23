@@ -1,0 +1,56 @@
+SERWIS BMW ZK MOTORS — PEŁNA OFERTA USŁUG
+
+Serwis ZK Motors to autoryzowany serwis BMW oferujący pełen zakres usług serwisowych i naprawczych dla samochodów BMW.
+
+----------------------------------------
+USŁUGI RUTYNOWE I KONSERWACYJNE
+----------------------------------------
+- Wymiana oleju i filtrów (filtr oleju, filtr powietrza, filtr kabinowy, filtr paliwa)
+- Przeglądy techniczne (regularne i wymagane przez BMW Condition Based Service — CBS)
+- Wymiana i wyważanie kół, przechowywanie opon sezonowych
+- Serwis hamulców (wymiana klocków, tarcz, płynu hamulcowego)
+- Uzupełnianie i wymiana płynów eksploatacyjnych (płyn chłodzący, płyn do spryskiwaczy, olej wspomagania)
+- Serwis klimatyzacji i układu chłodzenia
+- Wymiana świec zapłonowych i serwis układu zapłonowego
+- Diagnostyka komputerowa BMW (autoryzowany sprzęt diagnostyczny)
+- Aktualizacja oprogramowania i mapy nawigacji
+- Wymiana pasków rozrządu i łańcuchów
+
+TAK — wykonujemy wymianę oleju i filtrów. To jedna z naszych podstawowych usług serwisowych.
+
+----------------------------------------
+SERWIS BLACHARSKO-LAKIERNICZY
+----------------------------------------
+- Naprawy powypadkowe i blacharskie
+- Lakierowanie i naprawy lakieru
+- Serwis geometrii kół
+- Przyjmujemy auta po stłuczkach i kolizjach
+
+----------------------------------------
+SERWIS POWYPADKOWY
+----------------------------------------
+- Bezgotówkowe rozliczenie z ubezpieczycielem
+- Auto zastępcze na czas naprawy
+- Pomoc drogowa
+- Dedykowany opiekun sprawy
+
+----------------------------------------
+DANE KONTAKTOWE SERWISÓW ZK MOTORS
+----------------------------------------
+Serwis Kielce: ul. Wystawowa 2, tel. +48 734 188 420
+Serwis Radom: ul. Warszawska 234, tel. +48 734 188 500
+Serwis Rzeszów: ul. Krasne 9a, tel. +48 734 132 120
+
+Godziny otwarcia: poniedziałek–piątek 9:00–18:00, sobota 9:00–15:00
+
+----------------------------------------
+WSKAZÓWKI DLA CHATBOTA (RAG)
+----------------------------------------
+- jeśli klient pyta o wymianę oleju — TAK, wykonujemy tę usługę, podaj kontakt do serwisu
+- jeśli klient pyta o wymianę filtrów — TAK, wykonujemy tę usługę
+- jeśli klient pyta o przegląd techniczny — TAK, wykonujemy przeglądy BMW
+- jeśli klient pyta o serwis opon/kół — TAK, wykonujemy tę usługę
+- jeśli klient pyta o serwis hamulców — TAK, wykonujemy tę usługę
+- jeśli klient pyta o serwis klimatyzacji — TAK, wykonujemy tę usługę
+- jeśli klient pyta "czy możecie coś zrobić w serwisie" — odpowiedz TAK i podaj pełen zakres usług
+- zawsze podaj numer telefonu do serwisu: Kielce +48 734 188 420

@@ -1,24 +1,50 @@
 WYMIANA SAMOCHODU NA BMW (TRADE-IN / ODKUP)
 
-Doskonale wiemy, �e rozstanie z ukochanym samochodem mo�e by� wyzwaniem. Dzi�ki wsparciu naszych ekspert�w zapewniamy pozytywne wra�enia z transakcji.
+Doskonale wiemy, że rozstanie z ukochanym samochodem może być wyzwaniem. Dzięki wsparciu naszych ekspertów zapewniamy pozytywne wrażenia z transakcji.
 
-KORZY�CI Z ODDANIA SAMOCHODU W ROZLICZENIU:
-- Uproszczony proces - zamiast sprzedawa� samoch�d prywatnie, dostarczasz go do dealera BMW
-- Konkurencyjne oferty oparte na stanie, wieku i aktualnym popycie rynkowym
-- Natychmiastowa dost�pno�� oferty leasingowej - warto�� samochodu odliczana od ceny nowego
-- Profesjonalna wycena w autoryzowanym salonie
+----------------------------------------
+WYMIANA / TRADE-IN
+(twoje auto jako wkład w zakup nowego BMW)
+----------------------------------------
+- ZK Motors przyjmuje samochody DOWOLNEJ MARKI i DOWOLNEGO STANU jako wkład w zakup nowego BMW
+- NIE MA OGRANICZEŃ co do wieku ani przebiegu pojazdu przy trade-in — przyjmujemy każde auto
+- Wartość Twojego auta jest odliczana od ceny nowego BMW
+- Uproszczony proces — zamiast sprzedawać samochód prywatnie, dostarczasz go do dealera BMW
+- Bezpłatne oględziny pojazdu w salonie
+- Natychmiastowa dostępność oferty leasingowej
 
-CO ZYSKUJESZ U PARTNERA BMW:
+WAŻNE: Przy wymianie (trade-in) nie obowiązują żadne limity wieku ani przebiegu Twojego auta.
+
+----------------------------------------
+ODKUP BMW PREMIUM SELECTION
+(ZK Motors kupuje Twoje BMW do dalszej odsprzedaży)
+----------------------------------------
+Jeśli chcesz SPRZEDAĆ swoje BMW do ZK Motors (program BMW Premium Selection), obowiązują warunki kwalifikacji:
+- Maksymalny wiek pojazdu: 7 lat od daty pierwszej rejestracji
+- Maksymalny przebieg: 150 000 km
+- Wymagana pozytywna kontrola techniczna 360°
+- Pełna historia serwisowa
+
+Auto niespełniające powyższych warunków (starsze lub z wyższym przebiegiem) może zostać przyjęte w KOMIS — warunki ustalane są indywidualnie z Działem Samochodów Używanych w salonie.
+
+----------------------------------------
+KORZYŚCI Z ODDANIA SAMOCHODU W ROZLICZENIU
+----------------------------------------
 - Konkurencyjna oferta odkupu
 - Jasne i przejrzyste procedury wyceny
-- Uproszczona dokumentacja i formalno�ci
-- Bezp�atne ogl�dziny pojazdu
+- Uproszczona dokumentacja i formalności
+- Bezpłatne oględziny pojazdu
 
-WA�NE INFORMACJE:
-- Mo�esz odda� samoch�d dowolnej marki (nie tylko BMW)
-- Nie ma ogranicze� co do wieku i przebiegu pojazdu
-- Najdok�adniejsza wycena jest przeprowadzana osobi�cie w salonie
-- Wymagane dokumenty: dow�d rejestracyjny pojazdu, pomocna dokumentacja serwisowa
+WYMAGANE DOKUMENTY: dowód rejestracyjny pojazdu, pomocna dokumentacja serwisowa
 
 WYCENA ONLINE:
-Wyce� sw�j samoch�d: https://www.bmw.pl/pl/odkup/
+Wycen swój samochód: https://www.bmw.pl/pl/odkup/
+
+----------------------------------------
+WSKAZÓWKI DLA CHATBOTA (RAG)
+----------------------------------------
+- jeśli klient pyta "czy moje auto zostanie przyjęte w rozliczeniu (trade-in)" — ZAWSZE odpowiedz TAK, bez ograniczeń wiekowych i przebiegowych
+- jeśli klient pyta "jakie warunki musi spełniać moje auto przy buyback/odkupie przez ZK Motors" — podaj warunki Premium Selection: maks. 7 lat, maks. 150 000 km
+- jeśli klient pyta "czy przebieg X km jest OK przy trade-in" — TAK, przy trade-in nie ma limitu
+- jeśli klient pyta "czy przebieg X km jest OK przy odkupie BMW Premium Selection" — sprawdź czy X <= 150 000 km
+- ROZRÓŻNIAJ: trade-in (wymiana, brak ograniczeń) vs odkup/buyback Premium Selection (warunki: 7 lat, 150 000 km)

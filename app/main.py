@@ -470,38 +470,52 @@ class CrispBot:
 
     def _detect_intent(self, text_lower: str) -> str:
         """Wykrywa intencję użytkownika"""
-        
+
         # Specjalne przypadki
         if any(phrase in text_lower for phrase in ['która godzina', 'aktualna godzina', 'jaka godzina']):
             return "time"
-        
+
         if any(keyword in text_lower for keyword in ['konsultant', 'człowiek', 'agent', 'handoff']):
             return "handoff"
-        
+
         # Motocykle / skutery
-        if any(kw in text_lower for kw in ['motocykl', 'motor', 'skuter', 'scooter']):
+        if any(kw in text_lower for kw in ['motocykl', 'motor', 'skuter', 'scooter', 'motorrad']):
             return "motorcycle"
-        
-        # MINI - odsyła do salonu (ROZSZERZONE o nazwy modeli MINI)
-        mini_models = ['countryman', 'clubman', 'cooper', 'paceman', 'one', 'cabrio', 'john cooper']
+
+        # MINI
+        mini_models = ['countryman', 'clubman', 'cooper', 'paceman', 'john cooper']
         if 'mini' in text_lower or any(m in text_lower for m in mini_models):
             return "mini"
-        
+
         # Akcesoria
-        if any(phrase in text_lower for phrase in ['akcesoria', 'części', 'czesci', 'akcesoriów', 'części zamienne']):
+        if any(phrase in text_lower for phrase in [
+            'akcesoria', 'części', 'czesci', 'akcesoriów', 'części zamienne',
+            'accessories', 'parts', 'spare parts',
+        ]):
             return "accessories"
-        
+
         # Katalogi
-        if any(phrase in text_lower for phrase in ['katalog', 'katalogi', 'broszura', 'broszury', 'prospekt']):
+        if any(phrase in text_lower for phrase in [
+            'katalog', 'katalogi', 'broszura', 'broszury', 'prospekt', 'catalog', 'brochure',
+        ]):
             return "catalogs"
-        
+
         # Konfigurator
-        if any(phrase in text_lower for phrase in ['konfigurator', 'skonfiguruj', 'złóż', 'konfiguracja']):
+        if any(phrase in text_lower for phrase in [
+            'konfigurator', 'skonfiguruj', 'złóż', 'konfiguracja', 'configurator', 'configure',
+        ]):
             return "configurator"
-        
+
+        # Jazda próbna — PRZED available_models (Bug #2)
+        if any(phrase in text_lower for phrase in [
+            'jazda próbna', 'jazda probna', 'próbna jazda', 'probna jazda',
+            'jazda testowa', 'jazdy próbne', 'jazdy probne',
+            'jazd próbn', 'jazd probna',
+            'test drive', 'test-drive', 'testdrive',
+        ]):
+            return "test_drive"
+
         # Dostępne modele / stok / co jest w ofercie
-        # ALE: jeśli klient podaje budżet/cenę — to pytanie o konkretne modele,
-        # nie o ogólny stok. Wtedy niech RAG obsłuży.
         has_budget = bool(re.search(r'\d{2,3}\s*0{3}|tys|zł|pln|budżet|budzet', text_lower))
         if not has_budget and any(phrase in text_lower for phrase in [
             'dostępne modele', 'jakie modele', 'modele bmw', 'co macie',
@@ -512,37 +526,52 @@ class CrispBot:
             'oferta samochodów', 'oferta aut', 'stok', 'stock', 'magazyn',
             'od ręki', 'od reki', 'na stanie', 'w sprzedaży', 'w ofercie',
             'dostępne auta', 'dostępne samochody', 'co jest dostępne',
-            'available cars', 'cars for sale', 'see all cars',
+            'available cars', 'cars for sale', 'see all cars', 'what cars',
         ]):
             return "available_models"
 
-        # Trade-in / odkup / wymiana samochodu
+        # Trade-in / odkup / wymiana samochodu (Bug #D — English keywords added)
         if any(phrase in text_lower for phrase in [
-            'trade-in', 'trade in', 'odkup', 'wymiana samochodu',
+            'trade-in', 'trade in', 'tradein', 'odkup', 'wymiana samochodu',
             'oddać samochód', 'oddac samochod', 'rozliczenie',
             'wycena samochodu', 'wycena auta', 'sprzedać swój',
             'sprzedac swoj', 'zostawić auto', 'zostawic auto',
             'wymienić auto', 'wymienic auto', 'zamienić auto',
             'zamienic auto', 'w rozliczeniu',
+            'trade', 'exchange my car', 'sell my car', 'swap my car',
         ]):
             return "trade_in"
-        
-        # Serwis
-        if any(word in text_lower for word in ['serwis', 'napraw', 'stłuczk', 'przywieź', 'naprawiacie', 'przegląd']):
+
+        # Serwis (Bug #5/#C — dodano olej/filtr/English)
+        if any(word in text_lower for word in [
+            'serwis', 'napraw', 'stłuczk', 'przywieź', 'naprawiacie', 'przegląd',
+            'olej', 'filtr', 'opony', 'hamulce', 'klimatyz', 'płyn',
+            'wymiana oleju', 'wymiana filtr',
+            'service', 'repair', 'maintenance', 'oil change', 'filter', 'tyres', 'brakes',
+        ]):
             return "service"
-        
-        # Kontakt
-        if any(word in text_lower for word in ['kontakt', 'telefon', 'email', 'adres', 'gdzie']):
+
+        # Kontakt (Bug #D — English keywords added)
+        if any(word in text_lower for word in [
+            'kontakt', 'telefon', 'email', 'adres', 'gdzie',
+            'contact', 'phone', 'address', 'location', 'where', 'how to reach',
+        ]):
             return "contact"
-        
+
         # Sprzedaż / leasing / rabaty
-        if any(word in text_lower for word in ['sprzedajecie', 'kupić', 'zakup', 'leasing', 'kredyt', 'rabat', 'promocja', 'cena']):
+        if any(word in text_lower for word in [
+            'sprzedajecie', 'kupić', 'zakup', 'leasing', 'kredyt', 'rabat', 'promocja', 'cena',
+            'buy', 'purchase', 'price', 'financing', 'discount',
+        ]):
             return "sales"
-        
+
         # Godziny otwarcia
-        if any(phrase in text_lower for phrase in ['godziny otwarcia', 'czynny', 'czynne', 'otwarte']):
+        if any(phrase in text_lower for phrase in [
+            'godziny otwarcia', 'czynny', 'czynne', 'otwarte',
+            'opening hours', 'open', 'hours',
+        ]):
             return "salon_hours"
-        
+
         return "general"
 
     def _is_offtopic(self, text_lower: str) -> bool:
@@ -670,7 +699,8 @@ class CrispBot:
                 "general": "BMW samochód model",
                 "sales": "sprzedaż cena leasing oferta",
                 "service": "serwis naprawa godziny",
-                "contact": "kontakt salon telefon adres",
+                "contact": "kontakt salon telefon adres doradca",
+                "test_drive": "jazda próbna dostępne modele demo pojazdy",
             }
             
             if intent in intent_keywords:
@@ -711,8 +741,10 @@ class CrispBot:
                     "general": "ogólne pytanie o BMW",
                     "sales": "pytanie o sprzedaż/cenę/leasing",
                     "service": "pytanie o serwis",
-                    "contact": "pytanie o kontakt/lokalizację",
+                    "contact": "pytanie o kontakt/lokalizację/doradcę",
                     "salon_hours": "pytanie o godziny otwarcia",
+                    "test_drive": "pytanie o jazdę próbną / dostępne modele demo",
+                    "trade_in": "pytanie o wymianę/odkup samochodu",
                 }.get(intent, "ogólne pytanie")
                 
                 models_str = ", ".join(detected_models) if detected_models else "nie wykryto"
@@ -726,12 +758,13 @@ ZASADY ODPOWIEDZI:
 3. Jeśli danych BRAK w bazie — powiedz szczerze i odsyłaj do salonu ZK Motors
 4. NIE wymyślaj żadnych liczb (cen, mocy, momentu obrotowego, przyspieszenia)
 5. NIE używaj zwrotów: "zazwyczaj", "przykładowo", "z reguły", "standardowo"
-6. PRIORYTET: dane ze źródeł [MODEL_SPECS] > [LEASING] > [LINKS]
+6. PRIORYTET danych: [CONTACT] > [MODEL_SPECS] > [SERVICE] > [LEASING] > [LINKS]
 7. NIGDY nie wspominaj o konkurencyjnych markach (Mercedes, Audi, Toyota itp.)
 8. Jeśli klient pyta o porównanie z inną marką — grzecznie odmów i skup się na zaletach BMW
 9. NIE odpowiadaj na pytania niezwiązane z BMW/salonem (np. kto jest właścicielem, osobiste pytania)
-10. BUDŻET KLIENTA: Jeśli klient podaje budżet (np. "do 150 000 PLN"), sprawdź CENY w danych z bazy. Jeśli ŻADEN model w danych nie mieści się w budżecie — powiedz to WPROST i zaproponuj: (a) używane BMW w programie BMW Premium Selection, (b) kontakt z salonem ZK Motors po aktualne promocje. NIGDY nie proponuj modelu, którego cena przekracza podany budżet.
-11. LINKI DO STOKU: Gdy klient pyta o dostępne samochody, zawsze podaj link do aktualnego stoku: https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bmarka_id%5D=1&PojazdSearch%5Brodzaj_id%5D=1&PojazdSearch%5Bstatus_id%5D=1
+10. BUDŻET KLIENTA: Jeśli klient podaje budżet, sprawdź CENY w danych z bazy. Jeśli żaden model nie mieści się w budżecie — powiedz to wprost i zaproponuj: (a) używane BMW Premium Selection, (b) kontakt z salonem ZK Motors. NIGDY nie proponuj modelu przekraczającego budżet.
+11. LINKI DO STOKU: Podawaj link do stoku TYLKO gdy klient pyta ogólnie o dostępne/nowe samochody — NIE przy pytaniach o jazdę próbną, kontakty czy serwis.
+12. NIGDY nie używaj nawiasów kwadratowych ani placeholderów jak [dane z bazy danych], [data from database], [HP], [KM], [s] itp. Jeśli konkretnych danych (mocy, przyspieszenia, ceny) nie ma w DANE Z BAZY WIEDZY — napisz wprost: "Nie posiadam szczegółowych danych technicznych dla tego modelu" i zaproś do salonu.
 
 FORMAT:
 - Zacznij od modelu/tematu (bez powitania)
@@ -745,13 +778,14 @@ FORMAT:
 WYKRYTE MODELE BMW: {models_str}
 INTENCJA KLIENTA: {intent_desc}
 
-KONTAKT DO SALONÓW ZK MOTORS (podawaj gdy klient pyta o kontakt/serwis):
+KONTAKT OGÓLNY (używaj TYLKO gdy baza wiedzy nie zawiera bardziej szczegółowych danych kontaktowych — np. imiennych doradców):
 - Kielce: ul. Wystawowa 2, tel +48 734 188 400 (serwis: +48 734 188 420)
 - Radom: ul. Warszawska 234, tel +48 734 188 500
 - Rzeszów: ul. Krasne 9a, tel +48 734 132 100 (serwis: +48 734 132 120)
 
 INFORMACJE O SERWISIE (zawsze dostępne):
 - Godziny: {SALON_HOURS}
+- Serwis wykonuje pełen zakres usług BMW: olej, filtry, przeglądy, opony, hamulce, diagnostyka i inne
 - Serwis przyjmuje auta po stłuczkach"""
                 
                 user_prompt = f"""DANE Z BAZY WIEDZY (użyj TYLKO tych danych):
@@ -802,10 +836,30 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
         
         state = self.conversation_state[session_id]
         is_first_message = len(state["context"]) == 0
-        
+
+        # === POWITANIA — krótki obieg przed RAG (Bug #4) ===
+        # Czyste powitania nigdy nie trafiają do RAG — wracają TYLKO przywitaniem.
+        GREETINGS_EXACT = {
+            'cześć', 'czesc', 'hej', 'witam', 'dzień dobry', 'dzien dobry',
+            'siema', 'hello', 'hi', 'hey', 'halo', 'good morning',
+            'dobry wieczór', 'dobry wieczor', 'dobranoc',
+            'cześć!', 'hej!', 'witam!',
+        }
+        BMW_CONTEXT_WORDS = {'model', 'bmw', 'auto', 'serwis', 'motocykl', 'test', 'jazda', 'cena', 'kontakt'}
+        is_pure_greeting = (
+            text_lower.strip() in GREETINGS_EXACT
+            or (len(text_lower.split()) <= 2 and not any(kw in text_lower for kw in BMW_CONTEXT_WORDS))
+        )
+        if is_pure_greeting:
+            greeting_response = get_greeting()
+            state["greeting_sent"] = True
+            state["context"].append({"role": "user", "content": text})
+            state["context"].append({"role": "assistant", "content": greeting_response})
+            return greeting_response, False
+
         # Pobierz kontekst rozmowy
         conversation_context = self._get_conversation_context(state, last_n=3)
-        
+
         # Wykryj intencję
         intent = self._detect_intent(text_lower)
         
@@ -840,10 +894,18 @@ Który model BMW Cię interesuje? Mamy w ofercie SUV-y (X1-X7), sedany (seria 3,
                 return get_greeting() + "\n\n" + response, False
             return response, False
         
-        # Motocykle / skutery — hardcoded, nie idzie do RAG
+        # Motocykle / skutery
         if intent == "motorcycle":
-            # Skutery — jednoznaczna odpowiedź
-            if any(kw in text_lower for kw in ['skuter', 'scooter']):
+            # Jeśli klient pyta o KONTAKT / DORADCĘ — idź do RAG (Bug #1)
+            # kontakt_do_doradcow.txt zawiera Martę Magielską i Adama Obarę z bezpośrednimi danymi
+            moto_contact_kws = [
+                'kontakt', 'doradca', 'doradcy', 'telefon', 'numer',
+                'email', 'kto', 'dane kontaktowe', 'contact', 'advisor',
+                'sprzedawca', 'pracownik', 'osoba',
+            ]
+            if any(kw in text_lower for kw in moto_contact_kws):
+                pass  # fall through do RAG poniżej
+            elif any(kw in text_lower for kw in ['skuter', 'scooter']):
                 response = """W ofercie ZK Motors nie ma skuterów. Salon oferuje nowe i używane motocykle BMW.
 
 Jeśli interesują Cię motocykle BMW, sprawdź naszą ofertę:
@@ -855,14 +917,20 @@ https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Brodzaj_id%5D=2&PojazdSearch
 https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bstatus_id%5D=3
 
 Zapraszam do kontaktu z salonem ZK Motors po więcej informacji!"""
+                state["context"].append({"role": "user", "content": text})
+                state["context"].append({"role": "assistant", "content": response})
+                if is_first_message and not state["greeting_sent"]:
+                    state["greeting_sent"] = True
+                    return get_greeting() + "\n\n" + response, False
+                return response, False
             else:
                 response = get_motorcycle_response()
-            state["context"].append({"role": "user", "content": text})
-            state["context"].append({"role": "assistant", "content": response})
-            if is_first_message and not state["greeting_sent"]:
-                state["greeting_sent"] = True
-                return get_greeting() + "\n\n" + response, False
-            return response, False
+                state["context"].append({"role": "user", "content": text})
+                state["context"].append({"role": "assistant", "content": response})
+                if is_first_message and not state["greeting_sent"]:
+                    state["greeting_sent"] = True
+                    return get_greeting() + "\n\n" + response, False
+                return response, False
 
         # MINI - odsyła do salonu
         if intent == "mini":
@@ -964,7 +1032,7 @@ Zapraszam do kontaktu z salonem ZK Motors po więcej informacji!"""
         # Bug #6: Jeśli odpowiedź mówi o dostępnych/aktualnych samochodach ale nie ma linku do stoku
         stock_keywords = ['dostępn', 'od ręki', 'od reki', 'na stanie', 'w ofercie', 'aktualn', 'w salonie możesz zobaczyć', 'sprawdź']
         has_stock_link = 'stok.zkmotors.pl' in response or 'najlepszeoferty.bmw.pl' in response
-        if any(kw in response.lower() for kw in stock_keywords) and not has_stock_link:
+        if any(kw in response.lower() for kw in stock_keywords) and not has_stock_link and intent != "test_drive":
             if any(kw in text_lower for kw in ['dostępn', 'od ręki', 'od reki', 'na stanie', 'w ofercie', 'co macie', 'jaki', 'zobaczyć', 'where', 'link']):
                 response += "\n\nSprawdź aktualny stok: https://stok.zkmotors.pl/pojazd/lista?PojazdSearch%5Bmarka_id%5D=1&PojazdSearch%5Brodzaj_id%5D=1&PojazdSearch%5Bstatus_id%5D=1"
 
@@ -1300,6 +1368,33 @@ async def cohere_info():
 @app.get("/health")
 async def health():
     return {"status": "ok", "time": datetime.now().isoformat()}
+
+@app.post("/admin/rebuild-index")
+async def admin_rebuild_index(request: Request):
+    """Przebudowuje indeks FAISS z aktualnych plików w RAG_sources/. Użyj po dodaniu/edycji plików RAG."""
+    admin_token = os.getenv("ADMIN_TOKEN", "")
+    auth_header = request.headers.get("Authorization", "")
+    if admin_token and auth_header != f"Bearer {admin_token}":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    try:
+        from app.services.rag_service_faiss import rebuild_index
+        global _rag_service_instance
+        _rag_service_instance = None
+        bot.rag_service = None
+
+        logger.info("🔄 Rozpoczynam przebudowę indeksu FAISS...")
+        success = await rebuild_index()
+
+        if success:
+            new_service = await get_rag_service()
+            stats = await new_service.get_stats()
+            return {"status": "ok", "documents": stats.get("documents_in_store", 0)}
+        else:
+            return JSONResponse({"status": "error", "detail": "Rebuild failed — check server logs"}, status_code=500)
+    except Exception as e:
+        logger.error(f"Rebuild error: {e}")
+        return JSONResponse({"status": "error", "detail": str(e)}, status_code=500)
 
 # ============================================
 # ENDPOINTY TESTOWE
