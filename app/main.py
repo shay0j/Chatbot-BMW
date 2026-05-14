@@ -364,6 +364,23 @@ Zapraszamy też do salonu ZK Motors po dokładną wycenę:
 - Radom: tel +48 734 188 500
 - Rzeszów: tel +48 734 132 100"""
 
+def get_test_drive_response() -> str:
+    """Lista modeli dostępnych do jazd próbnych — bezpośrednio z dostepne_samochody_probne.txt."""
+    return """🚗 **Modele dostępne do jazd próbnych w ZK Motors:**
+
+- BMW Serii 1
+- BMW M235
+- BMW Serii 7
+- BMW iX2
+- BMW iX3
+- BMW X6
+- BMW M5
+
+Dostępność może się różnić w zależności od dnia i obłożenia — zalecana wcześniejsza rezerwacja.
+
+Jazdę próbną można umówić u doradcy handlowego lub telefonicznie. Zapraszamy do salonu ZK Motors!"""
+
+
 def get_available_models_response() -> str:
     """Odpowiedź na pytania o dostępne modele"""
     return """🚗 **Sprawdź dostępne pojazdy w ZK Motors:**
@@ -500,40 +517,58 @@ class CrispBot:
         ]):
             return "catalogs"
 
-        # Konfigurator
+        # Konfigurator — stems "konfigur" / "skonfigur" cover all Polish inflections
+        # (konfigurator, konfiguracja, konfigurować, skonfiguruj, skonfigurować, …)
         if any(phrase in text_lower for phrase in [
-            'konfigurator', 'skonfiguruj', 'złóż', 'konfiguracja', 'configurator', 'configure',
+            'konfigur', 'skonfigur', 'złóż', 'configurator', 'configure',
         ]):
             return "configurator"
 
         # Jazda próbna — PRZED available_models (Bug #2)
-        if any(phrase in text_lower for phrase in [
-            'jazda próbna', 'jazda probna', 'próbna jazda', 'probna jazda',
-            'jazda testowa', 'jazdy próbne', 'jazdy probne',
-            'jazd próbn', 'jazd probna',
-            'test drive', 'test-drive', 'testdrive',
-        ]):
+        # Regex absorbs Polish inflection: jazda/jazdy/jazd + próbn*/probn*/testow*
+        if re.search(r'\bjazd\w*\s+(próbn|probn|testow)', text_lower) or \
+           any(phrase in text_lower for phrase in ['test drive', 'test-drive', 'testdrive']):
             return "test_drive"
 
         # Dostępne modele / stok / co jest w ofercie
+        # Skip when the query is asking something more specific than "what do you have?":
+        #   - names a specific BMW model code (M3 Touring, iX3, …) → wants model info
+        #   - uses a superlative (najtańszy, najdroższy, …) → wants RAG comparison
+        # In both cases the URL dump is the wrong answer.
+        has_specific_model = bool(re.search(
+            r'\b(x[1-7]|xm|m[2-8]|m235|m240|m340|m440|m550|m760|z4|'
+            r'i[3-8]|ix[1-3]?|seria\s*[1-8])\b',
+            text_lower
+        ))
+        has_superlative = bool(re.search(
+            r'najta[nń]sz|najdro[zż]sz|najszybsz|najmocniejsz|najlepsz|największ|najmniejsz',
+            text_lower
+        ))
         has_budget = bool(re.search(r'\d{2,3}\s*0{3}|tys|zł|pln|budżet|budzet', text_lower))
-        if not has_budget and any(phrase in text_lower for phrase in [
+        if not has_budget and not has_specific_model and not has_superlative and any(phrase in text_lower for phrase in [
             'dostępne modele', 'jakie modele', 'modele bmw', 'co macie',
-            'jakie samochody', 'jakie auta', 'nowe samochody', 'dostępne pojazdy',
+            'jakie macie modele', 'jakie macie samochody', 'jakie macie auta',
+            'jakie samochody', 'jakie auta', 'nowe samochody', 'nowe bmw', 'dostępne pojazdy',
             'samochody na sprzedaż', 'auta na sprzedaż', 'auta do sprzedania',
             'samochody do sprzedania', 'link do samochodów', 'link do aut',
             'zobaczyć samochody', 'zobaczyć auta', 'zobaczyć ofertę',
             'oferta samochodów', 'oferta aut', 'stok', 'stock', 'magazyn',
             'od ręki', 'od reki', 'na stanie', 'w sprzedaży', 'w ofercie',
             'dostępne auta', 'dostępne samochody', 'co jest dostępne',
+            'pokaż samochody', 'pokaż auta', 'pokaż modele', 'pokaż bmw', 'pokaż ofertę',
+            'pokażcie samochody', 'pokażcie auta', 'pokażcie modele', 'pokażcie bmw', 'pokażcie ofertę',
             'available cars', 'cars for sale', 'see all cars', 'what cars',
+            'show me your cars', 'show all cars', 'show all models',
         ]):
             return "available_models"
 
         # Trade-in / odkup / wymiana samochodu (Bug #D — English keywords added)
         if any(phrase in text_lower for phrase in [
             'trade-in', 'trade in', 'tradein', 'odkup', 'wymiana samochodu',
-            'oddać samochód', 'oddac samochod', 'rozliczenie',
+            'oddać samochód', 'oddac samochod',
+            'oddać auto', 'oddac auto',
+            'oddać pojazd', 'oddac pojazd',
+            'rozliczenie',
             'wycena samochodu', 'wycena auta', 'sprzedać swój',
             'sprzedac swoj', 'zostawić auto', 'zostawic auto',
             'wymienić auto', 'wymienic auto', 'zamienić auto',
@@ -596,7 +631,15 @@ class CrispBot:
             'car', 'vehicle', 'engine', 'drive', 'price', 'buy',
             'stłuczk', 'wypadek', 'collision', 'repair',
             'trade', 'wycen', 'premium selection',
-            'elektrycz', 'hybryd', 'ev', 'bateri', 'zasięg', 'ładowan',
+            'elektrycz', 'hybryd', 'ev', 'bateri', 'zasięg', 'zasieg', 'ładowan',
+            # Service vocab missing from original list
+            'opon', 'klocki', 'klocek', 'hamulc', 'klimatyz', 'olej', 'filtr', 'filtry', 'akumulator',
+            # Contact terms
+            'email', 'mail', 'where', 'dealer', 'showroom',
+            # Vague-but-on-topic — customer describing what kind of car they want
+            'sport', 'sportow', 'rodzin', 'rodzinn', 'luksus', 'ekonomi',
+            'oszczęd', 'oszczed', 'szybki', 'wygodn', 'komfort', 'miejsk',
+            'polecasz', 'polećcie', 'doradz', 'pomóż wybrać', 'pomoz wybrac',
         ]
         
         has_moto_context = any(kw in text_lower for kw in moto_keywords)
@@ -845,7 +888,20 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
             'dobry wieczór', 'dobry wieczor', 'dobranoc',
             'cześć!', 'hej!', 'witam!',
         }
-        BMW_CONTEXT_WORDS = {'model', 'bmw', 'auto', 'serwis', 'motocykl', 'test', 'jazda', 'cena', 'kontakt'}
+        # Short 1-2 word queries with any of these are NOT greetings — they're real questions.
+        # Includes BMW model codes (so "ix3 zasieg" doesn't get greeted) and common
+        # one-word information-seeking words.
+        BMW_CONTEXT_WORDS = {
+            'model', 'bmw', 'auto', 'serwis', 'motocykl', 'test', 'jazda', 'cena', 'kontakt',
+            # Model codes
+            'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'xm', 'z4',
+            'i3', 'i4', 'i5', 'i7', 'i8', 'ix', 'ix1', 'ix2', 'ix3',
+            'm2', 'm3', 'm4', 'm5', 'm8', 'm235', 'm240', 'm340', 'm440', 'm550', 'm760',
+            'seria',
+            # Common short info-seeking words
+            'zasięg', 'zasieg', 'moc', 'ile', 'cena', 'info', 'spec',
+            'olej', 'filtr', 'opony', 'hamulce',
+        }
         is_pure_greeting = (
             text_lower.strip() in GREETINGS_EXACT
             or (len(text_lower.split()) <= 2 and not any(kw in text_lower for kw in BMW_CONTEXT_WORDS))
@@ -866,8 +922,10 @@ ODPOWIEDŹ PO POLSKU (na podstawie powyższych danych):"""
         logger.info(f"[{session_id[:8]}] INTENT={intent} | is_first={is_first_message} | msg='{text[:50]}'")
         
         # === KONKURENCJA — Issue #4 ===
-        # NIGDY nie dyskutuj o innych markach
-        if self._mentions_competitor(text_lower):
+        # NIGDY nie dyskutuj o innych markach.
+        # WYJĄTEK: trade-in — klient wymienia markę SWOJEGO obecnego auta,
+        # nie porównuje marek; źródło trade_in_BMW.txt mówi "DOWOLNEJ MARKI".
+        if intent != "trade_in" and self._mentions_competitor(text_lower):
             logger.info(f"[{session_id[:8]}] COMPETITOR wykryty — blokuję")
             response = """Specjalizuję się wyłącznie w ofercie BMW i ZK Motors. 😊
 
@@ -982,6 +1040,18 @@ Zapraszam do kontaktu z salonem ZK Motors po więcej informacji!"""
                 return get_greeting() + "\n\n" + response, False
             return response, False
 
+        # Jazda próbna — lista pochodzi bezpośrednio z dostepne_samochody_probne.txt;
+        # RAG mis-ranguje ten plik vs linki_dostepne_pojazdy_stok.txt, więc obsługujemy
+        # podstawowe pytanie statycznie. Bardziej szczegółowe pytania nadal idą do RAG.
+        if intent == "test_drive":
+            response = get_test_drive_response()
+            state["context"].append({"role": "user", "content": text})
+            state["context"].append({"role": "assistant", "content": response})
+            if is_first_message and not state["greeting_sent"]:
+                state["greeting_sent"] = True
+                return get_greeting() + "\n\n" + response, False
+            return response, False
+
         # Handoff
         if intent == "handoff":
             response = "Łączę z konsultantem..."
@@ -993,7 +1063,10 @@ Zapraszam do kontaktu z salonem ZK Motors po więcej informacji!"""
             return response, True
         
         # Off-topic (Issue #5 — wzmocniona detekcja)
-        if self._is_offtopic(text_lower):
+        # Bug fix: trust _detect_intent. Only fall back to off-topic heuristic
+        # when intent was "general" — otherwise short on-topic service questions
+        # like "wymień olej i filtry" (5 words, no moto keyword) get misrouted.
+        if intent == "general" and self._is_offtopic(text_lower):
             logger.info(f"[{session_id[:8]}] OFF-TOPIC wykryty")
             response = "😊 Jestem tu po to, żeby pomagać w sprawach BMW i ZK Motors! 🚗\n\nMogę pomóc z:\n- Informacjami o modelach BMW\n- Serwisem i naprawami\n- Ofertami i finansowaniem\n- Jazdą próbną\n\nW czym mogę pomóc? 😊"
             state["context"].append({"role": "user", "content": text})
