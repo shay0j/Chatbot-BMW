@@ -321,11 +321,16 @@ class FAISSVectorStore:
 
 class IntentDetector:
     def __init__(self):
+        # M-performance variants listed FIRST so longer codes match before base m2/m3/etc.
+        # \b boundaries on m2/m3 won't fire inside m235/m340, so adding the variants
+        # is what makes them detectable at all.
         self.bmw_models = [
+            "m235i", "m240i", "m340i", "m440i", "m550i", "m760i",
+            "m235", "m240", "m340", "m440", "m550", "m760",
             "x1", "x2", "x3", "x4", "x5", "x6", "x7", "xm",
-            "i3", "i4", "i5", "i7", "i8", "ix",
+            "i3", "i4", "i5", "i7", "i8", "ix", "ix1", "ix2", "ix3",
             "m2", "m3", "m4", "m5", "m8", "z4",
-            "seria 1", "seria 2", "seria 3", "seria 4", "seria 5", "seria 7", "seria 8"
+            "seria 1", "seria 2", "seria 3", "seria 4", "seria 5", "seria 7", "seria 8",
         ]
     
     def should_skip_rag(self, query: str) -> bool:
